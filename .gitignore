@@ -1,0 +1,11 @@
+
+###> symfony/framework-bundle ###
+.env
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> bicing-api ###
+/docker/
+###< bicing-api ###
