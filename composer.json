@@ -6,6 +6,7 @@
         "ext-iconv": "*",
         "beberlei/assert": "^2.9",
         "ramsey/uuid": "^3.7",
+        "ramsey/uuid-doctrine": "^1.4",
         "sensiolabs/security-checker": "^4.1",
         "symfony/console": "^4.0",
         "symfony/flex": "^1.0",
@@ -15,9 +16,11 @@
         "symfony/yaml": "^4.0"
     },
     "require-dev": {
+        "phpspec/phpspec": "^4.3",
         "symfony/dotenv": "^4.0"
     },
     "config": {
+        "bin-dir": "bin",
         "preferred-install": {
             "*": "dist"
         },
@@ -30,7 +33,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "Tests\\": "tests/"
         }
     },
     "replace": {

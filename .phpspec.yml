@@ -1,0 +1,3 @@
+suites:
+    app:
+        spec_prefix: Tests
