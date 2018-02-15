@@ -1,0 +1,20 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Domain\Exception\StationState;
+
+use App\Domain\Exception\DomainException;
+
+final class StationStateStatusIsInvalidException extends \DomainException implements DomainException
+{
+    /**
+     * @param string $status
+     *
+     * @return StationStateStatusIsInvalidException
+     */
+    public static function withStatus(string $status): StationStateStatusIsInvalidException
+    {
+        return new self(sprintf('StationStateStatus with status "%s" is invalid', $status));
+    }
+}
