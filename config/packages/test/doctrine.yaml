@@ -1,0 +1,7 @@
+doctrine:
+# http://blog.sznapka.pl/fully-isolated-tests-in-symfony2/
+    dbal:
+        url: ''
+        driver:  pdo_sqlite
+        memory:  true
+        charset: UTF8

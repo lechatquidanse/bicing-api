@@ -3,6 +3,9 @@ doctrine:
         url: '%env(DATABASE_URL)%'
         types:
             uuid:  'Ramsey\Uuid\Doctrine\UuidType'
+            date_time_immutable_stringable: 'App\Infrastructure\Persistence\Doctrine\Type\DoctrineDateTimeImmutableStringableType'
+            enum_station_state_status_type: 'App\Infrastructure\Persistence\Doctrine\Type\DoctrineEnumStationStateStatusType'
+            enum_station_detail_type_type: 'App\Infrastructure\Persistence\Doctrine\Type\DoctrineEnumStationDetailTypeType'
 
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'

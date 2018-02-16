@@ -38,3 +38,14 @@ ifdef TEST_SPEC
 endif
 .PHONY: test-spec
 
+###> test/phpunit ###
+TEST_PHPUNIT := $(shell which bin/phpunit)
+test-unit:
+ifdef TEST_PHPUNIT
+	@bin/phpunit
+endif
+.PHONY: test-unit
+
+###> test ###
+test: test-spec test-unit
+.PHONY: test
