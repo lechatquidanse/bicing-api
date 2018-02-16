@@ -21,4 +21,4 @@ services:
 
     test.app.bicing_api.availability_station_query: '@App\Infrastructure\BicingApi\HttpAvailabilityStationQuery'
     Tests\App\Infrastructure\BicingApi\MockHttpQueryClient: ~
-    guzzle.client.bicing_api: '@Tests\App\Infrastructure\BicingApi\MockHttpQueryClient'
+    eight_points_guzzle.client.bicing_api: '@Tests\App\Infrastructure\BicingApi\MockHttpQueryClient'

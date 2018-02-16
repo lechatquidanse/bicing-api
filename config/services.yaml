@@ -11,7 +11,7 @@ services:
         exclude: '../src/{Domain}'
 
     App\Infrastructure\BicingApi\HttpAvailabilityStationQuery:
-        arguments: ['@guzzle.client.bicing_api', '@jms_serializer' ]
+        arguments: ['@eight_points_guzzle.client.bicing_api', '@jms_serializer' ]
 
     app.use_case.create_station_handler:
         class: App\Application\UseCase\Handler\CreateStationHandler
@@ -25,3 +25,5 @@ services:
         public: true
         tags:
             - { name: command_handler, handles: App\Application\UseCase\Command\AssignStationStateToStationCommand }
+
+    SimpleBus\Message\Bus\MessageBus: '@command_bus'
