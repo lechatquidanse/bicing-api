@@ -20,13 +20,14 @@ Clone the project:
 git clone https://github.com/lechatquidanse/bicing-api.git
 ```
 
-Then inside the project, update your environment variable:
+Then run the default build installation
 
 ```bash
-cp dev.env.dist dev.env
+make build-bicing
 ```
 
-*A docker environment will be released soon.*
+Your docker containers have been successfully built and run.
+
 
 ## Usage
 
