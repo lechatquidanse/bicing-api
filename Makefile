@@ -49,3 +49,10 @@ endif
 ###> test ###
 test: test-spec test-unit
 .PHONY: test
+
+###> This build command has to be upgraded to avoid exec connection to containers ###
+build-bicing:
+	cp .env.dist .env
+	docker-compose up -d
+	docker exec -it bicingapi_php_1 composer install
+	docker exec -it bicingapi_php_1 bin/console do:mi:mi -n

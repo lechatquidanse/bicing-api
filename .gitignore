@@ -1,13 +1,12 @@
+###> docker environment ###
+/docker/.data
+
 ###> symfony/framework-bundle ###
 .env
 /public/bundles/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-
-###> bicing-api ###
-/docker/
-###< bicing-api ###
 
 ###> symfony/phpunit-bridge ###
 .phpunit
