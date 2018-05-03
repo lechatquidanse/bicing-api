@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Tests\App\Infrastructure\BicingApi;
 
 use Psr\Http\Message\ResponseInterface;
-use Tests\App\Infrastructure\Http\AbstractFakeHttpResponse;
+use Psr\Http\Message\StreamInterface;
 
-class FakeBicingApiHttpOkResponse extends AbstractFakeHttpResponse implements ResponseInterface
+class FakeBicingApiHttpOkResponse implements ResponseInterface
 {
     public function getBody()
     {
@@ -45,5 +45,57 @@ class FakeBicingApiHttpOkResponse extends AbstractFakeHttpResponse implements Re
     }
 ]
 json;
+    }
+
+    public function getStatusCode()
+    {
+    }
+
+    public function withStatus($code, $reasonPhrase = '')
+    {
+    }
+
+    public function getReasonPhrase()
+    {
+    }
+
+    public function getProtocolVersion()
+    {
+    }
+
+    public function withProtocolVersion($version)
+    {
+    }
+
+    public function getHeaders()
+    {
+    }
+
+    public function hasHeader($name)
+    {
+    }
+
+    public function getHeader($name)
+    {
+    }
+
+    public function getHeaderLine($name)
+    {
+    }
+
+    public function withHeader($name, $value)
+    {
+    }
+
+    public function withAddedHeader($name, $value)
+    {
+    }
+
+    public function withoutHeader($name)
+    {
+    }
+
+    public function withBody(StreamInterface $body)
+    {
     }
 }

@@ -2,7 +2,7 @@
 
 The goal of this API is to ease customer's usage of large-scale public bicycle sharing system.
 
-By collecting data from different providers (Bicing, Velib, ...) it can advice customer or provide them useful information (best time of picking up a bike, ...)
+By collecting data from different providers (Bicing, Velib, ...) it can advice customers or provide them useful information (best time of picking up a bike, ...)
 
 This API has been implemented in [DDD][wiki-DDD] with [PHP 7.1][PHP], [Symfony 4.0][symfony] and a [Timescale database][timescale].
 
