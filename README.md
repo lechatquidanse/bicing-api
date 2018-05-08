@@ -31,6 +31,19 @@ Your docker containers have been successfully built and run.
 
 ## Usage
 
+To collect new data from [Bicing][Bicing], you can run two Symfony commands.
+
+- The first one is used to add new Bicing stations:
+```bash
+php bin/console bicing-api:import:stations
+```
+
+- the second one is used to add states for each stations already in database:
+```bash
+php bin/console bicing-api:import:stations-states
+```
+
+
 ## Support
 
 Code and folder structure follow Domain Driven Design (DDD).
@@ -54,6 +67,7 @@ Here is a good article to understand naming and folder [Domain Driver Design, li
 [PHP]: http://php.net/
 [symfony]: http://symfony.com/
 [timescale]: http://www.timescale.com/
+[Bicing]: https://www.bicing.cat/
 
 Authors
 -------
