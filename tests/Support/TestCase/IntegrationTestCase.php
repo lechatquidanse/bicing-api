@@ -21,7 +21,7 @@ abstract class IntegrationTestCase extends WebTestCase
     /**
      * @var ContainerInterface
      */
-    private $container;
+    private $containerTest;
 
     /**
      * {@inheritdoc}
@@ -30,8 +30,8 @@ abstract class IntegrationTestCase extends WebTestCase
     {
         parent::setUp();
 
-        $this->client    = static::createClient();
-        $this->container = $this->client->getContainer();
+        $this->client = static::createClient();
+        $this->containerTest = $this->client->getContainer();
     }
 
     /**
@@ -39,8 +39,8 @@ abstract class IntegrationTestCase extends WebTestCase
      */
     protected function tearDown()
     {
-        $this->client    = null;
-        $this->container = null;
+        $this->client = null;
+        $this->containerTest = null;
 
         parent::tearDown();
     }
@@ -50,7 +50,7 @@ abstract class IntegrationTestCase extends WebTestCase
      */
     protected function getContainer(): ContainerInterface
     {
-        return $this->container;
+        return $this->containerTest;
     }
 
     /**

@@ -1,5 +1,6 @@
 ###> docker environment ###
 /docker/.data
+/logs
 
 ###> symfony/framework-bundle ###
 .env
