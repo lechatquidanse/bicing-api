@@ -22,7 +22,16 @@ services:
             - ./logs/symfony:/var/www/symfony/var/logs
         networks:
           - bicing-local-network
-
+    nginx:
+        build: docker/nginx
+        ports:
+            - 80:80
+        depends_on:
+            - php
+        volumes:
+            - ./logs/nginx/:/var/log/nginx
+        networks:
+          - bicing-local-network
 networks:
    bicing-local-network:
     external: true
