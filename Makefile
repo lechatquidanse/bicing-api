@@ -56,3 +56,4 @@ build-bicing:
 	docker-compose up -d
 	docker exec -it bicing-api_php_1 composer install
 	docker exec -it bicing-api_php_1 bin/console do:mi:mi -n
+	docker exec -it bicing-api_php_1 make test

@@ -15,8 +15,7 @@ services:
         networks:
           - bicing-local-network
     php:
-        build:
-            context: docker/php7-fpm
+        build: .
         volumes:
             - ./:/var/www/symfony
             - ./logs/symfony:/var/www/symfony/var/logs
@@ -29,7 +28,7 @@ services:
         depends_on:
             - php
         volumes:
-            - ./logs/nginx/:/var/log/nginx
+            - ./logs/nginx/:/var/logs/nginx
         networks:
           - bicing-local-network
 networks:

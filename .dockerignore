@@ -1,1 +1,5 @@
 /docker
+.data
+.idea
+/var/cache/*
+/var/logs/*

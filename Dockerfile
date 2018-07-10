@@ -4,7 +4,8 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     openssl \
     git \
-    unzip
+    unzip \
+    libzip-dev
 
 # Type docker-php-ext-install to see available extensions
 RUN docker-php-ext-install \
@@ -20,6 +21,5 @@ RUN composer --version
 RUN ln -snf /usr/share/zoneinfo/Europe/Paris /etc/localtime && echo Europe/Paris > /etc/timezone
 RUN printf '[PHP]\ndate.timezone = "%s"\n', Europe/Paris > /usr/local/etc/php/conf.d/tzone.ini
 RUN "date"
-
 
 WORKDIR /var/www/symfony
