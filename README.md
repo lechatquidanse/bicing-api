@@ -20,10 +20,10 @@ Clone the project:
 git clone https://github.com/lechatquidanse/bicing-api.git
 ```
 
-Then run the default build installation
+Then run the default build installation:
 
 ```bash
-make build-bicing
+make install
 ```
 
 Your docker containers have been successfully built and run.
@@ -31,16 +31,22 @@ Your docker containers have been successfully built and run.
 
 ## Usage
 
+To run the project once installed:
+
+```bash
+make run
+```
+
 To collect new data from [Bicing][Bicing], you can run two Symfony commands.
 
 - The first one is used to add new Bicing stations:
 ```bash
-php bin/console bicing-api:import:stations
+docker-compose run --rm php bin/console bicing-api:import:stations
 ```
 
 - the second one is used to add states for each stations already in database:
 ```bash
-php bin/console bicing-api:import:stations-states
+docker-compose run --rm bin/console bicing-api:import:stations-states
 ```
 
 

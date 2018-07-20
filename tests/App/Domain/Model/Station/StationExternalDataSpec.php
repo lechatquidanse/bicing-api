@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Domain\Model\Station;
+namespace tests\App\Domain\Model\Station;
 
 use App\Domain\Model\Station\StationExternalData;
 use Assert\LazyAssertionException;

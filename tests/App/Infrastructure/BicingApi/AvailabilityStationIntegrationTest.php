@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Infrastructure\BicingApi;
+namespace tests\App\Infrastructure\BicingApi;
 
 use App\Infrastructure\BicingApi\AvailabilityStation;
 use JMS\Serializer\SerializerInterface;
-use Tests\Support\TestCase\IntegrationTestCase;
+use tests\Support\TestCase\IntegrationTestCase;
 
 /**
  * @see AvailabilityStation

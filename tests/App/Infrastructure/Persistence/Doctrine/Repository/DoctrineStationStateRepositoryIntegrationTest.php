@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Infrastructure\Persistence\Doctrine\Repository;
+namespace tests\App\Infrastructure\Persistence\Doctrine\Repository;
 
 use App\Domain\Exception\StationState\StationStateAlreadyExistsException;
 use App\Domain\Model\Station\Station;
@@ -10,10 +10,10 @@ use App\Domain\Model\StationState\DateTimeImmutableStringable;
 use App\Domain\Model\StationState\StationState;
 use App\Infrastructure\Persistence\Doctrine\Repository\DoctrineStationStateRepository;
 use Ramsey\Uuid\Uuid;
-use Tests\Support\Builder\StationBuilder;
-use Tests\Support\Builder\StationStateBuilder;
-use Tests\Support\Builder\StationStateStatusBuilder;
-use Tests\Support\TestCase\DatabaseTestCase;
+use tests\Support\Builder\StationBuilder;
+use tests\Support\Builder\StationStateBuilder;
+use tests\Support\Builder\StationStateStatusBuilder;
+use tests\Support\TestCase\DatabaseTestCase;
 
 /**
  * @see DoctrineStationStateRepository

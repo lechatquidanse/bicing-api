@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Infrastructure\Factory\Form\Symfony\Type;
+namespace tests\App\Infrastructure\Factory\Form\Symfony\Type;
 
 use App\Application\UseCase\Command\CreateStationCommand;
 use App\Infrastructure\Factory\Form\Symfony\Type\SymfonyCreateStationType;
 use Symfony\Component\Form\FormInterface;
-use Tests\Support\Builder\StationDetailTypeBuilder;
-use Tests\Support\TestCase\IntegrationTestCase;
+use tests\Support\Builder\StationDetailTypeBuilder;
+use tests\Support\TestCase\IntegrationTestCase;
 
 class SymfonyCreateStationTypeIntegrationTest extends IntegrationTestCase
 {

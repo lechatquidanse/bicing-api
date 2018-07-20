@@ -1,25 +1,30 @@
-FROM php:7.1-fpm
+FROM php:7.1-fpm-alpine
 
-RUN apt-get update && apt-get install -y \
-    libpq-dev \
-    openssl \
-    git \
-    unzip \
-    libzip-dev
+ENV FETCH_PACKAGES \
+        libpq \
+        libzip \
+        git \
+        openssl \
+        unzip \
+        zlib-dev
 
-# Type docker-php-ext-install to see available extensions
-RUN docker-php-ext-install \
-    pdo \
-    pdo_pgsql \
-    zip
+ENV BUILD_PACKAGES \
+        postgresql-dev
 
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer --version
+ENV PHP_EXTENSIONS \
+        pdo \
+        pdo_pgsql \
+        zip
 
-# Set timezone
-RUN ln -snf /usr/share/zoneinfo/Europe/Paris /etc/localtime && echo Europe/Paris > /etc/timezone
-RUN printf '[PHP]\ndate.timezone = "%s"\n', Europe/Paris > /usr/local/etc/php/conf.d/tzone.ini
-RUN "date"
+RUN set -ex \
+    && apk add --no-cache --virtual .fetch-deps $FETCH_PACKAGES \
+    && apk add --no-cache --virtual .build-deps $BUILD_PACKAGES \
+    && docker-php-ext-install $PHP_EXTENSIONS \
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && ln -snf /usr/share/zoneinfo/Europe/Paris /etc/localtime \
+    && echo Europe/Paris > /etc/timezone \
+    && printf '[PHP]\ndate.timezone = "%s"\n', Europe/Paris > /usr/local/etc/php/conf.d/tzone.ini \
+    && apk del .fetch-deps
 
-WORKDIR /var/www/symfony
+WORKDIR /var/www/bicing-api
+COPY . /var/www/bicing-api

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Application\UseCase\Handler;
+namespace tests\App\Application\UseCase\Handler;
 
 use App\Application\UseCase\Command\AssignStationStateToStationCommand;
 use App\Application\UseCase\Handler\AssignStationStateToStationHandler;
@@ -10,10 +10,10 @@ use App\Domain\Exception\Station\StationDoesNotExist;
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
 use App\Domain\Model\StationState\StationStateStatus;
 use PHPUnit\Framework\TestCase;
-use Tests\Support\Builder\StationBuilder;
-use Tests\Support\Builder\StationExternalDataBuilder;
-use Tests\Support\Builder\StationStateBuilder;
-use Tests\Support\Builder\StationStateStatusBuilder;
+use tests\Support\Builder\StationBuilder;
+use tests\Support\Builder\StationExternalDataBuilder;
+use tests\Support\Builder\StationStateBuilder;
+use tests\Support\Builder\StationStateStatusBuilder;
 
 class AssignStationStateToStationHandlerUnitTest extends TestCase
 {
