@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Infrastructure\Factory;
+namespace tests\App\Infrastructure\Factory;
 
 use App\Application\UseCase\Command\CreateStationCommand;
 use App\Infrastructure\Factory\CreateStationCommandFactory;
 use Symfony\Component\Form\Exception\InvalidArgumentException;
-use Tests\App\Infrastructure\System\MockClock;
-use Tests\Support\Builder\AvailabilityStationBuilder;
-use Tests\Support\Builder\StationDetailTypeBuilder;
-use Tests\Support\TestCase\IntegrationTestCase;
+use tests\App\Infrastructure\System\MockClock;
+use tests\Support\Builder\AvailabilityStationBuilder;
+use tests\Support\Builder\StationDetailTypeBuilder;
+use tests\Support\TestCase\IntegrationTestCase;
 
 class CreateStationCommandFactoryIntegrationTest extends IntegrationTestCase
 {

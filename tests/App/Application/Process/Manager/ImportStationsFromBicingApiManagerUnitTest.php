@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Application\Process\Manager;
+namespace tests\App\Application\Process\Manager;
 
 use App\Application\Process\Manager\ImportStationsFromBicingApiManager;
 use App\Application\UseCase\Command\CreateStationCommand;

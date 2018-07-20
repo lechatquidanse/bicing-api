@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Application\Process\Manager;
+namespace tests\App\Application\Process\Manager;
 
 use App\Application\UseCase\Command\CreateStationCommand;
 use App\Application\UseCase\Command\CreateStationCommandFactoryInterface;
 use App\Infrastructure\BicingApi\AvailabilityStation;
-use Tests\Support\Builder\StationDetailTypeBuilder;
+use tests\Support\Builder\StationDetailTypeBuilder;
 
 class FakeCreateStationCommandFactory implements CreateStationCommandFactoryInterface
 {

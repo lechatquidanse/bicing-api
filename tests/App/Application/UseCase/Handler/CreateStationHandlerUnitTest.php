@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Application\UseCase\Handler;
+namespace tests\App\Application\UseCase\Handler;
 
 use App\Application\UseCase\Command\CreateStationCommand;
 use App\Application\UseCase\Handler\CreateStationHandler;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
-use Tests\Support\Builder\LocationBuilder;
-use Tests\Support\Builder\StationBuilder;
-use Tests\Support\Builder\StationDetailBuilder;
-use Tests\Support\Builder\StationDetailTypeBuilder;
-use Tests\Support\Builder\StationExternalDataBuilder;
+use tests\Support\Builder\LocationBuilder;
+use tests\Support\Builder\StationBuilder;
+use tests\Support\Builder\StationDetailBuilder;
+use tests\Support\Builder\StationDetailTypeBuilder;
+use tests\Support\Builder\StationExternalDataBuilder;
 
 class CreateStationHandlerUnitTest extends TestCase
 {

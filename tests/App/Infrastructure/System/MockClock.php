@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Infrastructure\System;
+namespace tests\App\Infrastructure\System;
 
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
 use App\Infrastructure\System\ClockInterface;

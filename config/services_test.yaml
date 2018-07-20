@@ -4,7 +4,7 @@ services:
 
     App\Infrastructure\System\ClockInterface: '@App\Infrastructure\System\Clock'
     test.app.system.clock.mock:
-        class: 'Tests\App\Infrastructure\System\MockClock'
+        class: 'tests\App\Infrastructure\System\MockClock'
 
     test.app.model.station_repository: '@App\Infrastructure\Persistence\Doctrine\Repository\DoctrineStationRepository'
     test.app.model.station_state_repository: '@App\Infrastructure\Persistence\Doctrine\Repository\DoctrineStationStateRepository'
@@ -20,5 +20,5 @@ services:
         arguments: ['@form.factory', '@test.app.system.clock.mock']
 
     test.app.bicing_api.availability_station_query: '@App\Infrastructure\BicingApi\HttpAvailabilityStationQuery'
-    Tests\App\Infrastructure\BicingApi\MockHttpQueryClient: ~
-    eight_points_guzzle.client.bicing_api: '@Tests\App\Infrastructure\BicingApi\MockHttpQueryClient'
+    tests\App\Infrastructure\BicingApi\MockHttpQueryClient: ~
+    eight_points_guzzle.client.bicing_api: '@tests\App\Infrastructure\BicingApi\MockHttpQueryClient'

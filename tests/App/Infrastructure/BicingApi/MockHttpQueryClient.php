@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Infrastructure\BicingApi;
+namespace tests\App\Infrastructure\BicingApi;
 
 use App\Infrastructure\Http\HttpQueryClientInterface;
 use Psr\Http\Message\ResponseInterface;

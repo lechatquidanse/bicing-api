@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Application\Process\Manager;
+namespace tests\App\Application\Process\Manager;
 
 use App\Application\UseCase\Command\AssignStationStateToStationCommand;
 use App\Application\UseCase\Command\AssignStationStateToStationCommandFactoryInterface;
 use App\Infrastructure\BicingApi\AvailabilityStation;
-use Tests\Support\Builder\StationStateStatusBuilder;
+use tests\Support\Builder\StationStateStatusBuilder;
 
 class FakeAssignStationStateToStationCommandFactory implements AssignStationStateToStationCommandFactoryInterface
 {

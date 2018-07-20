@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Infrastructure\BicingApi\Repository;
+namespace tests\App\Infrastructure\BicingApi;
 
 use App\Infrastructure\BicingApi\AvailabilityStation;
 use App\Infrastructure\BicingApi\HttpAvailabilityStationQuery;
-use Tests\Support\TestCase\IntegrationTestCase;
+use tests\Support\TestCase\IntegrationTestCase;
 
 /**
  * @see HttpAvailabilityStationQueryInterface

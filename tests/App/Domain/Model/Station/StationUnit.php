@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Domain\Model\Station;
+namespace tests\App\Domain\Model\Station;
 
 use App\Domain\Model\Station\Station;
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
-use Tests\Support\Builder\LocationBuilder;
-use Tests\Support\Builder\StationDetailBuilder;
-use Tests\Support\Builder\StationExternalDataBuilder;
-use Tests\Support\Builder\StationStateBuilder;
-use Tests\Support\Builder\StationStateStatusBuilder;
+use tests\Support\Builder\LocationBuilder;
+use tests\Support\Builder\StationDetailBuilder;
+use tests\Support\Builder\StationExternalDataBuilder;
+use tests\Support\Builder\StationStateBuilder;
+use tests\Support\Builder\StationStateStatusBuilder;
 
 class StationUnit extends TestCase
 {
