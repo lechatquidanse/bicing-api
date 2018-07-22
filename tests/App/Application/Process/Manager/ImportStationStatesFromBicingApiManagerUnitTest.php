@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Application\Process\Manager;
+namespace tests\App\Application\Process\Manager;
 
 use App\Application\Process\Manager\ImportStationStatesFromBicingApiManager;
 use App\Application\UseCase\Command\AssignStationStateToStationCommand;
@@ -10,7 +10,7 @@ use App\Domain\Model\StationState\DateTimeImmutableStringable;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Tests\Logger;
-use Tests\App\Infrastructure\System\MockClock;
+use tests\App\Infrastructure\System\MockClock;
 
 class ImportStationStatesFromBicingApiManagerUnitTest extends TestCase
 {

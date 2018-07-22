@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Infrastructure\Factory\Form\Symfony\Type;
+namespace tests\App\Infrastructure\Factory\Form\Symfony\Type;
 
 use App\Application\UseCase\Command\AssignStationStateToStationCommand;
 use App\Domain\Model\StationState\StationStateStatus;
 use App\Infrastructure\Factory\Form\Symfony\Type\SymfonyAssignStationStateToStationType;
 use Symfony\Component\Form\FormInterface;
-use Tests\Support\TestCase\IntegrationTestCase;
+use tests\Support\TestCase\IntegrationTestCase;
 
 class SymfonyAssignStationStateToStationTypeIntegrationTest extends IntegrationTestCase
 {

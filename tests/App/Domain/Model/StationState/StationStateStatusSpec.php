@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Domain\Model\StationState;
+namespace tests\App\Domain\Model\StationState;
 
 use App\Domain\Exception\StationState\StationStateStatusIsInvalidException;
 use App\Domain\Model\StationState\StationStateStatus;

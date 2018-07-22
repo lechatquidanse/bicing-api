@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\Support\TestCase;
+namespace tests\Support\TestCase;
 
 use Assert\Assertion;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
-use Tests\Support\Builder\BuilderInterface;
+use tests\Support\Builder\BuilderInterface;
 
 abstract class DatabaseTestCase extends IntegrationTestCase
 {

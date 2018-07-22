@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Domain\Model\StationState;
+namespace tests\App\Domain\Model\StationState;
 
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
 use App\Domain\Model\StationState\StationState;
 use Assert\LazyAssertionException;
 use PhpSpec\ObjectBehavior;
-use Tests\Support\Builder\StationBuilder;
-use Tests\Support\Builder\StationStateStatusBuilder;
+use tests\Support\Builder\StationBuilder;
+use tests\Support\Builder\StationStateStatusBuilder;
 
 
 /**

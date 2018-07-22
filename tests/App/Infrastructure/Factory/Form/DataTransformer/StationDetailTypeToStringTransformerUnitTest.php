@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Infrastructure\Factory\Form\DataTransformer;
+namespace tests\App\Infrastructure\Factory\Form\DataTransformer;
 
 use App\Infrastructure\Factory\Form\DataTransformer\StationDetailTypeToStringTransformer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use Tests\Support\Builder\StationDetailTypeBuilder;
+use tests\Support\Builder\StationDetailTypeBuilder;
 
 class StationDetailTypeToStringTransformerUnitTest extends TestCase
 {

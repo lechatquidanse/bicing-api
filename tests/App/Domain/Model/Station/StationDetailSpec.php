@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Domain\Model\Station;
+namespace tests\App\Domain\Model\Station;
 
 use App\Domain\Model\Station\StationDetail;
 use Assert\LazyAssertionException;
 use PhpSpec\ObjectBehavior;
-use Tests\Support\Builder\StationDetailTypeBuilder;
+use tests\Support\Builder\StationDetailTypeBuilder;
 
 /**
  * @see StationDetail

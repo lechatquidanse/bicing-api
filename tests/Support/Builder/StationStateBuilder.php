@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Support\Builder;
+namespace tests\Support\Builder;
 
 use App\Domain\Model\Station\Station;
 use App\Domain\Model\StationState\DateTimeImmutableStringable;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Application\UseCase\Handler;
+namespace tests\App\Application\UseCase\Handler;
 
 use App\Domain\Model\Station\Station;
 use App\Domain\Model\Station\StationRepositoryInterface;

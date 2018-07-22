@@ -50,10 +50,20 @@ endif
 test: test-spec test-unit
 .PHONY: test
 
-###> This build command has to be upgraded to avoid exec connection to containers ###
-build-bicing:
+install:
 	cp .env.dist .env
+	docker-compose up -d --build
+	docker-compose run --rm php composer install
+	docker-compose run --rm php bin/console do:mi:mi -n
+	docker-compose run --rm php bin/phpspec run
+	docker-compose run --rm php bin/phpunit
+
+run:
 	docker-compose up -d
-	docker exec -it bicing-api_php_1 composer install
-	docker exec -it bicing-api_php_1 bin/console do:mi:mi -n
-	docker exec -it bicing-api_php_1 make test
+	docker-compose run --rm php composer install
+	docker-compose run --rm php bin/console do:mi:mi -n
+	docker-compose run --rm php bin/phpspec run
+	docker-compose run --rm php bin/phpunit
+
+down:
+	docker-compose down -v --remove-orphans

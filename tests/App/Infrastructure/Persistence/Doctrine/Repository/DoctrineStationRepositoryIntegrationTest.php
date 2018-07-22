@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Infrastructure\Persistence\Doctrine\Repository;
+namespace tests\App\Infrastructure\Persistence\Doctrine\Repository;
 
 use App\Domain\Exception\Station\StationAlreadyExistsException;
 use App\Domain\Model\Station\Station;
 use App\Infrastructure\Persistence\Doctrine\Repository\DoctrineStationRepository;
 use Ramsey\Uuid\Uuid;
-use Tests\Support\Builder\LocationBuilder;
-use Tests\Support\Builder\StationBuilder;
-use Tests\Support\Builder\StationDetailBuilder;
-use Tests\Support\Builder\StationDetailTypeBuilder;
-use Tests\Support\Builder\StationExternalDataBuilder;
-use Tests\Support\TestCase\DatabaseTestCase;
+use tests\Support\Builder\LocationBuilder;
+use tests\Support\Builder\StationBuilder;
+use tests\Support\Builder\StationDetailBuilder;
+use tests\Support\Builder\StationDetailTypeBuilder;
+use tests\Support\Builder\StationExternalDataBuilder;
+use tests\Support\TestCase\DatabaseTestCase;
 
 /**
  * @see DoctrineStationRepository

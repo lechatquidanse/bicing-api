@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Domain\Model\Station;
+namespace tests\App\Domain\Model\Station;
 
 use App\Domain\Model\Station\Station;
 use PhpSpec\ObjectBehavior;
 use Ramsey\Uuid\Uuid;
-use Tests\Support\Builder\LocationBuilder;
-use Tests\Support\Builder\StationDetailBuilder;
-use Tests\Support\Builder\StationExternalDataBuilder;
+use tests\Support\Builder\LocationBuilder;
+use tests\Support\Builder\StationDetailBuilder;
+use tests\Support\Builder\StationExternalDataBuilder;
 
 /**
  * @see Station

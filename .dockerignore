@@ -1,5 +1,12 @@
 /docker
-.data
+.env
+.env.dist
+.gitignore
+.gitlab-ci.yml
 .idea
+.phpspec.yml
+phpunit.xml.dist
+README.md
+/tests
 /var/cache/*
 /var/logs/*
