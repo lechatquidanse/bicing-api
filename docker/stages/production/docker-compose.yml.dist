@@ -24,6 +24,8 @@ services:
           - backend
     php:
         image: ${PRODUCTION_IMAGE}
+        volumes:
+          - ./.env:/var/www/bicing-api/.env
         networks:
           - backend
 
