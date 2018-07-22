@@ -52,7 +52,6 @@ test: test-spec test-unit
 
 install:
 	cp .env.dist .env
-	docker network create bicing-api-network || true
 	docker-compose up -d --build
 	docker-compose run --rm php composer install
 	docker-compose run --rm php bin/console do:mi:mi -n
@@ -65,3 +64,6 @@ run:
 	docker-compose run --rm php bin/console do:mi:mi -n
 	docker-compose run --rm php bin/phpspec run
 	docker-compose run --rm php bin/phpunit
+
+down:
+	docker-compose down -v --remove-orphans

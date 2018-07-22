@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 
 services:
     db:
@@ -10,25 +10,26 @@ services:
             POSTGRES_USER: ${POSTGRES_USER}
             POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
         volumes:
-            - "./.data/db:/var/lib/postgresql/"
+          - data-db:/var/lib/postgresql/
         networks:
-          - bicing-api-network
+          - backend
     nginx:
         image: nginx:1.15.1-alpine
         ports:
             - 80:80
         volumes:
-          - ./docker/nginx/bicing-api.conf:/etc/nginx/conf.d/default.conf
-        depends_on:
-            - php
+          - ./bicing-api.conf:/etc/nginx/conf.d/default.conf
         networks:
-          - bicing-api-network
+          - frontend
+          - backend
     php:
         image: ${PRODUCTION_IMAGE}
-        #command: or entrypoint for migration
         networks:
-          - bicing-api-network
+          - backend
+
+volumes:
+  data-db:
 
 networks:
-   bicing-api-network:
-    external: true
+   frontend:
+   backend:
