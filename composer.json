@@ -18,6 +18,7 @@
         "symfony/form": "^4.0",
         "symfony/framework-bundle": "^4.0",
         "symfony/lts": "^4@dev",
+        "symfony/monolog-bundle": "^3.3",
         "symfony/orm-pack": "^1.0",
         "symfony/phpunit-bridge": "^4.0",
         "symfony/validator": "^4.0",

@@ -1,0 +1,14 @@
+monolog:
+    handlers:
+        std_out:
+            type:   stream
+            path:   '/dev/null'
+            level:  debug
+        std_err:
+            type:   stream
+            path:   '/dev/null'
+            level:  error
+        console:
+            type: console
+            process_psr_3_messages: false
+            channels: ["!event", "!doctrine"]
