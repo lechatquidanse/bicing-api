@@ -101,6 +101,9 @@
             "ref": "fe60ce509ef04a3f40da96e3979bc8d9b13b2372"
         }
     },
+    "monolog/monolog": {
+        "version": "1.23.0"
+    },
     "ocramius/package-versions": {
         "version": "1.3.0"
     },
@@ -271,6 +274,18 @@
     },
     "symfony/lts": {
         "version": "4-dev"
+    },
+    "symfony/monolog-bridge": {
+        "version": "v4.1.1"
+    },
+    "symfony/monolog-bundle": {
+        "version": "3.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.1",
+            "ref": "51b7a31438c8aeeda7931a0ece98a945c91e7f20"
+        }
     },
     "symfony/options-resolver": {
         "version": "v4.0.4"
