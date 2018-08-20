@@ -10,7 +10,7 @@ services:
         networks: ['backend', 'logging']
         ports: ['5432:5432']
         restart: 'always'
-        volumes: ['data-db:/var/lib/postgresql/']
+        volumes: ['data-db:/var/lib/postgresql/', './docker/stages/development/fixtures.zip:/var/data/fixtures.zip']
     elasticsearch:
         image: 'docker.elastic.co/elasticsearch/elasticsearch:6.3.2'
         environment:
