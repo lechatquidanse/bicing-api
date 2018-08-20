@@ -67,3 +67,9 @@ run:
 
 down:
 	docker-compose down -v --remove-orphans
+
+fixtures:
+	docker-compose down -v --remove-orphans
+	docker-compose up -d
+	docker-compose run --rm php bin/console do:mi:mi -n
+	./docker/stages/development/import-fixtures.sh

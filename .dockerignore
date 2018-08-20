@@ -4,6 +4,7 @@
 .gitignore
 .gitlab-ci.yml
 .idea
+Makefile
 .phpspec.yml
 phpunit.xml.dist
 README.md
