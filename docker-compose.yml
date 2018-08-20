@@ -12,7 +12,7 @@ services:
         restart: 'always'
         volumes: ['data-db:/var/lib/postgresql/']
     elasticsearch:
-        image: 'docker.elastic.co/elasticsearch/elasticsearch-oss:6.3.0'
+        image: 'docker.elastic.co/elasticsearch/elasticsearch:6.3.2'
         environment:
             - 'node.name=bicing'
             - 'discovery.type=single-node'
@@ -43,7 +43,7 @@ services:
         restart: 'always'
         volumes: ['./docker/fluentd/etc:/fluentd/etc']
     kibana:
-        image: 'docker.elastic.co/kibana/kibana-oss:6.3.0'
+        image: 'docker.elastic.co/kibana/kibana:6.3.2'
         depends_on: ['elasticsearch']
         logging:
             driver: fluentd
