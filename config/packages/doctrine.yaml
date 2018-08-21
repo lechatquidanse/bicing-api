@@ -1,16 +1,18 @@
 doctrine:
     dbal:
-        url: '%env(DATABASE_URL)%'
         types:
-            uuid:  'Ramsey\Uuid\Doctrine\UuidType'
             date_time_immutable_stringable: 'App\Infrastructure\Persistence\Doctrine\Type\DoctrineDateTimeImmutableStringableType'
             enum_station_state_status_type: 'App\Infrastructure\Persistence\Doctrine\Type\DoctrineEnumStationStateStatusType'
             enum_station_detail_type_type: 'App\Infrastructure\Persistence\Doctrine\Type\DoctrineEnumStationDetailTypeType'
+            uuid:  'Ramsey\Uuid\Doctrine\UuidType'
+        url: '%env(DATABASE_URL)%'
 
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
-        naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        dql:
+            datetime_functions:
+                time_bucket: 'App\Infrastructure\Persistence\Doctrine\DQL\TimescaleDbTimeBucketFunction'
         mappings:
             App:
                 is_bundle: false
@@ -18,3 +20,4 @@ doctrine:
                 dir: '%kernel.project_dir%/src/'
                 prefix: 'App\Domain\Model'
                 alias: App
+        naming_strategy: doctrine.orm.naming_strategy.underscore
