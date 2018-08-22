@@ -7,6 +7,7 @@ namespace tests\Support\TestCase;
 use Assert\Assertion;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Tools\SchemaTool;
 use tests\Support\Builder\BuilderInterface;
 
@@ -32,22 +33,21 @@ abstract class DatabaseTestCase extends IntegrationTestCase
 
     protected function setupDatabase()
     {
-        $em = $this->entityManager();
-//        $params = $em->getConnection()->getParams();
-//
-//        if (file_exists($params['path'])) {
-//            unlink($params['path']);
-//        }
-
-        $schemaTool = new SchemaTool($em);
-        $schemaTool->createSchema($em->getMetadataFactory()->getAllMetadata());
+        $this->truncateTables();
     }
 
-    /**
-     * @param mixed $object
-     *
-     * @return mixed
-     */
+    private function truncateTables()
+    {
+        $em = $this->entityManager();
+
+        $metaData = $em->getMetadataFactory()->getAllMetadata();
+
+        /** @var ClassMetadata $meta */
+        foreach ($metaData as $meta) {
+            $em->getConnection()->executeQuery(sprintf('TRUNCATE "%s" CASCADE;', $meta->getTableName()));
+        }
+    }
+
     protected function save($object)
     {
         $this->entityManager()->persist($object);

@@ -1,7 +1,3 @@
 doctrine:
-# http://blog.sznapka.pl/fully-isolated-tests-in-symfony2/
     dbal:
-        url: ''
-        driver:  pdo_sqlite
-        memory:  true
-        charset: UTF8
+        url: 'pgsql://test:test@db_test.bicing-api_backend:5432/bicing?charset=UTF8&serverVersion=10.0'
