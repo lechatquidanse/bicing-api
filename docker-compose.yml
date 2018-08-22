@@ -11,6 +11,14 @@ services:
         ports: ['5432:5432']
         restart: 'always'
         volumes: ['data-db:/var/lib/postgresql/', './docker/stages/development/fixtures.zip:/var/data/fixtures.zip']
+    db_test:
+        image: 'timescale/timescaledb:0.9.0-pg10'
+        environment:
+            POSTGRES_DB: bicing
+            POSTGRES_USER: test
+            POSTGRES_PASSWORD: test
+        networks: ['backend', 'logging']
+        volumes: ['data-db-test:/var/lib/postgresql/']
     elasticsearch:
         image: 'docker.elastic.co/elasticsearch/elasticsearch:6.3.2'
         environment:
@@ -88,6 +96,7 @@ services:
 
 volumes:
   data-db:
+  data-db-test:
   data-elasticsearch:
 
 networks:
