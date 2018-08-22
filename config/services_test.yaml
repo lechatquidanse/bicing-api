@@ -23,4 +23,4 @@ services:
     tests\App\Infrastructure\BicingApi\MockHttpQueryClient: ~
     eight_points_guzzle.client.bicing_api: '@tests\App\Infrastructure\BicingApi\MockHttpQueryClient'
 
-    test.app.query.availabilites_in_time_interval_by_station_query: '@App\Infrastructure\Persistence\Doctrine\Query\AvailabilitiesInTimeIntervalByStationQuery'
+    test.app.query.availabilites_in_time_interval_by_station_query: '@App\Infrastructure\Persistence\Doctrine\Query\DoctrineAvailabilitiesInTimeIntervalByStationQuery'

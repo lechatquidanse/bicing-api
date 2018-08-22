@@ -9,21 +9,25 @@ use Doctrine\ORM\Query\AST\Literal;
 use Doctrine\ORM\Query\AST\PathExpression;
 use Doctrine\ORM\Query\Lexer;
 
-/** @todo add comment to explain how it works */
+/**
+ * DQL function to use TimescaleDB "time_bucket" function.
+ *
+ * "time_bucket" "(" IntervalLiteral INTERVAL "," DateTimeExpression DATE ")"
+ */
 class TimescaleDbTimeBucketFunction extends FunctionNode
 {
     /** @var Literal */
     private $intervalLiteral;
 
     /** @var PathExpression */
-    private $fieldExpression;
+    private $datetimeExpression;
 
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
         $sql = sprintf(
             'time_bucket(%s, %s)',
             $this->intervalLiteral->dispatch($sqlWalker),
-            $this->fieldExpression->dispatch($sqlWalker));
+            $this->datetimeExpression->dispatch($sqlWalker));
 
         return $sql;
     }
@@ -37,7 +41,7 @@ class TimescaleDbTimeBucketFunction extends FunctionNode
 
         $parser->match(Lexer::T_COMMA);
 
-        $this->fieldExpression = $parser->SimpleArithmeticExpression();
+        $this->datetimeExpression = $parser->SimpleArithmeticExpression();
 
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }

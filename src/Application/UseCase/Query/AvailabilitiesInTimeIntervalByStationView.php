@@ -16,4 +16,12 @@ final class AvailabilitiesInTimeIntervalByStationView
     {
         $this->availabilities = $availabilities;
     }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return $this->availabilities;
+    }
 }
