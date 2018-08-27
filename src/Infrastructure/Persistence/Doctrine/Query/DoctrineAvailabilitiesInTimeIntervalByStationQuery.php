@@ -32,12 +32,12 @@ class DoctrineAvailabilitiesInTimeIntervalByStationQuery implements Availabiliti
         $this->entityManager = $entityManager;
     }
 
-    public function find(UuidInterface $stationId, DateTimeImmutableStringable $statedAt): AvailabilitiesInTimeIntervalByStationView
+    public function find(UuidInterface $stationId, DateTimeImmutableStringable $statedAt): array
     {
         $intervalUpAt = $statedAt->modify('+1 hour');
         $intervalDownAt = $statedAt->modify('-1 hour');
 
-        $results = $this->entityManager->createQueryBuilder()
+        return $this->entityManager->createQueryBuilder()
             ->select([
                 'time_bucket(\'5 minute\', ss.statedAt) AS interval',
                 'avg(ss.availableBikeNumber) as available_bike_avg',
@@ -62,11 +62,5 @@ class DoctrineAvailabilitiesInTimeIntervalByStationQuery implements Availabiliti
             ])
             ->getQuery()
             ->getResult();
-
-        if (empty($results)) {
-            return new AvailabilitiesInTimeIntervalByStationView([]);
-        }
-
-        return new AvailabilitiesInTimeIntervalByStationView($results);
     }
 }

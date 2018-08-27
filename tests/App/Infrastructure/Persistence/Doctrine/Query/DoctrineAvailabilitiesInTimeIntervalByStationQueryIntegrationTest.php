@@ -69,7 +69,7 @@ class DoctrineAvailabilitiesInTimeIntervalByStationQueryIntegrationTest extends 
                 'available_slot_max' => 1,
 
             ],
-        ], $this->query->find($stationId, $statedAt)->toArray());
+        ], $this->query->find($stationId, $statedAt));
     }
 
     /** {@inheritdoc} */
