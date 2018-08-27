@@ -1,3 +1,0 @@
-index:
-    path: /
-    controller: App\UserInterface\Rest\Symfony\SanityController::index
