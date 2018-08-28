@@ -40,7 +40,7 @@ class AssignStationStateToStationCommandFactory implements AssignStationStateToS
      * @return AssignStationStateToStationCommand
      * @throws InvalidArgumentException
      *
-     * @todo upgrade exception message
+     * @todo upgrade exception message ($form->getErrors()->__toString())
      */
     public function fromAvailabilityStation(AvailabilityStation $availabilityStation): AssignStationStateToStationCommand
     {

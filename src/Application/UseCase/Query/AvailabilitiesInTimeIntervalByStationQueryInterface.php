@@ -9,5 +9,5 @@ use Ramsey\Uuid\UuidInterface;
 
 interface AvailabilitiesInTimeIntervalByStationQueryInterface
 {
-    public function find(UuidInterface $stationId, DateTimeImmutableStringable $statedAt): AvailabilitiesInTimeIntervalByStationView;
+    public function find(UuidInterface $stationId, DateTimeImmutableStringable $statedAt): array;
 }

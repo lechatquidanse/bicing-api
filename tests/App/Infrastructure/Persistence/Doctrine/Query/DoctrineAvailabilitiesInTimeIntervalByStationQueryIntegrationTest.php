@@ -18,7 +18,10 @@ class DoctrineAvailabilitiesInTimeIntervalByStationQueryIntegrationTest extends 
     /** @var DoctrineAvailabilitiesInTimeIntervalByStationQuery */
     private $query;
 
-    /** @test */
+    /**
+     * @test
+     * @todo create a provider to test more data
+     */
     public function it_can_find_availabilities_with_opened_station_state_status_assigned_to_a_station(): void
     {
         $stationId = Uuid::uuid4();
@@ -69,7 +72,7 @@ class DoctrineAvailabilitiesInTimeIntervalByStationQueryIntegrationTest extends 
                 'available_slot_max' => 1,
 
             ],
-        ], $this->query->find($stationId, $statedAt)->toArray());
+        ], $this->query->find($stationId, $statedAt));
     }
 
     /** {@inheritdoc} */
