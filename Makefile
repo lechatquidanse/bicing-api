@@ -57,7 +57,7 @@ install:
 	docker-compose run --rm php bin/console do:mi:mi -n
 	docker-compose run --rm php bin/console do:mi:mi -n --env=test
 	docker-compose run --rm php bin/phpspec run
-	docker-compose run --rm php bin/phpunit
+	docker-compose run --rm php bin/simple-phpunit
 
 run:
 	docker-compose up -d
@@ -65,7 +65,7 @@ run:
 	docker-compose run --rm php bin/console do:mi:mi -n
 	docker-compose run --rm php bin/console do:mi:mi -n --env=test
 	docker-compose run --rm php bin/phpspec run
-	docker-compose run --rm php bin/phpunit
+	docker-compose run --rm php bin/simple-phpunit
 
 down:
 	docker-compose down -v --remove-orphans
@@ -82,4 +82,4 @@ qa:
 	docker-compose run --rm php bin/phpcs --standard=PSR2 src
 	docker-compose run --rm php composer install
 	docker-compose run --rm php bin/phpspec run
-	docker-compose run --rm php bin/phpunit
+	docker-compose run --rm php bin/simple-phpunit
