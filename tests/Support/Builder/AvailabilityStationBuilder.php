@@ -101,21 +101,21 @@ class AvailabilityStationBuilder implements BuilderInterface
         array $nearByStationIds,
         string $status,
         string $name,
-        string $type)
-    {
-        $this->id               = $id;
-        $this->districtCode     = $districtCode;
-        $this->longitude        = $longitude;
-        $this->latitude         = $latitude;
-        $this->bikes            = $bikes;
-        $this->slots            = $slots;
-        $this->zipCode          = $zipCode;
-        $this->address          = $address;
-        $this->addressNumber    = $addressNumber;
+        string $type
+    ) {
+        $this->id = $id;
+        $this->districtCode = $districtCode;
+        $this->longitude = $longitude;
+        $this->latitude = $latitude;
+        $this->bikes = $bikes;
+        $this->slots = $slots;
+        $this->zipCode = $zipCode;
+        $this->address = $address;
+        $this->addressNumber = $addressNumber;
         $this->nearByStationIds = $nearByStationIds;
-        $this->status           = $status;
-        $this->name             = $name;
-        $this->type             = $type;
+        $this->status = $status;
+        $this->name = $name;
+        $this->type = $type;
     }
 
     /**
@@ -171,7 +171,7 @@ class AvailabilityStationBuilder implements BuilderInterface
      */
     public function withId(string $id): AvailabilityStationBuilder
     {
-        $copy     = $this->copy();
+        $copy = $this->copy();
         $copy->id = $id;
 
         return $copy;
@@ -184,7 +184,7 @@ class AvailabilityStationBuilder implements BuilderInterface
      */
     public function withBikes(int $bikes): AvailabilityStationBuilder
     {
-        $copy        = $this->copy();
+        $copy = $this->copy();
         $copy->bikes = $bikes;
 
         return $copy;
@@ -197,7 +197,7 @@ class AvailabilityStationBuilder implements BuilderInterface
      */
     public function withSlots(int $slots): AvailabilityStationBuilder
     {
-        $copy        = $this->copy();
+        $copy = $this->copy();
         $copy->slots = $slots;
 
         return $copy;
@@ -210,7 +210,7 @@ class AvailabilityStationBuilder implements BuilderInterface
      */
     public function withStatus(string $status): AvailabilityStationBuilder
     {
-        $copy         = $this->copy();
+        $copy = $this->copy();
         $copy->status = $status;
 
         return $copy;
@@ -223,7 +223,7 @@ class AvailabilityStationBuilder implements BuilderInterface
      */
     public function withName(string $name): AvailabilityStationBuilder
     {
-        $copy       = $this->copy();
+        $copy = $this->copy();
         $copy->name = $name;
 
         return $copy;
@@ -236,7 +236,7 @@ class AvailabilityStationBuilder implements BuilderInterface
      */
     public function withType(string $type): AvailabilityStationBuilder
     {
-        $copy       = $this->copy();
+        $copy = $this->copy();
         $copy->type = $type;
 
         return $copy;
@@ -249,7 +249,7 @@ class AvailabilityStationBuilder implements BuilderInterface
      */
     public function withNearByStationIds(array $nearByStationIds): AvailabilityStationBuilder
     {
-        $copy                   = $this->copy();
+        $copy = $this->copy();
         $copy->nearByStationIds = $nearByStationIds;
 
         return $copy;
@@ -262,7 +262,7 @@ class AvailabilityStationBuilder implements BuilderInterface
      */
     public function withAddress(string $address): AvailabilityStationBuilder
     {
-        $copy          = $this->copy();
+        $copy = $this->copy();
         $copy->address = $address;
 
         return $copy;
@@ -275,7 +275,7 @@ class AvailabilityStationBuilder implements BuilderInterface
      */
     public function withAddressNumber(string $addressNumber): AvailabilityStationBuilder
     {
-        $copy                = $this->copy();
+        $copy = $this->copy();
         $copy->addressNumber = $addressNumber;
 
         return $copy;
@@ -288,7 +288,7 @@ class AvailabilityStationBuilder implements BuilderInterface
      */
     public function withDistrictCode(int $districtCode): AvailabilityStationBuilder
     {
-        $copy               = $this->copy();
+        $copy = $this->copy();
         $copy->districtCode = $districtCode;
 
         return $copy;
@@ -301,7 +301,7 @@ class AvailabilityStationBuilder implements BuilderInterface
      */
     public function withZipCode(string $zipCode): AvailabilityStationBuilder
     {
-        $copy          = $this->copy();
+        $copy = $this->copy();
         $copy->zipCode = $zipCode;
 
         return $copy;
@@ -314,7 +314,7 @@ class AvailabilityStationBuilder implements BuilderInterface
      */
     public function withLatitude(float $latitude): AvailabilityStationBuilder
     {
-        $copy           = $this->copy();
+        $copy = $this->copy();
         $copy->latitude = $latitude;
 
         return $copy;
@@ -327,7 +327,7 @@ class AvailabilityStationBuilder implements BuilderInterface
      */
     public function withLongitude(float $longitude): AvailabilityStationBuilder
     {
-        $copy            = $this->copy();
+        $copy = $this->copy();
         $copy->longitude = $longitude;
 
         return $copy;

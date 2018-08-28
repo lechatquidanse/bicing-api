@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace tests\Support\Builder;
 
-
 use App\Domain\Model\Station\StationExternalData;
 
 class StationExternalDataBuilder implements BuilderInterface
@@ -25,7 +24,7 @@ class StationExternalDataBuilder implements BuilderInterface
      */
     private function __construct(string $externalStationId, array $nearByExternalStationIds)
     {
-        $this->externalStationId        = $externalStationId;
+        $this->externalStationId = $externalStationId;
         $this->nearByExternalStationIds = $nearByExternalStationIds;
     }
 
@@ -59,7 +58,7 @@ class StationExternalDataBuilder implements BuilderInterface
      */
     public function withExternalStationId(string $externalStationId): StationExternalDataBuilder
     {
-        $copy                    = $this->copy();
+        $copy = $this->copy();
         $copy->externalStationId = $externalStationId;
 
         return $copy;
@@ -72,7 +71,7 @@ class StationExternalDataBuilder implements BuilderInterface
      */
     public function withNearByExternalStationIds(array $nearByExternalStationIds): StationExternalDataBuilder
     {
-        $copy                           = $this->copy();
+        $copy = $this->copy();
         $copy->nearByExternalStationIds = $nearByExternalStationIds;
 
         return $copy;

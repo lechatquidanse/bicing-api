@@ -27,7 +27,8 @@ class TimescaleDbTimeBucketFunctionDQL extends FunctionNode
         return sprintf(
             'time_bucket(%s, %s)',
             $this->intervalLiteral->dispatch($sqlWalker),
-            $this->datetimeExpression->dispatch($sqlWalker));
+            $this->datetimeExpression->dispatch($sqlWalker)
+        );
     }
 
     public function parse(\Doctrine\ORM\Query\Parser $parser)

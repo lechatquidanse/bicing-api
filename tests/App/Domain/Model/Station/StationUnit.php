@@ -31,9 +31,9 @@ class StationUnit extends TestCase
             new \DateTimeImmutable()
         );
 
-        $statedAt  = new DateTimeImmutableStringable();
+        $statedAt = new DateTimeImmutableStringable();
         $createdAt = new \DateTimeImmutable();
-        $status    = StationStateStatusBuilder::create()->withStatusOpened()->build();
+        $status = StationStateStatusBuilder::create()->withStatusOpened()->build();
 
         $this->assertEquals(
             StationStateBuilder::create()
@@ -50,6 +50,7 @@ class StationUnit extends TestCase
                 12,
                 $status,
                 $createdAt
-            ));
+            )
+        );
     }
 }

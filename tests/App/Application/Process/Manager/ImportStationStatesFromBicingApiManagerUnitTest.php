@@ -8,7 +8,6 @@ use App\Application\Process\Manager\ImportStationStatesFromBicingApiManager;
 use App\Application\UseCase\Command\AssignStationStateToStationCommand;
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Tests\Logger;
 use tests\App\Infrastructure\System\MockClock;
 
@@ -58,14 +57,13 @@ class ImportStationStatesFromBicingApiManagerUnitTest extends TestCase
         $this->clock::reset();
 
         $commands = $this->commandBus->commands();
-        $command  = array_pop($commands);
+        $command = array_pop($commands);
 
         $this->assertInstanceOf(AssignStationStateToStationCommand::class, $command);
         $this->assertEquals($statedAt, $command->statedAt);
     }
 
     /**
-     *
      * @test
      */
     public function it_can_manage_two_station_states_threw_command_bus()
@@ -96,11 +94,11 @@ class ImportStationStatesFromBicingApiManagerUnitTest extends TestCase
     {
         parent::setUp();
 
-        $this->query      = new FakeAvailabilityStationQuery();
-        $this->factory    = new FakeAssignStationStateToStationCommandFactory();
+        $this->query = new FakeAvailabilityStationQuery();
+        $this->factory = new FakeAssignStationStateToStationCommandFactory();
         $this->commandBus = new SpyCommandBus();
-        $this->clock      = new MockClock();
-        $this->logger     = new Logger();
+        $this->clock = new MockClock();
+        $this->logger = new Logger();
 
         $this->manager = new ImportStationStatesFromBicingApiManager(
             $this->query,
@@ -116,11 +114,11 @@ class ImportStationStatesFromBicingApiManagerUnitTest extends TestCase
      */
     protected function tearDown()
     {
-        $this->manager    = null;
-        $this->clock      = null;
+        $this->manager = null;
+        $this->clock = null;
         $this->commandBus = null;
-        $this->factory    = null;
-        $this->query      = null;
+        $this->factory = null;
+        $this->query = null;
 
         parent::tearDown();
     }

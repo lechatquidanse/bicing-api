@@ -8,14 +8,13 @@ use App\Domain\Exception\StationState\StationStateStatusIsInvalidException;
 use App\Domain\Model\StationState\StationStateStatus;
 use PhpSpec\ObjectBehavior;
 
-
 /**
  * @see StationStateStatus
  */
 class StationStateStatusSpec extends ObjectBehavior
 {
     /**
-     * Test that StationStateStatus can be created with status OPENED
+     * Test that StationStateStatus can be created with status OPENED.
      */
     public function it_can_be_created_from_string_opened()
     {
@@ -26,7 +25,7 @@ class StationStateStatusSpec extends ObjectBehavior
     }
 
     /**
-     * Test that StationStateStatus can be created with status OPN
+     * Test that StationStateStatus can be created with status OPN.
      */
     public function it_can_be_created_from_string_opn()
     {
@@ -37,7 +36,7 @@ class StationStateStatusSpec extends ObjectBehavior
     }
 
     /**
-     * Test that StationStateStatus can be created with status CLOSED
+     * Test that StationStateStatus can be created with status CLOSED.
      */
     public function it_can_be_created_from_string_closed()
     {
@@ -48,7 +47,7 @@ class StationStateStatusSpec extends ObjectBehavior
     }
 
     /**
-     * Test that StationStateStatus can be created with status CLS
+     * Test that StationStateStatus can be created with status CLS.
      */
     public function it_can_be_created_from_string_cls()
     {

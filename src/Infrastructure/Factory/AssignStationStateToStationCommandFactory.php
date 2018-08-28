@@ -31,26 +31,28 @@ class AssignStationStateToStationCommandFactory implements AssignStationStateToS
     public function __construct(FormFactoryInterface $formFactory, ClockInterface $clock)
     {
         $this->formFactory = $formFactory;
-        $this->clock       = $clock;
+        $this->clock = $clock;
     }
 
     /**
      * @param AvailabilityStation $availabilityStation
      *
      * @return AssignStationStateToStationCommand
+     *
      * @throws InvalidArgumentException
      *
      * @todo upgrade exception message ($form->getErrors()->__toString())
      */
-    public function fromAvailabilityStation(AvailabilityStation $availabilityStation): AssignStationStateToStationCommand
-    {
+    public function fromAvailabilityStation(
+        AvailabilityStation $availabilityStation
+    ): AssignStationStateToStationCommand {
         $form = $this->formFactory->create(SymfonyAssignStationStateToStationType::class);
 
         $form->submit([
-            'externalStationId'   => $availabilityStation->id(),
+            'externalStationId' => $availabilityStation->id(),
             'availableBikeNumber' => $availabilityStation->bikes(),
             'availableSlotNumber' => $availabilityStation->slots(),
-            'status'              => $availabilityStation->status(),
+            'status' => $availabilityStation->status(),
         ]);
 
         if (!$form->isValid()) {

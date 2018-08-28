@@ -28,7 +28,7 @@ final class AvailabilitiesInTimeIntervalByStationView
 
     /**
      * @param UuidInterface $stationId
-     * @param array $availabilities
+     * @param array         $availabilities
      */
     public function __construct(UuidInterface $stationId, array $availabilities)
     {

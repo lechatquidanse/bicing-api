@@ -29,12 +29,13 @@ class StationStateStatusToStringTransformer implements DataTransformerInterface
     {
         if (null === $value || false === is_string($value)) {
             throw new TransformationFailedException(
-                'To reverse transform to a StationStateStatus, "string" type is expected.');
+                'To reverse transform to a StationStateStatus, "string" type is expected.'
+            );
         }
 
         try {
             return StationStateStatus::fromString($value);
-        } catch(\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new TransformationFailedException($exception->getMessage());
         }
     }

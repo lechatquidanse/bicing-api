@@ -36,7 +36,7 @@ class HttpAvailabilityStationQuery implements AvailabilityStationQueryInterface
      */
     public function __construct(HttpQueryClientInterface $client, SerializerInterface $serializer)
     {
-        $this->client     = $client;
+        $this->client = $client;
         $this->serializer = $serializer;
     }
 
@@ -56,8 +56,9 @@ class HttpAvailabilityStationQuery implements AvailabilityStationQueryInterface
     private function deserialize(ResponseInterface $response): array
     {
         return $this->serializer->deserialize(
-            (string)$response->getBody(),
+            (string) $response->getBody(),
             'array<App\Infrastructure\BicingApi\AvailabilityStation>',
-            self::RESPONSE_FORMAT);
+            self::RESPONSE_FORMAT
+        );
     }
 }

@@ -42,7 +42,7 @@ class StationStateStatusBuilder implements BuilderInterface
      */
     public function withStatusOpened(): StationStateStatusBuilder
     {
-        $copy         = $this->copy();
+        $copy = $this->copy();
         $copy->status = 'OPENED';
 
         return $copy;
@@ -53,7 +53,7 @@ class StationStateStatusBuilder implements BuilderInterface
      */
     public function withStatusClosed(): StationStateStatusBuilder
     {
-        $copy         = $this->copy();
+        $copy = $this->copy();
         $copy->status = 'CLOSED';
 
         return $copy;

@@ -26,17 +26,23 @@ final class AvailabilitiesInTimeIntervalByStationDataProvider implements ItemDat
     private $availabilitiesQuery;
 
     /**
-     * @param StationRepositoryInterface $stationRepository
+     * @param StationRepositoryInterface                          $stationRepository
      * @param AvailabilitiesInTimeIntervalByStationQueryInterface $availabilitiesQuery
      */
-    public function __construct(StationRepositoryInterface $stationRepository, AvailabilitiesInTimeIntervalByStationQueryInterface $availabilitiesQuery)
-    {
+    public function __construct(
+        StationRepositoryInterface $stationRepository,
+        AvailabilitiesInTimeIntervalByStationQueryInterface $availabilitiesQuery
+    ) {
         $this->stationRepository = $stationRepository;
         $this->availabilitiesQuery = $availabilitiesQuery;
     }
 
-    public function getItem(string $resourceClass, $id, string $operationName = null, array $context = []): AvailabilitiesInTimeIntervalByStationView
-    {
+    public function getItem(
+        string $resourceClass,
+        $id,
+        string $operationName = null,
+        array $context = []
+    ): AvailabilitiesInTimeIntervalByStationView {
         if (!$this->supports($resourceClass, $operationName)) {
             throw new ResourceClassNotSupportedException(sprintf(
                 'Resource Class %s not supported by Availabilities In Time Interval By Station DataProvider',
@@ -50,11 +56,12 @@ final class AvailabilitiesInTimeIntervalByStationDataProvider implements ItemDat
 
         return new AvailabilitiesInTimeIntervalByStationView(
             $station->stationId(),
-            $this->availabilitiesQuery->find(Uuid::fromString($id), new DateTimeImmutableStringable('now')));
+            $this->availabilitiesQuery->find(Uuid::fromString($id), new DateTimeImmutableStringable('now'))
+        );
     }
 
     /**
-     * @param string $resourceClass
+     * @param string      $resourceClass
      * @param string|null $operationName
      *
      * @return bool

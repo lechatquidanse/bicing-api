@@ -40,7 +40,7 @@ final class StationExternalData implements ValueObjectInterface
     {
         $this->validate($externalStationId);
 
-        $this->externalStationId        = $externalStationId;
+        $this->externalStationId = $externalStationId;
         $this->nearByExternalStationIds = $nearByExternalStationIds;
     }
 
@@ -58,7 +58,7 @@ final class StationExternalData implements ValueObjectInterface
     /**
      * @param string $externalStationId
      *
-     * @throws LazyAssertionException if at least one assertion is not respected.
+     * @throws LazyAssertionException if at least one assertion is not respected
      */
     private function validate(string $externalStationId)
     {
@@ -75,4 +75,3 @@ final class StationExternalData implements ValueObjectInterface
         return $this->externalStationId;
     }
 }
-

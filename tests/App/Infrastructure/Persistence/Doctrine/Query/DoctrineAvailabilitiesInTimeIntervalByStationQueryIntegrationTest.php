@@ -20,6 +20,7 @@ class DoctrineAvailabilitiesInTimeIntervalByStationQueryIntegrationTest extends 
 
     /**
      * @test
+     *
      * @todo create a provider to test more data
      */
     public function it_can_find_availabilities_with_opened_station_state_status_assigned_to_a_station(): void
@@ -49,7 +50,8 @@ class DoctrineAvailabilitiesInTimeIntervalByStationQueryIntegrationTest extends 
                 ->withStationAssigned($station)
                 ->withAvailableBikeNumber(29)
                 ->withAvailableSlotNumber(1)
-                ->withStatus($status));
+            ->withStatus($status)
+        );
 
         $this->assertEquals([
             [
@@ -60,7 +62,6 @@ class DoctrineAvailabilitiesInTimeIntervalByStationQueryIntegrationTest extends 
                 'available_slot_avg' => '25.5000000000000000',
                 'available_slot_min' => 23,
                 'available_slot_max' => 28,
-
             ],
             [
                 'interval' => '2018-08-20 16:35:00',
@@ -70,7 +71,6 @@ class DoctrineAvailabilitiesInTimeIntervalByStationQueryIntegrationTest extends 
                 'available_slot_avg' => '1.0000000000000000',
                 'available_slot_min' => 1,
                 'available_slot_max' => 1,
-
             ],
         ], $this->query->find($stationId, $statedAt));
     }

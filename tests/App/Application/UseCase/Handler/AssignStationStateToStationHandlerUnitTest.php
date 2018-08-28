@@ -39,7 +39,7 @@ class AssignStationStateToStationHandlerUnitTest extends TestCase
      */
     public function it_can_handle()
     {
-        $statedAt  = new DateTimeImmutableStringable();
+        $statedAt = new DateTimeImmutableStringable();
         $createdAt = new \DateTimeImmutable();
 
         $station = StationBuilder::create()
@@ -93,9 +93,9 @@ class AssignStationStateToStationHandlerUnitTest extends TestCase
     {
         parent::setUp();
 
-        $this->stationRepository      = new MockStationRepository();
+        $this->stationRepository = new MockStationRepository();
         $this->stationStateRepository = new MockStationStateRepository();
-        $this->handler                = new AssignStationStateToStationHandler(
+        $this->handler = new AssignStationStateToStationHandler(
             $this->stationRepository,
             $this->stationStateRepository
         );
@@ -106,8 +106,8 @@ class AssignStationStateToStationHandlerUnitTest extends TestCase
      */
     protected function tearDown()
     {
-        $this->handler                = null;
-        $this->stationRepository      = null;
+        $this->handler = null;
+        $this->stationRepository = null;
         $this->stationStateRepository = null;
 
         parent::tearDown();
@@ -123,12 +123,12 @@ class AssignStationStateToStationHandlerUnitTest extends TestCase
     ): AssignStationStateToStationCommand {
         $command = new AssignStationStateToStationCommand();
 
-        $command->statedAt            = $statedAt;
-        $command->externalStationId   = $externalStationId;
+        $command->statedAt = $statedAt;
+        $command->externalStationId = $externalStationId;
         $command->availableBikeNumber = $availableBikeNumber;
         $command->availableSlotNumber = $availableSlotNumber;
-        $command->status              = $status;
-        $command->createdAt           = $createdAt;
+        $command->status = $status;
+        $command->createdAt = $createdAt;
 
         return $command;
     }

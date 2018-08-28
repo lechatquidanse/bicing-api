@@ -56,6 +56,6 @@ class MockClock implements ClockInterface
     public static function reset(): void
     {
         self::$willReturnDateTimeImmutableStringable = null;
-        self::$willReturnDateTimeImmutable           = null;
+        self::$willReturnDateTimeImmutable = null;
     }
 }
