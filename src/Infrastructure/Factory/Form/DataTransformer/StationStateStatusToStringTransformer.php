@@ -34,7 +34,7 @@ class StationStateStatusToStringTransformer implements DataTransformerInterface
 
         try {
             return StationStateStatus::fromString($value);
-        } catch(\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new TransformationFailedException($exception->getMessage());
         }
     }

@@ -75,11 +75,11 @@ final class Location implements ValueObjectInterface
     {
         $this->validate($address, $districtCode, $zipCode);
 
-        $this->address       = $address;
-        $this->districtCode  = $districtCode;
-        $this->zipCode       = $zipCode;
-        $this->latitude      = $latitude;
-        $this->longitude     = $longitude;
+        $this->address = $address;
+        $this->districtCode = $districtCode;
+        $this->zipCode = $zipCode;
+        $this->latitude = $latitude;
+        $this->longitude = $longitude;
     }
 
     /**
@@ -121,7 +121,7 @@ final class Location implements ValueObjectInterface
      * @param int    $districtCode
      * @param string $zipCode
      *
-     * @throws LazyAssertionException if at least one assertion is not respected.
+     * @throws LazyAssertionException if at least one assertion is not respected
      */
     private function validate(string $address, int $districtCode, string $zipCode): void
     {

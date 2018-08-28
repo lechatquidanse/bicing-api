@@ -80,5 +80,4 @@ json
 
         parent::tearDown();
     }
-
 }

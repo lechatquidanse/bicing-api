@@ -42,7 +42,6 @@ class SymfonyAssignStationStateToStationType extends AbstractType
         $builder->get('status')->addModelTransformer($this->statusTransformer);
     }
 
-
     /**
      * {@inheritdoc}
      */

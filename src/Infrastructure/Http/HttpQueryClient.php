@@ -24,8 +24,9 @@ class HttpQueryClient extends Client implements HttpQueryClientInterface
      * @param string $uri
      *
      * @return ResponseInterface
-     * @throws HttpQueryResponseIsNotValidException if response is not valid.
-     * @throws HttpQueryRequestIsNotValidException if request has encountered some issue.
+     *
+     * @throws HttpQueryResponseIsNotValidException if response is not valid
+     * @throws HttpQueryRequestIsNotValidException  if request has encountered some issue
      */
     public function query(string $uri): ResponseInterface
     {
@@ -65,7 +66,7 @@ class HttpQueryClient extends Client implements HttpQueryClientInterface
             $this->logger->error(
                 'External API call fail',
                 [
-                    'request'  => $exception->getRequest(),
+                    'request' => $exception->getRequest(),
                     'response' => $exception->getResponse(),
                 ]
             );

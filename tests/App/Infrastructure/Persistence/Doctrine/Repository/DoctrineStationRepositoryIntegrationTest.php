@@ -121,7 +121,6 @@ class DoctrineStationRepositoryIntegrationTest extends DatabaseTestCase
         $this->expectException(StationAlreadyExistsException::class);
         $this->expectExceptionMessage('A station already exists with external station Id "12"');
 
-
         $this->repository->add((StationBuilder::create())
             ->withStationExternalData(
                 StationExternalDataBuilder::create()

@@ -84,12 +84,12 @@ final class Station implements AggregateInterface
         \DateTimeImmutable $createdAt,
         \DateTimeImmutable $updatedAt = null)
     {
-        $this->stationId           = $stationId;
-        $this->stationDetail       = $stationDetail;
+        $this->stationId = $stationId;
+        $this->stationDetail = $stationDetail;
         $this->stationExternalData = $stationExternalData;
-        $this->location            = $location;
-        $this->createdAt           = $createdAt;
-        $this->updatedAt           = $updatedAt;
+        $this->location = $location;
+        $this->createdAt = $createdAt;
+        $this->updatedAt = $updatedAt;
     }
 
     /**
@@ -162,4 +162,3 @@ final class Station implements AggregateInterface
         );
     }
 }
-

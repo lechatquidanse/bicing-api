@@ -45,10 +45,10 @@ final class ImportStationsFromBicingApiManager
         MessageBus $commandBus,
         LoggerInterface $logger)
     {
-        $this->query          = $query;
+        $this->query = $query;
         $this->commandFactory = $commandFactory;
-        $this->commandBus     = $commandBus;
-        $this->logger         = $logger;
+        $this->commandBus = $commandBus;
+        $this->logger = $logger;
     }
 
     public function __invoke(): void

@@ -43,7 +43,7 @@ class DoctrineEnumStationStateStatusType extends Type
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        if ($value === null || $value instanceof StationStateStatus) {
+        if (null === $value || $value instanceof StationStateStatus) {
             return $value;
         }
 

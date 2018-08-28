@@ -8,7 +8,6 @@ use Assert\Assertion;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\Tools\SchemaTool;
 use tests\Support\Builder\BuilderInterface;
 
 abstract class DatabaseTestCase extends IntegrationTestCase
@@ -67,7 +66,6 @@ abstract class DatabaseTestCase extends IntegrationTestCase
         return $this->managerForClass($class)->find($class, $id);
     }
 
-
     /**
      * @param string $class
      *
@@ -77,7 +75,6 @@ abstract class DatabaseTestCase extends IntegrationTestCase
     {
         return $this->getContainer()->get('doctrine')->getManagerForClass($class);
     }
-
 
     /**
      * @return EntityManager

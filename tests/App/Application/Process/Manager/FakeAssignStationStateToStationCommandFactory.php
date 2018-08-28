@@ -15,8 +15,8 @@ class FakeAssignStationStateToStationCommandFactory implements AssignStationStat
     {
         $command = new AssignStationStateToStationCommand();
 
-        $command->externalStationId   = '122';
-        $command->status              = StationStateStatusBuilder::create()->build();
+        $command->externalStationId = '122';
+        $command->status = StationStateStatusBuilder::create()->build();
         $command->availableBikeNumber = 12;
         $command->availableSlotNumber = 7;
 

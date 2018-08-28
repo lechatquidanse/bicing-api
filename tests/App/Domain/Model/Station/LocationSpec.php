@@ -75,7 +75,6 @@ class LocationSpec extends ObjectBehavior
             2.18895,
         ]);
 
-
         $this->shouldThrow(LazyAssertionException::class)->duringInstantiation();
     }
 

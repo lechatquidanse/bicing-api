@@ -82,12 +82,12 @@ final class StationState implements ValueObjectInterface
     {
         $this->validate($availableBikeNumber, $availableSlotNumber);
 
-        $this->statedAt            = $statedAt;
-        $this->stationAssigned     = $stationAssigned;
+        $this->statedAt = $statedAt;
+        $this->stationAssigned = $stationAssigned;
         $this->availableBikeNumber = $availableBikeNumber;
         $this->availableSlotNumber = $availableSlotNumber;
-        $this->status              = $status;
-        $this->createdAt           = $createdAt;
+        $this->status = $status;
+        $this->createdAt = $createdAt;
     }
 
     /**
@@ -112,10 +112,10 @@ final class StationState implements ValueObjectInterface
     }
 
     /**
-     * @param int    $availableBikeNumber
-     * @param int    $availableSlotNumber
+     * @param int $availableBikeNumber
+     * @param int $availableSlotNumber
      *
-     * @throws LazyAssertionException if at least one assertion is not respected.
+     * @throws LazyAssertionException if at least one assertion is not respected
      */
     public function validate(int $availableBikeNumber, int $availableSlotNumber)
     {

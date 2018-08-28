@@ -11,7 +11,6 @@ use PhpSpec\ObjectBehavior;
 use tests\Support\Builder\StationBuilder;
 use tests\Support\Builder\StationStateStatusBuilder;
 
-
 /**
  * @see StationState
  */

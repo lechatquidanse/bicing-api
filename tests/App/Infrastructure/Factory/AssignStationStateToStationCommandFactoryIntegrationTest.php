@@ -30,13 +30,13 @@ class AssignStationStateToStationCommandFactoryIntegrationTest extends Integrati
     public function it_can_create_from_availability_station_with_valid_data()
     {
         $createdAt = new \DateTimeImmutable();
-        $expected  = new AssignStationStateToStationCommand();
+        $expected = new AssignStationStateToStationCommand();
 
-        $expected->externalStationId   = '12';
-        $expected->status              = StationStateStatus::fromString('OPN');
+        $expected->externalStationId = '12';
+        $expected->status = StationStateStatus::fromString('OPN');
         $expected->availableBikeNumber = 2;
         $expected->availableSlotNumber = 18;
-        $expected->createdAt           = $createdAt;
+        $expected->createdAt = $createdAt;
 
         $this->clock::willReturnDateTimeImmutable($createdAt);
 
@@ -73,7 +73,7 @@ class AssignStationStateToStationCommandFactoryIntegrationTest extends Integrati
     {
         parent::setUp();
 
-        $this->clock   = $this->getContainer()->get('test.app.system.clock.mock');
+        $this->clock = $this->getContainer()->get('test.app.system.clock.mock');
         $this->factory = $this->getContainer()->get('test.app.factory.assign_station_state_to_station_command');
     }
 
@@ -82,7 +82,7 @@ class AssignStationStateToStationCommandFactoryIntegrationTest extends Integrati
      */
     protected function tearDown()
     {
-        $this->clock   = null;
+        $this->clock = null;
         $this->factory = null;
 
         parent::tearDown();

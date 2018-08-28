@@ -53,16 +53,16 @@ final class ImportStationStatesFromBicingApiManager
         ClockInterface $clock,
         LoggerInterface $logger)
     {
-        $this->query          = $query;
+        $this->query = $query;
         $this->commandFactory = $commandFactory;
-        $this->commandBus     = $commandBus;
-        $this->clock          = $clock;
-        $this->logger         = $logger;
+        $this->commandBus = $commandBus;
+        $this->clock = $clock;
+        $this->logger = $logger;
     }
 
     public function __invoke(): void
     {
-        $statedAt             = $this->clock->dateTimeImmutableStringable();
+        $statedAt = $this->clock->dateTimeImmutableStringable();
         $availabilityStations = $this->query->findAll();
 
         foreach ($availabilityStations as $availabilityStation) {

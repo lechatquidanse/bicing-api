@@ -29,14 +29,14 @@ final class AssignStationStateToStationHandler
         StationRepositoryInterface $stationRepository,
         StationStateRepositoryInterface $stationStateRepository)
     {
-        $this->stationRepository      = $stationRepository;
+        $this->stationRepository = $stationRepository;
         $this->stationStateRepository = $stationStateRepository;
     }
 
     /**
      * @param AssignStationStateToStationCommand $command
      *
-     * @throws StationDoesNotExist if no station exists with the expected stationId.
+     * @throws StationDoesNotExist if no station exists with the expected stationId
      */
     public function __invoke(AssignStationStateToStationCommand $command): void
     {

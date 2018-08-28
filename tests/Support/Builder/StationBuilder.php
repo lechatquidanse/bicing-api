@@ -59,12 +59,12 @@ class StationBuilder implements BuilderInterface
         \DateTimeImmutable $createdAt,
         \DateTimeImmutable $updatedAt = null)
     {
-        $this->stationId           = $stationId;
-        $this->stationDetail       = $stationDetail;
+        $this->stationId = $stationId;
+        $this->stationDetail = $stationDetail;
         $this->stationExternalData = $stationExternalData;
-        $this->location            = $location;
-        $this->createdAt           = $createdAt;
-        $this->updatedAt           = $updatedAt;
+        $this->location = $location;
+        $this->createdAt = $createdAt;
+        $this->updatedAt = $updatedAt;
     }
 
     /**
@@ -108,7 +108,7 @@ class StationBuilder implements BuilderInterface
      */
     public function withStationId(UuidInterface $stationId): StationBuilder
     {
-        $copy            = $this->copy();
+        $copy = $this->copy();
         $copy->stationId = $stationId;
 
         return $copy;
@@ -121,7 +121,7 @@ class StationBuilder implements BuilderInterface
      */
     public function withStationDetail(StationDetail $stationDetail): StationBuilder
     {
-        $copy                = $this->copy();
+        $copy = $this->copy();
         $copy->stationDetail = $stationDetail;
 
         return $copy;
@@ -134,7 +134,7 @@ class StationBuilder implements BuilderInterface
      */
     public function withStationExternalData(StationExternalData $stationExternalData): StationBuilder
     {
-        $copy                      = $this->copy();
+        $copy = $this->copy();
         $copy->stationExternalData = $stationExternalData;
 
         return $copy;
@@ -147,7 +147,7 @@ class StationBuilder implements BuilderInterface
      */
     public function withLocation(Location $location): StationBuilder
     {
-        $copy           = $this->copy();
+        $copy = $this->copy();
         $copy->location = $location;
 
         return $copy;
@@ -160,7 +160,7 @@ class StationBuilder implements BuilderInterface
      */
     public function withCreatedAt(\DateTimeImmutable $createdAt): StationBuilder
     {
-        $copy            = $this->copy();
+        $copy = $this->copy();
         $copy->createdAt = $createdAt;
 
         return $copy;
@@ -173,7 +173,7 @@ class StationBuilder implements BuilderInterface
      */
     public function withUpdatedAt(?\DateTimeImmutable $updatedAt): StationBuilder
     {
-        $copy            = $this->copy();
+        $copy = $this->copy();
         $copy->updatedAt = $updatedAt;
 
         return $copy;

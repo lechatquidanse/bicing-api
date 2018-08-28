@@ -11,7 +11,6 @@ use App\Domain\Model\StationState\StationState;
 use App\Domain\Model\StationState\StationStateRepositoryInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\EntityRepository;
 
 class DoctrineStationStateRepository implements StationStateRepositoryInterface
 {

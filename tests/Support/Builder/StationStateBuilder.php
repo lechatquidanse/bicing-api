@@ -57,14 +57,13 @@ class StationStateBuilder implements BuilderInterface
         StationStateStatus $status,
         \DateTimeImmutable $createdAt)
     {
-        $this->statedAt            = $statedAt;
-        $this->stationAssigned     = $stationAssigned;
+        $this->statedAt = $statedAt;
+        $this->stationAssigned = $stationAssigned;
         $this->availableBikeNumber = $availableBikeNumber;
         $this->availableSlotNumber = $availableSlotNumber;
-        $this->status              = $status;
-        $this->createdAt           = $createdAt;
+        $this->status = $status;
+        $this->createdAt = $createdAt;
     }
-
 
     /**
      * {@inheritdoc}
@@ -107,7 +106,7 @@ class StationStateBuilder implements BuilderInterface
      */
     public function withStatedAt(DateTimeImmutableStringable $statedAt): StationStateBuilder
     {
-        $copy           = $this->copy();
+        $copy = $this->copy();
         $copy->statedAt = $statedAt;
 
         return $copy;
@@ -120,7 +119,7 @@ class StationStateBuilder implements BuilderInterface
      */
     public function withStationAssigned(Station $stationAssigned): StationStateBuilder
     {
-        $copy                  = $this->copy();
+        $copy = $this->copy();
         $copy->stationAssigned = $stationAssigned;
 
         return $copy;
@@ -133,7 +132,7 @@ class StationStateBuilder implements BuilderInterface
      */
     public function withAvailableBikeNumber(int $availableBikeNumber): StationStateBuilder
     {
-        $copy                      = $this->copy();
+        $copy = $this->copy();
         $copy->availableBikeNumber = $availableBikeNumber;
 
         return $copy;
@@ -146,7 +145,7 @@ class StationStateBuilder implements BuilderInterface
      */
     public function withAvailableSlotNumber(int $availableSlotNumber): StationStateBuilder
     {
-        $copy                      = $this->copy();
+        $copy = $this->copy();
         $copy->availableSlotNumber = $availableSlotNumber;
 
         return $copy;
@@ -159,7 +158,7 @@ class StationStateBuilder implements BuilderInterface
      */
     public function withStatus(StationStateStatus $status): StationStateBuilder
     {
-        $copy         = $this->copy();
+        $copy = $this->copy();
         $copy->status = $status;
 
         return $copy;
@@ -172,7 +171,7 @@ class StationStateBuilder implements BuilderInterface
      */
     public function withCreatedAt(\DateTimeImmutable $createdAt): StationStateBuilder
     {
-        $copy            = $this->copy();
+        $copy = $this->copy();
         $copy->createdAt = $createdAt;
 
         return $copy;

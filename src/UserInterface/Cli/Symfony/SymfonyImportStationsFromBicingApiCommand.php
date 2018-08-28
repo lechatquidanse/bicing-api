@@ -39,4 +39,3 @@ class SymfonyImportStationsFromBicingApiCommand extends Command
         $this->manager->__invoke();
     }
 }
-

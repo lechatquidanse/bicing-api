@@ -26,7 +26,7 @@ final class AvailabilitiesInTimeIntervalByStationDataProvider implements ItemDat
     private $availabilitiesQuery;
 
     /**
-     * @param StationRepositoryInterface $stationRepository
+     * @param StationRepositoryInterface                          $stationRepository
      * @param AvailabilitiesInTimeIntervalByStationQueryInterface $availabilitiesQuery
      */
     public function __construct(StationRepositoryInterface $stationRepository, AvailabilitiesInTimeIntervalByStationQueryInterface $availabilitiesQuery)
@@ -54,7 +54,7 @@ final class AvailabilitiesInTimeIntervalByStationDataProvider implements ItemDat
     }
 
     /**
-     * @param string $resourceClass
+     * @param string      $resourceClass
      * @param string|null $operationName
      *
      * @return bool
