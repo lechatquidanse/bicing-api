@@ -14,7 +14,7 @@ use Doctrine\ORM\Query\Lexer;
  *
  * "time_bucket" "(" IntervalLiteral INTERVAL "," DateTimeExpression DATE ")"
  */
-class TimescaleDbTimeBucketFunction extends FunctionNode
+class TimescaleDbTimeBucketFunctionDQL extends FunctionNode
 {
     /** @var Literal */
     private $intervalLiteral;
@@ -24,12 +24,10 @@ class TimescaleDbTimeBucketFunction extends FunctionNode
 
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
-        $sql = sprintf(
+        return sprintf(
             'time_bucket(%s, %s)',
             $this->intervalLiteral->dispatch($sqlWalker),
             $this->datetimeExpression->dispatch($sqlWalker));
-
-        return $sql;
     }
 
     public function parse(\Doctrine\ORM\Query\Parser $parser)

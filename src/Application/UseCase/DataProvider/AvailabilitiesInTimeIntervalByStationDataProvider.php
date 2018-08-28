@@ -11,10 +11,12 @@ use App\Application\UseCase\Query\AvailabilitiesInTimeIntervalByStationView;
 use App\Domain\Exception\Station\StationDoesNotExist;
 use App\Domain\Model\Station\StationRepositoryInterface;
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
-use Ramsey\Uuid\Exception\InvalidUuidStringException;
 use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
+/**
+ * @todo add tests
+ * @todo add operation name for support
+ */
 final class AvailabilitiesInTimeIntervalByStationDataProvider implements ItemDataProviderInterface
 {
     /** @var StationRepositoryInterface */
@@ -32,7 +34,6 @@ final class AvailabilitiesInTimeIntervalByStationDataProvider implements ItemDat
         $this->stationRepository = $stationRepository;
         $this->availabilitiesQuery = $availabilitiesQuery;
     }
-
 
     public function getItem(string $resourceClass, $id, string $operationName = null, array $context = []): AvailabilitiesInTimeIntervalByStationView
     {

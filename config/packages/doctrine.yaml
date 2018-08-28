@@ -12,7 +12,7 @@ doctrine:
         auto_mapping: true
         dql:
             datetime_functions:
-                time_bucket: 'App\Infrastructure\Persistence\Doctrine\DQL\TimescaleDbTimeBucketFunction'
+                time_bucket: 'App\Infrastructure\Persistence\Doctrine\DQL\TimescaleDbTimeBucketFunctionDQL'
         mappings:
             App:
                 is_bundle: false

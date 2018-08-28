@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Infrastructure\Persistence\Doctrine\Query;
 
 use App\Application\UseCase\Query\AvailabilitiesInTimeIntervalByStationQueryInterface;
-use App\Application\UseCase\Query\AvailabilitiesInTimeIntervalByStationView;
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
 use App\Domain\Model\StationState\StationState;
 use App\Domain\Model\StationState\StationStateStatus;
@@ -13,11 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\UuidInterface;
 
 /**
- * @todo check accuray with value 0 as input for available*Number
- * @todo add a time manager to create date so we can fake it in test
  * @todo Create a Date(Period|Interval) as input to find method to specify from when to when to look for
- * @todo get numeric from avg sql method
- * @todo round avg result
  */
 class DoctrineAvailabilitiesInTimeIntervalByStationQuery implements AvailabilitiesInTimeIntervalByStationQueryInterface
 {
