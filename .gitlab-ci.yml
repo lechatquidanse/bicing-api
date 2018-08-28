@@ -33,6 +33,7 @@ test:
     - cp .env.dist .env
 
     - docker-compose up -d
+    - docker-compose run --rm php bin/phpcs --standard=PSR2 src
     - docker-compose run --rm php composer install
     - docker-compose run --rm php bin/console do:mi:mi -n --env=test
     - docker-compose run --rm php bin/phpspec run
@@ -53,6 +54,7 @@ build:
     - cp .env.dist .env
 
     - docker-compose up -d
+    - docker-compose run --rm php bin/phpcs --standard=PSR2 src
     - docker-compose run --rm php composer install
     - docker-compose run --rm php bin/console do:mi:mi -n --env=test
     - docker-compose run --rm php bin/phpspec run

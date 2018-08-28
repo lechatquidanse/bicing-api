@@ -71,8 +71,8 @@ final class Location implements ValueObjectInterface
         int $districtCode,
         string $zipCode,
         float $latitude,
-        float $longitude)
-    {
+        float $longitude
+    ) {
         $this->validate($address, $districtCode, $zipCode);
 
         $this->address = $address;
@@ -96,14 +96,15 @@ final class Location implements ValueObjectInterface
         int $districtCode,
         string $zipCode,
         float $latitude,
-        float $longitude): self
-    {
+        float $longitude
+    ): self {
         return new self(
             $address,
             $districtCode,
             $zipCode,
             $latitude,
-            $longitude);
+            $longitude
+        );
     }
 
     /**

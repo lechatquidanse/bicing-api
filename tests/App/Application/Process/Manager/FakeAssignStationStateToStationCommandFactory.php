@@ -11,8 +11,9 @@ use tests\Support\Builder\StationStateStatusBuilder;
 
 class FakeAssignStationStateToStationCommandFactory implements AssignStationStateToStationCommandFactoryInterface
 {
-    public function fromAvailabilityStation(AvailabilityStation $availabilityStation): AssignStationStateToStationCommand
-    {
+    public function fromAvailabilityStation(
+        AvailabilityStation $availabilityStation
+    ): AssignStationStateToStationCommand {
         $command = new AssignStationStateToStationCommand();
 
         $command->externalStationId = '122';

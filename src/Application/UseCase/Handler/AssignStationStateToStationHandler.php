@@ -27,8 +27,8 @@ final class AssignStationStateToStationHandler
      */
     public function __construct(
         StationRepositoryInterface $stationRepository,
-        StationStateRepositoryInterface $stationStateRepository)
-    {
+        StationStateRepositoryInterface $stationStateRepository
+    ) {
         $this->stationRepository = $stationRepository;
         $this->stationStateRepository = $stationStateRepository;
     }

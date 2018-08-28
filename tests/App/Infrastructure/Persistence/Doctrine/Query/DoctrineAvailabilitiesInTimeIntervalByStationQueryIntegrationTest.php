@@ -50,7 +50,8 @@ class DoctrineAvailabilitiesInTimeIntervalByStationQueryIntegrationTest extends 
                 ->withStationAssigned($station)
                 ->withAvailableBikeNumber(29)
                 ->withAvailableSlotNumber(1)
-                ->withStatus($status));
+            ->withStatus($status)
+        );
 
         $this->assertEquals([
             [

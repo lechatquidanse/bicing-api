@@ -78,8 +78,8 @@ final class StationState implements ValueObjectInterface
         int $availableBikeNumber,
         int $availableSlotNumber,
         StationStateStatus $status,
-        \DateTimeImmutable $createdAt)
-    {
+        \DateTimeImmutable $createdAt
+    ) {
         $this->validate($availableBikeNumber, $availableSlotNumber);
 
         $this->statedAt = $statedAt;
@@ -106,8 +106,8 @@ final class StationState implements ValueObjectInterface
         int $availableBikeNumber,
         int $availableSlotNumber,
         StationStateStatus $status,
-        \DateTimeImmutable $createdAt): self
-    {
+        \DateTimeImmutable $createdAt
+    ): self {
         return new self($statedAt, $stationAssigned, $availableBikeNumber, $availableSlotNumber, $status, $createdAt);
     }
 

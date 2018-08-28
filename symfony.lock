@@ -233,6 +233,9 @@
     "simple-bus/symfony-bridge": {
         "version": "v5.1.2"
     },
+    "squizlabs/php_codesniffer": {
+        "version": "3.3.1"
+    },
     "symfony/asset": {
         "version": "v4.1.3"
     },

@@ -37,7 +37,8 @@ class HttpAvailabilityStationQueryIntegrationTest extends IntegrationTestCase
                 ['24', '369', '387', '426'],
                 'OPN',
                 '01 - C/ GRAN VIA CORTS CATALANES 760',
-                'BIKE'),
+                'BIKE'
+            ),
             AvailabilityStation::create(
                 '2',
                 2,
@@ -51,7 +52,8 @@ class HttpAvailabilityStationQueryIntegrationTest extends IntegrationTestCase
                 ['360', '368', '387', '414'],
                 'OPN',
                 '02 - C/ ROGER DE FLOR, 126',
-                'BIKE'),
+                'BIKE'
+            ),
         ];
 
         $this->assertEquals($expected, $this->repository->findAll());

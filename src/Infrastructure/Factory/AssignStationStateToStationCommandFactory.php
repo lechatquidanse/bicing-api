@@ -43,8 +43,9 @@ class AssignStationStateToStationCommandFactory implements AssignStationStateToS
      *
      * @todo upgrade exception message ($form->getErrors()->__toString())
      */
-    public function fromAvailabilityStation(AvailabilityStation $availabilityStation): AssignStationStateToStationCommand
-    {
+    public function fromAvailabilityStation(
+        AvailabilityStation $availabilityStation
+    ): AssignStationStateToStationCommand {
         $form = $this->formFactory->create(SymfonyAssignStationStateToStationType::class);
 
         $form->submit([

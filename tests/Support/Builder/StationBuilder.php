@@ -57,8 +57,8 @@ class StationBuilder implements BuilderInterface
         StationExternalData $stationExternalData,
         Location $location,
         \DateTimeImmutable $createdAt,
-        \DateTimeImmutable $updatedAt = null)
-    {
+        \DateTimeImmutable $updatedAt = null
+    ) {
         $this->stationId = $stationId;
         $this->stationDetail = $stationDetail;
         $this->stationExternalData = $stationExternalData;

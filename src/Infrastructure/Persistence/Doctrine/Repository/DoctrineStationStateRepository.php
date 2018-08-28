@@ -52,7 +52,13 @@ class DoctrineStationStateRepository implements StationStateRepositoryInterface
      */
     private function stationState(DateTimeImmutableStringable $statedAt, Station $stationAssigned)
     {
-        return $this->manager()->find(StationState::class, ['statedAt' => $statedAt, 'stationAssigned' => $stationAssigned]);
+        return $this->manager()->find(
+            StationState::class,
+            [
+                'statedAt' => $statedAt,
+                'stationAssigned' => $stationAssigned,
+            ]
+        );
     }
 
     /**

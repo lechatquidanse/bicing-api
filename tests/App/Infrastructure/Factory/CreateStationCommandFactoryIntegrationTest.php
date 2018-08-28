@@ -74,8 +74,7 @@ class CreateStationCommandFactoryIntegrationTest extends IntegrationTestCase
 
         $this->factory->fromAvailabilityStation(AvailabilityStationBuilder::create()
             ->withType('invalid type')
-            ->build()
-        );
+            ->build());
     }
 
     /**

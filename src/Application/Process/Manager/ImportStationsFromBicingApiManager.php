@@ -43,8 +43,8 @@ final class ImportStationsFromBicingApiManager
         AvailabilityStationQueryInterface $query,
         CreateStationCommandFactoryInterface $commandFactory,
         MessageBus $commandBus,
-        LoggerInterface $logger)
-    {
+        LoggerInterface $logger
+    ) {
         $this->query = $query;
         $this->commandFactory = $commandFactory;
         $this->commandBus = $commandBus;

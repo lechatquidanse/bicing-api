@@ -82,8 +82,8 @@ final class Station implements AggregateInterface
         StationExternalData $stationExternalData,
         Location $location,
         \DateTimeImmutable $createdAt,
-        \DateTimeImmutable $updatedAt = null)
-    {
+        \DateTimeImmutable $updatedAt = null
+    ) {
         $this->stationId = $stationId;
         $this->stationDetail = $stationDetail;
         $this->stationExternalData = $stationExternalData;
@@ -108,8 +108,8 @@ final class Station implements AggregateInterface
         StationExternalData $stationExternalData,
         Location $location,
         \DateTimeImmutable $createdAt,
-        \DateTimeImmutable $updatedAt = null): self
-    {
+        \DateTimeImmutable $updatedAt = null
+    ): self {
         return new self(
             $stationId,
             $stationDetail,
@@ -150,8 +150,8 @@ final class Station implements AggregateInterface
         int $availableBikeNumber,
         int $availableSlotNumber,
         StationStateStatus $status,
-        \DateTimeImmutable $createdAt): StationState
-    {
+        \DateTimeImmutable $createdAt
+    ): StationState {
         return StationState::create(
             $statedAt,
             $this,

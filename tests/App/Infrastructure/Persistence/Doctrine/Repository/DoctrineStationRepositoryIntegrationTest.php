@@ -100,7 +100,8 @@ class DoctrineStationRepositoryIntegrationTest extends DatabaseTestCase
     {
         $this->expectException(StationAlreadyExistsException::class);
         $this->expectExceptionMessage(
-            'A station already exists with station Id "25769c6c-d34d-4bfe-ba98-e0ee856f3e7a".');
+            'A station already exists with station Id "25769c6c-d34d-4bfe-ba98-e0ee856f3e7a".'
+        );
 
         $stationId = Uuid::fromString('25769c6c-d34d-4bfe-ba98-e0ee856f3e7a');
 
@@ -125,14 +126,16 @@ class DoctrineStationRepositoryIntegrationTest extends DatabaseTestCase
             ->withStationExternalData(
                 StationExternalDataBuilder::create()
                     ->withExternalStationId('12')
-                    ->build())
+                ->build()
+            )
             ->build());
 
         $this->repository->add((StationBuilder::create())
             ->withStationExternalData(
                 StationExternalDataBuilder::create()
                     ->withExternalStationId('12')
-                    ->build())
+                ->build()
+            )
             ->build());
     }
 

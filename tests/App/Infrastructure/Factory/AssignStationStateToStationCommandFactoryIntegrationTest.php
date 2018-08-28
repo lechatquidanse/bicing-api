@@ -62,8 +62,7 @@ class AssignStationStateToStationCommandFactoryIntegrationTest extends Integrati
 
         $this->factory->fromAvailabilityStation(AvailabilityStationBuilder::create()
             ->withStatus('invalid status')
-            ->build()
-        );
+            ->build());
     }
 
     /**

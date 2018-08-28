@@ -75,3 +75,11 @@ fixtures:
 	docker-compose up -d
 	docker-compose run --rm php bin/console do:mi:mi -n
 	./docker/stages/development/import-fixtures.sh
+
+qa:
+	docker-compose run --rm php bin/php-cs-fixer fix
+	docker-compose run --rm php bin/phpcbf --standard=PSR2 src tests
+	docker-compose run --rm php bin/phpcs --standard=PSR2 src
+	docker-compose run --rm php composer install
+	docker-compose run --rm php bin/phpspec run
+	docker-compose run --rm php bin/phpunit

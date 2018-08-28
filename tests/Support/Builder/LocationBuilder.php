@@ -52,8 +52,8 @@ class LocationBuilder implements BuilderInterface
         int $districtCode,
         string $zipCode,
         float $latitude,
-        float $longitude)
-    {
+        float $longitude
+    ) {
         $this->address = $address;
         $this->addressNumber = $addressNumber;
         $this->districtCode = $districtCode;

@@ -101,8 +101,8 @@ class AvailabilityStationBuilder implements BuilderInterface
         array $nearByStationIds,
         string $status,
         string $name,
-        string $type)
-    {
+        string $type
+    ) {
         $this->id = $id;
         $this->districtCode = $districtCode;
         $this->longitude = $longitude;

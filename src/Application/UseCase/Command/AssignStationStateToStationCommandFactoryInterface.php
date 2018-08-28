@@ -6,5 +6,7 @@ use App\Infrastructure\BicingApi\AvailabilityStation;
 
 interface AssignStationStateToStationCommandFactoryInterface
 {
-    public function fromAvailabilityStation(AvailabilityStation $availabilityStation): AssignStationStateToStationCommand;
+    public function fromAvailabilityStation(
+        AvailabilityStation $availabilityStation
+    ): AssignStationStateToStationCommand;
 }

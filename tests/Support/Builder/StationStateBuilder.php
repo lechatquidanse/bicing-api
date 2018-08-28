@@ -55,8 +55,8 @@ class StationStateBuilder implements BuilderInterface
         int $availableBikeNumber,
         int $availableSlotNumber,
         StationStateStatus $status,
-        \DateTimeImmutable $createdAt)
-    {
+        \DateTimeImmutable $createdAt
+    ) {
         $this->statedAt = $statedAt;
         $this->stationAssigned = $stationAssigned;
         $this->availableBikeNumber = $availableBikeNumber;

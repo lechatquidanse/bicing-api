@@ -58,6 +58,7 @@ class HttpAvailabilityStationQuery implements AvailabilityStationQueryInterface
         return $this->serializer->deserialize(
             (string) $response->getBody(),
             'array<App\Infrastructure\BicingApi\AvailabilityStation>',
-            self::RESPONSE_FORMAT);
+            self::RESPONSE_FORMAT
+        );
     }
 }

@@ -135,8 +135,8 @@ final class AvailabilityStation
         array $nearByStationIds,
         string $status,
         string $name,
-        string $type)
-    {
+        string $type
+    ) {
         $this->id = $id;
         $this->districtCode = $districtCode;
         $this->longitude = $longitude;
@@ -182,8 +182,8 @@ final class AvailabilityStation
         array $nearByStationIds,
         string $status,
         string $name,
-        string $type): self
-    {
+        string $type
+    ): self {
         return new self(
             $id,
             $districtCode,

@@ -50,6 +50,7 @@ class StationUnit extends TestCase
                 12,
                 $status,
                 $createdAt
-            ));
+            )
+        );
     }
 }

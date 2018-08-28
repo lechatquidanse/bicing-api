@@ -29,7 +29,8 @@ class StationStateStatusToStringTransformer implements DataTransformerInterface
     {
         if (null === $value || false === is_string($value)) {
             throw new TransformationFailedException(
-                'To reverse transform to a StationStateStatus, "string" type is expected.');
+                'To reverse transform to a StationStateStatus, "string" type is expected.'
+            );
         }
 
         try {
