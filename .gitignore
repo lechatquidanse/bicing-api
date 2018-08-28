@@ -1,6 +1,8 @@
 ###> docker environment ###
 /docker/.data
 ###> symfony/framework-bundle ###
+/bin/
+!/bin/console
 .env
 /public/bundles/
 /var/
