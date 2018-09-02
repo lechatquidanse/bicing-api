@@ -1,5 +1,3 @@
-###> docker environment ###
-/docker/.data
 ###> symfony/framework-bundle ###
 /bin/
 !/bin/console
