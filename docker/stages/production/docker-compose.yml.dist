@@ -2,26 +2,32 @@ version: '2'
 
 services:
     db:
-        image: 'timescale/timescaledb:0.9.0-pg10'
+        image: timescale/timescaledb:0.9.0-pg10
+        ports:
+          - 5432:5432
         environment:
             POSTGRES_DB: ${POSTGRES_PRODUCTION_DB}
             POSTGRES_USER: ${POSTGRES_PRODUCTION_USER}
             POSTGRES_PASSWORD: ${POSTGRES_PRODUCTION_PASSWORD}
-        networks: ['backend']
-        ports: ['5432:5432']
-        restart: 'always'
-        volumes: ['data-db:/var/lib/postgresql/']
+        volumes:
+          - data-db:/var/lib/postgresql/
+        networks:
+          - backend
     nginx:
-        image: ${PRODUCTION_IMAGE_NGINX}
-        depends_on: ['php']
-        networks: ['frontend', 'backend']
-        ports: ['80:80']
+        image: nginx:1.15.1-alpine
+        ports:
+            - 80:80
+        volumes:
+          - ./bicing-api.conf:/etc/nginx/conf.d/default.conf
+        networks:
+          - frontend
+          - backend
     php:
-        image: ${PRODUCTION_IMAGE_PHP}
-        depends_on: ['db']
-        networks: ['backend']
-        restart: 'always'
-        volumes: ['./.env:/var/www/bicing-api/.env']
+        image: ${PRODUCTION_IMAGE}
+        volumes:
+          - ./.env:/var/www/bicing-api/.env
+        networks:
+          - backend
 
 volumes:
   data-db:

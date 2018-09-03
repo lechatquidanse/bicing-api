@@ -21,7 +21,7 @@ before_script:
   - ENVIRONMENT=$(echo $CI_BUILD_REF_NAME | awk -F'/' '{print $1}')
 
   - PRODUCTION_TAG=$(echo $CI_BUILD_REF_NAME | awk -F'/' '{print $2}')
-  - export PRODUCTION_IMAGE_PHP="$CI_REGISTRY_IMAGE/php:$PRODUCTION_TAG"
+  - export PRODUCTION_IMAGE="$CI_REGISTRY_IMAGE:$PRODUCTION_TAG"
 
 # test environment
 test:
@@ -35,8 +35,8 @@ test:
     - docker-compose up -d
     - docker-compose run --rm php composer install
     - docker-compose run --rm php bin/phpcs --standard=PSR2 src
-    - docker-compose run --rm php bin/phpspec run
     - docker-compose run --rm php bin/console do:mi:mi -n --env=test
+    - docker-compose run --rm php bin/phpspec run
     - docker-compose run --rm php bin/simple-phpunit
     - docker-compose down -v --remove-orphans
 
@@ -56,13 +56,13 @@ build:
     - docker-compose up -d
     - docker-compose run --rm php composer install
     - docker-compose run --rm php bin/phpcs --standard=PSR2 src
-    - docker-compose run --rm php bin/phpspec run
     - docker-compose run --rm php bin/console do:mi:mi -n --env=test
+    - docker-compose run --rm php bin/phpspec run
     - docker-compose run --rm php bin/simple-phpunit
     - docker-compose run --rm php rm -rf var/cache/*
 
-    - docker build --target bicing_api_php -t $PRODUCTION_IMAGE_PHP .
-    - docker push $PRODUCTION_IMAGE_PHP
+    - docker build -t $PRODUCTION_IMAGE .
+    - docker push $PRODUCTION_IMAGE
 
     - docker-compose down -v --remove-orphans
     - echo "$ENVIRONMENT ENVIRONMENT HAS BEEN BUILT SUCCESSFULY!"

@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table()
  */
-class StationState implements ValueObjectInterface
+final class StationState implements ValueObjectInterface
 {
     /**
      * @var DateTimeImmutableStringable
