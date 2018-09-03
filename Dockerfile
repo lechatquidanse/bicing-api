@@ -37,4 +37,4 @@ WORKDIR /var/www/bicing-api
 COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./docker/nginx/conf.d/ /etc/nginx/conf.d
 
-COPY --from=bicing_api_php /var/www/bicing-api/public/bundles ./public/bundles
+#COPY --from=bicing_api_php /var/www/bicing-api/public/bundles ./public/bundles
