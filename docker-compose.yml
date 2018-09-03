@@ -1,98 +1,41 @@
-version: '2.0'
+version: '2.3'
 
 services:
     db:
-        image: 'timescale/timescaledb:0.9.0-pg10'
         environment:
             POSTGRES_DB: ${POSTGRES_DB}
             POSTGRES_USER: ${POSTGRES_USER}
             POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        image: 'timescale/timescaledb:0.9.0-pg10'
         networks: ['backend', 'logging']
         ports: ['5432:5432']
         restart: 'always'
         volumes: ['data-db:/var/lib/postgresql/', './docker/stages/development/fixtures.zip:/var/data/fixtures.zip']
     db_test:
-        image: 'timescale/timescaledb:0.9.0-pg10'
         environment:
             POSTGRES_DB: bicing
             POSTGRES_USER: test
             POSTGRES_PASSWORD: test
+        image: 'timescale/timescaledb:0.9.0-pg10'
         networks: ['backend', 'logging']
         volumes: ['data-db-test:/var/lib/postgresql/']
-    elasticsearch:
-        image: 'docker.elastic.co/elasticsearch/elasticsearch:6.3.2'
-        environment:
-            - 'node.name=bicing'
-            - 'discovery.type=single-node'
-            - 'bootstrap.memory_lock=true'
-            - 'ES_JAVA_OPTS=-Xms256m -Xmx256m'
-        logging:
-            driver: fluentd
-            options:
-                fluentd-address: localhost:24224
-                fluentd-async-connect: 'true'
-                fluentd-retry-wait: '1s'
-                fluentd-max-retries: '30'
-                tag: ${APP_ENV}.efk.elasticsearch
-        networks: ['logging']
-        ports: ['9200:9200']
-        restart: 'always'
-        volumes: ['data-elasticsearch:/usr/share/elasticsearch/data']
-    fluentd:
-        build:
-            context: 'docker/fluentd'
-        logging:
-            driver: "json-file"
-            options:
-                max-size: 100m
-                max-file: "5"
-        networks: ['logging']
-        ports: ['24224:24224', '24224:24224/udp']
-        restart: 'always'
-        volumes: ['./docker/fluentd/etc:/fluentd/etc']
-    kibana:
-        image: 'docker.elastic.co/kibana/kibana:6.3.2'
-        depends_on: ['elasticsearch']
-        logging:
-            driver: fluentd
-            options:
-                fluentd-address: localhost:24224
-                fluentd-async-connect: 'true'
-                fluentd-retry-wait: '1s'
-                fluentd-max-retries: '30'
-                tag: ${APP_ENV}.efk.kibana
-        networks: ['logging']
-        ports: ['5601:5601']
-        restart: 'always'
     nginx:
-        image: 'nginx:1.15.1-alpine'
-        depends_on: ['php', 'kibana', 'fluentd']
-        logging:
-            driver: fluentd
-            options:
-                fluentd-address: localhost:24224
-                fluentd-async-connect: 'true'
-                fluentd-retry-wait: '1s'
-                fluentd-max-retries: '30'
-                tag: ${APP_ENV}.efk.nginx
+        build:
+            context: .
+            target: 'bicing_api_nginx'
+        depends_on: ['php']
         networks: ['backend', 'frontend', 'logging']
         ports: ['80:80']
         restart: 'always'
-        volumes: ['./:/var/www/bicing-api', './docker/nginx/nginx.conf:/etc/nginx/nginx.conf', './docker/nginx/conf.d:/etc/nginx/conf.d']
+        volumes: ['./public/bundles:/var/www/bicing-api/public/bundles']
     php:
-        build: .
+        build:
+          context: .
+          target: 'bicing_api_php'
         depends_on: ['db']
-        logging:
-            driver: fluentd
-            options:
-                fluentd-address: localhost:24224
-                fluentd-async-connect: 'true'
-                fluentd-retry-wait: '1s'
-                fluentd-max-retries: '30'
-                tag: ${APP_ENV}.efk.php
         networks: ['backend', 'logging']
         restart: 'always'
-        volumes: ['./:/var/www/bicing-api']
+        volumes: ['./:/var/www/bicing-api/']
 
 volumes:
   data-db:
