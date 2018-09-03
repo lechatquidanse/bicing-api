@@ -27,7 +27,6 @@ RUN set -ex \
     && apk del .fetch-deps
 
 WORKDIR /var/www/bicing-api
-
 COPY . ./
 
 FROM nginx:1.15.1-alpine AS bicing_api_nginx

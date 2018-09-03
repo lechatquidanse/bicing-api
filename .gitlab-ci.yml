@@ -62,7 +62,7 @@ build:
     - docker-compose run --rm php rm -rf var/cache/*
     - docker-compose run --rm php rm -rf var/log/*
 
-    - docker build -t $PRODUCTION_IMAGE .
+    - docker build --target bicing_api_php -t $PRODUCTION_IMAGE .
     - docker push $PRODUCTION_IMAGE
 
     - docker-compose down -v --remove-orphans
