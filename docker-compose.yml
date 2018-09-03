@@ -40,7 +40,6 @@ services:
 volumes:
   data-db:
   data-db-test:
-  data-elasticsearch:
 
 networks:
    frontend:
