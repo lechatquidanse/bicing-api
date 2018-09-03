@@ -59,10 +59,9 @@ build:
     - docker-compose run --rm php bin/phpspec run
     - docker-compose run --rm php bin/console do:mi:mi -n --env=test
     - docker-compose run --rm php bin/simple-phpunit
-    - docker-compose run --rm php rm -rf var/cache/*
-    - docker-compose run --rm php rm -rf var/log/*
+    - docker-compose run --rm php rm -rf var/cache/* var/log/*
 
-    - docker build -t $PRODUCTION_IMAGE .
+    - docker build --target bicing_api_php -t $PRODUCTION_IMAGE .
     - docker push $PRODUCTION_IMAGE
 
     - docker-compose down -v --remove-orphans

@@ -22,7 +22,7 @@ use Ramsey\Uuid\UuidInterface;
  *     )}
  * )
  */
-final class Station implements AggregateInterface
+class Station implements AggregateInterface
 {
     /**
      * @var UuidInterface
