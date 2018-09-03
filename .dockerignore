@@ -7,7 +7,7 @@ docker/stages/
 Makefile
 .phpspec.yml
 phpunit.xml.dist
-public/bundles/
+#public/bundles/
 README.md
 tests/
 var/cache/*
