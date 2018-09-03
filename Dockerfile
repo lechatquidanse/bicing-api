@@ -1,4 +1,4 @@
-FROM php:7.1-fpm-alpine
+FROM php:7.1-fpm-alpine AS bicing_api_php
 
 ENV FETCH_PACKAGES \
         libpq \
@@ -27,4 +27,14 @@ RUN set -ex \
     && apk del .fetch-deps
 
 WORKDIR /var/www/bicing-api
-COPY . /var/www/bicing-api
+
+COPY . ./
+
+FROM nginx:1.15.1-alpine AS bicing_api_nginx
+
+WORKDIR /var/www/bicing-api
+
+COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./docker/nginx/conf.d/ /etc/nginx/conf.d
+
+COPY --from=bicing_api_php /var/www/bicing-api/public/bundles ./public/bundles
