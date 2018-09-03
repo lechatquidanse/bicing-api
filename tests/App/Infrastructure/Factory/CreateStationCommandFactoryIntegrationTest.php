@@ -30,19 +30,19 @@ class CreateStationCommandFactoryIntegrationTest extends IntegrationTestCase
     public function it_can_create_from_availability_station_with_valid_data()
     {
         $createdAt = new \DateTimeImmutable();
-        $expected  = new CreateStationCommand();
+        $expected = new CreateStationCommand();
 
-        $expected->name                     = '02 - C/ ROGER DE FLOR, 126';
-        $expected->type                     = StationDetailTypeBuilder::create()->withTypeBike()->build();
-        $expected->externalStationId        = '2';
+        $expected->name = '02 - C/ ROGER DE FLOR, 126';
+        $expected->type = StationDetailTypeBuilder::create()->withTypeBike()->build();
+        $expected->externalStationId = '2';
         $expected->nearByExternalStationIds = ['360', '368', '387', '414'];
-        $expected->address                  = 'Roger de Flor/ Gran Vía';
-        $expected->addressNumber            = '126';
-        $expected->districtCode             = 2;
-        $expected->zipCode                  = '08010';
-        $expected->latitude                 = 41.39553;
-        $expected->longitude                = 2.17706;
-        $expected->createdAt                = $createdAt;
+        $expected->address = 'Roger de Flor/ Gran Vía';
+        $expected->addressNumber = '126';
+        $expected->districtCode = 2;
+        $expected->zipCode = '08010';
+        $expected->latitude = 41.39553;
+        $expected->longitude = 2.17706;
+        $expected->createdAt = $createdAt;
 
         $this->clock::willReturnDateTimeImmutable($createdAt);
 
@@ -74,8 +74,7 @@ class CreateStationCommandFactoryIntegrationTest extends IntegrationTestCase
 
         $this->factory->fromAvailabilityStation(AvailabilityStationBuilder::create()
             ->withType('invalid type')
-            ->build()
-        );
+            ->build());
     }
 
     /**
@@ -85,7 +84,7 @@ class CreateStationCommandFactoryIntegrationTest extends IntegrationTestCase
     {
         parent::setUp();
 
-        $this->clock   = $this->getContainer()->get('test.app.system.clock.mock');
+        $this->clock = $this->getContainer()->get('test.app.system.clock.mock');
         $this->factory = $this->getContainer()->get('test.app.factory.create_station_command');
     }
 

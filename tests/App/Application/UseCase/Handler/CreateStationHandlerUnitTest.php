@@ -41,7 +41,7 @@ class CreateStationHandlerUnitTest extends TestCase
         $command->stationId = $stationId;
         $command->name = '19 - C/ ROSSELLÓ 354';
         $command->type = StationDetailTypeBuilder::create()->withTypeBike()->build();
-        $command->externalStationId= '20';
+        $command->externalStationId = '20';
         $command->nearByExternalStationIds = ['21', '28', '164', '177', '278'];
         $command->address = 'Cartagena';
         $command->addressNumber = '308';
@@ -83,7 +83,7 @@ class CreateStationHandlerUnitTest extends TestCase
         parent::setUp();
 
         $this->repository = new MockStationRepository();
-        $this->handler    = new CreateStationHandler($this->repository);
+        $this->handler = new CreateStationHandler($this->repository);
     }
 
     /**
@@ -91,7 +91,7 @@ class CreateStationHandlerUnitTest extends TestCase
      */
     protected function tearDown()
     {
-        $this->handler    = null;
+        $this->handler = null;
         $this->repository = null;
 
         parent::tearDown();

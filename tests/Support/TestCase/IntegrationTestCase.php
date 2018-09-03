@@ -61,4 +61,3 @@ abstract class IntegrationTestCase extends WebTestCase
         return $this->client;
     }
 }
-

@@ -22,7 +22,7 @@ use Ramsey\Uuid\UuidInterface;
  *     )}
  * )
  */
-final class Station implements AggregateInterface
+class Station implements AggregateInterface
 {
     /**
      * @var UuidInterface
@@ -82,14 +82,14 @@ final class Station implements AggregateInterface
         StationExternalData $stationExternalData,
         Location $location,
         \DateTimeImmutable $createdAt,
-        \DateTimeImmutable $updatedAt = null)
-    {
-        $this->stationId           = $stationId;
-        $this->stationDetail       = $stationDetail;
+        \DateTimeImmutable $updatedAt = null
+    ) {
+        $this->stationId = $stationId;
+        $this->stationDetail = $stationDetail;
         $this->stationExternalData = $stationExternalData;
-        $this->location            = $location;
-        $this->createdAt           = $createdAt;
-        $this->updatedAt           = $updatedAt;
+        $this->location = $location;
+        $this->createdAt = $createdAt;
+        $this->updatedAt = $updatedAt;
     }
 
     /**
@@ -108,8 +108,8 @@ final class Station implements AggregateInterface
         StationExternalData $stationExternalData,
         Location $location,
         \DateTimeImmutable $createdAt,
-        \DateTimeImmutable $updatedAt = null): self
-    {
+        \DateTimeImmutable $updatedAt = null
+    ): self {
         return new self(
             $stationId,
             $stationDetail,
@@ -150,8 +150,8 @@ final class Station implements AggregateInterface
         int $availableBikeNumber,
         int $availableSlotNumber,
         StationStateStatus $status,
-        \DateTimeImmutable $createdAt): StationState
-    {
+        \DateTimeImmutable $createdAt
+    ): StationState {
         return StationState::create(
             $statedAt,
             $this,
@@ -162,4 +162,3 @@ final class Station implements AggregateInterface
         );
     }
 }
-

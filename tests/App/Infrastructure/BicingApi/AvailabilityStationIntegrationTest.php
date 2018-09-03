@@ -36,7 +36,8 @@ class AvailabilityStationIntegrationTest extends IntegrationTestCase
             ['24', '369', '387', '426'],
             'OPN',
             '01 - C/ GRAN VIA CORTS CATALANES 760',
-            'BIKE');
+            'BIKE'
+        );
 
         $this->assertEquals($expected, $this->serializer->deserialize(
             <<<'json'
@@ -58,7 +59,8 @@ class AvailabilityStationIntegrationTest extends IntegrationTestCase
 json
             ,
             AvailabilityStation::class,
-            'json'));
+            'json'
+        ));
     }
 
     /**
@@ -80,5 +82,4 @@ json
 
         parent::tearDown();
     }
-
 }

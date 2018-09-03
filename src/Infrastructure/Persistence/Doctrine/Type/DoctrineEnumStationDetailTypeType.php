@@ -43,7 +43,7 @@ class DoctrineEnumStationDetailTypeType extends Type
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        if ($value === null || $value instanceof StationDetailType) {
+        if (null === $value || $value instanceof StationDetailType) {
             return $value;
         }
 

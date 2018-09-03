@@ -20,7 +20,7 @@ class StationDetailBuilder implements BuilderInterface
     private $type;
 
     /**
-     * @param string $name
+     * @param string            $name
      * @param StationDetailType $type
      */
     private function __construct(string $name, StationDetailType $type)
@@ -62,7 +62,7 @@ class StationDetailBuilder implements BuilderInterface
      */
     public function withName(string $name): StationDetailBuilder
     {
-        $copy       = $this->copy();
+        $copy = $this->copy();
         $copy->name = $name;
 
         return $copy;
@@ -75,7 +75,7 @@ class StationDetailBuilder implements BuilderInterface
      */
     public function withType(StationDetailType $type): StationDetailBuilder
     {
-        $copy       = $this->copy();
+        $copy = $this->copy();
         $copy->type = $type;
 
         return $copy;

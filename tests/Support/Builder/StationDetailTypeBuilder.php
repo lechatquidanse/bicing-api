@@ -42,7 +42,7 @@ class StationDetailTypeBuilder implements BuilderInterface
      */
     public function withTypeBike(): StationDetailTypeBuilder
     {
-        $copy       = $this->copy();
+        $copy = $this->copy();
         $copy->type = 'BIKE';
 
         return $copy;
@@ -53,7 +53,7 @@ class StationDetailTypeBuilder implements BuilderInterface
      */
     public function withTypeElectricBike(): StationDetailTypeBuilder
     {
-        $copy       = $this->copy();
+        $copy = $this->copy();
         $copy->type = 'ELECTRIC_BIKE';
 
         return $copy;

@@ -34,7 +34,7 @@ final class StationDetail implements ValueObjectInterface
      * @param string            $name
      * @param StationDetailType $type
      *
-     * @throws LazyAssertionException if validate method failed.
+     * @throws LazyAssertionException if validate method failed
      */
     private function __construct(string $name, StationDetailType $type)
     {
@@ -58,7 +58,7 @@ final class StationDetail implements ValueObjectInterface
     /**
      * @param string $name
      *
-     * @throws LazyAssertionException if at least one assertion is not respected.
+     * @throws LazyAssertionException if at least one assertion is not respected
      */
     private function validate(string $name)
     {
@@ -67,4 +67,3 @@ final class StationDetail implements ValueObjectInterface
             ->verifyNow();
     }
 }
-

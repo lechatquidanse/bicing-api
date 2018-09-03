@@ -135,21 +135,21 @@ final class AvailabilityStation
         array $nearByStationIds,
         string $status,
         string $name,
-        string $type)
-    {
-        $this->id               = $id;
-        $this->districtCode     = $districtCode;
-        $this->longitude        = $longitude;
-        $this->latitude         = $latitude;
-        $this->bikes            = $bikes;
-        $this->slots            = $slots;
-        $this->zipCode          = $zipCode;
-        $this->address          = $address;
-        $this->addressNumber    = $addressNumber;
+        string $type
+    ) {
+        $this->id = $id;
+        $this->districtCode = $districtCode;
+        $this->longitude = $longitude;
+        $this->latitude = $latitude;
+        $this->bikes = $bikes;
+        $this->slots = $slots;
+        $this->zipCode = $zipCode;
+        $this->address = $address;
+        $this->addressNumber = $addressNumber;
         $this->nearByStationIds = $nearByStationIds;
-        $this->status           = $status;
-        $this->name             = $name;
-        $this->type             = $type;
+        $this->status = $status;
+        $this->name = $name;
+        $this->type = $type;
     }
 
     /**
@@ -182,8 +182,8 @@ final class AvailabilityStation
         array $nearByStationIds,
         string $status,
         string $name,
-        string $type): self
-    {
+        string $type
+    ): self {
         return new self(
             $id,
             $districtCode,

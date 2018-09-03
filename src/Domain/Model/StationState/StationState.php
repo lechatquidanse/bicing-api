@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table()
  */
-final class StationState implements ValueObjectInterface
+class StationState implements ValueObjectInterface
 {
     /**
      * @var DateTimeImmutableStringable
@@ -78,16 +78,16 @@ final class StationState implements ValueObjectInterface
         int $availableBikeNumber,
         int $availableSlotNumber,
         StationStateStatus $status,
-        \DateTimeImmutable $createdAt)
-    {
+        \DateTimeImmutable $createdAt
+    ) {
         $this->validate($availableBikeNumber, $availableSlotNumber);
 
-        $this->statedAt            = $statedAt;
-        $this->stationAssigned     = $stationAssigned;
+        $this->statedAt = $statedAt;
+        $this->stationAssigned = $stationAssigned;
         $this->availableBikeNumber = $availableBikeNumber;
         $this->availableSlotNumber = $availableSlotNumber;
-        $this->status              = $status;
-        $this->createdAt           = $createdAt;
+        $this->status = $status;
+        $this->createdAt = $createdAt;
     }
 
     /**
@@ -106,16 +106,16 @@ final class StationState implements ValueObjectInterface
         int $availableBikeNumber,
         int $availableSlotNumber,
         StationStateStatus $status,
-        \DateTimeImmutable $createdAt): self
-    {
+        \DateTimeImmutable $createdAt
+    ): self {
         return new self($statedAt, $stationAssigned, $availableBikeNumber, $availableSlotNumber, $status, $createdAt);
     }
 
     /**
-     * @param int    $availableBikeNumber
-     * @param int    $availableSlotNumber
+     * @param int $availableBikeNumber
+     * @param int $availableSlotNumber
      *
-     * @throws LazyAssertionException if at least one assertion is not respected.
+     * @throws LazyAssertionException if at least one assertion is not respected
      */
     public function validate(int $availableBikeNumber, int $availableSlotNumber)
     {

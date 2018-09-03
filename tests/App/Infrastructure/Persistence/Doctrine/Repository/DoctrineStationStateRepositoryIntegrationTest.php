@@ -31,7 +31,7 @@ class DoctrineStationStateRepositoryIntegrationTest extends DatabaseTestCase
     public function it_can_add_a_station_state()
     {
         /** @var Station $station */
-        $station  = $this->buildPersisted(StationBuilder::create());
+        $station = $this->buildPersisted(StationBuilder::create());
         $statedAt = new DateTimeImmutableStringable();
 
         $stationState = (StationStateBuilder::create())
@@ -64,7 +64,7 @@ class DoctrineStationStateRepositoryIntegrationTest extends DatabaseTestCase
         $stationId = Uuid::fromString('25769c6c-d34d-4bfe-ba98-e0ee856f3e7a');
 
         /** @var Station $station */
-        $station  = $this->buildPersisted(StationBuilder::create()->withStationId($stationId));
+        $station = $this->buildPersisted(StationBuilder::create()->withStationId($stationId));
         $statedAt = (new DateTimeImmutableStringable())
             ->setDate(2017, 10, 17)
             ->setTime(16, 10, 47);

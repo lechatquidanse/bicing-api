@@ -11,7 +11,6 @@ use App\Domain\Model\StationState\StationState;
 use App\Domain\Model\StationState\StationStateRepositoryInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\EntityRepository;
 
 class DoctrineStationStateRepository implements StationStateRepositoryInterface
 {
@@ -53,7 +52,13 @@ class DoctrineStationStateRepository implements StationStateRepositoryInterface
      */
     private function stationState(DateTimeImmutableStringable $statedAt, Station $stationAssigned)
     {
-        return $this->manager()->find(StationState::class, ['statedAt' => $statedAt, 'stationAssigned' => $stationAssigned]);
+        return $this->manager()->find(
+            StationState::class,
+            [
+                'statedAt' => $statedAt,
+                'stationAssigned' => $stationAssigned,
+            ]
+        );
     }
 
     /**

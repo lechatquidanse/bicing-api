@@ -32,11 +32,12 @@ class DoctrineDateTimeImmutableStringableType extends BaseDateTimeImmutableType
      * @param AbstractPlatform $platform
      *
      * @return DateTimeImmutableStringable|null
+     *
      * @throws ConversionException
      */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?DateTimeImmutableStringable
     {
-        if ($value === null || $value instanceof DateTimeImmutableStringable) {
+        if (null === $value || $value instanceof DateTimeImmutableStringable) {
             return $value;
         }
 
@@ -52,7 +53,6 @@ class DoctrineDateTimeImmutableStringableType extends BaseDateTimeImmutableType
 
         return DateTimeImmutableStringable::fromDateTimeImmutable($baseDateTimeImmutable);
     }
-
 
     /**
      * {@inheritdoc}

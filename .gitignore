@@ -1,11 +1,17 @@
 ###> docker environment ###
 /docker/.data
 ###> symfony/framework-bundle ###
+/bin/
+!/bin/console
 .env
 /public/bundles/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+###> friendsofphp/php-cs-fixer ###
+/.php_cs
+/.php_cs.cache
+###< friendsofphp/php-cs-fixer ###
 
 ###> symfony/phpunit-bridge ###
 .phpunit

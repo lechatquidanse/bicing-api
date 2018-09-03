@@ -31,13 +31,14 @@ class CreateStationCommandFactory implements CreateStationCommandFactoryInterfac
     public function __construct(FormFactoryInterface $formFactory, ClockInterface $clock)
     {
         $this->formFactory = $formFactory;
-        $this->clock       = $clock;
+        $this->clock = $clock;
     }
 
     /**
      * @param AvailabilityStation $availabilityStation
      *
      * @return CreateStationCommand
+     *
      * @throws InvalidArgumentException
      *
      * @todo upgrade exception message
@@ -47,16 +48,16 @@ class CreateStationCommandFactory implements CreateStationCommandFactoryInterfac
         $form = $this->formFactory->create(SymfonyCreateStationType::class);
 
         $form->submit([
-            'name'                     => $availabilityStation->name(),
-            'type'                     => $availabilityStation->type(),
-            'externalStationId'        => $availabilityStation->id(),
+            'name' => $availabilityStation->name(),
+            'type' => $availabilityStation->type(),
+            'externalStationId' => $availabilityStation->id(),
             'nearByExternalStationIds' => $availabilityStation->nearByStationIds(),
-            'address'                  => $availabilityStation->address(),
-            'addressNumber'            => $availabilityStation->addressNumber(),
-            'districtCode'             => $availabilityStation->districtCode(),
-            'zipCode'                  => $availabilityStation->zipCode(),
-            'latitude'                 => $availabilityStation->latitude(),
-            'longitude'                => $availabilityStation->longitude(),
+            'address' => $availabilityStation->address(),
+            'addressNumber' => $availabilityStation->addressNumber(),
+            'districtCode' => $availabilityStation->districtCode(),
+            'zipCode' => $availabilityStation->zipCode(),
+            'latitude' => $availabilityStation->latitude(),
+            'longitude' => $availabilityStation->longitude(),
         ]);
 
         if (!$form->isValid()) {

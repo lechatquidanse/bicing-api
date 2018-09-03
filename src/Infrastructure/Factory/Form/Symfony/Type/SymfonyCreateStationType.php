@@ -41,7 +41,7 @@ class SymfonyCreateStationType extends AbstractType
             ->add('externalStationId', TextType::class, ['constraints' => new Assert\NotBlank()])
             ->add('nearByExternalStationIds', CollectionType::class, [
                 'constraints' => new Assert\NotBlank(),
-                'allow_add'   => true,
+                'allow_add' => true,
             ])
             ->add('address', TextType::class, ['constraints' => new Assert\NotBlank()])
             ->add('addressNumber', TextType::class)
@@ -52,7 +52,6 @@ class SymfonyCreateStationType extends AbstractType
 
         $builder->get('type')->addModelTransformer($this->typeTransformer);
     }
-
 
     /**
      * {@inheritdoc}

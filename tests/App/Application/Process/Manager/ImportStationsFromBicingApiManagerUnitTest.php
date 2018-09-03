@@ -45,14 +45,13 @@ class ImportStationsFromBicingApiManagerUnitTest extends TestCase
         $this->manager->__invoke();
 
         $commands = $this->commandBus->commands();
-        $command  = array_pop($commands);
+        $command = array_pop($commands);
 
         $this->assertInstanceOf(CreateStationCommand::class, $command);
         $this->assertInstanceOf(UuidInterface::class, $command->stationId);
     }
 
     /**
-     *
      * @test
      */
     public function it_can_manage_two_stations_threw_command_bus()
@@ -82,10 +81,10 @@ class ImportStationsFromBicingApiManagerUnitTest extends TestCase
     {
         parent::setUp();
 
-        $this->query      = new FakeAvailabilityStationQuery();
-        $this->factory    = new FakeCreateStationCommandFactory();
+        $this->query = new FakeAvailabilityStationQuery();
+        $this->factory = new FakeCreateStationCommandFactory();
         $this->commandBus = new SpyCommandBus();
-        $this->logger     = new Logger();
+        $this->logger = new Logger();
 
         $this->manager = new ImportStationsFromBicingApiManager(
             $this->query,
@@ -100,10 +99,10 @@ class ImportStationsFromBicingApiManagerUnitTest extends TestCase
      */
     protected function tearDown()
     {
-        $this->manager    = null;
+        $this->manager = null;
         $this->commandBus = null;
-        $this->factory    = null;
-        $this->query      = null;
+        $this->factory = null;
+        $this->query = null;
 
         parent::tearDown();
     }

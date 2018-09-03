@@ -15,15 +15,21 @@ services:
 
     app.use_case.create_station_handler:
         class: App\Application\UseCase\Handler\CreateStationHandler
-        arguments: ['@App\Infrastructure\Persistence\Doctrine\Repository\DoctrineStationRepository']
+        arguments: ['@App\Domain\Model\Station\StationRepositoryInterface']
         public: true
         tags:
             - { name: command_handler, handles: App\Application\UseCase\Command\CreateStationCommand}
     app.use_case.assign_station_state_to_station_handler:
         class: App\Application\UseCase\Handler\AssignStationStateToStationHandler
-        arguments: ['@App\Infrastructure\Persistence\Doctrine\Repository\DoctrineStationRepository', '@App\Infrastructure\Persistence\Doctrine\Repository\DoctrineStationStateRepository']
+        arguments: ['@App\Domain\Model\Station\StationRepositoryInterface', '@App\Domain\Model\Station\StationStateRepositoryInterface']
         public: true
         tags:
             - { name: command_handler, handles: App\Application\UseCase\Command\AssignStationStateToStationCommand }
 
     SimpleBus\Message\Bus\MessageBus: '@command_bus'
+
+    App\Domain\Model\Station\StationRepositoryInterface:
+        class: 'App\Infrastructure\Persistence\Doctrine\Repository\DoctrineStationRepository'
+
+    App\Domain\Model\Station\StationStateRepositoryInterface:
+        class: 'App\Infrastructure\Persistence\Doctrine\Repository\DoctrineStationStateRepository'

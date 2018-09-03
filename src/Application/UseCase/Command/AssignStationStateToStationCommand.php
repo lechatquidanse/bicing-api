@@ -39,4 +39,3 @@ final class AssignStationStateToStationCommand
      */
     public $createdAt;
 }
-
