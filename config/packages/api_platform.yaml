@@ -1,3 +1,7 @@
 api_platform:
+    title: 'Bicing API'
+    description: 'Bicing API data and statistics.'
+    version: '1.0.0'
+    enable_entrypoint: false
     mapping:
         paths: ['%kernel.project_dir%/src/Application/UseCase/Query']
