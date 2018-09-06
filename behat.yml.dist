@@ -1,0 +1,20 @@
+default:
+  suites:
+    default:
+      contexts:
+        - tests\Support\Context\FeatureContext:
+            kernel: '@kernel'
+        - 'Behat\MinkExtension\Context\MinkContext'
+        - 'behatch:context:json'
+        - 'behatch:context:rest'
+
+  extensions:
+    Behat\Symfony2Extension:
+      kernel:
+        bootstrap: 'tests/Support/Context/Bootstrap/bootstrap.php'
+        class: App\Kernel
+    Behat\MinkExtension:
+      sessions:
+        default:
+          symfony2: ~
+    Behatch\Extension: ~
