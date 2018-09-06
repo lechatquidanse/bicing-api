@@ -2,6 +2,7 @@ default:
   suites:
     default:
       contexts:
+        - tests\Support\Context\DatabaseContext:
         - tests\Support\Context\FeatureContext:
             kernel: '@kernel'
         - 'Behat\MinkExtension\Context\MinkContext'
@@ -14,6 +15,7 @@ default:
         bootstrap: 'tests/Support/Context/Bootstrap/bootstrap.php'
         class: App\Kernel
     Behat\MinkExtension:
+      #      base_url: "http://localhost"
       sessions:
         default:
           symfony2: ~
