@@ -1,26 +1,29 @@
 services:
-    _defaults:
-        public: true
+  _defaults:
+    public: true
 
-    App\Infrastructure\System\ClockInterface: '@App\Infrastructure\System\Clock'
-    test.app.system.clock.mock:
-        class: 'tests\App\Infrastructure\System\MockClock'
+  App\Infrastructure\System\ClockInterface: '@App\Infrastructure\System\Clock'
+  test.app.system.clock.mock:
+    class: 'tests\App\Infrastructure\System\MockClock'
 
-    test.app.model.station_repository: '@App\Infrastructure\Persistence\Doctrine\Repository\DoctrineStationRepository'
-    test.app.model.station_state_repository: '@App\Infrastructure\Persistence\Doctrine\Repository\DoctrineStationStateRepository'
+  test.app.model.station_repository: '@App\Infrastructure\Persistence\Doctrine\Repository\DoctrineStationRepository'
+  test.app.model.station_state_repository: '@App\Infrastructure\Persistence\Doctrine\Repository\DoctrineStationStateRepository'
 
-    App\Application\UseCase\Command\CreateStationCommandFactoryInterface: '@App\Infrastructure\Factory\CreateStationCommandFactory'
-    test.app.factory.create_station_command:
-        class: 'App\Infrastructure\Factory\CreateStationCommandFactory'
-        arguments: ['@form.factory', '@test.app.system.clock.mock']
+  App\Application\UseCase\Command\CreateStationCommandFactoryInterface: '@App\Infrastructure\Factory\CreateStationCommandFactory'
+  test.app.factory.create_station_command:
+    class: 'App\Infrastructure\Factory\CreateStationCommandFactory'
+    arguments: ['@form.factory', '@test.app.system.clock.mock']
 
-    App\Application\UseCase\Command\AssignStationStateToStationCommandFactoryInterface: '@App\Infrastructure\Factory\AssignStationStateToStationCommandFactory'
-    test.app.factory.assign_station_state_to_station_command:
-        class: 'App\Infrastructure\Factory\AssignStationStateToStationCommandFactory'
-        arguments: ['@form.factory', '@test.app.system.clock.mock']
+  App\Application\UseCase\Command\AssignStationStateToStationCommandFactoryInterface: '@App\Infrastructure\Factory\AssignStationStateToStationCommandFactory'
+  test.app.factory.assign_station_state_to_station_command:
+    class: 'App\Infrastructure\Factory\AssignStationStateToStationCommandFactory'
+    arguments: ['@form.factory', '@test.app.system.clock.mock']
 
-    test.app.bicing_api.availability_station_query: '@App\Infrastructure\BicingApi\HttpAvailabilityStationQuery'
-    tests\App\Infrastructure\BicingApi\MockHttpQueryClient: ~
-    eight_points_guzzle.client.bicing_api: '@tests\App\Infrastructure\BicingApi\MockHttpQueryClient'
+  test.app.bicing_api.availability_station_query: '@App\Infrastructure\BicingApi\HttpAvailabilityStationQuery'
+  tests\App\Infrastructure\BicingApi\MockHttpQueryClient: ~
+  eight_points_guzzle.client.bicing_api: '@tests\App\Infrastructure\BicingApi\MockHttpQueryClient'
 
-    test.app.query.availabilites_in_time_interval_by_station_query: '@App\Infrastructure\Persistence\Doctrine\Query\DoctrineAvailabilitiesInTimeIntervalByStationQuery'
+  test.app.query.availabilites_in_time_interval_by_station_query: '@App\Infrastructure\Persistence\Doctrine\Query\DoctrineAvailabilitiesInTimeIntervalByStationQuery'
+  test.database_manager:
+    class: 'tests\Support\Service\DoctrineDatabaseManager'
+    arguments: ['@doctrine.orm.default_entity_manager']

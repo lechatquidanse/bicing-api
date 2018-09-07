@@ -1,0 +1,23 @@
+default:
+  suites:
+    default:
+      contexts:
+      - tests\Support\Context\AvailabilitiesByStationContext:
+          databaseManager: '@test.database_manager'
+      - tests\Support\Context\DatabaseContext:
+          databaseManager: '@test.database_manager'
+      - 'Behat\MinkExtension\Context\MinkContext'
+      - 'behatch:context:json'
+      - 'behatch:context:rest'
+
+  extensions:
+    Behat\Symfony2Extension:
+      kernel:
+        bootstrap: 'tests/Support/Context/Bootstrap/bootstrap.php'
+        class: App\Kernel
+    Behat\MinkExtension:
+      base_url: "http://0.0.0.0"
+      sessions:
+        default:
+          symfony2: ~
+    Behatch\Extension: ~
