@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace tests\Support\TestCase;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use tests\Support\Service\DoctrineDatabaseSetup;
+use tests\Support\Service\DoctrineDatabaseManager;
 
 abstract class DatabaseTestCase extends IntegrationTestCase
 {
@@ -41,11 +41,11 @@ abstract class DatabaseTestCase extends IntegrationTestCase
     }
 
     /**
-     * @return DoctrineDatabaseSetup
+     * @return DoctrineDatabaseManager
      */
-    private function databaseSetup(): DoctrineDatabaseSetup
+    private function databaseSetup(): DoctrineDatabaseManager
     {
-        return $this->getContainer()->get('test.database_setup');
+        return $this->getContainer()->get('test.database_manager');
     }
 
     /**

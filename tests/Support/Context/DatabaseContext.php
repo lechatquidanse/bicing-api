@@ -4,11 +4,25 @@ declare(strict_types=1);
 
 namespace tests\Support\Context;
 
-class DatabaseContext extends DefaultContext
+use Behat\Behat\Context\Context;
+use tests\Support\Service\DoctrineDatabaseManager;
+
+class DatabaseContext implements Context
 {
-    /** @BeforeScenario */
+    /** @var DoctrineDatabaseManager */
+    private $databaseManager;
+
+    /**
+     * @param DoctrineDatabaseManager $databaseManager
+     */
+    public function __construct(DoctrineDatabaseManager $databaseManager)
+    {
+        $this->databaseManager = $databaseManager;
+    }
+
+    /** @BeforeScenario @database*/
     public function setUp()
     {
-        $this->getContainer()->get('test.database_setup')->setUp();
+        $this->databaseManager->setUp();
     }
 }

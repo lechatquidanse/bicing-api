@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use tests\Support\Builder\BuilderInterface;
 
-class DoctrineDatabaseSetup
+class DoctrineDatabaseManager
 {
     /** @var EntityManagerInterface */
     private $entityManager;

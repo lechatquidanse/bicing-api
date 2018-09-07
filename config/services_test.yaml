@@ -24,6 +24,6 @@ services:
   eight_points_guzzle.client.bicing_api: '@tests\App\Infrastructure\BicingApi\MockHttpQueryClient'
 
   test.app.query.availabilites_in_time_interval_by_station_query: '@App\Infrastructure\Persistence\Doctrine\Query\DoctrineAvailabilitiesInTimeIntervalByStationQuery'
-  test.database_setup:
-    class: 'tests\Support\Service\DoctrineDatabaseSetup'
+  test.database_manager:
+    class: 'tests\Support\Service\DoctrineDatabaseManager'
     arguments: ['@doctrine.orm.default_entity_manager']

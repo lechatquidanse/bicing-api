@@ -56,7 +56,7 @@ final class AvailabilitiesInTimeIntervalByStationDataProvider implements ItemDat
 
         return new AvailabilitiesInTimeIntervalByStationView(
             $station->stationId(),
-            $this->availabilitiesQuery->find(Uuid::fromString($id), new DateTimeImmutableStringable('now'))
+            $this->availabilitiesQuery->find(Uuid::fromString($id), new DateTimeImmutableStringable('last week'))
         );
     }
 
