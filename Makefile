@@ -55,6 +55,7 @@ install:
 	docker-compose up -d --build
 	docker-compose run --rm php composer install --prefer-dist --no-progress --no-suggest
 	docker-compose run --rm php bin/console do:mi:mi -n
+	docker-compose exec php bin/console do:mi:mi -n --env=test
 	docker-compose run --rm php bin/phpspec run
 	docker-compose run --rm php bin/simple-phpunit
 
@@ -62,8 +63,6 @@ run:
 	docker-compose up -d
 	docker-compose run --rm php composer install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest
 	docker-compose run --rm php bin/console do:mi:mi -n
-	docker-compose run --rm php bin/phpspec run
-	docker-compose run --rm php bin/simple-phpunit
 
 down:
 	docker-compose down -v --remove-orphans

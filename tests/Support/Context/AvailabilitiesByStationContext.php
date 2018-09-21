@@ -28,7 +28,7 @@ class AvailabilitiesByStationContext implements Context
     }
 
     /**
-     * @Given station identified by :stationId with "station states from :dayStatedAt:
+     * @Given station identified by :stationId with station states from :dayStatedAt:
      */
     public function stationWithStationStatesFrom($stationId, $dayStatedAt, TableNode $stationStates): void
     {
