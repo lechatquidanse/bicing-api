@@ -35,7 +35,7 @@ class StationExternalDataBuilder implements BuilderInterface
      */
     public static function create(): StationExternalDataBuilder
     {
-        return new self('34', ['36', '105', '359', '380']);
+        return new self((string) rand(1, 500), ['36', '105', '359', '380']);
     }
 
     /**

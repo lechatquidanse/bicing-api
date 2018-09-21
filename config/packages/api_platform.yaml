@@ -5,3 +5,6 @@ api_platform:
     enable_entrypoint: false
     mapping:
         paths: ['%kernel.project_dir%/src/Application/UseCase/Query']
+
+    exception_to_status:
+        App\Domain\Exception\Station\StationDoesNotExist: 404
