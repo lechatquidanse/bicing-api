@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Query;
 
-use App\Application\UseCase\Query\StationWithDetailAndLocationQueryInterface;
-use App\Domain\Model\Station\Station;
+use App\Application\UseCase\Query\LastStationStateByStationQueryInterface;
+use App\Domain\Model\StationState\StationState;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\Query\Expr\Join;
 use Ramsey\Uuid\UuidInterface;
 
-class DoctrineStationWithDetailAndLocationQuery implements StationWithDetailAndLocationQueryInterface
+class DoctrineLastStationStateByStationQuery implements LastStationStateByStationQueryInterface
 {
     /** @var EntityManagerInterface */
     private $entityManager;
@@ -30,7 +31,14 @@ class DoctrineStationWithDetailAndLocationQuery implements StationWithDetailAndL
     {
         return $this->entityManager->createQueryBuilder()
             ->select(self::expectedFields())
-            ->from(Station::class, 's')
+            ->from(StationState::class, 'ss')
+            ->leftJoin(
+                StationState::class,
+                'ss_join',
+                Join::WITH,
+                'ss.stationAssigned = ss_join.stationAssigned AND ss.statedAt < ss_join.statedAt'
+            )
+            ->where('ss_join.stationAssigned IS NULL')
             ->getQuery()
             ->getResult();
     }
@@ -45,8 +53,10 @@ class DoctrineStationWithDetailAndLocationQuery implements StationWithDetailAndL
         try {
             return $this->entityManager->createQueryBuilder()
                 ->select(self::expectedFields())
-                ->from(Station::class, 's')
-                ->where('s.stationId = :stationId')
+                ->from(StationState::class, 'ss')
+                ->where('ss.stationAssigned = :stationId')
+                ->orderBy('ss.statedAt', 'DESC')
+                ->setMaxResults(1)
                 ->setParameter('stationId', $stationId)
                 ->getQuery()
                 ->getOneOrNullResult();
@@ -61,14 +71,11 @@ class DoctrineStationWithDetailAndLocationQuery implements StationWithDetailAndL
     private static function expectedFields(): array
     {
         return [
-            's.stationId as station_id',
-            's.stationDetail.name as name',
-            's.stationDetail.type as type',
-            's.location.address as address',
-            's.location.addressNumber as address_number',
-            's.location.zipCode as zip_code',
-            's.location.latitude as latitude',
-            's.location.longitude as longitude',
+            'IDENTITY(ss.stationAssigned) as station_id',
+            'ss.statedAt as stated_at',
+            'ss.availableBikeNumber as available_bike_number',
+            'ss.availableSlotNumber as available_slot_number',
+            'ss.status as status',
         ];
     }
 }
