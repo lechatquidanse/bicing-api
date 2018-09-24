@@ -25,6 +25,8 @@ services:
 
   test.app.query.availabilites_in_time_interval_by_station_query: '@App\Infrastructure\Persistence\Doctrine\Query\DoctrineAvailabilitiesInTimeIntervalByStationQuery'
   test.app.query.station_with_detail_and_location_query: '@App\Infrastructure\Persistence\Doctrine\Query\DoctrineStationWithDetailAndLocationQuery'
+  test.app.query.last_station_state_by_station_query: '@App\Infrastructure\Persistence\Doctrine\Query\DoctrineLastStationStateByStationQuery'
+
   test.database_manager:
     class: 'tests\Support\Service\DoctrineDatabaseManager'
     arguments: ['@doctrine.orm.default_entity_manager']

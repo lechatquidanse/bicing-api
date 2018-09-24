@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Application\UseCase\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
-use ApiPlatform\Core\Exception\ResourceClassNotSupportedException;
+use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use App\Application\UseCase\Query\AvailabilitiesInTimeIntervalByStationQueryInterface;
 use App\Application\UseCase\Query\AvailabilitiesInTimeIntervalByStationView;
 use App\Domain\Exception\Station\StationDoesNotExist;
@@ -16,8 +16,9 @@ use Ramsey\Uuid\Uuid;
 /**
  * @todo add tests
  * @todo add operation name for support
+ * @todo change logic to follow other data provider
  */
-final class AvailabilitiesInTimeIntervalByStationDataProvider implements ItemDataProviderInterface
+final class AvailabilitiesInTimeIntervalByStationDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface // phpcs:ignore
 {
     /** @var StationRepositoryInterface */
     private $stationRepository;
@@ -43,13 +44,6 @@ final class AvailabilitiesInTimeIntervalByStationDataProvider implements ItemDat
         string $operationName = null,
         array $context = []
     ): AvailabilitiesInTimeIntervalByStationView {
-        if (!$this->supports($resourceClass, $operationName)) {
-            throw new ResourceClassNotSupportedException(sprintf(
-                'Resource Class %s not supported by Availabilities In Time Interval By Station DataProvider',
-                $resourceClass
-            ));
-        }
-
         if (null === ($station = $this->stationRepository->findByStationId($id))) {
             throw StationDoesNotExist::withExternalStationId((string) $id);
         }
@@ -60,13 +54,7 @@ final class AvailabilitiesInTimeIntervalByStationDataProvider implements ItemDat
         );
     }
 
-    /**
-     * @param string      $resourceClass
-     * @param string|null $operationName
-     *
-     * @return bool
-     */
-    public function supports(string $resourceClass, string $operationName = null): bool
+    public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
         return AvailabilitiesInTimeIntervalByStationView::class === $resourceClass;
     }

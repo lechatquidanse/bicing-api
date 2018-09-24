@@ -8,10 +8,10 @@ Feature: Plan my itinerary that requires a station according to its past statist
   @database
   Scenario: Can Retrieve last week availabilities from a station
     Given station identified by "15cff96c-de06-4606-9870-b82eb9219339" with station states from "last week":
-      | stated_at             | available_bike | available_slot | status   |
-      | -55 minutes 1 seconds | 7              | 23             | 'OPENED' |
-      | -55 minutes           | 2              | 28             | 'OPENED' |
-      | +5 minutes            | 27             | 3              | 'OPENED' |
+      | stated_at             | available_bike | available_slot | status |
+      | -55 minutes 1 seconds | 7              | 23             | OPENED |
+      | -55 minutes           | 2              | 28             | OPENED |
+      | +5 minutes            | 27             | 3              | OPENED |
     When I add "Accept" header equal to "application/ld+json"
     And I send a "GET" request to "/api/availabilities-by-station/15cff96c-de06-4606-9870-b82eb9219339"
     Then the response status code should be 200
@@ -37,8 +37,8 @@ Feature: Plan my itinerary that requires a station according to its past statist
   @database
   Scenario: Can't Retrieve last week availabilities from a station that does not exist
     Given station identified by "15cff96c-de06-4606-9870-b82eb9219339" with station states from "last week":
-      | stated_at             | available_bike | available_slot | status   |
-      | -55 minutes 1 seconds | 7              | 23             | 'OPENED' |
+      | stated_at             | available_bike | available_slot | status |
+      | -55 minutes 1 seconds | 7              | 23             | OPENED |
     When I add "Accept" header equal to "application/ld+json"
     And I send a "GET" request to "/api/availabilities-by-station/feb78515-1b8b-42fa-b8f4-da8f80b44733"
     Then the response status code should be 404

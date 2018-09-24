@@ -6,12 +6,12 @@ namespace tests\Support\Context;
 
 use App\Domain\Model\Station\Station;
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
+use App\Domain\Model\StationState\StationStateStatus;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Ramsey\Uuid\Uuid;
 use tests\Support\Builder\StationBuilder;
 use tests\Support\Builder\StationStateBuilder;
-use tests\Support\Builder\StationStateStatusBuilder;
 use tests\Support\Service\DoctrineDatabaseManager;
 
 class AvailabilitiesByStationContext implements Context
@@ -33,7 +33,6 @@ class AvailabilitiesByStationContext implements Context
     public function stationWithStationStatesFrom($stationId, $dayStatedAt, TableNode $stationStates): void
     {
         $statedAt = new DateTimeImmutableStringable($dayStatedAt);
-        $status = StationStateStatusBuilder::create()->withStatusOpened()->build();
 
         /** @var Station $station */
         $station = $this->databaseManager->buildPersisted(StationBuilder::create()
@@ -45,7 +44,7 @@ class AvailabilitiesByStationContext implements Context
                 ->withAvailableSlotNumber((int) $stationState['available_slot'])
                 ->withStatedAt($statedAt->modify($stationState['stated_at']))
                 ->withStationAssigned($station)
-                ->withStatus($status));
+                ->withStatus(StationStateStatus::fromString($stationState['status'])));
         }
     }
 }
