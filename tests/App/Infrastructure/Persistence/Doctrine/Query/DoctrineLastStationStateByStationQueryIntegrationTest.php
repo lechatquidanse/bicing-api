@@ -13,6 +13,7 @@ use tests\Support\Builder\StationStateBuilder;
 use tests\Support\Builder\StationStateStatusBuilder;
 use tests\Support\TestCase\DatabaseTestCase;
 
+/** @todo check that the service taken from container is the original one and not the decorator */
 class DoctrineLastStationStateByStationQueryIntegrationTest extends DatabaseTestCase
 {
     /** @var DoctrineLastStationStateByStationQuery */
