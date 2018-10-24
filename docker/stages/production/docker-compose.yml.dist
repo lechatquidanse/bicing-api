@@ -22,7 +22,7 @@ services:
         image: ${PRODUCTION_IMAGE}
         networks: ['backend']
         restart: 'always'
-        volumes: ['./.env:/var/www/bicing-api/.env']
+        volumes: ['./.env:/var/www/bicing-api/.env', './var:/var/www/bicing-api/var']
 
 volumes:
   data-db:
