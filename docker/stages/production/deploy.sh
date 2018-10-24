@@ -18,6 +18,7 @@ scp -o 'StrictHostKeyChecking no' ./docker/stages/production/docker-compose.yml 
 ssh -o "StrictHostKeyChecking no" ${SERVER_PRODUCTION} "docker login -u ${REGISTRY_PRODUCTION_LOGIN} -p ${REGISTRY_PRODUCTION_PASSOWRD} registry.gitlab.com"
 ssh -o "StrictHostKeyChecking no" ${SERVER_PRODUCTION} "docker-compose -f /var/www/bicing-api/docker-compose.yml up -d"
 ssh -o "StrictHostKeyChecking no" ${SERVER_PRODUCTION} "docker-compose -f /var/www/bicing-api/docker-compose.yml run --rm php bin/console do:mi:mi -n"
+ssh -o "StrictHostKeyChecking no" ${SERVER_PRODUCTION} "docker-compose -f /var/www/bicing-api/docker-compose.yml run --rm php bin/console ca:cl"
 ssh -o "StrictHostKeyChecking no" ${SERVER_PRODUCTION} "docker logout registry.gitlab.com"
 
 # Clean
