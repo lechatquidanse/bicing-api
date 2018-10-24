@@ -6,6 +6,7 @@ namespace tests\App\Application\Process\Manager;
 
 use App\Application\Process\Manager\ImportStationStatesFromBicingApiManager;
 use App\Application\UseCase\Command\AssignStationStateToStationCommand;
+use App\Application\UseCase\Command\RefreshLastStationStateByStationCacheCommand;
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\Tests\Logger;
@@ -46,7 +47,7 @@ class ImportStationStatesFromBicingApiManagerUnitTest extends TestCase
     /**
      * @test
      */
-    public function it_can_manage_an_assign_station_states_to_station_command_with_expected_date()
+    public function it_can_manage_an_assign_station_states_to_station_command_with_expected_date_and_refresh_cache_()
     {
         $statedAt = new DateTimeImmutableStringable();
 
@@ -57,6 +58,9 @@ class ImportStationStatesFromBicingApiManagerUnitTest extends TestCase
         $this->clock::reset();
 
         $commands = $this->commandBus->commands();
+
+        $this->assertInstanceOf(RefreshLastStationStateByStationCacheCommand::class, array_pop($commands));
+
         $command = array_pop($commands);
 
         $this->assertInstanceOf(AssignStationStateToStationCommand::class, $command);
@@ -69,8 +73,11 @@ class ImportStationStatesFromBicingApiManagerUnitTest extends TestCase
     public function it_can_manage_two_station_states_threw_command_bus()
     {
         $this->manager->__invoke();
+        $commands = $this->commandBus->commands();
 
-        $this->assertCount(2, $this->commandBus->commands());
+        $this->assertInstanceOf(RefreshLastStationStateByStationCacheCommand::class, array_pop($commands));
+
+        $this->assertCount(2, $commands);
     }
 
     /**
@@ -84,7 +91,7 @@ class ImportStationStatesFromBicingApiManagerUnitTest extends TestCase
 
         $this->commandBus::reset();
 
-        $this->assertCount(2, $this->logger->getLogs('error'));
+        $this->assertCount(3, $this->logger->getLogs('error'));
     }
 
     /**

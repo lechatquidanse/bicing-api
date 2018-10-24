@@ -10,7 +10,8 @@ use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ApiResource(
- *     itemOperations={"get"},
+ *     itemOperations={
+ *     "get"={"method"="GET", "path"="/availabilities-by-station/{id}"}},
  *     collectionOperations={}
  *     )
  */

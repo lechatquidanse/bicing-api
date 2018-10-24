@@ -6,9 +6,14 @@ namespace App\Domain\Model\StationState;
 
 /**
  * An immutable date time that can be displayed as string.
+ *
+ * @todo add test and validate construct
  */
 final class DateTimeImmutableStringable extends \DateTimeImmutable
 {
+    /** @var string */
+    public const DATE_FORMAT = 'Y-m-d H:i:s';
+
     /**
      * @param \DateTimeImmutable $dateTimeImmutable
      *
@@ -16,13 +21,7 @@ final class DateTimeImmutableStringable extends \DateTimeImmutable
      */
     public static function fromDateTimeImmutable(\DateTimeImmutable $dateTimeImmutable): DateTimeImmutableStringable
     {
-        $self = new self();
-
-        $self
-            ->setTimestamp($dateTimeImmutable->getTimestamp())
-            ->setTimezone($dateTimeImmutable->getTimezone());
-
-        return $self;
+        return new self($dateTimeImmutable->format(self::DATE_FORMAT), $dateTimeImmutable->getTimezone());
     }
 
     /**
@@ -30,6 +29,6 @@ final class DateTimeImmutableStringable extends \DateTimeImmutable
      */
     public function __toString(): string
     {
-        return $this->format('Y-m-d H:i:s');
+        return $this->format(self::DATE_FORMAT);
     }
 }

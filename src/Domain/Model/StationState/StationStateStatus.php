@@ -49,7 +49,9 @@ final class StationStateStatus implements ValueObjectInterface
     {
         if (in_array($string, ['CLS', self::STATUS_CLOSED])) {
             return new self(self::STATUS_CLOSED);
-        } elseif (in_array($string, ['OPN', self::STATUS_OPENED])) {
+        }
+
+        if (in_array($string, ['OPN', self::STATUS_OPENED])) {
             return new self(self::STATUS_OPENED);
         }
 

@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace tests\Support\TestCase;
 
-use Assert\Assertion;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Mapping\ClassMetadata;
-use tests\Support\Builder\BuilderInterface;
+use tests\Support\Service\DoctrineDatabaseManager;
 
 abstract class DatabaseTestCase extends IntegrationTestCase
 {
@@ -19,40 +16,7 @@ abstract class DatabaseTestCase extends IntegrationTestCase
      */
     protected function buildPersisted(...$builders)
     {
-        Assertion::allIsInstanceOf($builders, BuilderInterface::class);
-
-        $lastPersistedObject = null;
-
-        foreach ($builders as $builder) {
-            $this->save($lastPersistedObject = $builder->build());
-        }
-
-        return $lastPersistedObject;
-    }
-
-    protected function setupDatabase()
-    {
-        $this->truncateTables();
-    }
-
-    private function truncateTables()
-    {
-        $em = $this->entityManager();
-
-        $metaData = $em->getMetadataFactory()->getAllMetadata();
-
-        /** @var ClassMetadata $meta */
-        foreach ($metaData as $meta) {
-            $em->getConnection()->executeQuery(sprintf('TRUNCATE "%s" CASCADE;', $meta->getTableName()));
-        }
-    }
-
-    protected function save($object)
-    {
-        $this->entityManager()->persist($object);
-        $this->entityManager()->flush();
-
-        return $object;
+        return $this->databaseSetup()->buildPersisted(...$builders);
     }
 
     /**
@@ -77,11 +41,11 @@ abstract class DatabaseTestCase extends IntegrationTestCase
     }
 
     /**
-     * @return EntityManager
+     * @return DoctrineDatabaseManager
      */
-    private function entityManager(): EntityManager
+    private function databaseSetup(): DoctrineDatabaseManager
     {
-        return $this->getContainer()->get('doctrine.orm.entity_manager');
+        return $this->getContainer()->get('test.database_manager');
     }
 
     /**
@@ -91,6 +55,6 @@ abstract class DatabaseTestCase extends IntegrationTestCase
     {
         parent::setUp();
 
-        $this->setupDatabase();
+        $this->databaseSetup()->setUp();
     }
 }

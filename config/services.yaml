@@ -26,6 +26,15 @@ services:
         tags:
             - { name: command_handler, handles: App\Application\UseCase\Command\AssignStationStateToStationCommand }
 
+    app.use_case.refresh_last_station_state_by_station_cache_handler:
+      class: App\Application\UseCase\Handler\RefreshLastStationStateByStationCacheHandler
+      arguments:
+      - '@App\Infrastructure\Persistence\Doctrine\Query\DoctrineLastStationStateByStationQuery'
+      - '@App\Infrastructure\Persistence\Doctrine\Cache\DoctrineLastStationStateByStationCache'
+      public: true
+      tags:
+        - { name: command_handler, handles: App\Application\UseCase\Command\RefreshLastStationStateByStationCacheCommand }
+
     SimpleBus\Message\Bus\MessageBus: '@command_bus'
 
     App\Domain\Model\Station\StationRepositoryInterface:
@@ -33,3 +42,21 @@ services:
 
     App\Domain\Model\Station\StationStateRepositoryInterface:
         class: 'App\Infrastructure\Persistence\Doctrine\Repository\DoctrineStationStateRepository'
+
+    app.infrastructure.doctrine.last_station_state_by_station.cache:
+      class: 'Doctrine\Common\Cache\FilesystemCache'
+      arguments: ['%kernel.cache_dir%']
+
+    App\Infrastructure\Persistence\Doctrine\Cache\DoctrineLastStationStateByStationCache:
+      arguments: ['@app.infrastructure.doctrine.last_station_state_by_station.cache']
+
+    App\Infrastructure\Persistence\Doctrine\Query\DoctrineLastStationStateByStationQuery: ~
+    App\Infrastructure\Persistence\Doctrine\Query\DoctrineLastStationStateByStationQueryCache:
+      decorates: 'App\Infrastructure\Persistence\Doctrine\Query\DoctrineLastStationStateByStationQuery'
+      arguments:
+      - '@App\Infrastructure\Persistence\Doctrine\Query\DoctrineLastStationStateByStationQueryCache.inner'
+      - '@App\Infrastructure\Persistence\Doctrine\Cache\DoctrineLastStationStateByStationCache'
+
+    App\Application\UseCase\DataProvider\LastStationStateByStationDataProvider:
+      arguments: ['@App\Infrastructure\Persistence\Doctrine\Query\DoctrineLastStationStateByStationQueryCache']
+      tags: [ { name: 'api_platform.collection_data_provider'} ]

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Application\Process\Manager;
 
 use App\Application\UseCase\Command\AssignStationStateToStationCommandFactoryInterface;
+use App\Application\UseCase\Command\RefreshLastStationStateByStationCacheCommand;
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
 use App\Infrastructure\BicingApi\AvailabilityStation;
 use App\Infrastructure\BicingApi\AvailabilityStationQueryInterface;
@@ -68,6 +69,8 @@ final class ImportStationStatesFromBicingApiManager
         foreach ($availabilityStations as $availabilityStation) {
             $this->import($availabilityStation, $statedAt);
         }
+
+        $this->refreshLastStationStateByStationCache();
     }
 
     /**
@@ -81,6 +84,16 @@ final class ImportStationStatesFromBicingApiManager
 
             $command->statedAt = $statedAt;
 
+            $this->commandBus->handle($command);
+        } catch (\Exception $exception) {
+            $this->logger->error($exception->getMessage());
+        }
+    }
+
+    private function refreshLastStationStateByStationCache(): void
+    {
+        try {
+            $command = new RefreshLastStationStateByStationCacheCommand();
             $this->commandBus->handle($command);
         } catch (\Exception $exception) {
             $this->logger->error($exception->getMessage());

@@ -46,7 +46,7 @@ docker-compose run --rm php bin/console bicing-api:import:stations
 
 - the second one is used to add states for each stations already in database:
 ```bash
-docker-compose run --rm bin/console bicing-api:import:stations-states
+docker-compose run --rm php bin/console bicing-api:import:stations-states
 ```
 
 
