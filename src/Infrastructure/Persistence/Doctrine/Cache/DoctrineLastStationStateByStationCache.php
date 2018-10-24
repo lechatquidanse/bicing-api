@@ -4,21 +4,20 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Cache;
 
-use Doctrine\Common\Cache\FilesystemCache;
+use Doctrine\Common\Cache\Cache;
 
-/** @todo add implement cache interface */
-class DoctrineLastStationStateByStationCache
+final class DoctrineLastStationStateByStationCache
 {
     /** @var string */
     public const COLLECTION_CACHE_KEY = 'doctrine.last_station_state_by_station.collection';
 
-    /** @var FilesystemCache */
+    /** @var Cache */
     private $cache;
 
     /**
-     * @param FilesystemCache $cache
+     * @param Cache $cache
      */
-    public function __construct(FilesystemCache $cache)
+    public function __construct(Cache $cache)
     {
         $this->cache = $cache;
     }
