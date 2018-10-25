@@ -94,11 +94,9 @@ final class ImportStationStatesFromBicingApiManager
     {
         try {
             $this->logger->info('Start refresh stations states');
-            $this->logger->error('Start refresh stations states');
             $command = new RefreshLastStationStateByStationCacheCommand();
             $this->commandBus->handle($command);
             $this->logger->info('End refresh stations states');
-            $this->logger->error('End refresh stations states');
         } catch (\Exception $exception) {
             $this->logger->error($exception->getMessage());
         }
