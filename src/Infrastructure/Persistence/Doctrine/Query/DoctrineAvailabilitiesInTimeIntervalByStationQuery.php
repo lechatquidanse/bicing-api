@@ -11,10 +11,7 @@ use App\Domain\Model\StationState\StationStateStatus;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\UuidInterface;
 
-/**
- * @todo Create a Date(Period|Interval) as input to find method to specify from when to when to look for
- */
-class DoctrineAvailabilitiesInTimeIntervalByStationQuery implements AvailabilitiesInTimeIntervalByStationQueryInterface
+final class DoctrineAvailabilitiesInTimeIntervalByStationQuery implements AvailabilitiesInTimeIntervalByStationQueryInterface  // phpcs:ignore
 {
     /** @var EntityManagerInterface */
     private $entityManager;

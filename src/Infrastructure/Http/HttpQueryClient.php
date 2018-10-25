@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Http Client to query data from an external api threw GET method.
  */
-class HttpQueryClient extends Client implements HttpQueryClientInterface
+final class HttpQueryClient extends Client implements HttpQueryClientInterface
 {
     use LoggerAwareTrait;
 
@@ -25,8 +25,9 @@ class HttpQueryClient extends Client implements HttpQueryClientInterface
      *
      * @return ResponseInterface
      *
-     * @throws HttpQueryResponseIsNotValidException if response is not valid
-     * @throws HttpQueryRequestIsNotValidException  if request has encountered some issue
+     * @throws HttpQueryRequestIsNotValidException
+     * @throws HttpQueryResponseIsNotValidException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function query(string $uri): ResponseInterface
     {

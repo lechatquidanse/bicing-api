@@ -9,10 +9,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\DateTimeImmutableType as BaseDateTimeImmutableType;
 
-/**
- * @todo add missing test for this class.
- */
-class DoctrineDateTimeImmutableStringableType extends BaseDateTimeImmutableType
+final class DoctrineDateTimeImmutableStringableType extends BaseDateTimeImmutableType
 {
     /**
      * @var string

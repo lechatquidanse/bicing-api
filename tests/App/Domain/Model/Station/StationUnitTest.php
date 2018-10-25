@@ -14,12 +14,14 @@ use tests\Support\Builder\StationExternalDataBuilder;
 use tests\Support\Builder\StationStateBuilder;
 use tests\Support\Builder\StationStateStatusBuilder;
 
-class StationUnit extends TestCase
+class StationUnitTest extends TestCase
 {
     /**
      * Test that a Station State can be created and assigned threw Station.
      *
      * @test
+     *
+     * @throws \Exception
      */
     public function it_can_assign_a_station_state()
     {

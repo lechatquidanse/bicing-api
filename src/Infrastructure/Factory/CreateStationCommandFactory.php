@@ -12,7 +12,7 @@ use App\Infrastructure\System\ClockInterface;
 use Symfony\Component\Form\Exception\InvalidArgumentException;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class CreateStationCommandFactory implements CreateStationCommandFactoryInterface
+final class CreateStationCommandFactory implements CreateStationCommandFactoryInterface
 {
     /**
      * @var FormFactoryInterface
@@ -40,8 +40,6 @@ class CreateStationCommandFactory implements CreateStationCommandFactoryInterfac
      * @return CreateStationCommand
      *
      * @throws InvalidArgumentException
-     *
-     * @todo upgrade exception message
      */
     public function fromAvailabilityStation(AvailabilityStation $availabilityStation): CreateStationCommand
     {
