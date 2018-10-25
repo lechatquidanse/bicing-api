@@ -15,7 +15,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class SymfonyCreateStationType extends AbstractType
+final class SymfonyCreateStationType extends AbstractType
 {
     /**
      * @var StationDetailTypeToStringTransformer

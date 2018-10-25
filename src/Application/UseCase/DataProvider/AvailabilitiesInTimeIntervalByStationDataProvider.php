@@ -13,11 +13,6 @@ use App\Domain\Model\Station\StationRepositoryInterface;
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
 use Ramsey\Uuid\Uuid;
 
-/**
- * @todo add tests
- * @todo add operation name for support
- * @todo change logic to follow other data provider
- */
 final class AvailabilitiesInTimeIntervalByStationDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface // phpcs:ignore
 {
     /** @var StationRepositoryInterface */

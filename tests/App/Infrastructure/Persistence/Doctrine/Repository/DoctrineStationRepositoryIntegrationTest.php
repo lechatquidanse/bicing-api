@@ -28,7 +28,7 @@ class DoctrineStationRepositoryIntegrationTest extends DatabaseTestCase
     /**
      * @test
      */
-    public function it_can_add_a_station()
+    public function it_can_add_a_station(): void
     {
         $stationId = Uuid::uuid4();
 
@@ -62,7 +62,7 @@ class DoctrineStationRepositoryIntegrationTest extends DatabaseTestCase
     /**
      * @test
      */
-    public function it_can_add_a_station_without_location_address_number()
+    public function it_can_add_a_station_without_location_address_number(): void
     {
         $stationId = Uuid::uuid4();
 
@@ -96,7 +96,7 @@ class DoctrineStationRepositoryIntegrationTest extends DatabaseTestCase
     /**
      * @test
      */
-    public function it_can_not_add_a_station_that_already_exists_with_station_id()
+    public function it_can_not_add_a_station_that_already_exists_with_station_id(): void
     {
         $this->expectException(StationAlreadyExistsException::class);
         $this->expectExceptionMessage(
@@ -117,7 +117,7 @@ class DoctrineStationRepositoryIntegrationTest extends DatabaseTestCase
     /**
      * @test
      */
-    public function it_can_not_add_a_station_that_already_exists_with_external_station_id()
+    public function it_can_not_add_a_station_that_already_exists_with_external_station_id(): void
     {
         $this->expectException(StationAlreadyExistsException::class);
         $this->expectExceptionMessage('A station already exists with external station Id "12"');
@@ -137,6 +137,46 @@ class DoctrineStationRepositoryIntegrationTest extends DatabaseTestCase
                 ->build()
             )
             ->build());
+    }
+
+    /** @test */
+    public function it_can_find_by_station_id_a_station_that_does_exist(): void
+    {
+        $stationId = Uuid::uuid4();
+
+        $this->buildPersisted(StationBuilder::create()->withStationId($stationId));
+
+        $this->assertInstanceOf(Station::class, $this->repository->findByStationId($stationId));
+    }
+
+    /** @test */
+    public function it_can_not_find_by_station_id_a_station_that_does_not_exist(): void
+    {
+        $this->buildPersisted(StationBuilder::create()->withStationId(Uuid::uuid4()));
+
+        $this->assertNull($this->repository->findByStationId(Uuid::uuid4()));
+    }
+
+    /** @test */
+    public function it_can_find_by_external_station_id_a_station_that_does_exist(): void
+    {
+        $externalStationId = (string) rand(1, 1000);
+
+        $this->buildPersisted(StationBuilder::create()->withStationExternalData(
+            StationExternalDataBuilder::create()->withExternalStationId($externalStationId)->build()
+        ));
+
+        $this->assertInstanceOf(Station::class, $this->repository->findByExternalStationId($externalStationId));
+    }
+
+    /** @test */
+    public function it_can_not_find_by_external_station_id_a_station_that_does_not_exist(): void
+    {
+        $this->buildPersisted(StationBuilder::create()->withStationExternalData(
+            StationExternalDataBuilder::create()->withExternalStationId('external_id')->build()
+        ));
+
+        $this->assertNull($this->repository->findByExternalStationId('invalid_external_id'));
     }
 
     /**

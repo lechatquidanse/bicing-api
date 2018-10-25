@@ -8,7 +8,7 @@ use App\Domain\Model\StationState\StationStateStatus;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
-class StationStateStatusToStringTransformer implements DataTransformerInterface
+final class StationStateStatusToStringTransformer implements DataTransformerInterface
 {
     /**
      * {@inheritdoc}

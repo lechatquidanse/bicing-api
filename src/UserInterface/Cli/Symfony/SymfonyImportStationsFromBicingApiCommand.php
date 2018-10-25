@@ -9,7 +9,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class SymfonyImportStationsFromBicingApiCommand extends Command
+final class SymfonyImportStationsFromBicingApiCommand extends Command
 {
     /**
      * @var ImportStationsFromBicingApiManager

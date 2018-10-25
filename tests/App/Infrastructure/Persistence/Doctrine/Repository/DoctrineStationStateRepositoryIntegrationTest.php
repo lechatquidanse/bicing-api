@@ -18,7 +18,7 @@ use tests\Support\TestCase\DatabaseTestCase;
 /**
  * @see DoctrineStationStateRepository
  */
-class DoctrineStationStateRepositoryIntegrationTest extends DatabaseTestCase
+final class DoctrineStationStateRepositoryIntegrationTest extends DatabaseTestCase
 {
     /**
      * @var DoctrineStationStateRepository

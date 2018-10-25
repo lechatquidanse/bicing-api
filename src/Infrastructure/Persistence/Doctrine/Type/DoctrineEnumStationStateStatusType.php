@@ -8,10 +8,7 @@ use App\Domain\Model\StationState\StationStateStatus;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 
-/**
- * @todo add test
- */
-class DoctrineEnumStationStateStatusType extends Type
+final class DoctrineEnumStationStateStatusType extends Type
 {
     /**
      * @var string

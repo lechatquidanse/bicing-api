@@ -27,7 +27,7 @@ class AssignStationStateToStationCommandFactoryIntegrationTest extends Integrati
     /**
      * @test
      */
-    public function it_can_create_from_availability_station_with_valid_data()
+    public function it_can_create_from_availability_station_with_valid_data(): void
     {
         $createdAt = new \DateTimeImmutable();
         $expected = new AssignStationStateToStationCommand();
@@ -55,13 +55,13 @@ class AssignStationStateToStationCommandFactoryIntegrationTest extends Integrati
     /**
      * @test
      */
-    public function it_can_not_create_from_availability_station_with_invalid_status()
+    public function it_can_not_create_from_availability_station_with_invalid_status(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Form invalid when creating AssignStationStateToStationCommand.');
 
         $this->factory->fromAvailabilityStation(AvailabilityStationBuilder::create()
-            ->withStatus('invalid status')
+            ->withStatus('')
             ->build());
     }
 

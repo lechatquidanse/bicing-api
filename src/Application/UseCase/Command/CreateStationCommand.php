@@ -7,9 +7,6 @@ namespace App\Application\UseCase\Command;
 use App\Domain\Model\Station\StationDetailType;
 use Ramsey\Uuid\UuidInterface;
 
-/**
- * @todo add use immutbale
- */
 final class CreateStationCommand
 {
     /**

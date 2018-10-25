@@ -1,5 +1,5 @@
 # The availabilities (number of bike available and number of slot available).
-# @todo explain why this feature is a little more technical than it should be
+# The "THEN" feature is more technical that it should be, because the output render a date that can't be mock for now in the test.
 Feature: Plan my itinerary that requires a station according to its past statistics availabilities
   In order to plan my itinerary
   As a client software API
