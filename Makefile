@@ -83,7 +83,7 @@ env_run:
 ###############
 
 ## Import fixtures.
-import:_dev
+import_dev:
 	./docker/stages/development/import-fixtures.sh
 
 ## Import stations states from bicing.cat provider.
