@@ -1,61 +1,73 @@
 # Bicing API
-
-The goal of this API is to ease customer's usage of large-scale public bicycle sharing system.
-
-By collecting data from different providers (Bicing, Velib, ...) it can advice customers or provide them useful information (best time of picking up a bike, ...)
-
-This API has been implemented in [DDD][wiki-DDD] with [PHP 7.1][PHP], [Symfony 4.0][symfony] and a [Timescale database][timescale].
+> The goal of this API is to ease customer's usage of large-scale public bicycle sharing system.  
+> By collecting data from different providers ([Bicing][bicing], [Velib][velib], ...) it can advice customers or provide them useful information (location to pick or return a bike, best time of picking up a bike, ...).
 
 
 ## Table of Contents
+- [Getting Started](#installation)
+- [Features](#features)
+- [Built With](#support)
+- [Development](#development)
+- [Contributing](#contributing)
+- [Deployment](#deployment)
+- [Releases](#releases)
+- [Acknowledgment](#acknowledgment)
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Support](#support)
+## Getting Started
+### Prerequisites
 
-## Installation
+To install and run the API you need [Docker Compose](docker-compose) and... that's all.  
+Please follow the [official documentation](docker-compose-install) to install it on your environment.
 
+### Installing
 Clone the project:
+
 ```bash
-git clone https://github.com/lechatquidanse/bicing-api.git
+git clone https://github.com/lechatquidanse/bicing-api.git && cd bicing-api
 ```
 
 Then run the default build installation:
-
 ```bash
 make install
 ```
+Your docker containers should have been successfully built and run.
 
-Your docker containers have been successfully built and run.
 
+## Features
 
-## Usage
+To follow the goals of the API, this project offers many features across two user interfaces:
+
+### REST API:
+<p align="center">
+  <img src="./documentation/features-rest.png" alt="Bicing API REST features" />
+</p>
+
+###CLI:
+<p align="center">
+  <img src="./documentation/features-cli.svg" alt="Bicing API CLI features" />
+</p>
+
+The commandes:
+```bash
+docker-compose exec php bin/console bicing-api:import:stations
+docker-compose exec php bin/console bicing-api:import:stations-states
+```
 
 To run the project once installed:
 
-```bash
-make run
-```
+## Built with
 
-To collect new data from [Bicing][Bicing], you can run two Symfony commands.
-
-- The first one is used to add new Bicing stations:
-```bash
-docker-compose run --rm php bin/console bicing-api:import:stations
-```
-
-- the second one is used to add states for each stations already in database:
-```bash
-docker-compose run --rm php bin/console bicing-api:import:stations-states
-```
+- [PHP 7.1][php]
+- [Symfony 4.0][symfony]: 
+- [API-Platform][api-platform]:
+- [Timescale database][timescale]:
+- [Docker][docker]:
 
 
-## Support
+### The folder structure
 
 Code and folder structure follow Domain Driven Design (DDD).
 Here is a good article to understand naming and folder [Domain Driver Design, little explanation and example](https://jorgearco.com/ddd-with-symfony/).
-
-### The folder structure
 
     src
         \
@@ -69,11 +81,15 @@ Here is a good article to understand naming and folder [Domain Driver Design, li
 
 
 
-[wiki-DDD]: https://en.wikipedia.org/wiki/Domain-driven_design
-[PHP]: http://php.net/
+[api-platform]: https://api-platform.com/
+[docker-compose]: https://docs.docker.com/compose/
+[docker-compose-install]: https://docs.docker.com/compose/install
+[bicing]: https://www.bicing.cat/
+[php]: http://php.net/
 [symfony]: http://symfony.com/
 [timescale]: http://www.timescale.com/
-[Bicing]: https://www.bicing.cat/
+[velib]: https://www.velib-metropole.fr/
+[wiki-DDD]: https://en.wikipedia.org/wiki/Domain-driven_design
 
 Authors
 -------

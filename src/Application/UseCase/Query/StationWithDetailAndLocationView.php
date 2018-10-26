@@ -11,7 +11,7 @@ use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ApiResource(
- *     shortName="stationView",
+ *     shortName="station",
  *     routePrefix="/stations",
  *     collectionOperations={"get"={"method"="GET", "path"=""}},
  *     itemOperations={"get"={"method"="GET", "path"="/{id}"}}
