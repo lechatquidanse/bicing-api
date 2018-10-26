@@ -12,14 +12,14 @@
 - [CI and Deployment](#ci-and-deployment)
 
 
-##<a name="getting-started"></a> Getting Started
+## <a name="getting-started"></a> Getting Started
 ### Prerequisites
 
-To install and run the API you need [Docker Compose](docker-compose) and... that's all.  
+To install and run the API you need [Docker Compose](docker-compose) and... that's all.
 Please follow the [official documentation](docker-compose-install) to install it on your environment.
 
 ### Installing
-Clone the project and run the default build installation:
+Clone the project and run the default installation:
 
 ```bash
 git clone https://github.com/lechatquidanse/bicing-api.git && cd bicing-api
@@ -43,7 +43,7 @@ To follow the goals of the API, this project offers many features across 2 user 
 
 To run the project once installed:
 
-##<a name="built-with"></a> Built with
+## <a name="built-with"></a> Built with
 
 - [PHP 7.1][php]
 - [Symfony 4.0][symfony]
@@ -59,7 +59,7 @@ The Makefile contains useful command for development purpose
 </p>
 
 
-##<a name="coding-standard"></a> Coding standard
+## <a name="coding-standard"></a> Coding standard
 
 ### Domain Driven Design
 
@@ -88,7 +88,7 @@ For example, to create a station in database:
   <img src="./documentation/cqrs-command-handler.png" alt="CQRS command handler" />
 </p>
 
-##<a name="ci-and-deployment"></a> CI and Deployment
+## <a name="ci-and-deployment"></a> CI and Deployment
 
 CI and deployment can handled threw [Gitlab][gitlab] and [Docker][docker] thanks to [.gitlab-ci.yml](./.gitlab-ci.yml)
 It contains 3 different stages.
