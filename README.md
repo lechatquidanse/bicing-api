@@ -36,7 +36,7 @@ To follow the goals of the API, this project offers many features across 2 user 
 
 ### CLI:
 <p align="center">
-  <img src="./documentation/features-cli.svg" alt="Bicing API CLI features" with="100%" height="280"/>
+  <img src="./documentation/features-cli.svg?sanitize=1" alt="Bicing API CLI features" with="100%" height="100%"/>
 </p>
 
 To run the project once installed:
@@ -53,7 +53,7 @@ To run the project once installed:
 The Makefile contains useful command for development purpose
 
 <p align="center">
-  <img src="./documentation/makefile.svg" alt="Makefile helpul commands" with="100%" height="306"/>
+  <img src="./documentation/makefile.svg?sanitize=1" alt="Makefile helpul commands" />
 </p>
 
 ## <a name="coding-standard"></a> Coding standard
