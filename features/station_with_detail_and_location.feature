@@ -17,13 +17,13 @@ Feature: Choose a station to start or end my itinerary according to its details 
     And the JSON should be equal to:
     """
       {
-        "@context": "/api/contexts/stationView",
+        "@context": "/api/contexts/station",
         "@id": "/api/stations",
         "@type": "hydra:Collection",
         "hydra:member": [
           {
             "@id": "/api/stations/15cff96c-de06-4606-9870-b82eb9219339",
-            "@type": "stationView",
+            "@type": "station",
             "id": "15cff96c-de06-4606-9870-b82eb9219339",
             "name": "08 - PG. PUJADES 2",
             "type": "BIKE",
@@ -35,7 +35,7 @@ Feature: Choose a station to start or end my itinerary according to its details 
           },
           {
             "@id": "/api/stations/374c5b80-cb51-46d8-8f7d-48bce9044f23",
-            "@type": "stationView",
+            "@type": "station",
             "id": "374c5b80-cb51-46d8-8f7d-48bce9044f23",
             "name": "492 - PL. TETUAN",
             "type": "ELECTRIC_BIKE",
@@ -62,9 +62,9 @@ Feature: Choose a station to start or end my itinerary according to its details 
     And the JSON should be equal to:
     """
       {
-        "@context": "/api/contexts/stationView",
+        "@context": "/api/contexts/station",
         "@id": "/api/stations/feb78515-1b8b-42fa-b8f4-da8f80b44733",
-        "@type": "stationView",
+        "@type": "station",
         "id": "feb78515-1b8b-42fa-b8f4-da8f80b44733",
         "name": "08 - PG. PUJADES 2",
         "type": "BIKE",
