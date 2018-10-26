@@ -29,7 +29,7 @@ services:
     app.use_case.refresh_last_station_state_by_station_cache_handler:
       class: App\Application\UseCase\Handler\RefreshLastStationStateByStationCacheHandler
       arguments:
-      - '@App\Infrastructure\Persistence\Doctrine\Query\DoctrineLastStationStateByStationQuery'
+      - '@App\Infrastructure\Persistence\Doctrine\Query\DoctrineLastStationStateByStationQueryCache.inner'
       - '@App\Infrastructure\Persistence\Doctrine\Cache\DoctrineLastStationStateByStationCache'
       public: true
       tags:
