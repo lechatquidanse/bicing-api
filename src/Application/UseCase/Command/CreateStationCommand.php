@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace App\Application\UseCase\Command;
 
 use App\Domain\Model\Station\StationDetailType;
+use App\Domain\Model\UseCase;
 use Ramsey\Uuid\UuidInterface;
 
-final class CreateStationCommand
+final class CreateStationCommand implements UseCase
 {
     /**
      * @var UuidInterface
