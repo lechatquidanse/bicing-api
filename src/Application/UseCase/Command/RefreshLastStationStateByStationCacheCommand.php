@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Application\UseCase\Command;
 
-final class RefreshLastStationStateByStationCacheCommand
+use App\Domain\Model\UseCase;
+
+final class RefreshLastStationStateByStationCacheCommand implements UseCase
 {
     /**
      * @var int

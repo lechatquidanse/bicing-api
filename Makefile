@@ -40,15 +40,35 @@ stop:
 down:
 	docker-compose down -v --remove-orphans
 
-## Run all quality assurance tools.
+## Run all quality assurance tools (tests and code inspection).
 qa: code_fixer code_detect code_correct test_spec test test_behaviour
 
 ## Truncate database and import fixtures.
-fixtures: down run dev_import
+fixtures: down run import_dev
+
+########
+# Code #
+########
+
+## Run codesniffer to correct violations of a defined coding project standards.
+code_correct:
+	docker-compose exec php bin/phpcs --standard=PSR2 src
+
+## Run codesniffer to detect violations of a defined coding project standards.
+code_detect:
+	docker-compose exec php bin/phpcbf --standard=PSR2 src tests
+
+## Run cs-fixer to fix php code to follow project standards.
+code_fixer:
+	docker-compose exec php bin/php-cs-fixer fix
 
 ###############
 # Environment #
 ###############
+
+## Launch and build docker environment.
+env_build:
+	docker-compose up -d
 
 ## Set defaut environment variables by copying env.dist file as .env.
 env_file:
@@ -58,17 +78,25 @@ env_file:
 env_run:
 	docker-compose up -d
 
-## Launch and build docker environment.
-env_build:
-	docker-compose up -d
+###############
+# Import Data #
+###############
+
+## Import fixtures.
+import:_dev
+	./docker/stages/development/import-fixtures.sh
+
+## Import stations states from bicing.cat provider.
+import_states:
+	docker-compose exec php bin/console bicing-api:import:stations-states
+
+## Import stations from bicing.cat provider.
+import_stations:
+	docker-compose exec php bin/console bicing-api:import:stations
 
 ###########
 # Install #
 ###########
-
-## Install vendors.
-install_vendor:
-	docker-compose run --rm php composer install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest
 
 ## Run database migration.
 install_db:
@@ -78,33 +106,13 @@ install_db:
 install_db_test:
 	docker-compose exec php bin/console do:mi:mi -n --env=test
 
-########
-# Code #
-########
-
-## Run cs-fixer to fix php code to follow project standards.
-code_fixer:
-	docker-compose exec php bin/php-cs-fixer fix
-
-## Run codesniffer to detect violations of a defined coding project standards.
-code_detect:
-	docker-compose exec php bin/phpcbf --standard=PSR2 src tests
-
-## Run codesniffer to correct violations of a defined coding project standards.
-code_correct:
-	docker-compose exec php bin/phpcs --standard=PSR2 src
+## Install vendors.
+install_vendor:
+	docker-compose run --rm php composer install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest
 
 ########
 # Test#
 ########
-
-## Run php spect tests.
-test_spec:
-	docker-compose exec php bin/phpspec run
-
-## Run unit&integration tests.
-test_unit:
-	docker-compose exec php bin/simple-phpunit
 
 ## Run unit&integration tests with pre-installing test database.
 test: install_db_test test_unit
@@ -113,11 +121,10 @@ test: install_db_test test_unit
 test_behaviour:
 	docker-compose exec php bin/behat
 
-###############
-# Development #
-###############
+## Run unit&integration tests.
+test_unit:
+	docker-compose exec php bin/simple-phpunit
 
-## Import fixtures.
-dev_import:
-	./docker/stages/development/import-fixtures.sh
-
+## Run php spect tests.
+test_spec:
+	docker-compose exec php bin/phpspec run

@@ -6,6 +6,7 @@ namespace App\Application\UseCase\Query;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Domain\Model\UseCase;
 use Ramsey\Uuid\UuidInterface;
 
 /**
@@ -16,7 +17,7 @@ use Ramsey\Uuid\UuidInterface;
  *     collectionOperations={}
  *     )
  */
-final class AvailabilitiesInTimeIntervalByStationView
+final class AvailabilitiesInTimeIntervalByStationView implements UseCase
 {
     /**
      * @ApiProperty(identifier=true)

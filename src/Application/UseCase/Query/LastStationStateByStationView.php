@@ -8,6 +8,7 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
 use App\Domain\Model\StationState\StationStateStatus;
+use App\Domain\Model\UseCase;
 use Ramsey\Uuid\UuidInterface;
 
 /**
@@ -18,7 +19,7 @@ use Ramsey\Uuid\UuidInterface;
  *     itemOperations={"get"={"method"="GET", "path"="/{id}"}}
  *  )
  */
-final class LastStationStateByStationView
+final class LastStationStateByStationView implements UseCase
 {
     /**
      * @var UuidInterface
