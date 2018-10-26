@@ -32,14 +32,10 @@ Your docker containers should have been successfully built and run.
 To follow the goals of the API, this project offers many features across 2 user interfaces:
 
 ### REST API:
-<p align="center">
-  <img src="./documentation/features-rest.png" alt="Bicing API REST features" />
-</p>
+![Bicing API RESTs features](./documentation/features-rest.png)
 
 ### CLI:
-<p align="center">
-  <img src="./documentation/features-cli.svg" alt="Bicing API CLI features" />
-</p>
+![Bicing API CLI features](./documentation/features-cli.svg)
 
 To run the project once installed:
 
@@ -54,10 +50,7 @@ To run the project once installed:
 ## Development
 The Makefile contains useful command for development purpose
 
-<p align="center">
-  <img src="./documentation/makefile.svg" alt="Makefile helpul commands" />
-</p>
-
+![Makefile helpul commands](./documentation/makefile.svg)
 
 ## <a name="coding-standard"></a> Coding standard
 
@@ -84,9 +77,7 @@ This use case is then handled by a handler for a command or a data provider for 
 Commands are handled by a message bus ([SimpleBus][simplebus]) where a command is link to one handler.   
 For example, to create a station in database:
 
-<p align="center">
-  <img src="./documentation/cqrs-command-handler.png" alt="CQRS command handler" />
-</p>
+![CQRS command handler](./documentation/cqrs-command-handler.png)
 
 ## <a name="ci-and-deployment"></a> CI and Deployment
 
@@ -107,10 +98,7 @@ It will then install project, launch qa tools and then build and push a docker i
 
 This manual action, will pull the image build by the previous step and update the specific container.
 
-<p align="center">
-  <img src="./documentation/continuous-integration.png" alt="Continuous Integration" />
-</p>
-
+![Continuous Integration](./documentation/continuous-integration.png)
 
 [api-platform]: https://api-platform.com/
 [bicing]: https://www.bicing.cat/
