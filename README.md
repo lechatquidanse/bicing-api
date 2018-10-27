@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="Bicing Log" title="Bicing API" src="./documentation/bicing-logo.png" style="width:20%">
+    <img alt="Bicing Log" title="Bicing API" src="./documentation/bicing-logo.png" width="20%">
 </p>
 <h1 align="center">Bicing API</h1>
 
@@ -24,7 +24,7 @@
   <a href="#ci-and-deployment">CI and Deployment</a>
 </p>
 
-| <img src="?sanitize=true" alt="List stations"> | | <img src="?sanitize=true" alt="List last availabilities by station"> |  
+| <img src="https://raw.githubusercontent.com/lechatquidanse/bicing-api/develop/documentation/list-stations-curl.svg?sanitize=true" alt="List stations"> | | <img src="https://github.com/lechatquidanse/bicing-api/blob/develop/documentation/list-last-availabilities-by-station-curl.svg?sanitize=true" alt="List last availabilities by station"> |
 
 ## <a name="getting-started"></a> Getting Started
 ### Prerequisites
@@ -50,7 +50,7 @@ To follow the goals of the API, this project offers many features across 2 user 
 
 ### CLI:
 <p align="center">
-  <img src="?sanitize=true" alt="Bicing API CLI features" />
+  <img src="https://raw.githubusercontent.com/lechatquidanse/bicing-api/develop/documentation/features-cli.svg?sanitize=true" alt="Bicing API CLI features" />
 </p>
 
 To run the project once installed:
@@ -67,7 +67,7 @@ To run the project once installed:
 The Makefile contains useful command for development purpose
 
 <p align="center">
-  <img src="" alt="Makefile helpul commands" />
+  <img src="https://raw.githubusercontent.com/lechatquidanse/bicing-api/develop/documentation/makefile.svg?sanitize=true" alt="Makefile helpul commands" />
 </p>
 
 ## <a name="coding-standard"></a> Coding standard
