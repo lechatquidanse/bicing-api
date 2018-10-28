@@ -18,7 +18,7 @@
 <p align="center">
   <a href="#getting-started">Getting Started</a> •
   <a href="#features">Features</a> •
-  <a href="#build-with">Built With</a> •
+  <a href="#built-with">Built With</a> •
   <a href="#development">Development</a> •
   <a href="#coding-standard">Coding Standard</a> •
   <a href="#ci-and-deployment">CI and Deployment</a>
