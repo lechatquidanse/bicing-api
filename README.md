@@ -6,7 +6,7 @@
 <h4 align="center">Get statistics and locations of bicycle stations.</h4>
 
 > The goal of this REST API is to ease customer's usage of large-scale public bicycle sharing system.  
-> By collecting data from different providers ([Bicing][bicing], [Velib][velib], ...) it can advice customers or provide them useful information (location to pick or return a bike, best time of picking up a bike, ...).
+> By collecting data from different providers ([Bicing][bicing], [Velib][velib], ...) it can advice customers and provide them useful information (location to pick or return a bike, best time for picking up a bike, ...).
 
 <p align="center">
     <img src="https://img.shields.io/badge/php-%5E7.1-blue.svg" alt="PHP 7.1">
@@ -36,17 +36,19 @@ Please follow the [official documentation](docker-compose-install) to install it
 Clone the project and run the default installation:
 
 ```bash
-git clone https://github.com/lechatquidanse/bicing-api.git && cd bicing-api
-make install
+git clone https://github.com/lechatquidanse/bicing-api.git && cd bicing-api && make install
 ```
 Your docker containers should have been successfully built and run.
 
 ## Features
 
-To follow the goals of the API, this project offers many features across 2 user interfaces:
+Multiple features are proposed across 2 user interfaces, a REST API and command-line commands:
 
 ### REST API:
 ![Bicing API RESTs features](./documentation/features-rest.png)
+
+You can find the concrete user stories written in [Gherkin][gherkin] in [features folder](./features).
+These behaviour requirements are tested with [Behat][behat].
 
 ### CLI:
 
@@ -86,7 +88,7 @@ Here is a good article to understand naming and folder [Domain Driver Design, li
 
 ### Command Query Responsibility Segregation
 
-To avoid complexity in code, in this project, a use case is a command or a query with a single responsibility.
+In this project, a use case is a command or a query with a single responsibility.
 This use case is then handled by a handler for a command or a data provider for a query.
 
 Commands are handled by a message bus ([SimpleBus][simplebus]) where a command is link to one handler.   
@@ -96,7 +98,7 @@ For example, to create a station in database:
 
 ## <a name="ci-and-deployment"></a> CI and Deployment
 
-CI and deployment can handled threw [Gitlab][gitlab] and [Docker][docker] thanks to [.gitlab-ci.yml](./.gitlab-ci.yml)
+CI and deployment can be handled through [Gitlab][gitlab] and [Docker][docker] thanks to [.gitlab-ci.yml](./.gitlab-ci.yml)
 It contains 3 different stages.
 
 ### Test
@@ -123,10 +125,12 @@ This manual action, will pull the image build by the previous step and update th
 > [Linkedin](https://www.linkedin.com/in/stephane-el-manouni/)
 
 [api-platform]: https://api-platform.com/
+[behat]: http://behat.org/en/latest/
 [bicing]: https://www.bicing.cat/
 [docker]: https://www.docker.com/
 [docker-compose]: https://docs.docker.com/compose/
 [docker-compose-install]: https://docs.docker.com/compose/install
+[gherkin]: https://docs.cucumber.io/gherkin/
 [gitlab]: https://gitlab.com/
 [php]: http://php.net/
 [simplebus]: https://github.com/SimpleBus/SimpleBus
