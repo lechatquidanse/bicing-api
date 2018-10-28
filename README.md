@@ -50,7 +50,7 @@ To follow the goals of the API, this project offers many features across 2 user 
 
 ### CLI:
 <p align="center">
-  <img src="https://raw.githubusercontent.com/lechatquidanse/bicing-api/develop/documentation/features-cli.svg?sanitize=true" alt="Bicing API CLI features" />
+  <img src="https://raw.githubusercontent.com/lechatquidanse/bicing-api/develop/documentation/features-cli.svg?sanitize=true" width="100%" height="100%" alt="Bicing API CLI features" />
 </p>
 
 To run the project once installed:
