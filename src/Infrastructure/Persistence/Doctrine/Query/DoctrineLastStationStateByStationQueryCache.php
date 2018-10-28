@@ -8,8 +8,7 @@ use App\Application\UseCase\Query\LastStationStateByStationQueryInterface;
 use App\Infrastructure\Persistence\Doctrine\Cache\DoctrineLastStationStateByStationCache;
 use Ramsey\Uuid\UuidInterface;
 
-/** @todo add test */
-class DoctrineLastStationStateByStationQueryCache implements LastStationStateByStationQueryInterface
+final class DoctrineLastStationStateByStationQueryCache implements LastStationStateByStationQueryInterface
 {
     /** @var LastStationStateByStationQueryInterface */
     private $query;

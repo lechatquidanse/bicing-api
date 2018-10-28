@@ -8,10 +8,7 @@ use App\Domain\Model\Station\StationDetailType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 
-/**
- * @todo add test
- */
-class DoctrineEnumStationDetailTypeType extends Type
+final class DoctrineEnumStationDetailTypeType extends Type
 {
     /**
      * @var string

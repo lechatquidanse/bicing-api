@@ -12,7 +12,7 @@ use App\Infrastructure\System\ClockInterface;
 use Symfony\Component\Form\Exception\InvalidArgumentException;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class AssignStationStateToStationCommandFactory implements AssignStationStateToStationCommandFactoryInterface
+final class AssignStationStateToStationCommandFactory implements AssignStationStateToStationCommandFactoryInterface
 {
     /**
      * @var FormFactoryInterface
@@ -40,8 +40,6 @@ class AssignStationStateToStationCommandFactory implements AssignStationStateToS
      * @return AssignStationStateToStationCommand
      *
      * @throws InvalidArgumentException
-     *
-     * @todo upgrade exception message ($form->getErrors()->__toString())
      */
     public function fromAvailabilityStation(
         AvailabilityStation $availabilityStation

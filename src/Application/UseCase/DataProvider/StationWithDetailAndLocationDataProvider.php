@@ -11,9 +11,6 @@ use App\Application\UseCase\Query\StationWithDetailAndLocationQueryInterface;
 use App\Application\UseCase\Query\StationWithDetailAndLocationView;
 use App\Domain\Exception\Station\StationDoesNotExist;
 
-/**
- * @todo add operation name for support
- */
 class StationWithDetailAndLocationDataProvider implements ItemDataProviderInterface, CollectionDataProviderInterface, RestrictedDataProviderInterface  // phpcs:ignore
 {
     /** @var StationWithDetailAndLocationQueryInterface */

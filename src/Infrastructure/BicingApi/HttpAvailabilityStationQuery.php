@@ -8,7 +8,7 @@ use App\Infrastructure\Http\HttpQueryClientInterface;
 use JMS\Serializer\SerializerInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class HttpAvailabilityStationQuery implements AvailabilityStationQueryInterface
+final class HttpAvailabilityStationQuery implements AvailabilityStationQueryInterface
 {
     /**
      * @var string

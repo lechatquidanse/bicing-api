@@ -14,7 +14,7 @@ use Doctrine\ORM\Query\Lexer;
  *
  * "time_bucket" "(" IntervalLiteral INTERVAL "," DateTimeExpression DATE ")"
  */
-class TimescaleDbTimeBucketFunctionDQL extends FunctionNode
+final class TimescaleDbTimeBucketFunctionDQL extends FunctionNode
 {
     /** @var Literal */
     private $intervalLiteral;

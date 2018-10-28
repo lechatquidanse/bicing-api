@@ -6,16 +6,18 @@ namespace App\Application\UseCase\Query;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Domain\Model\UseCase;
 use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ApiResource(
+ *     shortName="collection of availabilities in a period for a station",
  *     itemOperations={
- *     "get"={"method"="GET", "path"="/availabilities-by-station/{id}"}},
+ *     "get"={"method"="GET", "path"="/availabilities/{id}"}},
  *     collectionOperations={}
  *     )
  */
-final class AvailabilitiesInTimeIntervalByStationView
+final class AvailabilitiesInTimeIntervalByStationView implements UseCase
 {
     /**
      * @ApiProperty(identifier=true)

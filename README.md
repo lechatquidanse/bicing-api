@@ -1,61 +1,80 @@
-# Bicing API
+<p align="center">
+    <img alt="Bicing Log" title="Bicing API" src="./documentation/bicing-logo.png" width="20%">
+</p>
+<h1 align="center">Bicing API</h1>
 
-The goal of this API is to ease customer's usage of large-scale public bicycle sharing system.
+<h4 align="center">Get statistics and locations of bicycle stations.</h4>
 
-By collecting data from different providers (Bicing, Velib, ...) it can advice customers or provide them useful information (best time of picking up a bike, ...)
+> The goal of this REST API is to ease customer's usage of large-scale public bicycle sharing system.  
+> By collecting data from different providers ([Bicing][bicing], [Velib][velib], ...) it can advice customers and provide them useful information (location to pick or return a bike, best time for picking up a bike, ...).
 
-This API has been implemented in [DDD][wiki-DDD] with [PHP 7.1][PHP], [Symfony 4.0][symfony] and a [Timescale database][timescale].
+<p align="center">
+    <img src="https://img.shields.io/badge/php-%5E7.1-blue.svg" alt="PHP 7.1">
+    <img src="https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg" alt="Dependencies">
+    <img src="https://img.shields.io/badge/contributions-welcome-orange.svg" alt="Contributions welcome">
+    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"><a>
+</p>
 
+<p align="center">
+  <a href="#getting-started">Getting Started</a> •
+  <a href="#features">Features</a> •
+  <a href="#built-with">Built With</a> •
+  <a href="#development">Development</a> •
+  <a href="#coding-standard">Coding Standard</a> •
+  <a href="#ci-and-deployment">CI and Deployment</a>
+</p>
 
-## Table of Contents
+![Bicing API RESTs examples](./documentation/bicing-api-curl-examples.png)
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Support](#support)
+## <a name="getting-started"></a> Getting Started
+### Prerequisites
 
-## Installation
+To install and run the API you need [Docker Compose](docker-compose) and... that's all.
+Please follow the [official documentation](docker-compose-install) to install it on your environment.
 
-Clone the project:
+### Installing
+Clone the project and run the default installation:
+
 ```bash
-git clone https://github.com/lechatquidanse/bicing-api.git
+git clone https://github.com/lechatquidanse/bicing-api.git && cd bicing-api && make install
 ```
+Your docker containers should have been successfully built and run.
 
-Then run the default build installation:
+## Features
 
-```bash
-make install
-```
+Multiple features are proposed across 2 user interfaces, a REST API and command-line commands:
 
-Your docker containers have been successfully built and run.
+### REST API:
+![Bicing API RESTs features](./documentation/features-rest.png)
 
+You can find the concrete user stories written in [Gherkin][gherkin] in [features folder](./features).
+These behaviour requirements are tested with [Behat][behat].
 
-## Usage
+### CLI:
+
+![Bicing API CLI features](./documentation/features-cli-min.png)
 
 To run the project once installed:
 
-```bash
-make run
-```
+## <a name="built-with"></a> Built with
 
-To collect new data from [Bicing][Bicing], you can run two Symfony commands.
+- [PHP 7.1][php]
+- [Symfony 4.0][symfony]
+- [API-Platform][api-platform]
+- [Timescale Database][timescale]
+- [Docker][docker]
 
-- The first one is used to add new Bicing stations:
-```bash
-docker-compose run --rm php bin/console bicing-api:import:stations
-```
+## Development
+The Makefile contains useful command for development purpose
 
-- the second one is used to add states for each stations already in database:
-```bash
-docker-compose run --rm php bin/console bicing-api:import:stations-states
-```
+![Makefile helpul commands](./documentation/makefile-help-min.png)
 
+## <a name="coding-standard"></a> Coding standard
 
-## Support
+### Domain Driven Design
 
-Code and folder structure follow Domain Driven Design (DDD).
+Code and folder structure follow Domain Driven Design (DDD).  
 Here is a good article to understand naming and folder [Domain Driver Design, little explanation and example](https://jorgearco.com/ddd-with-symfony/).
-
-### The folder structure
 
     src
         \
@@ -67,15 +86,55 @@ Here is a good article to understand naming and folder [Domain Driver Design, li
             |
             |\ UserInterface   `It contains all the interfaces allowed for a user of the API (Cli, HTTP, Rest, etc)`
 
+### Command Query Responsibility Segregation
 
+In this project, a use case is a command or a query with a single responsibility.
+This use case is then handled by a handler for a command or a data provider for a query.
 
-[wiki-DDD]: https://en.wikipedia.org/wiki/Domain-driven_design
-[PHP]: http://php.net/
+Commands are handled by a message bus ([SimpleBus][simplebus]) where a command is link to one handler.   
+For example, to create a station in database:
+
+![CQRS command handler](./documentation/command-handler-min.png)
+
+## <a name="ci-and-deployment"></a> CI and Deployment
+
+CI and deployment can be handled through [Gitlab][gitlab] and [Docker][docker] thanks to [.gitlab-ci.yml](./.gitlab-ci.yml)
+It contains 3 different stages.
+
+### Test
+
+Environment 'test' is triggered when a 'feature/*' branch is pushed to the repository. 
+It will then install project and launch qa tools. 
+
+### Build
+
+Environment 'build' is triggered when a 'release/*' branch is pushed to the repository. 
+It will then install project, launch qa tools and then build and push a docker image on a registry if no error occured.
+
+### Production
+
+This manual action, will pull the image build by the previous step and update the specific container.
+
+![Continuous Integration](./documentation/continuous-integration.png)
+
+## License
+
+[MIT](https://opensource.org/licenses/MIT)
+
+> Stéphane EL MANOUNI &nbsp;&middot;&nbsp;
+> [Linkedin](https://www.linkedin.com/in/stephane-el-manouni/)
+
+[api-platform]: https://api-platform.com/
+[behat]: http://behat.org/en/latest/
+[bicing]: https://www.bicing.cat/
+[docker]: https://www.docker.com/
+[docker-compose]: https://docs.docker.com/compose/
+[docker-compose-install]: https://docs.docker.com/compose/install
+[gherkin]: https://docs.cucumber.io/gherkin/
+[gitlab]: https://gitlab.com/
+[php]: http://php.net/
+[simplebus]: https://github.com/SimpleBus/SimpleBus
 [symfony]: http://symfony.com/
 [timescale]: http://www.timescale.com/
-[Bicing]: https://www.bicing.cat/
-
-Authors
--------
-
-* Stéphane EL MANOUNI
+[velib]: https://www.velib-metropole.fr/
+[wiki-DDD]: https://en.wikipedia.org/wiki/Domain-driven_design

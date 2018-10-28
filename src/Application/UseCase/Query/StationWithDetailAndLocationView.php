@@ -7,17 +7,18 @@ namespace App\Application\UseCase\Query;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Domain\Model\Station\StationDetailType;
+use App\Domain\Model\UseCase;
 use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ApiResource(
- *     shortName="stationView",
+ *     shortName="station",
  *     routePrefix="/stations",
  *     collectionOperations={"get"={"method"="GET", "path"=""}},
  *     itemOperations={"get"={"method"="GET", "path"="/{id}"}}
  *  )
  */
-final class StationWithDetailAndLocationView
+final class StationWithDetailAndLocationView implements UseCase
 {
     /**
      * @var UuidInterface
