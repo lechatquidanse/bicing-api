@@ -11,7 +11,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectManager;
 use Ramsey\Uuid\UuidInterface;
 
-class DoctrineStationRepository implements StationRepositoryInterface
+final class DoctrineStationRepository implements StationRepositoryInterface
 {
     /**
      * @var ManagerRegistry
@@ -44,8 +44,6 @@ class DoctrineStationRepository implements StationRepositoryInterface
     }
 
     /**
-     * @todo add test
-     *
      * @param UuidInterface $stationId
      *
      * @return Station|null
@@ -62,8 +60,6 @@ class DoctrineStationRepository implements StationRepositoryInterface
     }
 
     /**
-     * @todo add test
-     *
      * @param string $externalStationId
      *
      * @return Station|null

@@ -22,13 +22,13 @@ Feature: View last availability for each stations to choose one to start or end 
     And the JSON should be equal to:
     """
       {
-        "@context": "/api/contexts/lastAvailabilitiesByStationView",
+        "@context": "/api/contexts/last%20availability%20by%20station",
         "@id": "/api/last-availabilities-by-station",
         "@type": "hydra:Collection",
         "hydra:member": [
           {
             "@id": "/api/last-availabilities-by-station/15cff96c-de06-4606-9870-b82eb9219339",
-            "@type": "lastAvailabilitiesByStationView",
+            "@type": "last availability by station",
             "id": "15cff96c-de06-4606-9870-b82eb9219339",
             "statedAt": "2018-09-17T15:57:51+02:00",
             "availableBikeNumber": 27,
@@ -37,7 +37,7 @@ Feature: View last availability for each stations to choose one to start or end 
           },
           {
             "@id": "/api/last-availabilities-by-station/2d55ba4e-e0b0-4145-aff5-96426aee669b",
-            "@type": "lastAvailabilitiesByStationView",
+            "@type": "last availability by station",
             "id": "2d55ba4e-e0b0-4145-aff5-96426aee669b",
             "statedAt": "2018-09-23T15:49:51+02:00",
             "availableBikeNumber": 18,
@@ -62,9 +62,9 @@ Feature: View last availability for each stations to choose one to start or end 
     And the JSON should be equal to:
     """
       {
-        "@context": "/api/contexts/lastAvailabilitiesByStationView",
+        "@context": "/api/contexts/last%20availability%20by%20station",
         "@id": "/api/last-availabilities-by-station/15cff96c-de06-4606-9870-b82eb9219339",
-        "@type": "lastAvailabilitiesByStationView",
+        "@type": "last availability by station",
         "id": "15cff96c-de06-4606-9870-b82eb9219339",
         "statedAt": "2018-09-17T15:57:51+02:00",
         "availableBikeNumber": 27,

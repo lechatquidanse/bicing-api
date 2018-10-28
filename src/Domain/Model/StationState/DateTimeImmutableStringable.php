@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Domain\Model\StationState;
 
+use App\Domain\Model\ValueObjectInterface;
+
 /**
  * An immutable date time that can be displayed as string.
- *
- * @todo add test and validate construct
  */
-final class DateTimeImmutableStringable extends \DateTimeImmutable
+final class DateTimeImmutableStringable extends \DateTimeImmutable implements ValueObjectInterface
 {
     /** @var string */
     public const DATE_FORMAT = 'Y-m-d H:i:s';
@@ -18,6 +18,8 @@ final class DateTimeImmutableStringable extends \DateTimeImmutable
      * @param \DateTimeImmutable $dateTimeImmutable
      *
      * @return DateTimeImmutableStringable
+     *
+     * @throws \Exception
      */
     public static function fromDateTimeImmutable(\DateTimeImmutable $dateTimeImmutable): DateTimeImmutableStringable
     {

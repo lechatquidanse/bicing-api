@@ -1,5 +1,5 @@
 # The availabilities (number of bike available and number of slot available).
-# @todo explain why this feature is a little more technical than it should be
+# The "THEN" feature is more technical that it should be, because the output render a date that can't be mock for now in the test.
 Feature: Plan my itinerary that requires a station according to its past statistics availabilities
   In order to plan my itinerary
   As a client software API
@@ -13,7 +13,7 @@ Feature: Plan my itinerary that requires a station according to its past statist
       | -55 minutes           | 2              | 28             | OPENED |
       | +5 minutes            | 27             | 3              | OPENED |
     When I add "Accept" header equal to "application/ld+json"
-    And I send a "GET" request to "/api/availabilities-by-station/15cff96c-de06-4606-9870-b82eb9219339"
+    And I send a "GET" request to "/api/availabilities/15cff96c-de06-4606-9870-b82eb9219339"
     Then the response status code should be 200
     And the response should be in JSON
     And the header "Content-Type" should be equal to "application/ld+json; charset=utf-8"
@@ -40,7 +40,7 @@ Feature: Plan my itinerary that requires a station according to its past statist
       | stated_at             | available_bike | available_slot | status |
       | -55 minutes 1 seconds | 7              | 23             | OPENED |
     When I add "Accept" header equal to "application/ld+json"
-    And I send a "GET" request to "/api/availabilities-by-station/feb78515-1b8b-42fa-b8f4-da8f80b44733"
+    And I send a "GET" request to "/api/availabilities/feb78515-1b8b-42fa-b8f4-da8f80b44733"
     Then the response status code should be 404
     And the response should be in JSON
     And the header "Content-Type" should be equal to "application/ld+json; charset=utf-8"

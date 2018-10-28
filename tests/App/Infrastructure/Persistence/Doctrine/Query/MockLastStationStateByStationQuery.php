@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace tests\App\Application\UseCase\DataProvider;
+namespace tests\App\Infrastructure\Persistence\Doctrine\Query;
 
 use App\Application\UseCase\Query\LastStationStateByStationQueryInterface;
 use App\Domain\Model\StationState\DateTimeImmutableStringable;

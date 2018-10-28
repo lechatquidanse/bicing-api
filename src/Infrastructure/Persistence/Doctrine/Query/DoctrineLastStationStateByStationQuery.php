@@ -11,7 +11,7 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query\Expr\Join;
 use Ramsey\Uuid\UuidInterface;
 
-class DoctrineLastStationStateByStationQuery implements LastStationStateByStationQueryInterface
+final class DoctrineLastStationStateByStationQuery implements LastStationStateByStationQueryInterface
 {
     /** @var EntityManagerInterface */
     private $entityManager;

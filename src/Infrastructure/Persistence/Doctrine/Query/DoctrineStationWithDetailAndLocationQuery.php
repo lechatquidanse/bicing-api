@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Ramsey\Uuid\UuidInterface;
 
-class DoctrineStationWithDetailAndLocationQuery implements StationWithDetailAndLocationQueryInterface
+final class DoctrineStationWithDetailAndLocationQuery implements StationWithDetailAndLocationQueryInterface
 {
     /** @var EntityManagerInterface */
     private $entityManager;

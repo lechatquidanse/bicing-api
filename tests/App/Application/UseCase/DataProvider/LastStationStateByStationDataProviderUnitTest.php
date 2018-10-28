@@ -10,6 +10,7 @@ use App\Domain\Exception\Station\StationDoesNotExist;
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
+use tests\App\Infrastructure\Persistence\Doctrine\Query\MockLastStationStateByStationQuery;
 use tests\Support\Builder\StationStateStatusBuilder;
 
 class LastStationStateByStationDataProviderUnitTest extends TestCase

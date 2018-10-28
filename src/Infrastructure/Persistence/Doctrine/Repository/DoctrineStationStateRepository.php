@@ -12,7 +12,7 @@ use App\Domain\Model\StationState\StationStateRepositoryInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class DoctrineStationStateRepository implements StationStateRepositoryInterface
+final class DoctrineStationStateRepository implements StationStateRepositoryInterface
 {
     /**
      * @var ManagerRegistry
@@ -40,7 +40,6 @@ class DoctrineStationStateRepository implements StationStateRepositoryInterface
         }
 
         $this->manager()->persist($stationState);
-        // @todo check if flush required
         $this->manager()->flush();
     }
 
