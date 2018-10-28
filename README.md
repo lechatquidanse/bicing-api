@@ -24,7 +24,7 @@
   <a href="#ci-and-deployment">CI and Deployment</a>
 </p>
 
-| <img src="https://raw.githubusercontent.com/lechatquidanse/bicing-api/develop/documentation/list-stations-curl.svg?sanitize=true" alt="List stations"> | | <img src="https://github.com/lechatquidanse/bicing-api/blob/develop/documentation/list-last-availabilities-by-station-curl.svg?sanitize=true" alt="List last availabilities by station"> |
+![Bicing API RESTs examples](./documentation/bicing-api-curl-examples.png)
 
 ## <a name="getting-started"></a> Getting Started
 ### Prerequisites
@@ -49,9 +49,8 @@ To follow the goals of the API, this project offers many features across 2 user 
 ![Bicing API RESTs features](./documentation/features-rest.png)
 
 ### CLI:
-<p align="center">
-  <img src="https://raw.githubusercontent.com/lechatquidanse/bicing-api/develop/documentation/features-cli.svg?sanitize=true" width="100%" height="100%" alt="Bicing API CLI features" />
-</p>
+
+![Bicing API CLI features](./documentation/features-cli-min.png)
 
 To run the project once installed:
 
@@ -66,9 +65,7 @@ To run the project once installed:
 ## Development
 The Makefile contains useful command for development purpose
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/lechatquidanse/bicing-api/develop/documentation/makefile.svg?sanitize=true" alt="Makefile helpul commands" />
-</p>
+![Makefile helpul commands](./documentation/makefile-help-min.png)
 
 ## <a name="coding-standard"></a> Coding standard
 
@@ -95,7 +92,7 @@ This use case is then handled by a handler for a command or a data provider for 
 Commands are handled by a message bus ([SimpleBus][simplebus]) where a command is link to one handler.   
 For example, to create a station in database:
 
-![CQRS command handler](./documentation/cqrs-command-handler.png)
+![CQRS command handler](./documentation/command-handler-min.png)
 
 ## <a name="ci-and-deployment"></a> CI and Deployment
 
