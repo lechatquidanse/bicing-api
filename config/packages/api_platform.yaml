@@ -1,10 +1,11 @@
 api_platform:
-    title: 'Bicing API'
-    description: 'Bicing API data and statistics.'
-    version: '1.0.0'
-    enable_entrypoint: false
-    mapping:
-        paths: ['%kernel.project_dir%/src/Application/UseCase/Query']
+  title: 'Bicing API'
+  description: 'Bicing API data and statistics.'
+  version: '1.0.0'
+  enable_entrypoint: false
+  mapping:
+    paths: ['%kernel.project_dir%/src/Application/UseCase/Query']
 
-    exception_to_status:
-        App\Domain\Exception\Station\StationDoesNotExist: 404
+  exception_to_status:
+    App\Domain\Exception\Station\StationDoesNotExist: 404
+    Assert\LazyAssertionException: 400

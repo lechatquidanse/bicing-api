@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Request\Symfony;
 
 use App\Application\UseCase\Filter\IntervalInPeriodFilter;
+use Psr\Log\LoggerAwareTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -12,6 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class SymfonyIntervalInPeriodFilterParamConverter implements ParamConverterInterface
 {
+    use LoggerAwareTrait;
+
     /** @var string */
     private const DATE_START_QUERY_KEY = 'periodStart';
 
@@ -29,6 +32,9 @@ final class SymfonyIntervalInPeriodFilterParamConverter implements ParamConverte
 
     /** @var string */
     private const INTERVAL_OPTIONS_KEY = 'defaultInterval';
+
+    /** @var string */
+    private const EXCEPTION_DATE_OPTION_MESSAGE = 'An error occurred during period creation from options values';
 
     /**
      * @param Request        $request
@@ -53,6 +59,26 @@ final class SymfonyIntervalInPeriodFilterParamConverter implements ParamConverte
     }
 
     /**
+     * @param ParamConverter $configuration
+     *
+     * @return bool
+     */
+    public function supports(ParamConverter $configuration): bool
+    {
+        return IntervalInPeriodFilter::class === $configuration->getClass();
+    }
+
+    /**
+     * @param $message
+     */
+    private function logError($message): void
+    {
+        if ($this->logger) {
+            $this->logger->error($message);
+        }
+    }
+
+    /**
      * @param ParameterBag $query
      * @param string       $queryKey
      * @param array        $options
@@ -66,9 +92,14 @@ final class SymfonyIntervalInPeriodFilterParamConverter implements ParamConverte
         array $options,
         string $optionsKey
     ): string {
-        $defaultOption = isset($options[$optionsKey]) ?
-            (new \DateTime($options[$optionsKey]))->format(IntervalInPeriodFilter::DATE_FORMAT) :
-            '';
+        try {
+            $defaultOption = isset($options[$optionsKey]) ?
+                (new \DateTime($options[$optionsKey]))->format(IntervalInPeriodFilter::DATE_FORMAT) :
+                '';
+        } catch (\Exception $exception) {
+            $defaultOption = '';
+            $this->logError(self::EXCEPTION_DATE_OPTION_MESSAGE);
+        }
 
         return $query->get($queryKey, $defaultOption);
     }
@@ -82,15 +113,5 @@ final class SymfonyIntervalInPeriodFilterParamConverter implements ParamConverte
     private function intervalFromQueryAndOptions(ParameterBag $query, array $options): string
     {
         return $query->get(self::INTERVAL_QUERY_KEY, $options[self::INTERVAL_OPTIONS_KEY] ?? '');
-    }
-
-    /**
-     * @param ParamConverter $configuration
-     *
-     * @return bool
-     */
-    public function supports(ParamConverter $configuration): bool
-    {
-        return IntervalInPeriodFilter::class === $configuration->getClass();
     }
 }
