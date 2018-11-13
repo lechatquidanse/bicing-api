@@ -10,6 +10,7 @@
         "jms/serializer-bundle": "^2.3",
         "ramsey/uuid": "^3.7",
         "ramsey/uuid-doctrine": "^1.4",
+        "sensio/framework-extra-bundle": "^5.2",
         "sensiolabs/security-checker": "^4.1",
         "simple-bus/doctrine-orm-bridge": "^5.0",
         "simple-bus/message-bus": "^3.0",

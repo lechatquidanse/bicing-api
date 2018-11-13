@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace tests\App\Infrastructure\Persistence\Doctrine\Query;
 
+use App\Application\UseCase\Filter\IntervalInPeriodFilter;
 use App\Domain\Model\Station\Station;
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
-use App\Infrastructure\Persistence\Doctrine\Query\DoctrineAvailabilitiesInTimeIntervalByStationQuery;
+use App\Infrastructure\Persistence\Doctrine\Query\DoctrineStationAvailabilitiesByIntervalInPeriodQuery;
 use Ramsey\Uuid\Uuid;
 use tests\Support\Builder\StationBuilder;
 use tests\Support\Builder\StationStateBuilder;
 use tests\Support\Builder\StationStateStatusBuilder;
 use tests\Support\TestCase\DatabaseTestCase;
 
-class DoctrineAvailabilitiesInTimeIntervalByStationQueryIntegrationTest extends DatabaseTestCase
+class DoctrineStationAvailabilitiesByIntervalInPeriodQueryIntegrationTest extends DatabaseTestCase
 {
-    /** @var DoctrineAvailabilitiesInTimeIntervalByStationQuery */
+    /** @var DoctrineStationAvailabilitiesByIntervalInPeriodQuery */
     private $query;
 
     /**
@@ -70,7 +71,14 @@ class DoctrineAvailabilitiesInTimeIntervalByStationQueryIntegrationTest extends 
                 'available_slot_min' => 1,
                 'available_slot_max' => 1,
             ],
-        ], $this->query->find($stationId, $statedAt));
+        ], $this->query->find(
+            $stationId,
+            IntervalInPeriodFilter::fromRawStringValues(
+                '2018-08-20 15:35:20',
+                '2018-08-20 17:35:20',
+                '5 minute'
+            )
+        ));
     }
 
     /** {@inheritdoc} */
@@ -78,7 +86,7 @@ class DoctrineAvailabilitiesInTimeIntervalByStationQueryIntegrationTest extends 
     {
         parent::setUp();
 
-        $this->query = $this->getContainer()->get('test.app.query.availabilites_in_time_interval_by_station_query');
+        $this->query = $this->getContainer()->get('test.app.query.station_availabilites_by_interval_in_period_query');
     }
 
     /** {@inheritdoc} */
