@@ -71,5 +71,9 @@ services:
 
     App\Infrastructure\Request\Symfony\SymfonyIntervalInPeriodFilterParamConverter:
       arguments: ['@App\Domain\Model\Station\StationRepositoryInterface']
+      calls:
+      - method: setLogger
+        arguments:
+        - '@logger'
       tags:
       - { name: request.param_converter, converter: interval_in_period_param_converter }

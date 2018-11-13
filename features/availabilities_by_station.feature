@@ -91,3 +91,15 @@ Feature: Plan my itinerary that requires a station according to its past statist
     Then the response status code should be 404
     And the response should be in JSON
     And the header "Content-Type" should be equal to "application/ld+json; charset=utf-8"
+
+
+  @database
+  Scenario: Can't Retrieve last week availabilities from a station with bad query parameters
+    Given station identified by "15cff96c-de06-4606-9870-b82eb9219339" with station states from "last week":
+      | stated_at             | available_bike | available_slot | status |
+      | -55 minutes 1 seconds | 7              | 23             | OPENED |
+    When I add "Accept" header equal to "application/ld+json"
+    And I send a "GET" request to "/api/stations/15cff96c-de06-4606-9870-b82eb9219339/availabilities?periodStart=bad_parameters&periodEnd=bad_parameters&interval=bad_interval"
+    Then the response status code should be 400
+    And the response should be in JSON
+    And the header "Content-Type" should be equal to "application/ld+json; charset=utf-8"
