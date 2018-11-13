@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Query;
 
-use App\Application\UseCase\Query\AvailabilitiesInTimeIntervalByStationQueryInterface;
-use App\Domain\Model\StationState\DateTimeImmutableStringable;
+use App\Application\UseCase\Filter\IntervalInPeriodFilter;
+use App\Application\UseCase\Query\StationAvailabilitiesByIntervalInPeriodQueryInterface;
 use App\Domain\Model\StationState\StationState;
 use App\Domain\Model\StationState\StationStateStatus;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\UuidInterface;
 
-final class DoctrineAvailabilitiesInTimeIntervalByStationQuery implements AvailabilitiesInTimeIntervalByStationQueryInterface  // phpcs:ignore
+final class DoctrineStationAvailabilitiesByIntervalInPeriodQuery implements StationAvailabilitiesByIntervalInPeriodQueryInterface  // phpcs:ignore
 {
     /** @var EntityManagerInterface */
     private $entityManager;
@@ -24,14 +24,13 @@ final class DoctrineAvailabilitiesInTimeIntervalByStationQuery implements Availa
         $this->entityManager = $entityManager;
     }
 
-    public function find(UuidInterface $stationId, DateTimeImmutableStringable $statedAt): array
+    public function find(UuidInterface $stationId, IntervalInPeriodFilter $filter): array
     {
-        $intervalUpAt = $statedAt->modify('+1 hour');
-        $intervalDownAt = $statedAt->modify('-1 hour');
+        $selectInterval = sprintf('time_bucket(\'%s\', ss.statedAt) AS interval', $filter->interval());
 
         return $this->entityManager->createQueryBuilder()
             ->select([
-                'time_bucket(\'5 minute\', ss.statedAt) AS interval',
+                $selectInterval,
                 'avg(ss.availableBikeNumber) as available_bike_avg',
                 'min(ss.availableBikeNumber) as available_bike_min',
                 'max(ss.availableBikeNumber) as available_bike_max',
@@ -49,8 +48,8 @@ final class DoctrineAvailabilitiesInTimeIntervalByStationQuery implements Availa
             ->setParameters([
                 'status' => StationStateStatus::STATUS_OPENED,
                 'stationId' => $stationId->toString(),
-                'intervalUp' => $intervalUpAt->format('Y-m-d H:i:s'),
-                'intervalDown' => $intervalDownAt->format('Y-m-d H:i:s'),
+                'intervalDown' => $filter->periodStartAsString(),
+                'intervalUp' => $filter->periodEndAsString(),
             ])
             ->getQuery()
             ->getResult();
