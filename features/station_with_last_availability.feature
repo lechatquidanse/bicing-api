@@ -30,7 +30,7 @@ Feature: View last availability for each stations to choose one to start or end 
             "@id": "/api/last-availabilities-by-station/15cff96c-de06-4606-9870-b82eb9219339",
             "@type": "last availability by station",
             "id": "15cff96c-de06-4606-9870-b82eb9219339",
-            "statedAt": "2018-09-17T15:57:51+02:00",
+            "statedAt": "2018-09-17 15:57:51",
             "availableBikeNumber": 27,
             "availableSlotNumber": 3,
             "status": "CLOSED"
@@ -39,7 +39,7 @@ Feature: View last availability for each stations to choose one to start or end 
             "@id": "/api/last-availabilities-by-station/2d55ba4e-e0b0-4145-aff5-96426aee669b",
             "@type": "last availability by station",
             "id": "2d55ba4e-e0b0-4145-aff5-96426aee669b",
-            "statedAt": "2018-09-23T15:49:51+02:00",
+            "statedAt": "2018-09-23 15:49:51",
             "availableBikeNumber": 18,
             "availableSlotNumber": 2,
             "status": "OPENED"
@@ -66,7 +66,7 @@ Feature: View last availability for each stations to choose one to start or end 
         "@id": "/api/last-availabilities-by-station/15cff96c-de06-4606-9870-b82eb9219339",
         "@type": "last availability by station",
         "id": "15cff96c-de06-4606-9870-b82eb9219339",
-        "statedAt": "2018-09-17T15:57:51+02:00",
+        "statedAt": "2018-09-17 15:57:51",
         "availableBikeNumber": 27,
         "availableSlotNumber": 3,
         "status": "CLOSED"
