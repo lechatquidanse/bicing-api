@@ -77,3 +77,7 @@ services:
         - '@logger'
       tags:
       - { name: request.param_converter, converter: interval_in_period_param_converter }
+
+    Symfony\Component\Serializer\Normalizer\DateTimeNormalizer:
+      arguments:
+        $format: 'Y-m-d H:i:s'
