@@ -9,6 +9,8 @@ ENV FETCH_PACKAGES \
         zlib-dev
 
 ENV BUILD_PACKAGES \
+        alpine-sdk \
+        autoconf \
         postgresql-dev
 
 ENV PHP_EXTENSIONS \
@@ -26,6 +28,17 @@ RUN set -ex \
     && printf '[PHP]\ndate.timezone = "%s"\n', Europe/Paris > /usr/local/etc/php/conf.d/tzone.ini \
     && apk del .fetch-deps
 
+## install xdebug
+RUN pecl install xdebug
+RUN docker-php-ext-enable xdebug
+RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.idekey=\"PHPSTORM\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
 WORKDIR /var/www/bicing-api
 
 #ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -33,8 +46,6 @@ RUN set -eux; \
 	composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --classmap-authoritative; \
 	composer clear-cache
 #ENV PATH="${PATH}:/root/.composer/vendor/bin"
-
-WORKDIR /var/www/bicing-api
 
 # build for production
 ARG APP_ENV=prod
