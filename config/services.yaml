@@ -35,6 +35,13 @@ services:
       tags:
         - { name: command_handler, handles: App\Application\UseCase\Command\RefreshLastStationStateByStationCacheCommand }
 
+    app.use_case.update_station_location_geometry_handler:
+      class: App\Application\UseCase\Handler\UpdateStationLocationGeometryHandler
+      arguments: ['@App\Infrastructure\Persistence\Doctrine\Statement\DoctrineUpdateStationLocationGeometryStatement']
+      public: true
+      tags:
+      - { name: command_handler, handles: App\Application\UseCase\Command\UpdateStationLocationGeometryCommand }
+
     SimpleBus\Message\Bus\MessageBus: '@command_bus'
 
     App\Domain\Model\Station\StationRepositoryInterface:
@@ -81,3 +88,9 @@ services:
     Symfony\Component\Serializer\Normalizer\DateTimeNormalizer:
       arguments:
         $format: 'Y-m-d H:i:s'
+
+    App\Application\UseCase\Subscriber\UpdateStationLocationGeometryWhenStationWasCreated:
+      arguments: ['@command_bus']
+      public: true
+      tags:
+      - { name: 'event_subscriber', subscribes_to: 'App\Domain\Event\Station\StationWasCreated', method: __invoke }

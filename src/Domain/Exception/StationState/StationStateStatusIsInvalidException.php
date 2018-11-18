@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Domain\Exception\StationState;
 
-use App\Domain\Exception\DomainException;
+use App\Domain\Exception\DomainExceptionInterface;
 
-final class StationStateStatusIsInvalidException extends \DomainException implements DomainException
+final class StationStateStatusIsInvalidException extends \DomainException implements DomainExceptionInterface
 {
     /**
      * @param string $status

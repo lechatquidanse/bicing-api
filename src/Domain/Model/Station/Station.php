@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Domain\Model\Station;
 
+use App\Domain\Event\Station\StationWasCreated;
 use App\Domain\Model\AggregateInterface;
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
 use App\Domain\Model\StationState\StationState;
 use App\Domain\Model\StationState\StationStateStatus;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
+use SimpleBus\Message\Recorder\ContainsRecordedMessages;
+use SimpleBus\Message\Recorder\PrivateMessageRecorderCapabilities;
 
 /**
  * An aggregate of station data to represent a Station Model.
@@ -22,8 +25,10 @@ use Ramsey\Uuid\UuidInterface;
  *     )}
  * )
  */
-class Station implements AggregateInterface
+class Station implements AggregateInterface, ContainsRecordedMessages
 {
+    use PrivateMessageRecorderCapabilities;
+
     /**
      * @var UuidInterface
      *
@@ -90,6 +95,8 @@ class Station implements AggregateInterface
         $this->location = $location;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
+
+        $this->record(new StationWasCreated($this->stationId));
     }
 
     /**

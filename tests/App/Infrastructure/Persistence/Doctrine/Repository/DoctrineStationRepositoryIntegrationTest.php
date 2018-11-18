@@ -179,6 +179,24 @@ class DoctrineStationRepositoryIntegrationTest extends DatabaseTestCase
         $this->assertNull($this->repository->findByExternalStationId('invalid_external_id'));
     }
 
+    /** @test */
+    public function it_can_find_all_stations(): void
+    {
+        $station1 = $this->buildPersisted(StationBuilder::create()
+            ->withStationExternalData(StationExternalDataBuilder::create()
+                ->withExternalStationId('1')->build()));
+        $station2 = $this->buildPersisted(StationBuilder::create()
+            ->withStationExternalData(StationExternalDataBuilder::create()
+                ->withExternalStationId('2')->build()));
+        $station3 = $this->buildPersisted(StationBuilder::create()
+            ->withStationExternalData(StationExternalDataBuilder::create()
+                ->withExternalStationId('3')->build()));
+
+        $this->assertEquals([
+            $station1, $station2, $station3,
+        ], $this->repository->findAll());
+    }
+
     /**
      * {@inheritdoc}
      */

@@ -33,4 +33,9 @@ class MockStationRepository implements StationRepositoryInterface
 
         return null;
     }
+
+    public function findAll(): array
+    {
+        return [];
+    }
 }

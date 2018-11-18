@@ -11,4 +11,6 @@ interface StationRepositoryInterface
     public function findByStationId(UuidInterface $stationId): ?Station;
 
     public function findByExternalStationId(string $externalStationId): ?Station;
+
+    public function findAll(): array;
 }

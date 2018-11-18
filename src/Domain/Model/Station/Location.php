@@ -60,6 +60,13 @@ final class Location implements ValueObjectInterface
     private $longitude;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="geometry", options={"geometry_type"="POINT"}, nullable=true)
+     */
+    private $geometry;
+
+    /**
      * @param string $address
      * @param int    $districtCode
      * @param string $zipCode
@@ -109,12 +116,22 @@ final class Location implements ValueObjectInterface
 
     /**
      * @param string $addressNumber
+     *
+     * @throws \Assert\AssertionFailedException
      */
-    public function withAddressNumber(string $addressNumber)
+    public function withAddressNumber(string $addressNumber): void
     {
         $this->validateAddressNumber($addressNumber);
 
         $this->addressNumber = $addressNumber;
+    }
+
+    /**
+     * @param string $geometry
+     */
+    public function withGeometry(string $geometry): void
+    {
+        $this->geometry = $geometry;
     }
 
     /**
@@ -135,8 +152,10 @@ final class Location implements ValueObjectInterface
 
     /**
      * @param string $addressNumber
+     *
+     * @throws \Assert\AssertionFailedException
      */
-    private function validateAddressNumber(string $addressNumber)
+    private function validateAddressNumber(string $addressNumber): void
     {
         Assertion::maxLength($addressNumber, 10);
     }

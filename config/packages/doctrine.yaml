@@ -11,6 +11,7 @@ doctrine:
             enum_station_state_status_type: 'App\Infrastructure\Persistence\Doctrine\Type\DoctrineEnumStationStateStatusType'
             enum_station_detail_type_type: 'App\Infrastructure\Persistence\Doctrine\Type\DoctrineEnumStationDetailTypeType'
             uuid:  'Ramsey\Uuid\Doctrine\UuidType'
+            geometry: 'Jsor\Doctrine\PostGIS\Types\GeometryType'
         url: '%env(DATABASE_URL)%'
 
     orm:

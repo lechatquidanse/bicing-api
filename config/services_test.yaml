@@ -29,6 +29,10 @@ services:
     class: 'App\Infrastructure\Persistence\Doctrine\Query\DoctrineLastStationStateByStationQuery'
     arguments: ['@doctrine.orm.entity_manager']
 
+  test.app.statement.station_location_geometry_update:
+    class: 'App\Infrastructure\Persistence\Doctrine\Statement\DoctrineUpdateStationLocationGeometryStatement'
+    arguments: ['@doctrine.orm.entity_manager', '@test.app.system.clock.mock']
+
   test.database_manager:
     class: 'tests\Support\Service\DoctrineDatabaseManager'
     arguments: ['@doctrine.orm.default_entity_manager']

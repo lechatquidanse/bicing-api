@@ -8,6 +8,7 @@
         "beberlei/assert": "^2.9",
         "eightpoints/guzzle-bundle": "^7.3",
         "jms/serializer-bundle": "^2.3",
+        "jsor/doctrine-postgis": "^1.7",
         "ramsey/uuid": "^3.7",
         "ramsey/uuid-doctrine": "^1.4",
         "sensio/framework-extra-bundle": "^5.2",

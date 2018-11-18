@@ -6,9 +6,9 @@ namespace App\Application\UseCase\Command;
 
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
 use App\Domain\Model\StationState\StationStateStatus;
-use App\Domain\Model\UseCase;
+use App\Domain\Model\UseCaseInterface;
 
-final class AssignStationStateToStationCommand implements UseCase
+final class AssignStationStateToStationCommand implements UseCaseInterface
 {
     /**
      * @var DateTimeImmutableStringable
