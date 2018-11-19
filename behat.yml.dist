@@ -6,6 +6,7 @@ default:
           databaseManager: '@test.database_manager'
       - tests\Support\Context\StationWithDetailAndLocationContext:
           databaseManager: '@test.database_manager'
+          geometryManager: '@test.app.use_case.update_station_location_geometry_manager'
       - tests\Support\Context\DatabaseContext:
           databaseManager: '@test.database_manager'
       - 'Behat\MinkExtension\Context\MinkContext'

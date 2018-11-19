@@ -70,6 +70,8 @@ services:
 
     App\UserInterface\Rest\Controller\StationAvailabilitiesByIntervalInPeriodController:
       public: true
+    App\UserInterface\Rest\Controller\StationByGeoLocationFilterController:
+      public: true
 
     App\Infrastructure\Request\Symfony\SymfonyStationParamConverter:
       arguments: ['@App\Domain\Model\Station\StationRepositoryInterface']
@@ -84,6 +86,10 @@ services:
         - '@logger'
       tags:
       - { name: request.param_converter, converter: interval_in_period_param_converter }
+
+    App\Infrastructure\Request\Symfony\SymfonyByGeoLocationFilterParamConverter:
+      tags:
+      - { name: request.param_converter, converter: by_geo_location_filter_param_converter }
 
     Symfony\Component\Serializer\Normalizer\DateTimeNormalizer:
       arguments:
