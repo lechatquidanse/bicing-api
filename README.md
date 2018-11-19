@@ -59,7 +59,7 @@ To run the project once installed:
 ## <a name="built-with"></a> Built with
 
 - [PHP 7.2][php]
-- [Symfony 4.0][symfony]
+- [Symfony 4.1][symfony]
 - [API-Platform][api-platform]
 - [Timescale Database][timescale]
 - [Docker][docker]
