@@ -6,7 +6,7 @@ namespace tests\App\Infrastructure\Persistence\Doctrine\Query;
 
 use App\Application\Process\Manager\UpdateStationsLocationGeometryManager;
 use App\Application\UseCase\Filter\ByGeoLocationFilter;
-use App\Infrastructure\Persistence\Doctrine\Query\DoctrineStationsByGeoLocationFilterQuery;
+use App\Infrastructure\Persistence\Doctrine\Query\DoctrineStationWithDetailAndLocationByGeoLocationFilterQuery;
 use Ramsey\Uuid\Uuid;
 use tests\Support\Builder\LocationBuilder;
 use tests\Support\Builder\StationBuilder;
@@ -14,9 +14,9 @@ use tests\Support\Builder\StationDetailBuilder;
 use tests\Support\Builder\StationDetailTypeBuilder;
 use tests\Support\TestCase\DatabaseTestCase;
 
-class DoctrineStationsByGeoLocationFilterQueryIntegrationTest extends DatabaseTestCase
+class DoctrineStationWithDetailAndLocationByGeoLocationFilterQueryIntegrationTest extends DatabaseTestCase
 {
-    /** @var DoctrineStationsByGeoLocationFilterQuery */
+    /** @var DoctrineStationWithDetailAndLocationByGeoLocationFilterQuery */
     private $query;
 
     /** @var UpdateStationsLocationGeometryManager */
@@ -102,7 +102,7 @@ class DoctrineStationsByGeoLocationFilterQueryIntegrationTest extends DatabaseTe
     {
         parent::setUp();
 
-        $this->query = $this->getContainer()->get('test.app.query.station_by_geo_location_query');
+        $this->query = $this->getContainer()->get('test.app.query.station_with_detail_and_location_by_geo_location_query');
         $this->geometryManager = $this->getContainer()->get('test.app.use_case.update_station_location_geometry_manager');
     }
 

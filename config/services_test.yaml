@@ -25,10 +25,10 @@ services:
 
   test.app.query.station_availabilites_by_interval_in_period_query: '@App\Infrastructure\Persistence\Doctrine\Query\DoctrineStationAvailabilitiesByIntervalInPeriodQuery'
   test.app.query.station_with_detail_and_location_query: '@App\Infrastructure\Persistence\Doctrine\Query\DoctrineStationWithDetailAndLocationQuery'
+  test.app.query.station_with_detail_and_location_by_geo_location_query: '@App\Infrastructure\Persistence\Doctrine\Query\DoctrineStationWithDetailAndLocationByGeoLocationFilterQuery'
   test.app.query.last_station_state_by_station_query:
     class: 'App\Infrastructure\Persistence\Doctrine\Query\DoctrineLastStationStateByStationQuery'
     arguments: ['@doctrine.orm.entity_manager']
-  test.app.query.station_by_geo_location_query: '@App\Infrastructure\Persistence\Doctrine\Query\DoctrineStationsByGeoLocationFilterQuery'
 
   test.app.statement.station_location_geometry_update:
     class: 'App\Infrastructure\Persistence\Doctrine\Statement\DoctrineUpdateStationLocationGeometryStatement'

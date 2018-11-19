@@ -6,7 +6,7 @@ namespace App\Application\UseCase\Query;
 
 use App\Application\UseCase\Filter\ByGeoLocationFilter;
 
-interface StationsByGeoLocationFilterQueryInterface
+interface StationWithDetailAndLocationByGeoLocationFilterQueryInterface
 {
     /**
      * @param ByGeoLocationFilter $filter

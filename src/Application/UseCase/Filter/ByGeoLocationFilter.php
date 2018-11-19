@@ -13,32 +13,32 @@ final class ByGeoLocationFilter
     private $longitude;
 
     /** @var float */
-    private $areaRestriction;
+    private $limit;
 
     /**
      * ByGeoLocationFilter constructor.
      *
      * @param float $latitude
      * @param float $longitude
-     * @param float $areaRestriction
+     * @param float $limit
      */
-    private function __construct(float $latitude, float $longitude, float $areaRestriction)
+    private function __construct(float $latitude, float $longitude, float $limit)
     {
         $this->latitude = $latitude;
         $this->longitude = $longitude;
-        $this->areaRestriction = $areaRestriction;
+        $this->limit = $limit;
     }
 
     /**
      * @param float $latitude
      * @param float $longitude
-     * @param float $areaRestriction
+     * @param float $limit
      *
      * @return ByGeoLocationFilter
      */
-    public static function fromRawValues(float $latitude, float $longitude, float $areaRestriction): self
+    public static function fromRawValues(float $latitude, float $longitude, float $limit): self
     {
-        return new self($latitude, $longitude, $areaRestriction);
+        return new self($latitude, $longitude, $limit);
     }
 
     /**
@@ -58,10 +58,10 @@ final class ByGeoLocationFilter
     }
 
     /**
-     * @return int
+     * @return float
      */
-    public function areaRestriction(): float
+    public function limit(): float
     {
-        return $this->areaRestriction;
+        return $this->limit;
     }
 }
