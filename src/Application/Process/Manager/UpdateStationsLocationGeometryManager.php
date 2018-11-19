@@ -11,16 +11,14 @@ use SimpleBus\Message\Bus\MessageBus;
 
 final class UpdateStationsLocationGeometryManager
 {
-    /**
-     * @var StationRepositoryInterface
-     */
+    /** @var StationRepositoryInterface */
     private $repository;
 
     /** @var MessageBus */
     private $commandBus;
 
     /**
-     * @param StationRepositoryInterface $query
+     * @param StationRepositoryInterface $repository
      * @param MessageBus                 $commandBus
      */
     public function __construct(StationRepositoryInterface $repository, MessageBus $commandBus)

@@ -28,6 +28,7 @@ services:
   test.app.query.last_station_state_by_station_query:
     class: 'App\Infrastructure\Persistence\Doctrine\Query\DoctrineLastStationStateByStationQuery'
     arguments: ['@doctrine.orm.entity_manager']
+  test.app.query.station_by_geo_location_query: '@App\Infrastructure\Persistence\Doctrine\Query\DoctrineStationsByGeoLocationFilterQuery'
 
   test.app.statement.station_location_geometry_update:
     class: 'App\Infrastructure\Persistence\Doctrine\Statement\DoctrineUpdateStationLocationGeometryStatement'
@@ -36,3 +37,5 @@ services:
   test.database_manager:
     class: 'tests\Support\Service\DoctrineDatabaseManager'
     arguments: ['@doctrine.orm.default_entity_manager']
+
+  test.app.use_case.update_station_location_geometry_manager: '@App\Application\Process\Manager\UpdateStationsLocationGeometryManager'
