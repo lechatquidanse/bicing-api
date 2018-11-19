@@ -7,7 +7,7 @@ namespace App\Application\UseCase\Query;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Application\UseCase\Filter\IntervalInPeriodFilter;
-use App\Domain\Model\UseCase;
+use App\Domain\Model\UseCaseInterface;
 use Ramsey\Uuid\UuidInterface;
 use App\UserInterface\Rest\Controller\StationAvailabilitiesByIntervalInPeriodController;
 
@@ -25,7 +25,7 @@ use App\UserInterface\Rest\Controller\StationAvailabilitiesByIntervalInPeriodCon
  *     collectionOperations={}
  *  )
  */
-final class StationAvailabilitiesByIntervalInPeriodView implements UseCase
+final class StationAvailabilitiesByIntervalInPeriodView implements UseCaseInterface
 {
     /**
      * @var UuidInterface

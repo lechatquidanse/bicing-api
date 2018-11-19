@@ -1,29 +1,35 @@
 parameters:
-    # Adds a fallback DATABASE_URL if the env var is not set.
-    # This allows you to run cache:warmup even if your
-    # environment variables are not available yet.
-    env(DATABASE_URL): 'pgsql://default?serverVersion=10.0'
+  # Adds a fallback DATABASE_URL if the env var is not set.
+  # This allows you to run cache:warmup even if your
+  # environment variables are not available yet.
+  env(DATABASE_URL): 'pgsql://default?serverVersion=10.0'
 
 doctrine:
-    dbal:
-        types:
-            date_time_immutable_stringable: 'App\Infrastructure\Persistence\Doctrine\Type\DoctrineDateTimeImmutableStringableType'
-            enum_station_state_status_type: 'App\Infrastructure\Persistence\Doctrine\Type\DoctrineEnumStationStateStatusType'
-            enum_station_detail_type_type: 'App\Infrastructure\Persistence\Doctrine\Type\DoctrineEnumStationDetailTypeType'
-            uuid:  'Ramsey\Uuid\Doctrine\UuidType'
-        url: '%env(DATABASE_URL)%'
+  dbal:
+    types:
+      date_time_immutable_stringable: 'App\Infrastructure\Persistence\Doctrine\Type\DoctrineDateTimeImmutableStringableType'
+      enum_station_state_status_type: 'App\Infrastructure\Persistence\Doctrine\Type\DoctrineEnumStationStateStatusType'
+      enum_station_detail_type_type: 'App\Infrastructure\Persistence\Doctrine\Type\DoctrineEnumStationDetailTypeType'
+      uuid:  'Ramsey\Uuid\Doctrine\UuidType'
+      geometry: 'Jsor\Doctrine\PostGIS\Types\GeometryType'
+    url: '%env(DATABASE_URL)%'
 
-    orm:
-        auto_generate_proxy_classes: '%kernel.debug%'
-        auto_mapping: true
-        dql:
-            datetime_functions:
-                time_bucket: 'App\Infrastructure\Persistence\Doctrine\DQL\TimescaleDbTimeBucketFunctionDQL'
-        mappings:
-            App:
-                is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/'
-                prefix: 'App\Domain\Model'
-                alias: App
-        naming_strategy: doctrine.orm.naming_strategy.underscore
+  orm:
+    auto_generate_proxy_classes: '%kernel.debug%'
+    auto_mapping: true
+    dql:
+      datetime_functions:
+        time_bucket: 'App\Infrastructure\Persistence\Doctrine\DQL\TimescaleDbTimeBucketFunctionDQL'
+      string_functions:
+        ST_Distance: 'Jsor\Doctrine\PostGIS\Functions\ST_Distance'
+        ST_Transform: 'Jsor\Doctrine\PostGIS\Functions\ST_Transform'
+        ST_SetSRID: 'Jsor\Doctrine\PostGIS\Functions\ST_SetSRID'
+        ST_MakePoint: 'Jsor\Doctrine\PostGIS\Functions\ST_MakePoint'
+    mappings:
+      App:
+        is_bundle: false
+        type: annotation
+        dir: '%kernel.project_dir%/src/'
+        prefix: 'App\Domain\Model'
+        alias: App
+    naming_strategy: doctrine.orm.naming_strategy.underscore

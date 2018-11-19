@@ -35,6 +35,13 @@ services:
       tags:
         - { name: command_handler, handles: App\Application\UseCase\Command\RefreshLastStationStateByStationCacheCommand }
 
+    app.use_case.update_station_location_geometry_handler:
+      class: App\Application\UseCase\Handler\UpdateStationLocationGeometryHandler
+      arguments: ['@App\Infrastructure\Persistence\Doctrine\Statement\DoctrineUpdateStationLocationGeometryStatement']
+      public: true
+      tags:
+      - { name: command_handler, handles: App\Application\UseCase\Command\UpdateStationLocationGeometryCommand }
+
     SimpleBus\Message\Bus\MessageBus: '@command_bus'
 
     App\Domain\Model\Station\StationRepositoryInterface:
@@ -63,6 +70,8 @@ services:
 
     App\UserInterface\Rest\Controller\StationAvailabilitiesByIntervalInPeriodController:
       public: true
+    App\UserInterface\Rest\Controller\StationByGeoLocationFilterController:
+      public: true
 
     App\Infrastructure\Request\Symfony\SymfonyStationParamConverter:
       arguments: ['@App\Domain\Model\Station\StationRepositoryInterface']
@@ -78,6 +87,16 @@ services:
       tags:
       - { name: request.param_converter, converter: interval_in_period_param_converter }
 
+    App\Infrastructure\Request\Symfony\SymfonyByGeoLocationFilterParamConverter:
+      tags:
+      - { name: request.param_converter, converter: by_geo_location_filter_param_converter }
+
     Symfony\Component\Serializer\Normalizer\DateTimeNormalizer:
       arguments:
         $format: 'Y-m-d H:i:s'
+
+    App\Application\UseCase\Subscriber\UpdateStationLocationGeometryWhenStationWasCreated:
+      arguments: ['@command_bus']
+      public: true
+      tags:
+      - { name: 'event_subscriber', subscribes_to: 'App\Domain\Event\Station\StationWasCreated', method: __invoke }

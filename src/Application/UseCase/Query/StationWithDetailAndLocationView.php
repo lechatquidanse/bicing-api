@@ -7,18 +7,31 @@ namespace App\Application\UseCase\Query;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Domain\Model\Station\StationDetailType;
-use App\Domain\Model\UseCase;
+use App\Domain\Model\UseCaseInterface;
 use Ramsey\Uuid\UuidInterface;
+use App\UserInterface\Rest\Controller\StationByGeoLocationFilterController;
 
 /**
  * @ApiResource(
  *     shortName="station",
  *     routePrefix="/stations",
- *     collectionOperations={"get"={"method"="GET", "path"=""}},
- *     itemOperations={"get"={"method"="GET", "path"="/{id}"}}
+ *     itemOperations={"get"={"method"="GET", "path"="/{id}"}},
+ *     collectionOperations={
+ *       "get"={
+ *         "method"="GET",
+ *         "path"=""
+ *       },
+ *       "by-geo-location-filter"={
+ *         "method"="GET",
+ *         "path"="/near-by",
+ *         "controller"=StationByGeoLocationFilterController::class,
+ *         "defaults"={"_api_receive"=false}
+ *       }
+ *     },
+ *
  *  )
  */
-final class StationWithDetailAndLocationView implements UseCase
+final class StationWithDetailAndLocationView implements UseCaseInterface
 {
     /**
      * @var UuidInterface

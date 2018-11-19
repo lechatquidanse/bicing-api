@@ -1,4 +1,4 @@
-FROM php:7.1-fpm-alpine AS bicing_api_php
+FROM php:7.2-fpm-alpine AS bicing_api_php
 
 ENV FETCH_PACKAGES \
         libpq \

@@ -78,6 +78,14 @@ final class DoctrineStationRepository implements StationRepositoryInterface
     }
 
     /**
+     * @return array
+     */
+    public function findAll(): array
+    {
+        return $this->manager()->getRepository(Station::class)->findAll();
+    }
+
+    /**
      * @return ObjectManager
      */
     private function manager(): ObjectManager

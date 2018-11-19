@@ -67,7 +67,7 @@ class DoctrineStationAvailabilitiesByIntervalInPeriodQueryIntegrationTest extend
                 'available_bike_avg' => '29.0000000000000000',
                 'available_bike_min' => 29,
                 'available_bike_max' => 29,
-                'available_slot_avg' => '1.0000000000000000',
+                'available_slot_avg' => '1.00000000000000000000',
                 'available_slot_min' => 1,
                 'available_slot_max' => 1,
             ],

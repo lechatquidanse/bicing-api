@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Domain\Exception\Station;
 
-use App\Domain\Exception\DomainException;
+use App\Domain\Exception\DomainExceptionInterface;
 
-final class StationDoesNotExist extends \DomainException implements DomainException
+final class StationDoesNotExist extends \DomainException implements DomainExceptionInterface
 {
     /**
      * @param string $externalStationId
