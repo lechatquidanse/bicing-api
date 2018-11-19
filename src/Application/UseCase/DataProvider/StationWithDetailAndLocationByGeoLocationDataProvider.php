@@ -23,6 +23,7 @@ class StationWithDetailAndLocationByGeoLocationDataProvider
 
     /**
      * @param ByGeoLocationFilter $filter
+     *
      * @return \Generator
      */
     public function getCollection(ByGeoLocationFilter $filter): \Generator

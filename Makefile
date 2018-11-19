@@ -108,7 +108,7 @@ install_db_test:
 
 ## Install vendors.
 install_vendor:
-	docker-compose run --rm php composer install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest
+	docker-compose run --rm php composer install --prefer-dist --no-scripts --no-progress --no-suggest
 
 ########
 # Test#
