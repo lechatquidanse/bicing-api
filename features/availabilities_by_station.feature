@@ -49,9 +49,9 @@ Feature: Plan my itinerary that requires a station according to its past statist
     And the JSON should be equal to:
     """
       {
-        "@context": "/api/contexts/collection%20of%20availabilities%20by%20time%20interval%20for%20a%20station",
+        "@context": "/api/contexts/collection%20of%20availabilities%20by%20time%20interval%20filter%20for%20a%20station",
         "@id": "/api/stations/15cff96c-de06-4606-9870-b82eb9219339/availabilities",
-        "@type": "collection of availabilities by time interval for a station",
+        "@type": "collection of availabilities by time interval filter for a station",
         "stationId": "15cff96c-de06-4606-9870-b82eb9219339",
         "availabilities": [
           {

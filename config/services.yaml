@@ -68,7 +68,7 @@ services:
       arguments: ['@App\Infrastructure\Persistence\Doctrine\Query\DoctrineLastStationStateByStationQueryCache']
       tags: [ { name: 'api_platform.collection_data_provider'} ]
 
-    App\UserInterface\Rest\Controller\StationAvailabilitiesByIntervalInPeriodController:
+    App\UserInterface\Rest\Controller\StationAvailabilitiesByIntervalInPeriodFilterController:
       public: true
     App\UserInterface\Rest\Controller\StationByGeoLocationFilterController:
       public: true
@@ -78,14 +78,13 @@ services:
       tags:
       - { name: request.param_converter, converter: station_param_converter }
 
-    App\Infrastructure\Request\Symfony\SymfonyIntervalInPeriodFilterParamConverter:
-      arguments: ['@App\Domain\Model\Station\StationRepositoryInterface']
+    App\Infrastructure\Request\Symfony\SymfonyByIntervalInPeriodFilterParamConverter:
       calls:
       - method: setLogger
         arguments:
         - '@logger'
       tags:
-      - { name: request.param_converter, converter: interval_in_period_param_converter }
+      - { name: request.param_converter, converter: by_interval_in_period_filter_param_converter }
 
     App\Infrastructure\Request\Symfony\SymfonyByGeoLocationFilterParamConverter:
       tags:
