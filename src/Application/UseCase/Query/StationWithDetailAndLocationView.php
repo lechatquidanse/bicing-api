@@ -18,7 +18,7 @@ use Ramsey\Uuid\UuidInterface;
  *     collectionOperations={
  *       "get"={
  *         "method"="GET",
- *         "path"="/near-by",
+ *         "path"="/",
  *         "controller"=StationWithDetailAndLocationCollectionController::class,
  *         "defaults"={"_api_receive"=false}
  *       }

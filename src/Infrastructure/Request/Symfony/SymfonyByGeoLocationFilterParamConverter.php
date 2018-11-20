@@ -8,7 +8,6 @@ use App\Application\UseCase\Filter\ByGeoLocationFilter;
 use Assert\Assert;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
-use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
 final class SymfonyByGeoLocationFilterParamConverter implements ParamConverterInterface
@@ -35,11 +34,13 @@ final class SymfonyByGeoLocationFilterParamConverter implements ParamConverterIn
     {
         $query = $request->query;
 
-        if (null === ($latitude = $this->fromQuery(self::LATITUDE_QUERY_KEY, $query))
-            || null === ($longitude = $this->fromQuery(self::LONGITUDE_QUERY_KEY, $query))
-            || null === ($limit = $this->fromQuery(self::LIMIT_QUERY_KEY, $query))) {
+        if (null === ($latitude = $query->get(self::LATITUDE_QUERY_KEY))
+            || null === ($longitude = $query->get(self::LONGITUDE_QUERY_KEY))
+            || null === ($limit = $query->get(self::LIMIT_QUERY_KEY))) {
             return false;
         }
+
+        $this->validateQueries($latitude, $longitude, $limit);
 
         $request->attributes->set($configuration->getName(), ByGeoLocationFilter::fromRawValues(
             $latitude,
@@ -61,20 +62,16 @@ final class SymfonyByGeoLocationFilterParamConverter implements ParamConverterIn
     }
 
     /**
-     * @param string       $queryKey
-     * @param ParameterBag $query
-     *
-     * @return float|null
+     * @param $latitude
+     * @param $longitude
+     * @param $limit
      */
-    private function fromQuery(string $queryKey, ParameterBag $query): ?float
+    private function validateQueries($latitude, $longitude, $limit): void
     {
-        $value = (float) $query->get($queryKey, null);
-
-        Assert::that($value)
-            ->nullOr()
-            ->float(self::EXCEPTION_MESSAGE)
-            ->greaterThan(0, self::EXCEPTION_MESSAGE);
-
-        return $value;
+        Assert::lazy()
+            ->that($latitude, 'latitude')->nullOr()->float()->greaterThan(0)
+            ->that($longitude, 'longitude')->nullOr()->float()->greaterThan(0)
+            ->that($limit, 'limit')->nullOr()->float()->greaterThan(0)
+            ->verifyNow();
     }
 }

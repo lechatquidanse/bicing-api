@@ -132,7 +132,7 @@ class DoctrineStationWithDetailAndLocationQueryIntegrationTest extends DatabaseT
                 'latitude' => 41.36335,
                 'longitude' => 2.134144,
             ],
-        ], $this->query->findAll(ByGeoLocationFilter::fromRawValues(41.373, 2.17031, 800.00)));
+        ], $this->query->findAll());
     }
 
     /** @test */

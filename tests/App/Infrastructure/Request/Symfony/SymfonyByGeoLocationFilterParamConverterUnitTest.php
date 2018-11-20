@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace tests\App\Infrastructure\Request\Symfony;
 
 use App\Application\UseCase\Filter\ByGeoLocationFilter;
-use App\Application\UseCase\Filter\IntervalInPeriodFilter;
 use App\Domain\Model\Station\Station;
 use App\Infrastructure\Request\Symfony\SymfonyByGeoLocationFilterParamConverter;
-use Assert\InvalidArgumentException;
+use Assert\LazyAssertionException;
 use PHPUnit\Framework\TestCase;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,39 +53,20 @@ class SymfonyByGeoLocationFilterParamConverterUnitTest extends TestCase
         );
     }
 
-//    /** @test */
-//    public function it_can_not_apply_if_no_queries(): void
-//    {
-//        $request = new Request();
-//
-//        $configuration = new ParamConverter([
-//            'class' => IntervalInPeriodFilter::class,
-//            'name' => 'filter',
-//            'options' => [
-//                'defaultLatitude' => 31.390205,
-//                'defaultLongitude' => 2.954007,
-//                'defaultLimit' => 50.00,
-//            ],
-//        ]);
-//
-//        $this->assertTrue($this->converter->apply($request, $configuration));
-//        $this->assertTrue($request->attributes->has('filter'));
-//        $this->assertEquals(
-//            ByGeoLocationFilter::fromRawValues(31.390205, 2.954007, 50),
-//            $request->attributes->get('filter')
-//        );
-//    }
-
     /** @test */
     public function it_can_not_apply_if_query_in_request_is_not_float(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('An error occurred during geo location creation from queries values');
+        $this->expectException(LazyAssertionException::class);
+        $this->expectExceptionMessage('The following 3 assertions failed:
+1) latitude: Value "latitude_not_a_float" is not a float.
+2) longitude: Value "longitude_not_a_float" is not a float.
+3) limit: Value "limit_not_a_float" is not a float.
+');
 
         $request = new Request([
-            'latitude' => 41.390205,
-            'longitude' => 2.154007,
-            'limit' => 'not_a_float',
+            'latitude' => 'latitude_not_a_float',
+            'longitude' => 'longitude_not_a_float',
+            'limit' => 'limit_not_a_float',
         ]);
 
         $this->converter->apply(
@@ -95,26 +75,16 @@ class SymfonyByGeoLocationFilterParamConverterUnitTest extends TestCase
         );
     }
 
-//
-//    /** @test */
-//    public function it_can_not_apply_if_query_in_options_is_not_float(): void
-//    {
-//        $this->expectException(InvalidArgumentException::class);
-//        $this->expectExceptionMessage('An error occurred during geo location creation from queries values');
-//
-//        $request = new Request();
-//        $configuration = new ParamConverter([
-//            'class' => IntervalInPeriodFilter::class,
-//            'name' => 'filter',
-//            'options' => [
-//                'defaultLatitude' => 'not_a_float',
-//                'defaultLongitude' => 2.954007,
-//                'defaultLimit' => 50,
-//            ],
-//        ]);
-//
-//        $this->converter->apply($request, $configuration);
-//    }
+    /** @test */
+    public function it_can_not_apply_if_no_query_in_request(): void
+    {
+        $request = new Request();
+        $this->assertFalse($this->converter->apply(
+            $request,
+            new ParamConverter(['class' => ByGeoLocationFilter::class, 'name' => 'filter'])
+        ));
+        $this->assertNull($request->attributes->get('filter'));
+    }
 
     protected function setUp()
     {
