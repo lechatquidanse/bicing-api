@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Request\Symfony;
 
-use App\Application\UseCase\Filter\IntervalInPeriodFilter;
+use App\Application\UseCase\Filter\ByIntervalInPeriodFilter;
 use Psr\Log\LoggerAwareTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
-final class SymfonyIntervalInPeriodFilterParamConverter implements ParamConverterInterface
+final class SymfonyByIntervalInPeriodFilterParamConverter implements ParamConverterInterface
 {
     use LoggerAwareTrait;
 
@@ -47,7 +47,7 @@ final class SymfonyIntervalInPeriodFilterParamConverter implements ParamConverte
         $query = $request->query;
         $options = $configuration->getOptions();
 
-        $filter = IntervalInPeriodFilter::fromRawStringValues(
+        $filter = ByIntervalInPeriodFilter::fromRawStringValues(
             $this->dateFromQueryOrOptions($query, self::DATE_START_QUERY_KEY, $options, self::DATE_START_OPTIONS_KEY),
             $this->dateFromQueryOrOptions($query, self::DATE_END_QUERY_KEY, $options, self::DATE_END_OPTIONS_KEY),
             $this->intervalFromQueryAndOptions($query, $options)
@@ -65,7 +65,7 @@ final class SymfonyIntervalInPeriodFilterParamConverter implements ParamConverte
      */
     public function supports(ParamConverter $configuration): bool
     {
-        return IntervalInPeriodFilter::class === $configuration->getClass();
+        return ByIntervalInPeriodFilter::class === $configuration->getClass();
     }
 
     /**
@@ -94,7 +94,7 @@ final class SymfonyIntervalInPeriodFilterParamConverter implements ParamConverte
     ): string {
         try {
             $defaultOption = isset($options[$optionsKey]) ?
-                (new \DateTime($options[$optionsKey]))->format(IntervalInPeriodFilter::DATE_FORMAT) :
+                (new \DateTime($options[$optionsKey]))->format(ByIntervalInPeriodFilter::DATE_FORMAT) :
                 '';
         } catch (\Exception $exception) {
             $defaultOption = '';

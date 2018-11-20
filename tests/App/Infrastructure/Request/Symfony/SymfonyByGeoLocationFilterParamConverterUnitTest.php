@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace tests\App\Infrastructure\Request\Symfony;
 
 use App\Application\UseCase\Filter\ByGeoLocationFilter;
-use App\Application\UseCase\Filter\IntervalInPeriodFilter;
 use App\Domain\Model\Station\Station;
 use App\Infrastructure\Request\Symfony\SymfonyByGeoLocationFilterParamConverter;
 use Assert\InvalidArgumentException;
@@ -60,7 +59,7 @@ class SymfonyByGeoLocationFilterParamConverterUnitTest extends TestCase
         $request = new Request();
 
         $configuration = new ParamConverter([
-            'class' => IntervalInPeriodFilter::class,
+            'class' => ByGeoLocationFilter::class,
             'name' => 'filter',
             'options' => [
                 'defaultLatitude' => 31.390205,
@@ -103,7 +102,7 @@ class SymfonyByGeoLocationFilterParamConverterUnitTest extends TestCase
 
         $request = new Request();
         $configuration = new ParamConverter([
-            'class' => IntervalInPeriodFilter::class,
+            'class' => ByGeoLocationFilter::class,
             'name' => 'filter',
             'options' => [
                 'defaultLatitude' => 'not_a_float',

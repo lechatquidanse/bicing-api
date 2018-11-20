@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace tests\App\Application\UseCase\Filter;
 
-use App\Application\UseCase\Filter\IntervalInPeriodFilter;
+use App\Application\UseCase\Filter\ByIntervalInPeriodFilter;
 use Assert\LazyAssertionException;
 use PhpSpec\ObjectBehavior;
 
 /**
- * @see IntervalInPeriodFilter
+ * @see ByIntervalInPeriodFilter
  */
-class IntervalInPeriodFilterSpec extends ObjectBehavior
+class ByIntervalInPeriodFilterSpec extends ObjectBehavior
 {
     /**
-     * Test that IntervalInPeriodFilter can be created from raw string values.
+     * Test that ByIntervalInPeriodFilter can be created from raw string values.
      */
     public function it_can_be_created_from_raw_string_values(): void
     {
@@ -24,11 +24,11 @@ class IntervalInPeriodFilterSpec extends ObjectBehavior
             '5 minute',
         ]);
 
-        $this->shouldBeAnInstanceOf(IntervalInPeriodFilter::class);
+        $this->shouldBeAnInstanceOf(ByIntervalInPeriodFilter::class);
     }
 
     /**
-     * Test that a Location can not be created with a periodStart invalid to create a DateTIme.
+     * Test that a ByIntervalInPeriodFilter can not be created with a periodStart invalid to create a DateTIme.
      */
     public function it_can_not_be_created_with_an_invalid_period_start(): void
     {
@@ -42,7 +42,7 @@ class IntervalInPeriodFilterSpec extends ObjectBehavior
     }
 
     /**
-     * Test that a Location can not be created with a periodEnd invalid to create a DateTIme.
+     * Test that a ByIntervalInPeriodFilter can not be created with a periodEnd invalid to create a DateTIme.
      */
     public function it_can_not_be_created_with_an_invalid_period_end(): void
     {
@@ -56,7 +56,7 @@ class IntervalInPeriodFilterSpec extends ObjectBehavior
     }
 
     /**
-     * Test that a Location can not be created with an interval invalid, that does not respect the expected regex.
+     * Test that a ByIntervalInPeriodFilter can not be created with an interval invalid, that does not respect the expected regex.
      */
     public function it_can_not_be_created_with_an_invalid_interval(): void
     {
@@ -70,7 +70,7 @@ class IntervalInPeriodFilterSpec extends ObjectBehavior
     }
 
     /**
-     * Test that a Location can not be created with an interval invalid, that does not respect the expected regex.
+     * Test that a ByIntervalInPeriodFilter can not be created with an interval invalid, that does not respect the expected regex.
      */
     public function it_can_not_be_created_with_a_period_start_greater_than_period_end(): void
     {
