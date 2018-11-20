@@ -42,7 +42,7 @@ final class DoctrineUpdateStationLocationGeometryStatementIntegrationTest extend
 
         $this->clock::willReturnDateTimeImmutableStringable($updatedAt);
 
-        $this->assertTrue($this->statement->execute($stationId));
+        $this->assertEquals(1, $this->statement->execute($stationId));
 
         $this->clock::reset();
 
