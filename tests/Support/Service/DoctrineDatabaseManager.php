@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace tests\Support\Service;
 
+use App\Application\Process\Manager\UpdateStationsLocationGeometryManager;
 use Assert\Assertion;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -14,14 +15,17 @@ class DoctrineDatabaseManager
     /** @var EntityManagerInterface */
     private $entityManager;
 
+    /** @var UpdateStationsLocationGeometryManager */
+    private $stationLocationGeometryUpdateManager;
+
     /**
-     * DoctrineDatabaseSetup constructor.
-     *
-     * @param EntityManagerInterface $entityManager
+     * @param EntityManagerInterface                $entityManager
+     * @param UpdateStationsLocationGeometryManager $stationLocationGeometryUpdateManager
      */
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, UpdateStationsLocationGeometryManager $stationLocationGeometryUpdateManager)
     {
         $this->entityManager = $entityManager;
+        $this->stationLocationGeometryUpdateManager = $stationLocationGeometryUpdateManager;
     }
 
     /**
@@ -38,6 +42,8 @@ class DoctrineDatabaseManager
         foreach ($builders as $builder) {
             $this->save($lastPersistedObject = $builder->build());
         }
+
+        ($this->stationLocationGeometryUpdateManager)();
 
         return $lastPersistedObject;
     }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace tests\App\Infrastructure\Persistence\Doctrine\Query;
 
-use App\Application\Process\Manager\UpdateStationsLocationGeometryManager;
 use App\Application\UseCase\Filter\ByGeoLocationFilter;
 use App\Infrastructure\Persistence\Doctrine\Query\DoctrineStationWithDetailAndLocationByGeoLocationFilterQuery;
 use Ramsey\Uuid\Uuid;
@@ -18,9 +17,6 @@ class DoctrineStationWithDetailAndLocationByGeoLocationFilterQueryIntegrationTes
 {
     /** @var DoctrineStationWithDetailAndLocationByGeoLocationFilterQuery */
     private $query;
-
-    /** @var UpdateStationsLocationGeometryManager */
-    private $geometryManager;
 
     /** @test */
     public function it_can_find_all_station_by_geo_location_filter(): void
@@ -71,8 +67,6 @@ class DoctrineStationWithDetailAndLocationByGeoLocationFilterQueryIntegrationTes
                     ->build())
         );
 
-        $this->geometryManager->__invoke();
-
         $this->assertEquals([
             [
                 'station_id' => $stationId1,
@@ -103,13 +97,11 @@ class DoctrineStationWithDetailAndLocationByGeoLocationFilterQueryIntegrationTes
         parent::setUp();
 
         $this->query = $this->getContainer()->get('test.app.query.station_with_detail_and_location_by_geo_location_query');
-        $this->geometryManager = $this->getContainer()->get('test.app.use_case.update_station_location_geometry_manager');
     }
 
     /** {@inheritdoc} */
     protected function tearDown()
     {
-        $this->geometryManager = null;
         $this->query = null;
 
         parent::tearDown();

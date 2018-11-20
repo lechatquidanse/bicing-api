@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Persistence\Doctrine\Statement;
 
 use App\Application\UseCase\Handler\UpdateStationLocationGeometryStatementInterface;
+use App\Domain\Model\Station\Station;
 use App\Infrastructure\System\ClockInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\UuidInterface;
@@ -30,25 +31,25 @@ final class DoctrineUpdateStationLocationGeometryStatement implements UpdateStat
     /**
      * @param UuidInterface $stationId
      *
-     * @return bool
+     * @return mixed
      *
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function execute(UuidInterface $stationId): bool
+    public function execute(UuidInterface $stationId)
     {
-        $query = <<<SQLUPDATE
-UPDATE station
-SET 
-  location_geometry = ST_Transform(ST_SetSRID(ST_MakePoint(location_longitude,location_latitude),4326),2163),
-  updated_at = :updatedAt
-WHERE station_id = :stationId
-SQLUPDATE;
-
-        $statement = $this->entityManager->getConnection()->prepare($query);
-
-        $statement->bindValue('stationId', $stationId->toString());
-        $statement->bindValue('updatedAt', $this->clock->dateTimeImmutableStringable());
-
-        return $statement->execute();
+        return $this->entityManager->createQueryBuilder()
+            ->update(Station::class, 's')
+            ->set(
+                's.location.geometry',
+                'ST_Transform(ST_SetSRID(ST_MakePoint(s.location.longitude,s.location.latitude),4326),2163)'
+            )
+            ->set('s.updatedAt', ':updatedAt')
+            ->where('s.stationId = :stationId')
+            ->setParameters([
+                'stationId' => $stationId,
+                'updatedAt' => $this->clock->dateTimeImmutableStringable(),
+            ])
+            ->getQuery()
+            ->execute();
     }
 }
