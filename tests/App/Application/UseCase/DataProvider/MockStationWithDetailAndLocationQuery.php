@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace tests\App\Application\UseCase\DataProvider;
 
+use App\Application\UseCase\Filter\ByGeoLocationFilter;
 use App\Application\UseCase\Query\StationWithDetailAndLocationQueryInterface;
 use App\Domain\Model\Station\StationDetailType;
 use Ramsey\Uuid\UuidInterface;
@@ -24,9 +25,9 @@ class MockStationWithDetailAndLocationQuery implements StationWithDetailAndLocat
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
-    public function findAll(): array
+    public function findAll(ByGeoLocationFilter $filter = null): array
     {
         return $this->stations;
     }

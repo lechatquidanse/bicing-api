@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\Application\UseCase\DataProvider;
 
-use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use App\Application\UseCase\Query\StationWithDetailAndLocationQueryInterface;
 use App\Application\UseCase\Query\StationWithDetailAndLocationView;
 use App\Domain\Exception\Station\StationDoesNotExist;
 
-class StationWithDetailAndLocationDataProvider implements ItemDataProviderInterface, CollectionDataProviderInterface, RestrictedDataProviderInterface  // phpcs:ignore
+class StationWithDetailAndLocationDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
     /** @var StationWithDetailAndLocationQueryInterface */
     private $query;
@@ -44,21 +43,6 @@ class StationWithDetailAndLocationDataProvider implements ItemDataProviderInterf
         }
 
         return StationWithDetailAndLocationView::fromArray($station);
-    }
-
-    /**
-     * @param string      $resourceClass
-     * @param string|null $operationName
-     *
-     * @return \Generator
-     */
-    public function getCollection(string $resourceClass, string $operationName = null): \Generator
-    {
-        $stations = $this->query->findAll();
-
-        foreach ($stations as $station) {
-            yield StationWithDetailAndLocationView::fromArray($station);
-        }
     }
 
     /**

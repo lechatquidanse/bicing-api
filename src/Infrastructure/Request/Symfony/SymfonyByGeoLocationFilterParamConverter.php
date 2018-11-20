@@ -23,15 +23,6 @@ final class SymfonyByGeoLocationFilterParamConverter implements ParamConverterIn
     private const LIMIT_QUERY_KEY = 'limit';
 
     /** @var string */
-    private const LATITUDE_OPTIONS_KEY = 'defaultLatitude';
-
-    /** @var string */
-    private const LONGITUDE_OPTIONS_KEY = 'defaultLongitude';
-
-    /** @var string */
-    private const LIMIT_OPTIONS_KEY = 'defaultLimit';
-
-    /** @var string */
     private const EXCEPTION_MESSAGE = 'An error occurred during geo location creation from queries values';
 
     /**
@@ -43,15 +34,18 @@ final class SymfonyByGeoLocationFilterParamConverter implements ParamConverterIn
     public function apply(Request $request, ParamConverter $configuration): bool
     {
         $query = $request->query;
-        $options = $configuration->getOptions();
 
-        $filter = ByGeoLocationFilter::fromRawValues(
-            $this->fromQueryOrOptions(self::LATITUDE_QUERY_KEY, $query, self::LATITUDE_OPTIONS_KEY, $options),
-            $this->fromQueryOrOptions(self::LONGITUDE_QUERY_KEY, $query, self::LONGITUDE_OPTIONS_KEY, $options),
-            $this->fromQueryOrOptions(self::LIMIT_QUERY_KEY, $query, self::LIMIT_OPTIONS_KEY, $options)
-        );
+        if (null === ($latitude = $this->fromQuery(self::LATITUDE_QUERY_KEY, $query))
+            || null === ($longitude = $this->fromQuery(self::LONGITUDE_QUERY_KEY, $query))
+            || null === ($limit = $this->fromQuery(self::LIMIT_QUERY_KEY, $query))) {
+            return false;
+        }
 
-        $request->attributes->set($configuration->getName(), $filter);
+        $request->attributes->set($configuration->getName(), ByGeoLocationFilter::fromRawValues(
+            $latitude,
+            $longitude,
+            $limit
+        ));
 
         return true;
     }
@@ -69,20 +63,15 @@ final class SymfonyByGeoLocationFilterParamConverter implements ParamConverterIn
     /**
      * @param string       $queryKey
      * @param ParameterBag $query
-     * @param string       $defaultOptionKey
-     * @param array        $options
      *
-     * @return float
+     * @return float|null
      */
-    private function fromQueryOrOptions(
-        string $queryKey,
-        ParameterBag $query,
-        string $defaultOptionKey,
-        array $options
-    ): float {
-        $value = (float) $query->get($queryKey, $options[$defaultOptionKey] ?? null);
+    private function fromQuery(string $queryKey, ParameterBag $query): ?float
+    {
+        $value = (float) $query->get($queryKey, null);
 
         Assert::that($value)
+            ->nullOr()
             ->float(self::EXCEPTION_MESSAGE)
             ->greaterThan(0, self::EXCEPTION_MESSAGE);
 

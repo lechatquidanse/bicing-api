@@ -9,7 +9,6 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Domain\Model\Station\StationDetailType;
 use App\Domain\Model\UseCaseInterface;
 use Ramsey\Uuid\UuidInterface;
-use App\UserInterface\Rest\Controller\StationByGeoLocationFilterController;
 
 /**
  * @ApiResource(
@@ -19,12 +18,8 @@ use App\UserInterface\Rest\Controller\StationByGeoLocationFilterController;
  *     collectionOperations={
  *       "get"={
  *         "method"="GET",
- *         "path"=""
- *       },
- *       "by-geo-location-filter"={
- *         "method"="GET",
  *         "path"="/near-by",
- *         "controller"=StationByGeoLocationFilterController::class,
+ *         "controller"=StationWithDetailAndLocationCollectionController::class,
  *         "defaults"={"_api_receive"=false}
  *       }
  *     },

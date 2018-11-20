@@ -70,7 +70,7 @@ services:
 
     App\UserInterface\Rest\Controller\StationAvailabilitiesByIntervalInPeriodController:
       public: true
-    App\UserInterface\Rest\Controller\StationByGeoLocationFilterController:
+    App\UserInterface\Rest\Controller\StationWithDetailAndLocationCollectionController:
       public: true
 
     App\Infrastructure\Request\Symfony\SymfonyStationParamConverter:
