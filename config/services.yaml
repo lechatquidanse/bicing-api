@@ -100,3 +100,6 @@ services:
       public: true
       tags:
       - { name: 'event_subscriber', subscribes_to: 'App\Domain\Event\Station\StationWasCreated', method: __invoke }
+    App\Infrastructure\Persistence\Doctrine\Subscriber\DoctrineMigrationSubscriber:
+      tags:
+      - { name: 'doctrine.event_subscriber', connection: default }

@@ -13,6 +13,7 @@ doctrine:
       uuid:  'Ramsey\Uuid\Doctrine\UuidType'
       geometry: 'Jsor\Doctrine\PostGIS\Types\GeometryType'
     url: '%env(DATABASE_URL)%'
+    schema_filter: '~^(station|station_state|migration_versions)~'
 
   orm:
     auto_generate_proxy_classes: '%kernel.debug%'
