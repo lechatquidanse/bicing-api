@@ -9,6 +9,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Domain\Model\Station\StationDetailType;
 use App\Domain\Model\UseCaseInterface;
 use Ramsey\Uuid\UuidInterface;
+use App\UserInterface\Rest\Controller\StationWithDetailAndLocationCollectionController;
 
 /**
  * @ApiResource(
@@ -18,12 +19,22 @@ use Ramsey\Uuid\UuidInterface;
  *     collectionOperations={
  *       "get"={
  *         "method"="GET",
- *         "path"="/",
+ *         "path"="",
  *         "controller"=StationWithDetailAndLocationCollectionController::class,
- *         "defaults"={"_api_receive"=false}
+ *         "defaults"={"_api_receive"=false},
+ *         "swagger_context"={
+ *           "parameters"={
+ *              {
+ *                "name"="geo_location_filter",
+ *                "in"="query",
+ *                "description"="Query 'latitude,longitude,limit' (example: 41.373,2.17031,450.35). Limit in meter.",
+ *                "required"=false,
+ *                "type"="string"
+ *              }
+ *            }
+ *          }
  *       }
- *     },
- *
+ *     }
  *  )
  */
 final class StationWithDetailAndLocationView implements UseCaseInterface

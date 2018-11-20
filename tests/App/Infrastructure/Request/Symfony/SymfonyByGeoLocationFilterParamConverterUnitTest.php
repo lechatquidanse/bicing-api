@@ -7,7 +7,7 @@ namespace tests\App\Infrastructure\Request\Symfony;
 use App\Application\UseCase\Filter\ByGeoLocationFilter;
 use App\Domain\Model\Station\Station;
 use App\Infrastructure\Request\Symfony\SymfonyByGeoLocationFilterParamConverter;
-use Assert\LazyAssertionException;
+use Assert\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,11 +36,7 @@ class SymfonyByGeoLocationFilterParamConverterUnitTest extends TestCase
     /** @test */
     public function it_can_apply(): void
     {
-        $request = new Request([
-            'latitude' => 41.390205,
-            'longitude' => 2.154007,
-            'limit' => 450.35,
-        ]);
+        $request = new Request(['geo_location_filter' => '41.373,2.17031,450.35']);
 
         $this->assertTrue($this->converter->apply(
             $request,
@@ -48,7 +44,7 @@ class SymfonyByGeoLocationFilterParamConverterUnitTest extends TestCase
         ));
         $this->assertTrue($request->attributes->has('filter'));
         $this->assertEquals(
-            ByGeoLocationFilter::fromRawValues(41.390205, 2.154007, 450.35),
+            ByGeoLocationFilter::fromRawValues(41.373, 2.17031, 450.35),
             $request->attributes->get('filter')
         );
     }
@@ -56,18 +52,12 @@ class SymfonyByGeoLocationFilterParamConverterUnitTest extends TestCase
     /** @test */
     public function it_can_not_apply_if_query_in_request_is_not_float(): void
     {
-        $this->expectException(LazyAssertionException::class);
-        $this->expectExceptionMessage('The following 3 assertions failed:
-1) latitude: Value "latitude_not_a_float" is not a float.
-2) longitude: Value "longitude_not_a_float" is not a float.
-3) limit: Value "limit_not_a_float" is not a float.
-');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(
+            'Value "bad_query_pattern" does not match expected expression (for example: \'?geo_location_filter=41.373,2.17031,450.35\').'
+        );
 
-        $request = new Request([
-            'latitude' => 'latitude_not_a_float',
-            'longitude' => 'longitude_not_a_float',
-            'limit' => 'limit_not_a_float',
-        ]);
+        $request = new Request(['geo_location_filter' => 'bad_query_pattern']);
 
         $this->converter->apply(
             $request,

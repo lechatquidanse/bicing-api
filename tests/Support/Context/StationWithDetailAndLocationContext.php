@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace tests\Support\Context;
 
-use App\Application\Process\Manager\UpdateStationsLocationGeometryManager;
 use App\Domain\Model\Station\StationDetailType;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
@@ -19,19 +18,14 @@ class StationWithDetailAndLocationContext implements Context
     /** @var DoctrineDatabaseManager */
     private $databaseManager;
 
-    /** @var UpdateStationsLocationGeometryManager */
-    private $geometryManager;
-
     /**
      * StationWithDetailAndLocationContext constructor.
      *
-     * @param DoctrineDatabaseManager               $databaseManager
-     * @param UpdateStationsLocationGeometryManager $geometryManager
+     * @param DoctrineDatabaseManager $databaseManager
      */
-    public function __construct(DoctrineDatabaseManager $databaseManager, UpdateStationsLocationGeometryManager $geometryManager)
+    public function __construct(DoctrineDatabaseManager $databaseManager)
     {
         $this->databaseManager = $databaseManager;
-        $this->geometryManager = $geometryManager;
     }
 
     /**
@@ -54,7 +48,5 @@ class StationWithDetailAndLocationContext implements Context
                     ->withLongitude((float) $station['longitude'])
                     ->build()));
         }
-
-        $this->geometryManager->__invoke();
     }
 }
