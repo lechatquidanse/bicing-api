@@ -9,7 +9,7 @@
 > By collecting data from different providers ([Bicing][bicing], [Velib][velib], ...) it can advice customers and provide them useful information (location to pick or return a bike, best time for picking up a bike, ...).
 
 <p align="center">
-    <img src="https://img.shields.io/badge/php-%5E7.1-blue.svg" alt="PHP 7.1">
+    <img src="https://img.shields.io/badge/php-%5E7.2-blue.svg" alt="PHP 7.2">
     <img src="https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg" alt="Dependencies">
     <img src="https://img.shields.io/badge/contributions-welcome-orange.svg" alt="Contributions welcome">
     <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"><a>
@@ -58,8 +58,8 @@ To run the project once installed:
 
 ## <a name="built-with"></a> Built with
 
-- [PHP 7.1][php]
-- [Symfony 4.0][symfony]
+- [PHP 7.2][php]
+- [Symfony 4.1][symfony]
 - [API-Platform][api-platform]
 - [Timescale Database][timescale]
 - [Docker][docker]

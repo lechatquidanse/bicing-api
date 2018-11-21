@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace tests\App\Infrastructure\Persistence\Doctrine\Query;
 
-use App\Application\UseCase\Filter\IntervalInPeriodFilter;
+use App\Application\UseCase\Filter\ByIntervalInPeriodFilter;
 use App\Domain\Model\Station\Station;
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
-use App\Infrastructure\Persistence\Doctrine\Query\DoctrineStationAvailabilitiesByIntervalInPeriodQuery;
+use App\Infrastructure\Persistence\Doctrine\Query\DoctrineStationAvailabilitiesByIntervalInPeriodFilterQuery;
 use Ramsey\Uuid\Uuid;
 use tests\Support\Builder\StationBuilder;
 use tests\Support\Builder\StationStateBuilder;
 use tests\Support\Builder\StationStateStatusBuilder;
 use tests\Support\TestCase\DatabaseTestCase;
 
-class DoctrineStationAvailabilitiesByIntervalInPeriodQueryIntegrationTest extends DatabaseTestCase
+class DoctrineStationAvailabilitiesByIntervalInPeriodFilterQueryIntegrationTest extends DatabaseTestCase
 {
-    /** @var DoctrineStationAvailabilitiesByIntervalInPeriodQuery */
+    /** @var DoctrineStationAvailabilitiesByIntervalInPeriodFilterQuery */
     private $query;
 
     /**
@@ -67,13 +67,13 @@ class DoctrineStationAvailabilitiesByIntervalInPeriodQueryIntegrationTest extend
                 'available_bike_avg' => '29.0000000000000000',
                 'available_bike_min' => 29,
                 'available_bike_max' => 29,
-                'available_slot_avg' => '1.0000000000000000',
+                'available_slot_avg' => '1.00000000000000000000',
                 'available_slot_min' => 1,
                 'available_slot_max' => 1,
             ],
         ], $this->query->find(
             $stationId,
-            IntervalInPeriodFilter::fromRawStringValues(
+            ByIntervalInPeriodFilter::fromRawStringValues(
                 '2018-08-20 15:35:20',
                 '2018-08-20 17:35:20',
                 '5 minute'
@@ -86,7 +86,7 @@ class DoctrineStationAvailabilitiesByIntervalInPeriodQueryIntegrationTest extend
     {
         parent::setUp();
 
-        $this->query = $this->getContainer()->get('test.app.query.station_availabilites_by_interval_in_period_query');
+        $this->query = $this->getContainer()->get('test.app.query.station_availabilites_by_interval_in_period_filter_query');
     }
 
     /** {@inheritdoc} */

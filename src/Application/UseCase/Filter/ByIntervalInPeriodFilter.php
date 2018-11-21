@@ -7,7 +7,7 @@ namespace App\Application\UseCase\Filter;
 use Assert\Assert;
 use Assert\LazyAssertionException;
 
-final class IntervalInPeriodFilter
+final class ByIntervalInPeriodFilter
 {
     /** @var string */
     public const DATE_FORMAT = 'Y-m-d H:i:s';
@@ -43,7 +43,7 @@ final class IntervalInPeriodFilter
      * @param string $periodEnd
      * @param string $interval
      *
-     * @return IntervalInPeriodFilter
+     * @return ByIntervalInPeriodFilter
      *
      * @throws LazyAssertionException
      */

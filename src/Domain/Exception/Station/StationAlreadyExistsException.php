@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Exception\Station;
 
-use App\Domain\Exception\DomainException;
+use App\Domain\Exception\DomainExceptionInterface;
 use Ramsey\Uuid\UuidInterface;
 
-final class StationAlreadyExistsException extends \DomainException implements DomainException
+final class StationAlreadyExistsException extends \DomainException implements DomainExceptionInterface
 {
     /**
      * @param UuidInterface $stationId

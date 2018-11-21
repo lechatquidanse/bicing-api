@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Query;
 
-use App\Application\UseCase\Filter\IntervalInPeriodFilter;
-use App\Application\UseCase\Query\StationAvailabilitiesByIntervalInPeriodQueryInterface;
+use App\Application\UseCase\Filter\ByIntervalInPeriodFilter;
+use App\Application\UseCase\Query\StationAvailabilitiesByIntervalInPeriodFilterQueryInterface;
 use App\Domain\Model\StationState\StationState;
 use App\Domain\Model\StationState\StationStateStatus;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\UuidInterface;
 
-final class DoctrineStationAvailabilitiesByIntervalInPeriodQuery implements StationAvailabilitiesByIntervalInPeriodQueryInterface  // phpcs:ignore
+final class DoctrineStationAvailabilitiesByIntervalInPeriodFilterQuery implements StationAvailabilitiesByIntervalInPeriodFilterQueryInterface  // phpcs:ignore
 {
     /** @var EntityManagerInterface */
     private $entityManager;
@@ -24,7 +24,7 @@ final class DoctrineStationAvailabilitiesByIntervalInPeriodQuery implements Stat
         $this->entityManager = $entityManager;
     }
 
-    public function find(UuidInterface $stationId, IntervalInPeriodFilter $filter): array
+    public function find(UuidInterface $stationId, ByIntervalInPeriodFilter $filter): array
     {
         $selectInterval = sprintf('time_bucket(\'%s\', ss.statedAt) AS interval', $filter->interval());
 
