@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Query;
 
+use App\Application\UseCase\Filter\ByGeoLocationFilter;
 use App\Application\UseCase\Query\StationWithDetailAndLocationQueryInterface;
 use App\Domain\Model\Station\Station;
+use App\Infrastructure\Persistence\Doctrine\Query\Filter\DoctrineByGeoLocationFilter;
 use App\Infrastructure\Persistence\Doctrine\Query\Selector\DoctrineStationWithDetailAndLocationSelector;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
@@ -25,14 +27,19 @@ final class DoctrineStationWithDetailAndLocationQuery implements StationWithDeta
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
-    public function findAll(): array
+    public function findAll(ByGeoLocationFilter $filter = null): array
     {
-        return $this->entityManager->createQueryBuilder()
+        $queryBuilder = $this->entityManager->createQueryBuilder()
             ->select(DoctrineStationWithDetailAndLocationSelector::FIELD_SELECTOR)
-            ->from(Station::class, 's')
-            ->getQuery()
+            ->from(Station::class, 's');
+
+        if (null !== $filter) {
+            $queryBuilder = DoctrineByGeoLocationFilter::filter($queryBuilder, $filter);
+        }
+
+        return $queryBuilder->getQuery()
             ->getResult();
     }
 

@@ -36,11 +36,7 @@ class SymfonyByGeoLocationFilterParamConverterUnitTest extends TestCase
     /** @test */
     public function it_can_apply(): void
     {
-        $request = new Request([
-            'latitude' => 41.390205,
-            'longitude' => 2.154007,
-            'limit' => 450.35,
-        ]);
+        $request = new Request(['geo_location_filter' => '41.373,2.17031,450.35']);
 
         $this->assertTrue($this->converter->apply(
             $request,
@@ -48,30 +44,7 @@ class SymfonyByGeoLocationFilterParamConverterUnitTest extends TestCase
         ));
         $this->assertTrue($request->attributes->has('filter'));
         $this->assertEquals(
-            ByGeoLocationFilter::fromRawValues(41.390205, 2.154007, 450.35),
-            $request->attributes->get('filter')
-        );
-    }
-
-    /** @test */
-    public function it_can_apply_with_default_value_option_if_not_in_request(): void
-    {
-        $request = new Request();
-
-        $configuration = new ParamConverter([
-            'class' => ByGeoLocationFilter::class,
-            'name' => 'filter',
-            'options' => [
-                'defaultLatitude' => 31.390205,
-                'defaultLongitude' => 2.954007,
-                'defaultLimit' => 50.00,
-            ],
-        ]);
-
-        $this->assertTrue($this->converter->apply($request, $configuration));
-        $this->assertTrue($request->attributes->has('filter'));
-        $this->assertEquals(
-            ByGeoLocationFilter::fromRawValues(31.390205, 2.954007, 50),
+            ByGeoLocationFilter::fromRawValues(41.373, 2.17031, 450.35),
             $request->attributes->get('filter')
         );
     }
@@ -80,13 +53,11 @@ class SymfonyByGeoLocationFilterParamConverterUnitTest extends TestCase
     public function it_can_not_apply_if_query_in_request_is_not_float(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('An error occurred during geo location creation from queries values');
+        $this->expectExceptionMessage(
+            'Value "bad_query_pattern" does not match expected expression (for example: \'?geo_location_filter=41.373,2.17031,450.35\').'
+        );
 
-        $request = new Request([
-            'latitude' => 41.390205,
-            'longitude' => 2.154007,
-            'limit' => 'not_a_float',
-        ]);
+        $request = new Request(['geo_location_filter' => 'bad_query_pattern']);
 
         $this->converter->apply(
             $request,
@@ -95,23 +66,14 @@ class SymfonyByGeoLocationFilterParamConverterUnitTest extends TestCase
     }
 
     /** @test */
-    public function it_can_not_apply_if_query_in_options_is_not_float(): void
+    public function it_can_not_apply_if_no_query_in_request(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('An error occurred during geo location creation from queries values');
-
         $request = new Request();
-        $configuration = new ParamConverter([
-            'class' => ByGeoLocationFilter::class,
-            'name' => 'filter',
-            'options' => [
-                'defaultLatitude' => 'not_a_float',
-                'defaultLongitude' => 2.954007,
-                'defaultLimit' => 50,
-            ],
-        ]);
-
-        $this->converter->apply($request, $configuration);
+        $this->assertFalse($this->converter->apply(
+            $request,
+            new ParamConverter(['class' => ByGeoLocationFilter::class, 'name' => 'filter'])
+        ));
+        $this->assertNull($request->attributes->get('filter'));
     }
 
     protected function setUp()

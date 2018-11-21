@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace App\Application\UseCase\DataProvider;
 
 use App\Application\UseCase\Filter\ByGeoLocationFilter;
-use App\Application\UseCase\Query\StationWithDetailAndLocationByGeoLocationFilterQueryInterface;
+use App\Application\UseCase\Query\StationWithDetailAndLocationQueryInterface;
 use App\Application\UseCase\Query\StationWithDetailAndLocationView;
 
-class StationWithDetailAndLocationByGeoLocationDataProvider
+class StationWithDetailAndLocationCollectionDataProvider
 {
-    /** @var StationWithDetailAndLocationByGeoLocationFilterQueryInterface */
+    /** @var StationWithDetailAndLocationQueryInterface */
     private $query;
 
     /**
-     * @param StationWithDetailAndLocationByGeoLocationFilterQueryInterface $query
+     * @param StationWithDetailAndLocationQueryInterface $query
      */
-    public function __construct(StationWithDetailAndLocationByGeoLocationFilterQueryInterface $query)
+    public function __construct(StationWithDetailAndLocationQueryInterface $query)
     {
         $this->query = $query;
     }
@@ -26,7 +26,7 @@ class StationWithDetailAndLocationByGeoLocationDataProvider
      *
      * @return \Generator
      */
-    public function getCollection(ByGeoLocationFilter $filter): \Generator
+    public function getCollection(ByGeoLocationFilter $filter = null): \Generator
     {
         $stations = $this->query->findAll($filter);
 
