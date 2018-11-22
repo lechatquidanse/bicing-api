@@ -44,11 +44,11 @@ final class ImportStationStatesFromBicingApiManager
     private $logger;
 
     /**
-     * @param AvailabilityStationQueryInterface $query
+     * @param AvailabilityStationQueryInterface                  $query
      * @param AssignStationStateToStationCommandFactoryInterface $commandFactory
-     * @param MessageBus $commandBus
-     * @param ClockInterface $clock
-     * @param LoggerInterface $logger
+     * @param MessageBus                                         $commandBus
+     * @param ClockInterface                                     $clock
+     * @param LoggerInterface                                    $logger
      */
     public function __construct(
         AvailabilityStationQueryInterface $query,
@@ -56,8 +56,7 @@ final class ImportStationStatesFromBicingApiManager
         MessageBus $commandBus,
         ClockInterface $clock,
         LoggerInterface $logger
-    )
-    {
+    ) {
         $this->query = $query;
         $this->commandFactory = $commandFactory;
         $this->commandBus = $commandBus;
@@ -78,7 +77,7 @@ final class ImportStationStatesFromBicingApiManager
     }
 
     /**
-     * @param AvailabilityStation $availabilityStation
+     * @param AvailabilityStation         $availabilityStation
      * @param DateTimeImmutableStringable $statedAt
      */
     private function import(AvailabilityStation $availabilityStation, DateTimeImmutableStringable $statedAt): void

@@ -27,10 +27,10 @@ final class LastStationStateByStationDataProvider implements ItemDataProviderInt
     }
 
     /**
-     * @param string $resourceClass
+     * @param string        $resourceClass
      * @param UuidInterface $id
-     * @param string|null $operationName
-     * @param array $context
+     * @param string|null   $operationName
+     * @param array         $context
      *
      * @return LastStationStateByStationView|null|object
      */
@@ -39,8 +39,7 @@ final class LastStationStateByStationDataProvider implements ItemDataProviderInt
         $id,
         string $operationName = null,
         array $context = []
-    )
-    {
+    ) {
         Assert::that($id)->isInstanceOf(UuidInterface::class);
 
         $stationSate = $this->query->find($id);
@@ -67,9 +66,9 @@ final class LastStationStateByStationDataProvider implements ItemDataProviderInt
     }
 
     /**
-     * @param string $resourceClass
+     * @param string      $resourceClass
      * @param string|null $operationName
-     * @param array $context
+     * @param array       $context
      *
      * @return bool
      */
