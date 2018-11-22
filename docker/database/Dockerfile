@@ -1,3 +1,4 @@
+# Inspired by @appropriate https://github.com/appropriate/docker-postgis/blob/master/10-2.5/alpine/Dockerfile
 FROM timescale/timescaledb:0.9.0-pg10 AS bicing_api_db
 
 ENV POSTGIS_VERSION 2.5.0

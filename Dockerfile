@@ -21,9 +21,9 @@ ENV PHP_EXTENSIONS \
         pdo_pgsql \
         zip
 
-ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV COMPOSE_HTTP_TIMEOUT=3600
 ENV COMPOSE_PROJECT_NAME=bicing-api
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
 RUN set -ex \
     && apk add --no-cache --virtual .fetch-deps $FETCH_PACKAGES \

@@ -7,6 +7,7 @@ namespace tests\App\Application\UseCase\DataProvider;
 use App\Application\UseCase\DataProvider\StationWithDetailAndLocationDataProvider;
 use App\Application\UseCase\Query\StationWithDetailAndLocationView;
 use App\Domain\Exception\Station\StationDoesNotExist;
+use Assert\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use tests\Support\Builder\StationDetailTypeBuilder;
@@ -70,6 +71,14 @@ class StationWithDetailAndLocationDataProviderUnitTest extends TestCase
             StationWithDetailAndLocationView::class,
             Uuid::fromString('50ca0f4c-a474-40e3-a1d0-8fd0901b46d3')
         );
+    }
+
+    /** @test */
+    public function it_can_not_get_an_item_with_an_id_that_is_not_uuid_type(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $this->provider->getItem(StationWithDetailAndLocationView::class, 'not_expected_station_id_type');
     }
 
     protected function setUp()

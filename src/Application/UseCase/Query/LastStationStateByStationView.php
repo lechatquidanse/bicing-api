@@ -44,7 +44,7 @@ final class LastStationStateByStationView implements UseCaseInterface
     public $availableSlotNumber;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $status;
 

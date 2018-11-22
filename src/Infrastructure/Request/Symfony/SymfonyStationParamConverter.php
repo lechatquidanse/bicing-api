@@ -42,7 +42,7 @@ final class SymfonyStationParamConverter implements ParamConverterInterface
         $stationId = $this->retrieveRequestParameterStationId($request->attributes);
 
         if (null === ($station = $this->repository->findByStationId($stationId))) {
-            throw StationDoesNotExist::withExternalStationId((string) $stationId);
+            throw StationDoesNotExist::withExternalStationId($stationId->toString());
         }
 
         $request->attributes->set($configuration->getName(), $station);
