@@ -34,7 +34,7 @@ test:
 
   - docker-compose up -d
   - docker-compose run --rm php composer install
-  - docker-compose run --rm bin/phpstan analyse src --level max
+  - docker-compose run --rm php bin/phpstan analyse src --level max
   - docker-compose run --rm php bin/phpcs --standard=PSR2 src
   - docker-compose run --rm php bin/phpspec run
   - docker-compose run --rm php bin/console do:mi:mi -n --env=test
@@ -57,7 +57,7 @@ build:
 
   - docker-compose up -d
   - docker-compose run --rm php composer install
-  - docker-compose run --rm bin/phpstan analyse src --level max
+  - docker-compose run --rm php bin/phpstan analyse src --level max
   - docker-compose run --rm php bin/phpcs --standard=PSR2 src
   - docker-compose run --rm php bin/phpspec run
   - docker-compose run --rm php bin/console do:mi:mi -n --env=test
