@@ -1,0 +1,7 @@
+includes:
+	- vendor/phpstan/phpstan-symfony/extension.neon
+parameters:
+    ignoreErrors:
+        - '#PHPDoc tag @throws with type .* is not subtype of Throwable#'
+    symfony:
+        container_xml_path: %rootDir%/../../../var/cache/dev/srcDevDebugProjectContainer.xml

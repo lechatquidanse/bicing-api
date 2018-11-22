@@ -15,6 +15,9 @@ use SimpleBus\Message\Bus\MessageBus;
 
 final class ImportStationStatesFromBicingApiManager
 {
+    /** @var int */
+    private const DEFAULT_CACHE_TTL = 0;
+
     /**
      * @var AvailabilityStationQueryInterface
      */
@@ -93,7 +96,7 @@ final class ImportStationStatesFromBicingApiManager
     private function refreshLastStationStateByStationCache(): void
     {
         try {
-            $command = new RefreshLastStationStateByStationCacheCommand();
+            $command = RefreshLastStationStateByStationCacheCommand::create(self::DEFAULT_CACHE_TTL);
             $this->commandBus->handle($command);
         } catch (\Exception $exception) {
             $this->logger->error($exception->getMessage());

@@ -2,13 +2,11 @@ image: docker:latest
 services:
 - docker:dind
 
-# Project stages
 stages:
 - test
 - build
 - production
 
-# Install the required packages / tools for this project before doing anything else
 before_script:
 - apk update && apk upgrade
 - apk add --update bash curl git gettext openssh python python-dev py-pip build-base openssl wget
@@ -17,65 +15,43 @@ before_script:
 - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
 - docker network create bicing-api-network
 
-# Get the release branch name to be used as tag for the newly built Docker image
 - ENVIRONMENT=$(echo $CI_BUILD_REF_NAME | awk -F'/' '{print $1}')
-
 - PRODUCTION_TAG=$(echo $CI_BUILD_REF_NAME | awk -F'/' '{print $2}')
 - export PRODUCTION_IMAGE="$CI_REGISTRY_IMAGE:$PRODUCTION_TAG"
 
-# test environment
 test:
-  stage: test
   environment: test
   script:
-  - echo "Hello We will now be preparing the Test $ENVIRONMENT environment for you. Please be patient as this might take a while"
-
   - cp .env.dist .env
-
   - docker-compose up -d
   - docker-compose run --rm php composer install
-  - docker-compose run --rm php bin/phpcs --standard=PSR2 src
-  - docker-compose run --rm php bin/phpspec run
-  - docker-compose run --rm php bin/console do:mi:mi -n --env=test
-  - docker-compose run --rm php bin/simple-phpunit
-  - docker-compose run --rm php bin/behat
-  - docker-compose down -v --remove-orphans
-
-  - echo "TESTING BRANCH HAS BEEN BUILT SUCCESSFULY!"
-  only:
-  - /^[F|f]eature\/.*$/
-
-## Build Environment
-build:
-  stage: build
-  environment: build
-  script:
-  - echo "Hello We will now be preparing the Build $ENVIRONMENT environment for you."
-
-  - cp .env.dist .env
-
-  - docker-compose up -d
-  - docker-compose run --rm php composer install
+  - docker-compose run --rm php bin/phpstan analyse src --level max
   - docker-compose run --rm php bin/phpcs --standard=PSR2 src
   - docker-compose run --rm php bin/phpspec run
   - docker-compose run --rm php bin/console do:mi:mi -n --env=test
   - docker-compose run --rm php bin/simple-phpunit
   - docker-compose run --rm php bin/behat
   - docker-compose run --rm php rm -rf var/cache/* var/log/*
+  - docker-compose down -v --remove-orphans
+  stage: test
+  only:
+  - /^[F|f]eature\/.*$/
 
+build:
+  environment: build
+  extends: test
+  script:
   - docker build --target bicing_api_php -t $PRODUCTION_IMAGE .
   - docker push $PRODUCTION_IMAGE
-
-  - docker-compose down -v --remove-orphans
-  - echo "$ENVIRONMENT ENVIRONMENT HAS BEEN BUILT SUCCESSFULY!"
+  stage: build
   only:
   - /^[R|r]elease\/.*$/
   - /^[H|h]otfix\/.*$/
 
 ### Production Environment
 production:
-  stage: production
   environment: production
+  stage: production
   script:
   - echo "Hello We will now be preparing the Build $ENVIRONMENT environment for you."
 
@@ -87,3 +63,4 @@ production:
   only:
   - /^[R|r]elease\/.*$/
   - /^[H|h]otfix\/.*$/
+

@@ -10,6 +10,8 @@ use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use App\Application\UseCase\Query\LastStationStateByStationQueryInterface;
 use App\Application\UseCase\Query\LastStationStateByStationView;
 use App\Domain\Exception\Station\StationDoesNotExist;
+use Assert\Assert;
+use Ramsey\Uuid\UuidInterface;
 
 final class LastStationStateByStationDataProvider implements ItemDataProviderInterface, CollectionDataProviderInterface, RestrictedDataProviderInterface // phpcs:ignore
 {
@@ -25,11 +27,12 @@ final class LastStationStateByStationDataProvider implements ItemDataProviderInt
     }
 
     /**
-     * Retrieves an item.
+     * @param string        $resourceClass
+     * @param UuidInterface $id
+     * @param string|null   $operationName
+     * @param array         $context
      *
-     * @param array|int|string $id
-     *
-     * @return object|null
+     * @return LastStationStateByStationView|null|object
      */
     public function getItem(
         string $resourceClass,
@@ -37,8 +40,12 @@ final class LastStationStateByStationDataProvider implements ItemDataProviderInt
         string $operationName = null,
         array $context = []
     ) {
-        if (null === ($stationSate = $this->query->find($id))) {
-            throw StationDoesNotExist::withExternalStationId((string) $id);
+        Assert::that($id)->isInstanceOf(UuidInterface::class);
+
+        $stationSate = $this->query->find($id);
+
+        if (null === $stationSate) {
+            throw StationDoesNotExist::withExternalStationId($id->toString());
         }
 
         return LastStationStateByStationView::fromArray($stationSate);
@@ -47,7 +54,7 @@ final class LastStationStateByStationDataProvider implements ItemDataProviderInt
     /**
      * Retrieves a collection.
      *
-     * @return array|\Traversable
+     * @return \Generator
      */
     public function getCollection(string $resourceClass, string $operationName = null): \Generator
     {

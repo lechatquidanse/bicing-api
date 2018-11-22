@@ -69,11 +69,11 @@ final class SymfonyByIntervalInPeriodFilterParamConverter implements ParamConver
     }
 
     /**
-     * @param $message
+     * @param string $message
      */
-    private function logError($message): void
+    private function logError(string $message): void
     {
-        if ($this->logger) {
+        if (null !== $this->logger) {
             $this->logger->error($message);
         }
     }

@@ -312,12 +312,4 @@ final class AvailabilityStation
     {
         return $this->type;
     }
-
-    /**
-     * @return string
-     */
-    public function statedAt(): string
-    {
-        return $this->statedAt;
-    }
 }

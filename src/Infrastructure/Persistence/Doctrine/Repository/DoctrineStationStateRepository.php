@@ -14,6 +14,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 final class DoctrineStationStateRepository implements StationStateRepositoryInterface
 {
+    /** @var string */
+    private const EXCEPTION_NO_MANAGER_MESSAGE = 'No manager found for class StationState';
+
     /**
      * @var ManagerRegistry
      */
@@ -65,6 +68,12 @@ final class DoctrineStationStateRepository implements StationStateRepositoryInte
      */
     private function manager(): ObjectManager
     {
-        return $this->managerRegistry->getManagerForClass(StationState::class);
+        $manager = $this->managerRegistry->getManagerForClass(StationState::class);
+
+        if (null === $manager) {
+            throw new \RuntimeException(self::EXCEPTION_NO_MANAGER_MESSAGE);
+        }
+
+        return $manager;
     }
 }

@@ -52,7 +52,7 @@ final class StationWithDetailAndLocationView implements UseCaseInterface
     public $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $type;
 

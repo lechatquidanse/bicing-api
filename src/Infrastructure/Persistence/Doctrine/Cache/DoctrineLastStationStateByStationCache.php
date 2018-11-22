@@ -24,9 +24,9 @@ final class DoctrineLastStationStateByStationCache
 
     /**
      * @param array $lastStationSateByStation
-     * @param null  $ttl
+     * @param int   $ttl
      */
-    public function set(array $lastStationSateByStation, $ttl = null): void
+    public function set(array $lastStationSateByStation, $ttl = 0): void
     {
         $this->cache->save(static::COLLECTION_CACHE_KEY, $lastStationSateByStation, $ttl);
     }
