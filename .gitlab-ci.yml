@@ -19,28 +19,34 @@ before_script:
 - PRODUCTION_TAG=$(echo $CI_BUILD_REF_NAME | awk -F'/' '{print $2}')
 - export PRODUCTION_IMAGE="$CI_REGISTRY_IMAGE:$PRODUCTION_TAG"
 
-test:
-  environment: test
+.qa:
   script:
   - cp .env.dist .env
   - docker-compose up -d
-  - docker-compose run --rm php composer install
-  - docker-compose run --rm php bin/phpstan analyse src --level max
-  - docker-compose run --rm php bin/phpcs --standard=PSR2 src
-  - docker-compose run --rm php bin/phpspec run
-  - docker-compose run --rm php bin/console do:mi:mi -n --env=test
-  - docker-compose run --rm php bin/simple-phpunit
-  - docker-compose run --rm php bin/behat
-  - docker-compose run --rm php rm -rf var/cache/* var/log/*
+  - docker-compose exec php composer install
+  - docker-compose exec php bin/phpstan analyse src --level max
+  - docker-compose exec php bin/phpcs --standard=PSR2 src
+  - docker-compose exec php bin/phpspec run
+  - docker-compose exec php bin/console do:mi:mi -n --env=test
+  - docker-compose exec php bin/simple-phpunit
+  - docker-compose exec php bin/behat
+  - docker-compose exec php rm -rf var/cache/* var/log/*
   - docker-compose down -v --remove-orphans
+
+test:
+  environment: test
+  extends: .qa
+  script:
+  - echo "Hello We will now be preparing the test environment for you."
   stage: test
   only:
   - /^[F|f]eature\/.*$/
 
 build:
   environment: build
-  extends: test
+  extends: .qa
   script:
+  - echo "Hello We will now be preparing the build environment for you."
   - docker build --target bicing_api_php -t $PRODUCTION_IMAGE .
   - docker push $PRODUCTION_IMAGE
   stage: build
@@ -53,12 +59,9 @@ production:
   environment: production
   stage: production
   script:
-  - echo "Hello We will now be preparing the Build $ENVIRONMENT environment for you."
-
+  - echo "Hello We will now be preparing the production environment for you."
   - chmod +x ./docker/stages/production/deploy.sh
   - ./docker/stages/production/deploy.sh
-
-  - echo "$ENVIRONMENT ENVIRONMENT HAS BEEN DEPLOY SUCCESSFULY!"
   when: manual
   only:
   - /^[R|r]elease\/.*$/
