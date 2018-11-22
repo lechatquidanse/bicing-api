@@ -33,7 +33,7 @@ services:
   php:
     build:
       context: .
-      target: 'bicing_api_php'
+      target: 'bicing_api_php_env_dev'
     depends_on: ['db']
     networks: ['backend', 'logging']
     restart: 'always'

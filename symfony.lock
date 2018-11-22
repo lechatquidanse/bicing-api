@@ -245,6 +245,9 @@
             "ref": "f7895777cd673fcefbc321a9063077a24e5df646"
         }
     },
+    "roave/security-advisories": {
+        "version": "dev-master"
+    },
     "sebastian/comparator": {
         "version": "3.0.2"
     },
