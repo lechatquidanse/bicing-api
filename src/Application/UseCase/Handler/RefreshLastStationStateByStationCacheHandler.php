@@ -37,6 +37,6 @@ final class RefreshLastStationStateByStationCacheHandler
      */
     public function __invoke(RefreshLastStationStateByStationCacheCommand $command): void
     {
-        $this->cache->set($this->query->findAll(), $command->ttl);
+//        $this->cache->set($this->query->findAll(), $command->ttl());
     }
 }

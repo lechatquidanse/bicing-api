@@ -38,6 +38,9 @@ class LocationBuilder implements BuilderInterface
      */
     private $longitude;
 
+    /** @var string */
+    private $geometry;
+
     /**
      * @param string      $address
      * @param string|null $addressNumber
@@ -45,14 +48,16 @@ class LocationBuilder implements BuilderInterface
      * @param string      $zipCode
      * @param float       $latitude
      * @param float       $longitude
+     * @param string      $geometry
      */
     private function __construct(
         string $address,
-        string $addressNumber = null,
         int $districtCode,
         string $zipCode,
         float $latitude,
-        float $longitude
+        float $longitude,
+        string $addressNumber = null,
+        string $geometry = null
     ) {
         $this->address = $address;
         $this->addressNumber = $addressNumber;
@@ -60,6 +65,7 @@ class LocationBuilder implements BuilderInterface
         $this->zipCode = $zipCode;
         $this->latitude = $latitude;
         $this->longitude = $longitude;
+        $this->geometry = $geometry;
     }
 
     /**
@@ -71,11 +77,12 @@ class LocationBuilder implements BuilderInterface
     {
         return new self(
             'Sant Pere Més Alt',
-            null,
             1,
             '08003',
             41.387074,
-            2.175247
+            2.175247,
+            null,
+            null
         );
     }
 
@@ -83,6 +90,8 @@ class LocationBuilder implements BuilderInterface
      * {@inheritdoc}
      *
      * @return Location
+     *
+     * @throws \Assert\AssertionFailedException
      */
     public function build(): Location
     {
@@ -96,6 +105,10 @@ class LocationBuilder implements BuilderInterface
 
         if (null !== $this->addressNumber) {
             $location->withAddressNumber($this->addressNumber);
+        }
+
+        if (null !== $this->geometry) {
+            $location->withGeometry($this->geometry);
         }
 
         return $location;
@@ -180,17 +193,31 @@ class LocationBuilder implements BuilderInterface
     }
 
     /**
+     * @param string $geometry
+     *
+     * @return LocationBuilder
+     */
+    public function withGeometry(string $geometry = null): LocationBuilder
+    {
+        $copy = $this->copy();
+        $copy->geometry = $geometry;
+
+        return $copy;
+    }
+
+    /**
      * @return LocationBuilder
      */
     private function copy(): LocationBuilder
     {
         return new self(
             $this->address,
-            $this->addressNumber,
             $this->districtCode,
             $this->zipCode,
             $this->latitude,
-            $this->longitude
+            $this->longitude,
+            $this->addressNumber,
+            $this->geometry
         );
     }
 }

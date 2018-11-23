@@ -13,6 +13,9 @@ use Ramsey\Uuid\UuidInterface;
 
 final class DoctrineStationRepository implements StationRepositoryInterface
 {
+    /** @var string */
+    private const EXCEPTION_NO_MANAGER_MESSAGE = 'No manager found for class Station';
+
     /**
      * @var ManagerRegistry
      */
@@ -78,10 +81,24 @@ final class DoctrineStationRepository implements StationRepositoryInterface
     }
 
     /**
+     * @return array
+     */
+    public function findAll(): array
+    {
+        return $this->manager()->getRepository(Station::class)->findAll();
+    }
+
+    /**
      * @return ObjectManager
      */
     private function manager(): ObjectManager
     {
-        return $this->managerRegistry->getManagerForClass(Station::class);
+        $manager = $this->managerRegistry->getManagerForClass(Station::class);
+
+        if (null === $manager) {
+            throw new \RuntimeException(self::EXCEPTION_NO_MANAGER_MESSAGE);
+        }
+
+        return $manager;
     }
 }

@@ -9,3 +9,4 @@ api_platform:
   exception_to_status:
     App\Domain\Exception\Station\StationDoesNotExist: 404
     Assert\LazyAssertionException: 400
+    Assert\InvalidArgumentException: 400

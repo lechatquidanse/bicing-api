@@ -7,9 +7,13 @@ namespace App\Infrastructure\BicingApi;
 use App\Infrastructure\Http\HttpQueryClientInterface;
 use JMS\Serializer\SerializerInterface;
 use Psr\Http\Message\ResponseInterface;
+use RuntimeException;
 
 final class HttpAvailabilityStationQuery implements AvailabilityStationQueryInterface
 {
+    /** @var string */
+    private const DESERIALIZE_EXCEPTION_MESSAGE = 'An error occurred during AvailabilityStation query deserialization ';
+
     /**
      * @var string
      */
@@ -55,10 +59,16 @@ final class HttpAvailabilityStationQuery implements AvailabilityStationQueryInte
      */
     private function deserialize(ResponseInterface $response): array
     {
-        return $this->serializer->deserialize(
+        $data = $this->serializer->deserialize(
             (string) $response->getBody(),
             'array<App\Infrastructure\BicingApi\AvailabilityStation>',
             self::RESPONSE_FORMAT
         );
+
+        if (false === is_array($data)) {
+            throw new RuntimeException(self::DESERIALIZE_EXCEPTION_MESSAGE);
+        }
+
+        return $data;
     }
 }

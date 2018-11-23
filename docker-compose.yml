@@ -1,47 +1,49 @@
 version: '2.3'
 
 services:
-    db:
-        environment:
-            POSTGRES_DB: ${POSTGRES_DB}
-            POSTGRES_USER: ${POSTGRES_USER}
-            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-        image: 'timescale/timescaledb:0.9.0-pg10'
-        networks: ['backend', 'logging']
-        ports: ['5432:5432']
-        restart: 'always'
-        volumes: ['data-db:/var/lib/postgresql/', './docker/stages/development/fixtures.zip:/var/data/fixtures.zip']
-    db_test:
-        environment:
-            POSTGRES_DB: bicing
-            POSTGRES_USER: test
-            POSTGRES_PASSWORD: test
-        image: 'timescale/timescaledb:0.9.0-pg10'
-        networks: ['backend', 'logging']
-        volumes: ['data-db-test:/var/lib/postgresql/']
-    nginx:
-        build:
-            context: .
-            target: 'bicing_api_nginx'
-        depends_on: ['php']
-        networks: ['backend', 'frontend', 'logging']
-        ports: ['80:80']
-        restart: 'always'
-        volumes: ['./public/bundles:/var/www/bicing-api/public/bundles']
-    php:
-        build:
-          context: .
-          target: 'bicing_api_php'
-        depends_on: ['db']
-        networks: ['backend', 'logging']
-        restart: 'always'
-        volumes: ['./:/var/www/bicing-api/']
+  db:
+    build:
+      context: docker/build/database
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks: ['backend', 'logging']
+    ports: ['5432:5432']
+    restart: 'always'
+    volumes: ['data-db:/var/lib/postgresql/', './docker/development/fixtures.zip:/var/data/fixtures.zip']
+  db_test:
+    build:
+      context: docker/build/database
+    environment:
+      POSTGRES_DB: bicing
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+    networks: ['backend', 'logging']
+    volumes: ['data-db-test:/var/lib/postgresql/']
+  nginx:
+    build:
+      context: .
+      target: 'bicing_api_nginx'
+    depends_on: ['php']
+    networks: ['backend', 'frontend', 'logging']
+    ports: ['80:80']
+    restart: 'always'
+    volumes: ['./public/bundles:/var/www/bicing-api/public/bundles']
+  php:
+    build:
+      context: .
+      target: 'bicing_api_php_env_dev'
+    depends_on: ['db', 'db_test']
+    networks: ['backend', 'logging']
+    restart: 'always'
+    volumes: ['./:/var/www/bicing-api/']
 
 volumes:
   data-db:
   data-db-test:
 
 networks:
-   frontend:
-   backend:
-   logging:
+  frontend:
+  backend:
+  logging:

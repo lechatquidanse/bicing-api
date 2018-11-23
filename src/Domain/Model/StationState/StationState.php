@@ -9,12 +9,13 @@ use App\Domain\Model\ValueObjectInterface;
 use Assert\Assert;
 use Assert\LazyAssertionException;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
 
 /**
  * A state of a station at a statedAt time.
  *
  * @ORM\Entity()
- * @ORM\Table()
+ * @ORM\Table(indexes={@Index(name="station_state_stated_at_idx", columns={"stated_at"})})
  */
 class StationState implements ValueObjectInterface
 {

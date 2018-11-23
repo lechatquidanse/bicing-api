@@ -19,6 +19,8 @@ class StationWithDetailAndLocationContext implements Context
     private $databaseManager;
 
     /**
+     * StationWithDetailAndLocationContext constructor.
+     *
      * @param DoctrineDatabaseManager $databaseManager
      */
     public function __construct(DoctrineDatabaseManager $databaseManager)

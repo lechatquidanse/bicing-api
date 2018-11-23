@@ -1,0 +1,8 @@
+version: '2.3'
+
+services:
+  php:
+    build:
+      target: 'bicing_api_php'
+    environment:
+      - COMPOSE_INTERACTIVE_NO_CLI=1

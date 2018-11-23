@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Exception\StationState;
 
-use App\Domain\Exception\DomainException;
+use App\Domain\Exception\DomainExceptionInterface;
 use App\Domain\Model\Station\Station;
 
-final class StationStateAlreadyExistsException extends \DomainException implements DomainException
+final class StationStateAlreadyExistsException extends \DomainException implements DomainExceptionInterface
 {
     /**
      * @param \DateTimeImmutable $statedAt

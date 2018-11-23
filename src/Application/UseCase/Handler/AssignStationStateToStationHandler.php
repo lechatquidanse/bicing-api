@@ -40,7 +40,9 @@ final class AssignStationStateToStationHandler
      */
     public function __invoke(AssignStationStateToStationCommand $command): void
     {
-        if (null === $station = $this->stationRepository->findByExternalStationId($command->externalStationId)) {
+        $station = $this->stationRepository->findByExternalStationId($command->externalStationId);
+
+        if (null === $station) {
             throw StationDoesNotExist::withExternalStationId($command->externalStationId);
         }
 

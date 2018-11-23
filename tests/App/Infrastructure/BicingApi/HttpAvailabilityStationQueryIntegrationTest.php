@@ -18,10 +18,8 @@ class HttpAvailabilityStationQueryIntegrationTest extends IntegrationTestCase
      */
     private $repository;
 
-    /**
-     * @test
-     */
-    public function it_can_find_all_two_availability_stations()
+    /** @test */
+    public function it_can_find_all_two_availability_stations(): void
     {
         $expected = [
             AvailabilityStation::create(

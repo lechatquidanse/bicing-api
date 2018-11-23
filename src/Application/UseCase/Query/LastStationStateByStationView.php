@@ -8,7 +8,7 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
 use App\Domain\Model\StationState\StationStateStatus;
-use App\Domain\Model\UseCase;
+use App\Domain\Model\UseCaseInterface;
 use Ramsey\Uuid\UuidInterface;
 
 /**
@@ -19,7 +19,7 @@ use Ramsey\Uuid\UuidInterface;
  *     itemOperations={"get"={"method"="GET", "path"="/{id}"}}
  *  )
  */
-final class LastStationStateByStationView implements UseCase
+final class LastStationStateByStationView implements UseCaseInterface
 {
     /**
      * @var UuidInterface
@@ -44,7 +44,7 @@ final class LastStationStateByStationView implements UseCase
     public $availableSlotNumber;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $status;
 

@@ -27,7 +27,7 @@ help:
 ##################
 
 ## Install all install_* requirements and launch project.
-install: env_file env_build install_vendor install_db
+install: env_file env_run install_vendor install_db
 
 ## Run project, install vendors and run migrations.
 run: env_run install_vendor install_db
@@ -41,7 +41,7 @@ down:
 	docker-compose down -v --remove-orphans
 
 ## Run all quality assurance tools (tests and code inspection).
-qa: code_fixer code_detect code_correct test_spec test test_behaviour
+qa: code_static_analysis code_fixer code_detect code_correct test_spec test test_behaviour
 
 ## Truncate database and import fixtures.
 fixtures: down run import_dev
@@ -62,13 +62,13 @@ code_detect:
 code_fixer:
 	docker-compose exec php bin/php-cs-fixer fix
 
+## Run PHPStan to find errors in code.
+code_static_analysis:
+	docker-compose exec php bin/phpstan analyse src --level max
+
 ###############
 # Environment #
 ###############
-
-## Launch and build docker environment.
-env_build:
-	docker-compose up -d
 
 ## Set defaut environment variables by copying env.dist file as .env.
 env_file:
@@ -84,7 +84,7 @@ env_run:
 
 ## Import fixtures.
 import_dev:
-	./docker/stages/development/import-fixtures.sh
+	./docker/development/import-fixtures.sh
 
 ## Import stations states from bicing.cat provider.
 import_states:
@@ -108,7 +108,7 @@ install_db_test:
 
 ## Install vendors.
 install_vendor:
-	docker-compose run --rm php composer install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest
+	docker-compose run --rm php composer install --prefer-dist --no-scripts --no-progress --no-suggest
 
 ########
 # Test#

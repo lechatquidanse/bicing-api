@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace App\Application\UseCase\DataProvider;
 
-use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use App\Application\UseCase\Query\StationWithDetailAndLocationQueryInterface;
 use App\Application\UseCase\Query\StationWithDetailAndLocationView;
 use App\Domain\Exception\Station\StationDoesNotExist;
+use Assert\Assert;
+use Ramsey\Uuid\UuidInterface;
 
-class StationWithDetailAndLocationDataProvider implements ItemDataProviderInterface, CollectionDataProviderInterface, RestrictedDataProviderInterface  // phpcs:ignore
+class StationWithDetailAndLocationDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
     /** @var StationWithDetailAndLocationQueryInterface */
     private $query;
@@ -25,40 +26,28 @@ class StationWithDetailAndLocationDataProvider implements ItemDataProviderInterf
     }
 
     /**
-     * @param string           $resourceClass
-     * @param array|int|string $id
-     * @param string|null      $operationName
-     * @param array            $context
+     * @param string        $resourceClass
+     * @param UuidInterface $id
+     * @param string|null   $operationName
+     * @param array         $context
      *
      * @return StationWithDetailAndLocationView
      */
     public function getItem(
         string $resourceClass,
         $id,
-        string
-        $operationName = null,
+        string $operationName = null,
         array $context = []
     ): StationWithDetailAndLocationView {
-        if (null === ($station = $this->query->find($id))) {
-            throw StationDoesNotExist::withExternalStationId((string) $id);
+        Assert::that($id)->isInstanceOf(UuidInterface::class);
+
+        $station = $this->query->find($id);
+
+        if (null === $station) {
+            throw StationDoesNotExist::withExternalStationId($id->toString());
         }
 
         return StationWithDetailAndLocationView::fromArray($station);
-    }
-
-    /**
-     * @param string      $resourceClass
-     * @param string|null $operationName
-     *
-     * @return \Generator
-     */
-    public function getCollection(string $resourceClass, string $operationName = null): \Generator
-    {
-        $stations = $this->query->findAll();
-
-        foreach ($stations as $station) {
-            yield StationWithDetailAndLocationView::fromArray($station);
-        }
     }
 
     /**

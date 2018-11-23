@@ -36,7 +36,7 @@ Feature: Plan my itinerary that requires a station according to its past statist
 
   @database
   Scenario: Can Retrieve stations's availabilities for an interval in a period of time
-    Given station identified by "15cff96c-de06-4606-9870-b82eb9219339" with station states from "2016-08-13 15:35:12 ":
+    Given station identified by "15cff96c-de06-4606-9870-b82eb9219339" with station states from "2016-08-13 15:35:12":
       | stated_at             | available_bike | available_slot | status |
       | -55 minutes 1 seconds | 7              | 23             | OPENED |
       | -55 minutes           | 2              | 28             | OPENED |
@@ -49,9 +49,9 @@ Feature: Plan my itinerary that requires a station according to its past statist
     And the JSON should be equal to:
     """
       {
-        "@context": "/api/contexts/collection%20of%20availabilities%20by%20time%20interval%20for%20a%20station",
+        "@context": "/api/contexts/collection%20of%20availabilities%20by%20time%20interval%20filter%20for%20a%20station",
         "@id": "/api/stations/15cff96c-de06-4606-9870-b82eb9219339/availabilities",
-        "@type": "collection of availabilities by time interval for a station",
+        "@type": "collection of availabilities by time interval filter for a station",
         "stationId": "15cff96c-de06-4606-9870-b82eb9219339",
         "availabilities": [
           {
@@ -74,8 +74,8 @@ Feature: Plan my itinerary that requires a station according to its past statist
           }
         ],
         "filter": {
-            "periodStart": "2016-08-13T14:35:23+02:00",
-            "periodEnd": "2016-08-13T16:35:23+02:00",
+            "periodStart": "2016-08-13 14:35:23",
+            "periodEnd": "2016-08-13 16:35:23",
             "interval": "5 minute"
         }
       }
@@ -91,7 +91,6 @@ Feature: Plan my itinerary that requires a station according to its past statist
     Then the response status code should be 404
     And the response should be in JSON
     And the header "Content-Type" should be equal to "application/ld+json; charset=utf-8"
-
 
   @database
   Scenario: Can't Retrieve last week availabilities from a station with bad query parameters

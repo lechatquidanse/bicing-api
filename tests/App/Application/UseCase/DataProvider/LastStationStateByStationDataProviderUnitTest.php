@@ -8,6 +8,7 @@ use App\Application\UseCase\DataProvider\LastStationStateByStationDataProvider;
 use App\Application\UseCase\Query\LastStationStateByStationView;
 use App\Domain\Exception\Station\StationDoesNotExist;
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
+use Assert\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use tests\App\Infrastructure\Persistence\Doctrine\Query\MockLastStationStateByStationQuery;
@@ -65,6 +66,14 @@ class LastStationStateByStationDataProviderUnitTest extends TestCase
             LastStationStateByStationView::class,
             Uuid::fromString('50ca0f4c-a474-40e3-a1d0-8fd0901b46d3')
         );
+    }
+
+    /** @test */
+    public function it_can_not_get_an_item_with_an_id_that_is_not_uuid_type(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $this->provider->getItem(LastStationStateByStationView::class, 'not_expected_station_id_type');
     }
 
     /** @test */
