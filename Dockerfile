@@ -73,7 +73,7 @@ COPY --from=bicing_api_php /var/www/bicing-api/public/bundles ./public/bundles
 #########################################
 ###### Bicing API PHP for dev env #######
 #########################################
-FROM bicing_api_php AS bicing_api_php_env_dev
+FROM bicing_api_php AS dev_bicing_api_php
 
 RUN composer install --dev --prefer-dist --no-scripts --no-progress --no-suggest \
     && pecl install xdebug \

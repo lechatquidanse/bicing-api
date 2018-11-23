@@ -68,7 +68,6 @@ test:
   stage: test
 
 build:
-  <<: *cache
   <<: *build_script
   environment: build
   only:
