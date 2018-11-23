@@ -27,7 +27,7 @@ help:
 ##################
 
 ## Install all install_* requirements and launch project.
-install: env_file env_build install_vendor install_db
+install: env_file env_run install_vendor install_db
 
 ## Run project, install vendors and run migrations.
 run: env_run install_vendor install_db
@@ -70,10 +70,6 @@ code_static_analysis:
 # Environment #
 ###############
 
-## Launch and build docker environment.
-env_build:
-	docker-compose up -d
-
 ## Set defaut environment variables by copying env.dist file as .env.
 env_file:
 	cp .env.dist .env
@@ -88,7 +84,7 @@ env_run:
 
 ## Import fixtures.
 import_dev:
-	./docker/stages/development/import-fixtures.sh
+	./docker/development/import-fixtures.sh
 
 ## Import stations states from bicing.cat provider.
 import_states:

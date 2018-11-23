@@ -3,7 +3,7 @@ version: '2.3'
 services:
   db:
     build:
-      context: ./docker/database
+      context: docker/build/database
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -11,10 +11,10 @@ services:
     networks: ['backend', 'logging']
     ports: ['5432:5432']
     restart: 'always'
-    volumes: ['data-db:/var/lib/postgresql/', './docker/stages/development/fixtures.zip:/var/data/fixtures.zip']
+    volumes: ['data-db:/var/lib/postgresql/', './docker/development/fixtures.zip:/var/data/fixtures.zip']
   db_test:
     build:
-      context: ./docker/database
+      context: docker/build/database
     environment:
       POSTGRES_DB: bicing
       POSTGRES_USER: test
@@ -34,7 +34,7 @@ services:
     build:
       context: .
       target: 'bicing_api_php_env_dev'
-    depends_on: ['db']
+    depends_on: ['db', 'db_test']
     networks: ['backend', 'logging']
     restart: 'always'
     volumes: ['./:/var/www/bicing-api/']
