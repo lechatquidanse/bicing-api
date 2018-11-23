@@ -34,7 +34,7 @@ services:
     build:
       context: .
       target: 'bicing_api_php_env_dev'
-    depends_on: ['db']
+    depends_on: ['db', 'db_test']
     networks: ['backend', 'logging']
     restart: 'always'
     volumes: ['./:/var/www/bicing-api/']
