@@ -19,6 +19,12 @@ before_script:
 - PRODUCTION_TAG=$(echo $CI_BUILD_REF_NAME | awk -F'/' '{print $2}')
 - export PRODUCTION_IMAGE="$CI_REGISTRY_IMAGE:$PRODUCTION_TAG"
 
+.cache_template: &cache
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+    - ./vendor
+
 .quality_assurance_script_template: &quality_assurance_script
   script:
     - cp .env.dist .env
@@ -27,7 +33,7 @@ before_script:
     - docker-compose exec -T php bin/phpstan analyse src --level max
     - docker-compose exec -T php bin/phpcs --standard=PSR2 src
     - docker-compose exec -T php bin/phpspec run
-    - docker-compose run -rm php bin/console do:mi:mi -n --env=test
+    - docker-compose run --rm php bin/console do:mi:mi -n --env=test
     - docker-compose exec -T php bin/simple-phpunit
     - docker-compose exec -T php bin/behat
     - docker-compose down -v --remove-orphans
@@ -40,7 +46,7 @@ before_script:
     - docker-compose exec -T php bin/phpstan analyse src --level max
     - docker-compose exec -T php bin/phpcs --standard=PSR2 src
     - docker-compose exec -T php bin/phpspec run
-    - docker-compose run -rm php bin/console do:mi:mi -n --env=test
+    - docker-compose run --rm php bin/console do:mi:mi -n --env=test
     - docker-compose exec -T php bin/simple-phpunit
     - docker-compose exec -T php bin/behat
     - docker-compose exec -T php rm -rf var/cache/* var/log/*
@@ -54,6 +60,7 @@ before_script:
     - ./docker/stages/production/deploy.sh
 
 test:
+  <<: *cache
   <<: *quality_assurance_script
   environment: test
   only:
@@ -61,6 +68,7 @@ test:
   stage: test
 
 build:
+  <<: *cache
   <<: *build_script
   environment: build
   only:
