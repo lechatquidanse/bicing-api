@@ -73,7 +73,7 @@ final class ImportStationStatesFromBicingApiManager
             $this->import($availabilityStation, $statedAt);
         }
 
-//        $this->refreshLastStationStateByStationCache();
+        $this->refreshLastStationStateByStationCache();
     }
 
     /**
