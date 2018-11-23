@@ -32,7 +32,7 @@ final class DoctrineStationWithDetailAndLocationQuery implements StationWithDeta
     public function findAll(ByGeoLocationFilter $filter = null): array
     {
         $queryBuilder = $this->entityManager->createQueryBuilder()
-            ->select(DoctrineStationWithDetailAndLocationSelector::FIELD_SELECTOR)
+            ->select(DoctrineStationWithDetailAndLocationSelector::select('s'))
             ->from(Station::class, 's');
 
         if (null !== $filter) {
@@ -52,7 +52,7 @@ final class DoctrineStationWithDetailAndLocationQuery implements StationWithDeta
     {
         try {
             return $this->entityManager->createQueryBuilder()
-                ->select(DoctrineStationWithDetailAndLocationSelector::FIELD_SELECTOR)
+                ->select(DoctrineStationWithDetailAndLocationSelector::select('s'))
                 ->from(Station::class, 's')
                 ->where('s.stationId = :stationId')
                 ->setParameter('stationId', $stationId)
