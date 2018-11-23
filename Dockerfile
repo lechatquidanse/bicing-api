@@ -36,7 +36,7 @@ RUN set -ex \
 
 WORKDIR /var/www/bicing-api
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer:1.7 /usr/bin/composer /usr/bin/composer
 RUN set -eux; \
 	composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --classmap-authoritative; \
 	composer clear-cache
@@ -65,20 +65,19 @@ FROM nginx:1.15.1-alpine AS bicing_api_nginx
 
 WORKDIR /var/www/bicing-api
 
-COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY ./docker/nginx/conf.d/ /etc/nginx/conf.d
+COPY docker/build/nginx /etc/nginx/
 
 COPY --from=bicing_api_php /var/www/bicing-api/public/bundles ./public/bundles
 
 #########################################
 ###### Bicing API PHP for dev env #######
 #########################################
-FROM bicing_api_php AS dev_bicing_api_php
+FROM bicing_api_php AS bicing_api_php_env_dev
 
 RUN composer install --dev --prefer-dist --no-scripts --no-progress --no-suggest \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug
-COPY ./docker/php-fpm/xdebug.ini  /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+COPY docker/build/php-fpm/docker-php-ext-xdebug.ini  /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 ENV XDEBUG_IDE_KEY=PHPSTORM
 ENV XDEBUG_REMOTE_ENABLE=1

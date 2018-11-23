@@ -28,8 +28,8 @@ before_script:
 .quality_assurance_script_template: &quality_assurance_script
   script:
     - cp .env.dist .env
-    - docker-compose up -d
-    - docker-compose exec -T php composer install
+    - docker-compose up -f docker-compose.yml -f ./docker/docker-compose.yml -d
+    - docker-compose exec -T php composer install --dev --prefer-dist --no-scripts --no-progress --no-suggest
     - docker-compose exec -T php bin/phpstan analyse src --level max
     - docker-compose exec -T php bin/phpcs --standard=PSR2 src
     - docker-compose exec -T php bin/phpspec run
@@ -41,8 +41,8 @@ before_script:
 .build_script_template: &build_script
   script:
     - cp .env.dist .env
-    - docker-compose up -d
-    - docker-compose exec -T php composer install
+    - docker-compose up -f docker-compose.yml -f ./docker/docker-compose.yml -d
+    - docker-compose exec -T php composer install --dev --prefer-dist --no-scripts --no-progress --no-suggest
     - docker-compose exec -T php bin/phpstan analyse src --level max
     - docker-compose exec -T php bin/phpcs --standard=PSR2 src
     - docker-compose exec -T php bin/phpspec run
@@ -56,8 +56,8 @@ before_script:
 
 .production_script_template: &production_script
   script:
-    - chmod +x ./docker/stages/production/deploy.sh
-    - ./docker/stages/production/deploy.sh
+    - chmod +x ./docker/production/deploy.sh
+    - ./docker/production/deploy.sh
 
 test:
   <<: *cache
