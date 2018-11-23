@@ -20,6 +20,6 @@ final class DoctrineStationWithDetailAndLocationSelectorUnitTest extends TestCas
             's.location.zipCode as zip_code',
             's.location.latitude as latitude',
             's.location.longitude as longitude',
-        ], DoctrineStationWithDetailAndLocationSelector::FIELD_SELECTOR);
+        ], DoctrineStationWithDetailAndLocationSelector::select('s'));
     }
 }

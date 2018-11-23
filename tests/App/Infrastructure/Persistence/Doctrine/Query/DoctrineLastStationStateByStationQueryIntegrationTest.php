@@ -53,7 +53,7 @@ class DoctrineLastStationStateByStationQueryIntegrationTest extends DatabaseTest
                 ->withAvailableSlotNumber(10)
                 ->withStatus($statusOpened),
             StationStateBuilder::create()
-                ->withStatedAt($statedAt->modify('-1 minutes'))
+                ->withStatedAt($statedAt)
                 ->withStationAssigned($station2)
                 ->withAvailableBikeNumber(15)
                 ->withAvailableSlotNumber(5)
@@ -62,18 +62,18 @@ class DoctrineLastStationStateByStationQueryIntegrationTest extends DatabaseTest
 
         $this->assertEquals([
             [
+                'station_id' => $stationId2->toString(),
+                'stated_at' => $statedAt,
+                'available_bike_number' => 15,
+                'available_slot_number' => 5,
+                'status' => $statusOpened,
+            ],
+            [
                 'station_id' => $stationId1->toString(),
                 'stated_at' => $statedAt,
                 'available_bike_number' => 29,
                 'available_slot_number' => 1,
                 'status' => $statusClosed,
-            ],
-            [
-                'station_id' => $stationId2->toString(),
-                'stated_at' => $statedAt->modify('-1 minutes'),
-                'available_bike_number' => 15,
-                'available_slot_number' => 5,
-                'status' => $statusOpened,
             ],
         ], $this->query->findAll());
     }

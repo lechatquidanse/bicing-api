@@ -6,14 +6,24 @@ namespace App\Infrastructure\Persistence\Doctrine\Query\Selector;
 
 final class DoctrineStationWithDetailAndLocationSelector
 {
-    public const FIELD_SELECTOR = [
-        's.stationId as station_id',
-        's.stationDetail.name as name',
-        's.stationDetail.type as type',
-        's.location.address as address',
-        's.location.addressNumber as address_number',
-        's.location.zipCode as zip_code',
-        's.location.latitude as latitude',
-        's.location.longitude as longitude',
+    private const FIELD_SELECTOR = [
+        '%alias%.stationId as station_id',
+        '%alias%.stationDetail.name as name',
+        '%alias%.stationDetail.type as type',
+        '%alias%.location.address as address',
+        '%alias%.location.addressNumber as address_number',
+        '%alias%.location.zipCode as zip_code',
+        '%alias%.location.latitude as latitude',
+        '%alias%.location.longitude as longitude',
     ];
+
+    /**
+     * @param string $alias
+     *
+     * @return array
+     */
+    public static function select(string $alias): array
+    {
+        return str_replace('%alias%', $alias, self::FIELD_SELECTOR);
+    }
 }

@@ -10,10 +10,10 @@ Feature: View last availability for each stations to choose one to start or end 
       | stated_at  | available_bike | available_slot | status |
       | -5 minutes | 2              | 28             | OPENED |
       | +5 minutes | 27             | 3              | CLOSED |
-    And station identified by "2d55ba4e-e0b0-4145-aff5-96426aee669b" with station states from "2018-09-23 15:48:51":
+    And station identified by "2d55ba4e-e0b0-4145-aff5-96426aee669b" with station states from "2018-09-17 15:52:51":
       | stated_at  | available_bike | available_slot | status |
-      | -2 minutes | 10             | 10             | OPENED |
-      | +1 minutes | 18             | 2              | OPENED |
+      | -5 minutes | 10             | 10             | OPENED |
+      | +5 minutes | 18             | 2              | OPENED |
     When I add "Accept" header equal to "application/ld+json"
     And I send a "GET" request to "/api/last-availabilities-by-station"
     Then the response status code should be 200
@@ -27,6 +27,15 @@ Feature: View last availability for each stations to choose one to start or end 
         "@type": "hydra:Collection",
         "hydra:member": [
           {
+            "@id": "/api/last-availabilities-by-station/2d55ba4e-e0b0-4145-aff5-96426aee669b",
+            "@type": "last availability by station",
+            "id": "2d55ba4e-e0b0-4145-aff5-96426aee669b",
+            "statedAt": "2018-09-17 15:57:51",
+            "availableBikeNumber": 18,
+            "availableSlotNumber": 2,
+            "status": "OPENED"
+          },
+          {
             "@id": "/api/last-availabilities-by-station/15cff96c-de06-4606-9870-b82eb9219339",
             "@type": "last availability by station",
             "id": "15cff96c-de06-4606-9870-b82eb9219339",
@@ -34,15 +43,6 @@ Feature: View last availability for each stations to choose one to start or end 
             "availableBikeNumber": 27,
             "availableSlotNumber": 3,
             "status": "CLOSED"
-          },
-          {
-            "@id": "/api/last-availabilities-by-station/2d55ba4e-e0b0-4145-aff5-96426aee669b",
-            "@type": "last availability by station",
-            "id": "2d55ba4e-e0b0-4145-aff5-96426aee669b",
-            "statedAt": "2018-09-23 15:49:51",
-            "availableBikeNumber": 18,
-            "availableSlotNumber": 2,
-            "status": "OPENED"
           }
         ]
       }
