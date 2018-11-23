@@ -19,51 +19,61 @@ before_script:
 - PRODUCTION_TAG=$(echo $CI_BUILD_REF_NAME | awk -F'/' '{print $2}')
 - export PRODUCTION_IMAGE="$CI_REGISTRY_IMAGE:$PRODUCTION_TAG"
 
-.qa:
+.quality_assurance_script_template: &quality_assurance_script
   script:
-  - cp .env.dist .env
-  - docker-compose up -d
-  - docker-compose exec php composer install
-  - docker-compose exec php bin/phpstan analyse src --level max
-  - docker-compose exec php bin/phpcs --standard=PSR2 src
-  - docker-compose exec php bin/phpspec run
-  - docker-compose exec php bin/console do:mi:mi -n --env=test
-  - docker-compose exec php bin/simple-phpunit
-  - docker-compose exec php bin/behat
-  - docker-compose exec php rm -rf var/cache/* var/log/*
-  - docker-compose down -v --remove-orphans
+    - cp .env.dist .env
+    - docker-compose up -d
+    - docker-compose exec php composer install
+    - docker-compose exec php bin/phpstan analyse src --level max
+    - docker-compose exec php bin/phpcs --standard=PSR2 src
+    - docker-compose exec php bin/phpspec run
+    - docker-compose exec php bin/console do:mi:mi -n --env=test
+    - docker-compose exec php bin/simple-phpunit
+    - docker-compose exec php bin/behat
+    - docker-compose down -v --remove-orphans
+
+.build_script_template: &build_script
+  script:
+    - cp .env.dist .env
+    - docker-compose up -d
+    - docker-compose exec php composer install
+    - docker-compose exec php bin/phpstan analyse src --level max
+    - docker-compose exec php bin/phpcs --standard=PSR2 src
+    - docker-compose exec php bin/phpspec run
+    - docker-compose exec php bin/console do:mi:mi -n --env=test
+    - docker-compose exec php bin/simple-phpunit
+    - docker-compose exec php bin/behat
+    - docker-compose exec php rm -rf var/cache/* var/log/*
+    - docker-compose down -v --remove-orphans
+    - docker build --target bicing_api_php -t $PRODUCTION_IMAGE .
+    - docker push $PRODUCTION_IMAGE
+
+.production_script_template: &production_script
+  script:
+    - chmod +x ./docker/stages/production/deploy.sh
+    - ./docker/stages/production/deploy.sh
 
 test:
+  <<: *quality_assurance_script
   environment: test
-  extends: .qa
-  script:
-  - echo "Hello We will now be preparing the test environment for you."
-  stage: test
   only:
   - /^[F|f]eature\/.*$/
+  stage: test
 
 build:
+  <<: *build_script
   environment: build
-  extends: .qa
-  script:
-  - echo "Hello We will now be preparing the build environment for you."
-  - docker build --target bicing_api_php -t $PRODUCTION_IMAGE .
-  - docker push $PRODUCTION_IMAGE
+  only:
+  - /^[R|r]elease\/.*$/
+  - /^[H|h]otfix\/.*$/
   stage: build
-  only:
-  - /^[R|r]elease\/.*$/
-  - /^[H|h]otfix\/.*$/
 
-### Production Environment
 production:
+  <<: *production_script
   environment: production
-  stage: production
-  script:
-  - echo "Hello We will now be preparing the production environment for you."
-  - chmod +x ./docker/stages/production/deploy.sh
-  - ./docker/stages/production/deploy.sh
-  when: manual
   only:
   - /^[R|r]elease\/.*$/
   - /^[H|h]otfix\/.*$/
+  stage: production
+  when: manual
 
