@@ -28,7 +28,7 @@ before_script:
 .quality_assurance_script_template: &quality_assurance_script
   script:
     - cp .env.dist .env
-    - docker-compose up -f docker-compose.yml -f ./docker/docker-compose.yml -d
+    - docker-compose -f docker-compose.yml -f ./docker/docker-compose.yml up -d
     - docker-compose exec -T php composer install --dev --prefer-dist --no-scripts --no-progress --no-suggest
     - docker-compose exec -T php bin/phpstan analyse src --level max
     - docker-compose exec -T php bin/phpcs --standard=PSR2 src
@@ -41,7 +41,7 @@ before_script:
 .build_script_template: &build_script
   script:
     - cp .env.dist .env
-    - docker-compose up -f docker-compose.yml -f ./docker/docker-compose.yml -d
+    - docker-compose -f docker-compose.yml -f ./docker/docker-compose.yml up -d
     - docker-compose exec -T php composer install --dev --prefer-dist --no-scripts --no-progress --no-suggest
     - docker-compose exec -T php bin/phpstan analyse src --level max
     - docker-compose exec -T php bin/phpcs --standard=PSR2 src
