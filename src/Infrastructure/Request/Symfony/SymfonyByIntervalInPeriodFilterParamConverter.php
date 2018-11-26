@@ -34,7 +34,7 @@ final class SymfonyByIntervalInPeriodFilterParamConverter implements ParamConver
     private const INTERVAL_OPTIONS_KEY = 'defaultInterval';
 
     /** @var string */
-    private const EXCEPTION_DATE_OPTION_MESSAGE = 'An error occurred during period creation from options values';
+    private const EXCEPTION_DATE_OPTION_MESSAGE = 'An error occurred during period creation from options values %s';
 
     /**
      * @param Request        $request
@@ -98,7 +98,7 @@ final class SymfonyByIntervalInPeriodFilterParamConverter implements ParamConver
                 '';
         } catch (\Exception $exception) {
             $defaultOption = '';
-            $this->logError(self::EXCEPTION_DATE_OPTION_MESSAGE);
+            $this->logError(sprintf(self::EXCEPTION_DATE_OPTION_MESSAGE, $optionsKey));
         }
 
         return $query->get($queryKey, $defaultOption);

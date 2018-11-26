@@ -127,14 +127,6 @@ final class Location implements ValueObjectInterface
     }
 
     /**
-     * @param string $geometry
-     */
-    public function withGeometry(string $geometry): void
-    {
-        $this->geometry = $geometry;
-    }
-
-    /**
      * @param string $address
      * @param int    $districtCode
      * @param string $zipCode

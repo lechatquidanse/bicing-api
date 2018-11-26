@@ -77,6 +77,10 @@ class StationWithDetailAndLocationCollectionDataProviderUnitTest extends TestCas
             ]),
             $generators->current()
         );
+
+        $generators->next();
+
+        $this->assertNull($generators->getReturn());
     }
 
     protected function setUp()

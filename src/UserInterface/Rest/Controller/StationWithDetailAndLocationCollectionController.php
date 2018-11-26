@@ -8,6 +8,9 @@ use App\Application\UseCase\DataProvider\StationWithDetailAndLocationCollectionD
 use App\Application\UseCase\Filter\ByGeoLocationFilter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
+/**
+ * @codeCoverageIgnore
+ */
 final class StationWithDetailAndLocationCollectionController
 {
     /** @var StationWithDetailAndLocationCollectionDataProvider */

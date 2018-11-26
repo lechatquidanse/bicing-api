@@ -5,6 +5,7 @@
 !/bin/console
 .env
 /public/bundles/
+/reports/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###

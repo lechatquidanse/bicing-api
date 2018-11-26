@@ -11,7 +11,7 @@ interface LastStationStateByStationQueryInterface
     /**
      * @param UuidInterface $stationId
      *
-     * @return array[]
+     * @return array[]|null
      */
     public function find(UuidInterface $stationId): ?array;
 
