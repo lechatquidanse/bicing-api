@@ -89,6 +89,27 @@ class DoctrineLastStationStateByStationQueryCacheUnitTest extends TestCase
         $this->assertEquals($expected, $this->queryCache->findAll());
     }
 
+    /** @test */
+    public function it_can_find_last_station_sate_for_specific_station(): void
+    {
+        $stationId = Uuid::uuid4();
+        $statusClosed = StationStateStatusBuilder::create()->withStatusClosed()->build();
+        $statedAt = new DateTimeImmutableStringable();
+
+        $this->query->addStationSateWithData($stationId, $statedAt, 23, 12, $statusClosed);
+
+        $this->assertEquals(
+            [
+                'station_id' => $stationId,
+                'stated_at' => $statedAt,
+                'available_bike_number' => 23,
+                'available_slot_number' => 12,
+                'status' => StationStateStatusBuilder::create()->withStatusClosed()->build(),
+            ],
+            $this->queryCache->find($stationId)
+        );
+    }
+
     /** {@inheritdoc} */
     protected function setUp()
     {

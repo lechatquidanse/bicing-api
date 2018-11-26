@@ -6,6 +6,7 @@ namespace tests\App\Application\UseCase\DataProvider;
 
 use App\Application\UseCase\DataProvider\LastStationStateByStationDataProvider;
 use App\Application\UseCase\Query\LastStationStateByStationView;
+use App\Application\UseCase\Query\StationAvailabilitiesByIntervalInPeriodFilterView;
 use App\Domain\Exception\Station\StationDoesNotExist;
 use App\Domain\Model\StationState\DateTimeImmutableStringable;
 use Assert\InvalidArgumentException;
@@ -126,6 +127,22 @@ class LastStationStateByStationDataProviderUnitTest extends TestCase
             ]),
             $generators->current()
         );
+
+        $generators->next();
+
+        $this->assertNull($generators->getReturn());
+    }
+
+    /** @test */
+    public function it_can_support_last_station_state_by_station_view_class(): void
+    {
+        $this->assertTrue($this->provider->supports(LastStationStateByStationView::class));
+    }
+
+    /** @test */
+    public function it_can_not_support_other_than_last_station_state_by_station_view_class(): void
+    {
+        $this->assertFalse($this->provider->supports(StationAvailabilitiesByIntervalInPeriodFilterView::class));
     }
 
     protected function setUp()

@@ -79,6 +79,12 @@ class DoctrineLastStationStateByStationQueryIntegrationTest extends DatabaseTest
     }
 
     /** @test */
+    public function it_can_not_find_all_if_no_record_with_a_last_stated_at_found(): void
+    {
+        $this->assertEquals([], $this->query->findAll());
+    }
+
+    /** @test */
     public function it_can_find_last_station_sate_for_specific_station(): void
     {
         $stationId = Uuid::uuid4();

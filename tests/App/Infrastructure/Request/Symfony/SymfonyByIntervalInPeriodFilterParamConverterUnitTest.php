@@ -10,6 +10,7 @@ use App\Infrastructure\Request\Symfony\SymfonyByIntervalInPeriodFilterParamConve
 use PHPUnit\Framework\TestCase;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use tests\App\Infrastructure\Persistence\Doctrine\Type\SpyLogger;
 
 class SymfonyByIntervalInPeriodFilterParamConverterUnitTest extends TestCase
 {
@@ -80,6 +81,32 @@ class SymfonyByIntervalInPeriodFilterParamConverterUnitTest extends TestCase
             ByIntervalInPeriodFilter::fromRawStringValues($defaultPeriodStart, $defaultPeriodEnd, $defaultInterval),
             $request->attributes->get('filter')
         );
+    }
+
+    /** @test */
+    public function it_can_log_error_from_bad_value_set_in_option(): void
+    {
+        $logger = new SpyLogger('test');
+        $this->converter->setLogger($logger);
+
+        $configuration = new ParamConverter([
+            'class' => ByIntervalInPeriodFilter::class,
+            'name' => 'filter',
+            'options' => [
+                'defaultPeriodStart' => 'bad_value_option',
+                'defaultPeriodEnd' => 'bad_value_option End',
+                'defaultInterval' => '10 minute',
+            ],
+        ]);
+
+        try {
+            $this->converter->apply(new Request(), $configuration);
+        } catch (\Exception $e) {
+            $this->assertEquals([
+                'An error occurred during period creation from options values defaultPeriodStart',
+                'An error occurred during period creation from options values defaultPeriodEnd',
+            ], $logger->errors());
+        }
     }
 
     protected function setUp()

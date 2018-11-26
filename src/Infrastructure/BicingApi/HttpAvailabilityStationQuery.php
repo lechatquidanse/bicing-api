@@ -65,7 +65,7 @@ final class HttpAvailabilityStationQuery implements AvailabilityStationQueryInte
             self::RESPONSE_FORMAT
         );
 
-        if (false === is_array($data)) {
+        if (false === is_array($data) || empty($data)) {
             throw new RuntimeException(self::DESERIALIZE_EXCEPTION_MESSAGE);
         }
 
