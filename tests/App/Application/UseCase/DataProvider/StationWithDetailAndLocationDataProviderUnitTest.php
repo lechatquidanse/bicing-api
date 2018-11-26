@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace tests\App\Application\UseCase\DataProvider;
 
 use App\Application\UseCase\DataProvider\StationWithDetailAndLocationDataProvider;
+use App\Application\UseCase\Query\LastStationStateByStationView;
 use App\Application\UseCase\Query\StationWithDetailAndLocationView;
 use App\Domain\Exception\Station\StationDoesNotExist;
 use Assert\InvalidArgumentException;
@@ -79,6 +80,18 @@ class StationWithDetailAndLocationDataProviderUnitTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
 
         $this->provider->getItem(StationWithDetailAndLocationView::class, 'not_expected_station_id_type');
+    }
+
+    /** @test */
+    public function it_can_support_station_with_detail_and_location_view_class(): void
+    {
+        $this->assertTrue($this->provider->supports(StationWithDetailAndLocationView::class));
+    }
+
+    /** @test */
+    public function it_can_not_support_other_than_station_with_detail_and_location_view_class(): void
+    {
+        $this->assertFalse($this->provider->supports(LastStationStateByStationView::class));
     }
 
     protected function setUp()

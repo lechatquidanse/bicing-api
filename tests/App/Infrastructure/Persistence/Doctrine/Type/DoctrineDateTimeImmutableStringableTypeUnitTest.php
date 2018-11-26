@@ -8,6 +8,7 @@ use App\Domain\Model\StationState\DateTimeImmutableStringable;
 use App\Infrastructure\Persistence\Doctrine\Type\DoctrineDateTimeImmutableStringableType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
+use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Type;
 use PHPUnit\Framework\TestCase;
 
@@ -48,6 +49,14 @@ class DoctrineDateTimeImmutableStringableTypeUnitTest extends TestCase
         $datetime = new DateTimeImmutableStringable();
 
         $this->assertEquals($datetime, $this->type->convertToPHPValue($datetime, $this->platform));
+    }
+
+    /** @test */
+    public function it_can_not_convert_bad_value_to_php_value(): void
+    {
+        $this->expectException(ConversionException::class);
+
+        $this->type->convertToPHPValue('bad_value', $this->platform);
     }
 
     /** @test */

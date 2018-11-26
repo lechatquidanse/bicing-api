@@ -4,7 +4,6 @@
 **/.gitignore
 **/Dockerfile
 **/docker-compose.*
-!docker/build/nginx
 docker/build/database/
 docker/development/
 documentation/

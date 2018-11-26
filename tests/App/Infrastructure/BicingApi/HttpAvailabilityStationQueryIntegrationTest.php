@@ -9,7 +9,7 @@ use App\Infrastructure\BicingApi\HttpAvailabilityStationQuery;
 use tests\Support\TestCase\IntegrationTestCase;
 
 /**
- * @see HttpAvailabilityStationQueryInterface
+ * @see HttpAvailabilityStationQuery
  */
 class HttpAvailabilityStationQueryIntegrationTest extends IntegrationTestCase
 {
@@ -17,6 +17,9 @@ class HttpAvailabilityStationQueryIntegrationTest extends IntegrationTestCase
      * @var HttpAvailabilityStationQuery
      */
     private $repository;
+
+    /** @var MockHttpQueryClient */
+    private $httpClient;
 
     /** @test */
     public function it_can_find_all_two_availability_stations(): void
@@ -57,6 +60,16 @@ class HttpAvailabilityStationQueryIntegrationTest extends IntegrationTestCase
         $this->assertEquals($expected, $this->repository->findAll());
     }
 
+    /** @test */
+    public function it_can_not_find_if_empty_http_response_return(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('An error occurred during AvailabilityStation query deserialization ');
+
+        $this->httpClient::willReturnEmptyResponse();
+        $this->repository->findAll();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -64,6 +77,7 @@ class HttpAvailabilityStationQueryIntegrationTest extends IntegrationTestCase
     {
         parent::setUp();
 
+        $this->httpClient = $this->getContainer()->get('eight_points_guzzle.client.bicing_api');
         $this->repository = $this->getContainer()->get('test.app.bicing_api.availability_station_query');
     }
 
@@ -72,6 +86,8 @@ class HttpAvailabilityStationQueryIntegrationTest extends IntegrationTestCase
      */
     protected function tearDown()
     {
+        $this->httpClient::reset();
+        $this->httpClient = null;
         $this->repository = null;
 
         parent::tearDown();

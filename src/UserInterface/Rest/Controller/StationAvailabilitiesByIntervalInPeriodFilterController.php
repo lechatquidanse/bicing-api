@@ -10,6 +10,9 @@ use App\Application\UseCase\Query\StationAvailabilitiesByIntervalInPeriodFilterV
 use App\Domain\Model\Station\Station;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
+/**
+ * @codeCoverageIgnore
+ */
 final class StationAvailabilitiesByIntervalInPeriodFilterController
 {
     /** @var StationAvailabilitiesByIntervalInPeriodFilterQueryInterface */
