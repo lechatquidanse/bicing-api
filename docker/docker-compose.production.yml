@@ -7,7 +7,7 @@ services:
       POSTGRES_USER: ${POSTGRES_PRODUCTION_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PRODUCTION_PASSWORD}
     image: ${PRODUCTION_IMAGE_DATABASE}
-    networks: ['backend']
+    networks: ['backend', 'bicing-statistics-api-data']
     ports: ['5432:5432']
     restart: 'always'
     volumes: ['data-db:/var/lib/postgresql/']
@@ -30,3 +30,5 @@ volumes:
 networks:
   frontend:
   backend:
+  bicing-statistics-api-data:
+    external: true
