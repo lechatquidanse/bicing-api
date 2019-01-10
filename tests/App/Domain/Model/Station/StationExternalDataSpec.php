@@ -27,6 +27,19 @@ class StationExternalDataSpec extends ObjectBehavior
     }
 
     /**
+     * Test that StationExternalData can be created from raw values with nullable parameters.
+     */
+    public function it_can_be_created_from_raw_values_with_nullable_parameter()
+    {
+        $this->beConstructedThrough('fromRawValues', [
+            '31',
+            null,
+        ]);
+
+        $this->shouldBeAnInstanceOf(StationExternalData::class);
+    }
+
+    /**
      * Test that a StationExternalData can not be created with an empty external station id.
      */
     public function it_can_not_be_created_with_empty_external_station_id()

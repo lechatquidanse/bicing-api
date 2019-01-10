@@ -33,15 +33,12 @@ final class CreateStationHandler
     {
         $location = Location::fromRawValues(
             $command->address,
-            $command->districtCode,
-            $command->zipCode,
             $command->latitude,
-            $command->longitude
+            $command->longitude,
+            $command->addressNumber,
+            $command->districtCode,
+            $command->zipCode
         );
-
-        if (null !== $command->addressNumber) {
-            $location->withAddressNumber($command->addressNumber);
-        }
 
         $this->repository->add(Station::create(
             $command->stationId,

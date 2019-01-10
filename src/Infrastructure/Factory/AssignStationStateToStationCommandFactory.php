@@ -48,9 +48,9 @@ final class AssignStationStateToStationCommandFactory implements AssignStationSt
 
         $form->submit([
             'externalStationId' => $availabilityStation->id(),
-            'availableBikeNumber' => $availabilityStation->bikes(),
-            'availableSlotNumber' => $availabilityStation->slots(),
-            'status' => $availabilityStation->status(),
+            'availableBikeNumber' => $availabilityStation->availability()->bikes(),
+            'availableSlotNumber' => $availabilityStation->availability()->slots(),
+            'status' => $availabilityStation->availability()->status(),
         ]);
 
         if (!$form->isValid()) {

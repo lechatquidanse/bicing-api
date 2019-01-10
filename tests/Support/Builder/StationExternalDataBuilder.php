@@ -14,15 +14,15 @@ class StationExternalDataBuilder implements BuilderInterface
     private $externalStationId;
 
     /**
-     * @var array
+     * @var array|null
      */
     private $nearByExternalStationIds;
 
     /**
-     * @param string $externalStationId
-     * @param array  $nearByExternalStationIds
+     * @param string     $externalStationId
+     * @param array|null $nearByExternalStationIds
      */
-    private function __construct(string $externalStationId, array $nearByExternalStationIds)
+    private function __construct(string $externalStationId, ?array $nearByExternalStationIds)
     {
         $this->externalStationId = $externalStationId;
         $this->nearByExternalStationIds = $nearByExternalStationIds;
@@ -35,7 +35,7 @@ class StationExternalDataBuilder implements BuilderInterface
      */
     public static function create(): StationExternalDataBuilder
     {
-        return new self((string) rand(1, 500), ['36', '105', '359', '380']);
+        return new self((string) random_int(1, 500), null);
     }
 
     /**
@@ -65,11 +65,11 @@ class StationExternalDataBuilder implements BuilderInterface
     }
 
     /**
-     * @param array $nearByExternalStationIds
+     * @param array|null $nearByExternalStationIds
      *
      * @return StationExternalDataBuilder
      */
-    public function withNearByExternalStationIds(array $nearByExternalStationIds): StationExternalDataBuilder
+    public function withNearByExternalStationIds(?array $nearByExternalStationIds): StationExternalDataBuilder
     {
         $copy = $this->copy();
         $copy->nearByExternalStationIds = $nearByExternalStationIds;

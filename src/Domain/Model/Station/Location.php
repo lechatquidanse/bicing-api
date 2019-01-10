@@ -25,27 +25,6 @@ final class Location implements ValueObjectInterface
     private $address;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(type="string", length=10, nullable=true)
-     */
-    private $addressNumber;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="smallint", options={"unsigned":true})
-     */
-    private $districtCode;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=5)
-     */
-    private $zipCode;
-
-    /**
      * @var float
      *
      * @ORM\Column(type="float")
@@ -60,6 +39,27 @@ final class Location implements ValueObjectInterface
     private $longitude;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $addressNumber;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", length=5, nullable=true)
+     */
+    private $zipCode;
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(type="smallint", options={"unsigned":true}, nullable=true)
+     */
+    private $districtCode;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="geometry", options={"geometry_type"="POINT"}, nullable=true)
@@ -67,88 +67,74 @@ final class Location implements ValueObjectInterface
     private $geometry;
 
     /**
-     * @param string $address
-     * @param int    $districtCode
-     * @param string $zipCode
-     * @param float  $latitude
-     * @param float  $longitude
+     * @param string      $address
+     * @param float       $latitude
+     * @param float       $longitude
+     * @param null|string $addressNumber
+     * @param int|null    $districtCode
+     * @param null|string $zipCode
      */
     private function __construct(
         string $address,
-        int $districtCode,
-        string $zipCode,
         float $latitude,
-        float $longitude
+        float $longitude,
+        ?string $addressNumber,
+        ?int $districtCode,
+        ?string $zipCode
     ) {
-        $this->validate($address, $districtCode, $zipCode);
+        $this->validate($address, $addressNumber, $districtCode, $zipCode);
 
         $this->address = $address;
-        $this->districtCode = $districtCode;
-        $this->zipCode = $zipCode;
         $this->latitude = $latitude;
         $this->longitude = $longitude;
+        $this->addressNumber = $addressNumber;
+        $this->districtCode = $districtCode;
+        $this->zipCode = $zipCode;
     }
 
     /**
-     * @param string $address
-     * @param int    $districtCode
-     * @param string $zipCode
-     * @param float  $latitude
-     * @param float  $longitude
+     * @param string      $address
+     * @param float       $latitude
+     * @param float       $longitude
+     * @param null|string $addressNumber
+     * @param int|null    $districtCode
+     * @param null|string $zipCode
      *
-     * @return self
+     * @return Location
      */
     public static function fromRawValues(
         string $address,
-        int $districtCode,
-        string $zipCode,
         float $latitude,
-        float $longitude
+        float $longitude,
+        ?string $addressNumber,
+        ?int $districtCode,
+        ?string $zipCode
     ): self {
         return new self(
             $address,
-            $districtCode,
-            $zipCode,
             $latitude,
-            $longitude
+            $longitude,
+            $addressNumber,
+            $districtCode,
+            $zipCode
         );
     }
 
     /**
-     * @param string $addressNumber
-     *
-     * @throws \Assert\AssertionFailedException
-     */
-    public function withAddressNumber(string $addressNumber): void
-    {
-        $this->validateAddressNumber($addressNumber);
-
-        $this->addressNumber = $addressNumber;
-    }
-
-    /**
-     * @param string $address
-     * @param int    $districtCode
-     * @param string $zipCode
+     * @param string      $address
+     * @param string|null $addressNumber
+     * @param int|null    $districtCode
+     * @param string|null $zipCode
      *
      * @throws LazyAssertionException if at least one assertion is not respected
      */
-    private function validate(string $address, int $districtCode, string $zipCode): void
+    private function validate(string $address, ?string $addressNumber, ?int $districtCode, ?string $zipCode): void
     {
         Assert::lazy()
             ->that($address, 'address')->notEmpty()
-            ->that($districtCode, 'districtCode')->max(10)
-            ->that($zipCode, 'zipCode')->length(5)
+            ->that($addressNumber, 'address')->nullOr()->maxLength(10)
+            ->that($districtCode, 'districtCode')->nullOr()->max(10)
+            ->that($zipCode, 'zipCode')->nullOr()->length(5)
             ->verifyNow();
-    }
-
-    /**
-     * @param string $addressNumber
-     *
-     * @throws \Assert\AssertionFailedException
-     */
-    private function validateAddressNumber(string $addressNumber): void
-    {
-        Assertion::maxLength($addressNumber, 10);
     }
 }
