@@ -12,8 +12,9 @@ class FakeBicingApiHttpEmptyResponse implements ResponseInterface
     public function getBody()
     {
         return <<<'json'
-[
-]
+{
+    "fake": "bad_value"
+}
 json;
     }
 

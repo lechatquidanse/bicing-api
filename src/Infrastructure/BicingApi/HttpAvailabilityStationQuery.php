@@ -7,7 +7,6 @@ namespace App\Infrastructure\BicingApi;
 use App\Infrastructure\Http\HttpQueryClientInterface;
 use JMS\Serializer\SerializerInterface;
 use Psr\Http\Message\ResponseInterface;
-use RuntimeException;
 
 final class HttpAvailabilityStationQuery implements AvailabilityStationQueryInterface
 {
@@ -17,7 +16,7 @@ final class HttpAvailabilityStationQuery implements AvailabilityStationQueryInte
     /**
      * @var string
      */
-    const REQUEST_URI = '/availability_map/getJsonObject';
+    const REQUEST_URI = '/get-stations';
 
     /**
      * @var string
@@ -55,20 +54,21 @@ final class HttpAvailabilityStationQuery implements AvailabilityStationQueryInte
     /**
      * @param ResponseInterface $response
      *
-     * @return AvailabilityStation[]
+     * @return array
      */
     private function deserialize(ResponseInterface $response): array
     {
-        $data = $this->serializer->deserialize(
+        /** @var ApiResponse $apiResponse */
+        $apiResponse = $this->serializer->deserialize(
             (string) $response->getBody(),
-            'array<App\Infrastructure\BicingApi\AvailabilityStation>',
+            ApiResponse::class,
             self::RESPONSE_FORMAT
         );
 
-        if (false === is_array($data) || empty($data)) {
-            throw new RuntimeException(self::DESERIALIZE_EXCEPTION_MESSAGE);
+        if (false === $apiResponse->isValid()) {
+            throw new \RuntimeException(self::DESERIALIZE_EXCEPTION_MESSAGE);
         }
 
-        return $data;
+        return $apiResponse->stations();
     }
 }

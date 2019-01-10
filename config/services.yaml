@@ -102,3 +102,8 @@ services:
     App\Infrastructure\Persistence\Doctrine\Subscriber\DoctrineMigrationSubscriber:
       tags:
       - { name: 'doctrine.event_subscriber', connection: default }
+
+
+    App\Infrastructure\BicingApi\TransformApiResponseSubscriber:
+      tags:
+      - { name: jms_serializer.event_subscriber }

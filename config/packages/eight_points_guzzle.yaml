@@ -2,7 +2,7 @@ eight_points_guzzle:
     clients:
         bicing_api:
             class: 'App\Infrastructure\Http\HttpQueryClient'
-            base_url: 'https://www.bicing.cat/'
+            base_url: 'https://www.bicing.barcelona/'
 
             options:
                 timeout: 30

@@ -26,9 +26,9 @@ final class StationExternalData implements ValueObjectInterface
     private $externalStationId;
 
     /**
-     * @var array
+     * @var array|null
      *
-     * @ORM\Column(type="simple_array")
+     * @ORM\Column(type="simple_array", nullable=true)
      */
     private $nearByExternalStationIds;
 
@@ -36,7 +36,7 @@ final class StationExternalData implements ValueObjectInterface
      * @param string $externalStationId
      * @param array  $nearByExternalStationIds
      */
-    private function __construct(string $externalStationId, array $nearByExternalStationIds)
+    private function __construct(string $externalStationId, ?array $nearByExternalStationIds)
     {
         $this->validate($externalStationId);
 
@@ -50,7 +50,7 @@ final class StationExternalData implements ValueObjectInterface
      *
      * @return self
      */
-    public static function fromRawValues(string $externalStationId, array $nearByExternalStationIds): self
+    public static function fromRawValues(string $externalStationId, ?array $nearByExternalStationIds): self
     {
         return new self($externalStationId, $nearByExternalStationIds);
     }

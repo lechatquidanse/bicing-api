@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace tests\App\Infrastructure\BicingApi;
 
-use App\Infrastructure\BicingApi\AvailabilityStation;
 use App\Infrastructure\BicingApi\HttpAvailabilityStationQuery;
+use tests\Support\Builder\BicingApi\AvailabilityBuilder;
+use tests\Support\Builder\BicingApi\AvailabilityStationBuilder;
+use tests\Support\Builder\BicingApi\LocationBuilder;
+use tests\Support\Builder\BicingApi\StationBuilder;
 use tests\Support\TestCase\IntegrationTestCase;
 
 /**
@@ -25,36 +28,42 @@ class HttpAvailabilityStationQueryIntegrationTest extends IntegrationTestCase
     public function it_can_find_all_two_availability_stations(): void
     {
         $expected = [
-            AvailabilityStation::create(
-                '1',
-                2,
-                2.180042,
-                41.397952,
-                7,
-                20,
-                '08013',
-                'Gran Via Corts Catalanes',
-                '760',
-                ['24', '369', '387', '426'],
-                'OPN',
-                '01 - C/ GRAN VIA CORTS CATALANES 760',
-                'BIKE'
-            ),
-            AvailabilityStation::create(
-                '2',
-                2,
-                2.17706,
-                41.39553,
-                16,
-                11,
-                '08010',
-                'Roger de Flor/ Gran Vía',
-                '126',
-                ['360', '368', '387', '414'],
-                'OPN',
-                '02 - C/ ROGER DE FLOR, 126',
-                'BIKE'
-            ),
+            AvailabilityStationBuilder::create()
+                ->withId('406')
+                ->withAvailability(AvailabilityBuilder::create()
+                    ->withStatus('OPENED')
+                    ->withBikes(30)
+                    ->withSlots(1)
+                    ->build())
+                ->withStation(StationBuilder::create()
+                    ->withName('Gran Via de Les Corts Catalanes')
+                    ->withType('ELECTRIC_BIKE')
+                    ->build())
+                ->withLocation(LocationBuilder::create()
+                    ->withLongitude(2.164597)
+                    ->withLatitude(41.386512)
+                    ->withAddress('Gran Via de Les Corts Catalanes')
+                    ->withAddressNumber('592')
+                    ->build())
+                ->build(),
+            AvailabilityStationBuilder::create()
+                ->withId('405')
+                ->withAvailability(AvailabilityBuilder::create()
+                    ->withStatus('CLOSED')
+                    ->withBikes(1)
+                    ->withSlots(24)
+                    ->build())
+                ->withStation(StationBuilder::create()
+                    ->withName('Comte Borrell')
+                    ->withType('BIKE')
+                    ->build())
+                ->withLocation(LocationBuilder::create()
+                    ->withLongitude(2.152)
+                    ->withLatitude(41.38551)
+                    ->withAddress('Comte Borrell')
+                    ->withAddressNumber('198')
+                    ->build())
+                ->build(),
         ];
 
         $this->assertEquals($expected, $this->repository->findAll());

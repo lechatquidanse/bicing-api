@@ -9,7 +9,8 @@ use App\Domain\Model\StationState\StationStateStatus;
 use App\Infrastructure\Factory\AssignStationStateToStationCommandFactory;
 use Symfony\Component\Form\Exception\InvalidArgumentException;
 use tests\App\Infrastructure\System\MockClock;
-use tests\Support\Builder\AvailabilityStationBuilder;
+use tests\Support\Builder\BicingApi\AvailabilityBuilder;
+use tests\Support\Builder\BicingApi\AvailabilityStationBuilder;
 use tests\Support\TestCase\IntegrationTestCase;
 
 class AssignStationStateToStationCommandFactoryIntegrationTest extends IntegrationTestCase
@@ -43,9 +44,11 @@ class AssignStationStateToStationCommandFactoryIntegrationTest extends Integrati
         $this->assertEquals($expected, $this->factory->fromAvailabilityStation(
             AvailabilityStationBuilder::create()
                 ->withId('12')
-                ->withStatus('OPN')
-                ->withBikes(2)
-                ->withSlots(18)
+                ->withAvailability(AvailabilityBuilder::create()
+                    ->withStatus('OPN')
+                    ->withBikes(2)
+                    ->withSlots(18)
+                    ->build())
                 ->build()
         ));
 
@@ -61,7 +64,9 @@ class AssignStationStateToStationCommandFactoryIntegrationTest extends Integrati
         $this->expectExceptionMessage('Form invalid when creating AssignStationStateToStationCommand.');
 
         $this->factory->fromAvailabilityStation(AvailabilityStationBuilder::create()
-            ->withStatus('')
+            ->withAvailability(AvailabilityBuilder::create()
+                ->withStatus('')
+                ->build())
             ->build());
     }
 
