@@ -39,14 +39,11 @@ final class SymfonyCreateStationType extends AbstractType
             ->add('name', TextType::class, ['constraints' => new Assert\NotBlank()])
             ->add('type', TextType::class, ['constraints' => new Assert\NotBlank()])
             ->add('externalStationId', TextType::class, ['constraints' => new Assert\NotBlank()])
-            ->add('nearByExternalStationIds', CollectionType::class, [
-                'constraints' => new Assert\NotBlank(),
-                'allow_add' => true,
-            ])
+            ->add('nearByExternalStationIds', CollectionType::class, ['allow_add' => true])
             ->add('address', TextType::class, ['constraints' => new Assert\NotBlank()])
             ->add('addressNumber', TextType::class)
-            ->add('districtCode', IntegerType::class, ['constraints' => new Assert\NotBlank()])
-            ->add('zipCode', TextType::class, ['constraints' => new Assert\NotBlank()])
+            ->add('districtCode', IntegerType::class)
+            ->add('zipCode', TextType::class)
             ->add('latitude', NumberType::class, ['constraints' => new Assert\NotBlank()])
             ->add('longitude', NumberType::class, ['constraints' => new Assert\NotBlank()]);
 

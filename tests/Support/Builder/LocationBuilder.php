@@ -19,16 +19,6 @@ class LocationBuilder implements BuilderInterface
     private $addressNumber;
 
     /**
-     * @var int
-     */
-    private $districtCode;
-
-    /**
-     * @var string
-     */
-    private $zipCode;
-
-    /**
      * @var float
      */
     private $latitude;
@@ -42,29 +32,39 @@ class LocationBuilder implements BuilderInterface
     private $geometry;
 
     /**
+     * @var int|null
+     */
+    private $districtCode;
+
+    /**
+     * @var string|null
+     */
+    private $zipCode;
+
+    /**
      * @param string      $address
-     * @param string|null $addressNumber
-     * @param int         $districtCode
-     * @param string      $zipCode
      * @param float       $latitude
      * @param float       $longitude
-     * @param string      $geometry
+     * @param int|null    $districtCode
+     * @param null|string $zipCode
+     * @param null|string $addressNumber
+     * @param null|string $geometry
      */
     private function __construct(
         string $address,
-        int $districtCode,
-        string $zipCode,
         float $latitude,
         float $longitude,
-        string $addressNumber = null,
-        string $geometry = null
+        ?string $addressNumber,
+        ?int $districtCode,
+        ?string $zipCode,
+        ?string $geometry = null
     ) {
         $this->address = $address;
+        $this->latitude = $latitude;
+        $this->longitude = $longitude;
         $this->addressNumber = $addressNumber;
         $this->districtCode = $districtCode;
         $this->zipCode = $zipCode;
-        $this->latitude = $latitude;
-        $this->longitude = $longitude;
         $this->geometry = $geometry;
     }
 
@@ -77,10 +77,10 @@ class LocationBuilder implements BuilderInterface
     {
         return new self(
             'Sant Pere Més Alt',
-            1,
-            '08003',
             41.387074,
             2.175247,
+            null,
+            null,
             null,
             null
         );
@@ -97,19 +97,12 @@ class LocationBuilder implements BuilderInterface
     {
         $location = Location::fromRawValues(
             $this->address,
-            $this->districtCode,
-            $this->zipCode,
             $this->latitude,
-            $this->longitude
+            $this->longitude,
+            $this->addressNumber,
+            $this->districtCode,
+            $this->zipCode
         );
-
-        if (null !== $this->addressNumber) {
-            $location->withAddressNumber($this->addressNumber);
-        }
-
-        if (null !== $this->geometry) {
-            $location->withGeometry($this->geometry);
-        }
 
         return $location;
     }
@@ -132,7 +125,7 @@ class LocationBuilder implements BuilderInterface
      *
      * @return LocationBuilder
      */
-    public function withAddressNumber(string $addressNumber = null): LocationBuilder
+    public function withAddressNumber(?string $addressNumber): LocationBuilder
     {
         $copy = $this->copy();
         $copy->addressNumber = $addressNumber;
@@ -145,7 +138,7 @@ class LocationBuilder implements BuilderInterface
      *
      * @return LocationBuilder
      */
-    public function withDistrictCode(int $districtCode): LocationBuilder
+    public function withDistrictCode(?int $districtCode): LocationBuilder
     {
         $copy = $this->copy();
         $copy->districtCode = $districtCode;
@@ -158,7 +151,7 @@ class LocationBuilder implements BuilderInterface
      *
      * @return LocationBuilder
      */
-    public function withZipCode(string $zipCode): LocationBuilder
+    public function withZipCode(?string $zipCode): LocationBuilder
     {
         $copy = $this->copy();
         $copy->zipCode = $zipCode;
@@ -212,11 +205,11 @@ class LocationBuilder implements BuilderInterface
     {
         return new self(
             $this->address,
-            $this->districtCode,
-            $this->zipCode,
             $this->latitude,
             $this->longitude,
             $this->addressNumber,
+            $this->districtCode,
+            $this->zipCode,
             $this->geometry
         );
     }

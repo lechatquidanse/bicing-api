@@ -46,16 +46,16 @@ final class CreateStationCommandFactory implements CreateStationCommandFactoryIn
         $form = $this->formFactory->create(SymfonyCreateStationType::class);
 
         $form->submit([
-            'name' => $availabilityStation->name(),
-            'type' => $availabilityStation->type(),
+            'name' => $availabilityStation->station()->name(),
+            'type' => $availabilityStation->station()->type(),
             'externalStationId' => $availabilityStation->id(),
-            'nearByExternalStationIds' => $availabilityStation->nearByStationIds(),
-            'address' => $availabilityStation->address(),
-            'addressNumber' => $availabilityStation->addressNumber(),
-            'districtCode' => $availabilityStation->districtCode(),
-            'zipCode' => $availabilityStation->zipCode(),
-            'latitude' => $availabilityStation->latitude(),
-            'longitude' => $availabilityStation->longitude(),
+            'nearByExternalStationIds' => $availabilityStation->station()->nearByStationIds(),
+            'address' => $availabilityStation->location()->address(),
+            'addressNumber' => $availabilityStation->location()->addressNumber(),
+            'districtCode' => $availabilityStation->location()->districtCode(),
+            'zipCode' => $availabilityStation->location()->zipCode(),
+            'latitude' => $availabilityStation->location()->latitude(),
+            'longitude' => $availabilityStation->location()->longitude(),
         ]);
 
         if (!$form->isValid()) {

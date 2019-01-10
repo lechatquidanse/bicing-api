@@ -6,6 +6,10 @@ namespace tests\App\Infrastructure\BicingApi;
 
 use App\Infrastructure\BicingApi\AvailabilityStation;
 use JMS\Serializer\SerializerInterface;
+use tests\Support\Builder\BicingApi\AvailabilityStationBuilder;
+use tests\Support\Builder\BicingApi\AvailabilityBuilder;
+use tests\Support\Builder\BicingApi\LocationBuilder;
+use tests\Support\Builder\BicingApi\StationBuilder;
 use tests\Support\TestCase\IntegrationTestCase;
 
 /**
@@ -21,40 +25,46 @@ class AvailabilityStationIntegrationTest extends IntegrationTestCase
     /**
      * @test
      */
-    public function it_can_be_deserialized_from_json()
+    public function it_can_be_deserialized_from_json(): void
     {
-        $expected = AvailabilityStation::create(
-            '1',
-            2,
-            2.180042,
-            41.397952,
-            7,
-            20,
-            '08013',
-            'Gran Via Corts Catalanes',
-            '760',
-            ['24', '369', '387', '426'],
-            'OPN',
-            '01 - C/ GRAN VIA CORTS CATALANES 760',
-            'BIKE'
-        );
+        $expected = AvailabilityStationBuilder::create()
+            ->withId('405')
+            ->withAvailability(AvailabilityBuilder::create()
+                ->withStatus('OPENED')
+                ->withBikes(1)
+                ->withSlots(24)
+            ->build())
+            ->withStation(StationBuilder::create()
+                ->withName('Comte Borrell')
+                ->withType('BIKE')
+            ->build())
+            ->withLocation(LocationBuilder::create()
+                ->withLongitude(2.152)
+                ->withLatitude(41.38551)
+                ->withAddress('Comte Borrell')
+                ->withAddressNumber('198')
+            ->build())
+        ->build();
 
         $this->assertEquals($expected, $this->serializer->deserialize(
             <<<'json'
 {
-    "id": "1",
-    "district": "2",
-    "lon": "2.180042",
-    "lat": "41.397952",
-    "bikes": "7",
-    "slots": "20",
-    "zip": "08013",
-    "address": "Gran Via Corts Catalanes",
-    "addressNumber": "760",
-    "nearbyStations": "24,369,387,426",
-    "status": "OPN",
-    "name": "01 - C/ GRAN VIA CORTS CATALANES 760",
-    "stationType": "BIKE"
+    "id": "405",
+    "type": "BIKE",
+    "latitude": "41.38551",
+    "longitude": "2.152",
+    "streetName": "Comte Borrell",
+    "streetNumber": "198",
+    "slots": "24",
+    "bikes": "1",
+    "type_bicing": 1,
+    "electrical_bikes": 0,
+    "mechanical_bikes": "0",
+    "status": 1,
+    "disponibilidad": 0,
+    "icon": "/modules/custom/mapa_disponibilitat/assets/icons/ubicacio-0.png",
+    "transition_start": "",
+    "transition_end": ""
 }
 json
             ,

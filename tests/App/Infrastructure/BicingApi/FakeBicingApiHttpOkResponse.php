@@ -12,38 +12,53 @@ class FakeBicingApiHttpOkResponse implements ResponseInterface
     public function getBody()
     {
         return <<<'json'
-[
-    {
-        "id": "1",
-        "district": "2",
-        "lon": "2.180042",
-        "lat": "41.397952",
-        "bikes": "7",
-        "slots": "20",
-        "zip": "08013",
-        "address": "Gran Via Corts Catalanes",
-        "addressNumber": "760",
-        "nearbyStations": "24,369,387,426",
-        "status": "OPN",
-        "name": "01 - C/ GRAN VIA CORTS CATALANES 760",
-        "stationType": "BIKE"
-    },
-    {
-        "id": "2",
-        "district": "2",
-        "lon": "2.17706",
-        "lat": "41.39553",
-        "bikes": "16",
-        "slots": "11",
-        "zip": "08010",
-        "address": "Roger de Flor/ Gran Vía",
-        "addressNumber": "126",
-        "nearbyStations": "360,368,387,414",
-        "status": "OPN",
-        "name": "02 - C/ ROGER DE FLOR, 126",
-        "stationType": "BIKE"
-    }
-]
+{
+    "url_icon": "/modules/custom/mapa_disponibilitat/assets/icons/ubicacio.png",
+    "url_icon2": "/modules/custom/mapa_disponibilitat/assets/icons/ubicacio2.png",
+    "url_icon3": "/modules/custom/mapa_disponibilitat/assets/icons/ubicacio3.png",
+    "url_icon4": "/modules/custom/mapa_disponibilitat/assets/icons/ubicacio4.png",
+    "url_icon5": "/modules/custom/mapa_disponibilitat/assets/icons/ubicacio5.png",
+    "estacions_icon": "/modules/custom/mapa_disponibilitat/assets/icons/estacions.png",
+    "parametros_filtro": [ ],
+    "stations":[
+        {
+            "id": "406",
+            "type": "BIKE-ELECTRIC",
+            "latitude": "41.386512",
+            "longitude": "2.164597",
+            "streetName": "Gran Via de Les Corts Catalanes",
+            "streetNumber": "592",
+            "slots": "1",
+            "bikes": "30",
+            "type_bicing": 2,
+            "electrical_bikes": 0,
+            "mechanical_bikes": "30",
+            "status": 1,
+            "disponibilidad": 75,
+            "icon": "/modules/custom/mapa_disponibilitat/assets/icons/ubicacio-75.png",
+            "transition_start": "",
+            "transition_end": ""
+        },
+        {
+            "id": "405",
+            "type": "BIKE",
+            "latitude": "41.38551",
+            "longitude": "2.152",
+            "streetName": "Comte Borrell",
+            "streetNumber": "198",
+            "slots": "24",
+            "bikes": "1",
+            "type_bicing": 1,
+            "electrical_bikes": 0,
+            "mechanical_bikes": "0",
+            "status": 0,
+            "disponibilidad": 0,
+            "icon": "/modules/custom/mapa_disponibilitat/assets/icons/ubicacio-0.png",
+            "transition_start": "",
+            "transition_end": ""
+        }
+    ]
+}
 json;
     }
 

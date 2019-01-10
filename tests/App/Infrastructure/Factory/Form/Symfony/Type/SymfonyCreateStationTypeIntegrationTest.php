@@ -20,7 +20,7 @@ class SymfonyCreateStationTypeIntegrationTest extends IntegrationTestCase
     /**
      * @test
      */
-    public function it_can_be_valid_with_valid_data_submitted()
+    public function it_can_be_valid_with_valid_data_submitted(): void
     {
         $this->form->submit([
             'name' => '01 - C/ GRAN VIA CORTS CATALANES 760',
@@ -41,7 +41,24 @@ class SymfonyCreateStationTypeIntegrationTest extends IntegrationTestCase
     /**
      * @test
      */
-    public function it_can_get_data_once_valid_data_have_been_submitted()
+    public function it_can_be_valid_with_only_mandatory_valid_data_submitted(): void
+    {
+        $this->form->submit([
+            'name' => '01 - C/ GRAN VIA CORTS CATALANES 760',
+            'type' => 'BIKE',
+            'externalStationId' => '1',
+            'address' => 'Gran Via Corts Catalanes',
+            'latitude' => 41.397952,
+            'longitude' => 2.180042,
+        ]);
+
+        $this->assertTrue($this->form->isValid());
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_get_data_once_valid_data_have_been_submitted(): void
     {
         $this->form->submit([
             'name' => '02 - C/ ROGER DE FLOR, 126',
@@ -75,7 +92,7 @@ class SymfonyCreateStationTypeIntegrationTest extends IntegrationTestCase
     /**
      * @test
      */
-    public function it_can_not_be_valid_if_submitted_data_are_missing()
+    public function it_can_not_be_valid_if_submitted_data_are_missing(): void
     {
         $this->form->submit([]);
 
@@ -85,7 +102,7 @@ class SymfonyCreateStationTypeIntegrationTest extends IntegrationTestCase
     /**
      * @test
      */
-    public function it_can_not_be_valid_if_submitted_data_are_not_typed_as_expected()
+    public function it_can_not_be_valid_if_submitted_data_are_not_typed_as_expected(): void
     {
         $this->form->submit([
             'name' => 0,
