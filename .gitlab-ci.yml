@@ -19,6 +19,9 @@ before_script:
 - PRODUCTION_TAG=$(echo $CI_BUILD_REF_NAME | awk -F'/' '{print $2}')
 - export PRODUCTION_IMAGE="$CI_REGISTRY_IMAGE:$PRODUCTION_TAG"
 
+after_script:
+- docker logout
+
 .quality_assurance_script_template: &quality_assurance_script
   script:
     - cp .env.dist .env
