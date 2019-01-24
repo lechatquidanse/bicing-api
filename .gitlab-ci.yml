@@ -10,7 +10,7 @@ stages:
 before_script:
 - apk update && apk upgrade
 - apk add --update bash curl git gettext openssh python python-dev py-pip build-base openssl wget
-#- pip install docker-compose
+- pip install docker-compose
 
 #- docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
 #- docker network create bicing-api-network
@@ -31,20 +31,20 @@ after_script:
     - docker-compose exec -T php bin/phpcs --standard=PSR2 src
     - docker-compose exec -T php bin/phpspec run
     - docker-compose run --rm php bin/console do:mi:mi -n --env=test
-    - docker-compose exec -T php bin/simple-phpunit
+    - docker-compose exec -T php bin/simple-phpunit --coverage-text --colors=never
     - docker-compose exec -T php bin/behat
     - docker-compose down -v --remove-orphans
 
 .build_script_template: &build_script
   script:
-#    - cp .env.dist .env
-#    - docker-compose -f docker-compose.yml -f ./docker/docker-compose.ci.yml up -d
-#    - docker-compose exec -T php composer install --dev --prefer-dist --no-scripts --no-progress --no-suggest
+    - cp .env.dist .env
+    - docker-compose -f docker-compose.yml -f ./docker/docker-compose.ci.yml up -d
+    - docker-compose exec -T php composer install --dev --prefer-dist --no-scripts --no-progress --no-suggest
 #    - docker-compose exec -T php bin/phpstan analyse src --level max
 #    - docker-compose exec -T php bin/phpcs --standard=PSR2 src
 #    - docker-compose exec -T php bin/phpspec run
-#    - docker-compose run --rm php bin/console do:mi:mi -n --env=test
-#    - docker-compose exec -T php bin/simple-phpunit
+    - docker-compose run --rm php bin/console do:mi:mi -n --env=test
+    - docker-compose exec -T php bin/simple-phpunit --coverage-text --colors=never
 #    - docker-compose exec -T php bin/behat
 #    - docker-compose exec -T php rm -rf var/cache/* var/log/*
 #    - docker-compose down -v --remove-orphans
@@ -81,4 +81,3 @@ production:
   - /^[H|h]otfix\/.*$/
   stage: production
   when: manual
-
