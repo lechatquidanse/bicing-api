@@ -10,10 +10,10 @@ stages:
 before_script:
 - apk update && apk upgrade
 - apk add --update bash curl git gettext openssh python python-dev py-pip build-base openssl wget
-- pip install docker-compose
+#- pip install docker-compose
 
-- docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
-- docker network create bicing-api-network
+#- docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+#- docker network create bicing-api-network
 
 - ENVIRONMENT=$(echo $CI_BUILD_REF_NAME | awk -F'/' '{print $1}')
 - PRODUCTION_TAG=$(echo $CI_BUILD_REF_NAME | awk -F'/' '{print $2}')
