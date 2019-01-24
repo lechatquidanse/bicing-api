@@ -6,7 +6,7 @@
 #project
 #branch
 
-BADGE_BUILD_URL="https://gitlab.com/"${CI_PROJECT_PATH}"/badges/"${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}"/build.svg"
+BADGE_BUILD_URL="https://gitlab.com/"${CI_PROJECT_PATH}"/badges/"${CI_BUILD_REF_NAME}"/build.svg"
 echo ${BADGE_BUILD_URL}
 BADGE_BUILD=$(curl -s  -X GET "${BADGE_BUILD_URL}" | base64)
 
