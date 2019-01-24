@@ -20,7 +20,7 @@ before_script:
 - export PRODUCTION_IMAGE="$CI_REGISTRY_IMAGE:$PRODUCTION_TAG"
 
 after_script:
-- docker logout
+- docker logout registry.gitlab.com
 
 .quality_assurance_script_template: &quality_assurance_script
   script:
