@@ -7,7 +7,7 @@
 #branch
 
 BADGE_BUILD_URL="https://gitlab.com/"${CI_PROJECT_PATH}"/badges/"${CI_BUILD_REF_NAME}"/build.svg"
-BADGE_BUILD=$(curl -X --header "Private-Token: ${BADGE_REPOSITORY_PRIVATE_TOKEN}" GET "${BADGE_BUILD_URL}" | base64)
+BADGE_BUILD=$(curl --header "Private-Token: ${BADGE_REPOSITORY_PRIVATE_TOKEN}" "${BADGE_BUILD_URL}" | base64)
 
 PAYLOAD=$(cat << JSON
 {
