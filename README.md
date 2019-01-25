@@ -9,10 +9,10 @@
 <p align="center">
   <a href="https://symfony.com/">Symfony 4</a> 
   <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST API</a> 
-  applying <a href="https://martinfowler.com/bliki/CQRS.html">CQRS</a>,
+  applying <a href="https://martinfowler.com/bliki/CQRS.html">CQRS</a> and
   <a href="https://en.wikipedia.org/wiki/Domain-driven_design">DDD</a> patterns,
   built with <a href="https://en.wikipedia.org/wiki/Continuous_integration">CI</a>,
-  and driven by <a href="https://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a>.
+  driven by <a href="https://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a>.
 </p>
 
 <p align="center">

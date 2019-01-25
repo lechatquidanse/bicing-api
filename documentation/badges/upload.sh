@@ -6,9 +6,9 @@ JOB=$(curl  --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${JOB_URL})
 echo '--------------------------------'
 echo ${JOB}
 
-status=${JOB} jq '.status'
-coverage=echo ${JOB} | jq '.coverage'
-ref=echo ${JOB} | jq '.pipeline.ref'
+status=$(${JOB} jq '.status')
+coverage=$(echo ${JOB} | jq '.coverage')
+ref=$(echo ${JOB} | jq '.pipeline.ref')
 
 echo '--------------------------------'
 echo ${status}
