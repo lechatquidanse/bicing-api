@@ -88,7 +88,4 @@ production:
 
 generate_badges:
   <<: *generate_badges_script
-  only:
-  - /^[R|r]elease\/.*$/
-  - /^[H|h]otfix\/.*$/
   when: always
