@@ -3,9 +3,12 @@
 JOB_URL="https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/jobs/${CI_JOB_ID}"
 JOB=$(curl  --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${JOB_URL})
 
-status= JOB | jq '.status'
-coverage= JOB | jq '.coverage'
-ref = JOB | jq '.pipeline.ref'
+echo '--------------------------------'
+echo ${JOB}
+
+status=${JOB}| jq '.status'
+coverage=${JOB} | jq '.coverage'
+ref=${JOB} | jq '.pipeline.ref'
 
 echo '--------------------------------'
 echo ${status}
@@ -20,12 +23,12 @@ echo '--------------------------------'
 
 if [ status = 'success' ]
 then
-    status_color = 'green'
+    status_color= 'green'
 else
-    status_color = 'red'
+    status_color= 'red'
 fi
 
-BADGE_BUILD=$(curl "https://img.shields.io/badge/pipeline-"${status}"-"${status_color}".svg" | base64)
+BADGE_BUILD=$(curl "https://img.shields.io/badge/build-"${status}"-"${status_color}".svg" | base64)
 BADGE_COVERAGE=$(curl "https://img.shields.io/badge/coverage-"${coverage}"-green.svg" | base64)
 BADGE_REF=$(curl "https://img.shields.io/badge/api-"${ref}"-ff69b4.svg" | base64)
 
