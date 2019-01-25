@@ -88,4 +88,4 @@ production:
 
 generate_badges:
   <<: *generate_badges_script
-  when: always
+  when: on_success
