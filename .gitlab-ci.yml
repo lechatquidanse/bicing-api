@@ -6,10 +6,11 @@ stages:
 - test
 - build
 - production
+- publish
 
 before_script:
 - apk update && apk upgrade
-- apk add --update bash curl git gettext openssh python python-dev py-pip build-base openssl wget
+- apk add --update bash curl git gettext openssh python python-dev py-pip build-base openssl wget jq
 - pip install docker-compose
 
 - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
@@ -18,6 +19,9 @@ before_script:
 - ENVIRONMENT=$(echo $CI_BUILD_REF_NAME | awk -F'/' '{print $1}')
 - PRODUCTION_TAG=$(echo $CI_BUILD_REF_NAME | awk -F'/' '{print $2}')
 - export PRODUCTION_IMAGE="$CI_REGISTRY_IMAGE:$PRODUCTION_TAG"
+
+after_script:
+- docker logout registry.gitlab.com
 
 .quality_assurance_script_template: &quality_assurance_script
   script:
@@ -28,7 +32,7 @@ before_script:
     - docker-compose exec -T php bin/phpcs --standard=PSR2 src
     - docker-compose exec -T php bin/phpspec run
     - docker-compose run --rm php bin/console do:mi:mi -n --env=test
-    - docker-compose exec -T php bin/simple-phpunit
+    - docker-compose exec -T php bin/simple-phpunit --coverage-text --colors=never
     - docker-compose exec -T php bin/behat
     - docker-compose down -v --remove-orphans
 
@@ -41,7 +45,7 @@ before_script:
     - docker-compose exec -T php bin/phpcs --standard=PSR2 src
     - docker-compose exec -T php bin/phpspec run
     - docker-compose run --rm php bin/console do:mi:mi -n --env=test
-    - docker-compose exec -T php bin/simple-phpunit
+    - docker-compose exec -T php bin/simple-phpunit --coverage-text --colors=never
     - docker-compose exec -T php bin/behat
     - docker-compose exec -T php rm -rf var/cache/* var/log/*
     - docker-compose down -v --remove-orphans
@@ -50,8 +54,13 @@ before_script:
 
 .production_script_template: &production_script
   script:
-    - chmod +x ./docker/production/deploy.sh
-    - ./docker/production/deploy.sh
+  - chmod +x ./docker/production/deploy.sh
+  - ./docker/production/deploy.sh
+
+.generate_badges_template: &generate_badges_script
+  script:
+  - chmod +x ./documentation/badges/upload.sh
+  - ./documentation/badges/upload.sh
 
 test:
   <<: *quality_assurance_script
@@ -77,3 +86,9 @@ production:
   stage: production
   when: manual
 
+publish:
+  <<: *generate_badges_script
+  environment: publish
+  stage: publish
+  only:
+  - /^master\/.*$/
