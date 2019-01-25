@@ -31,13 +31,6 @@ JOB=$(curl  --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${JOB_URL})
 echo '--------------------------------'
 echo ${JOB}
 
-stage=$(echo ${JOB} | jq '.stage')
-
-if [ stage != 'build' ];then
-  echo "Job was not not done in build stage"
-  exit 1
-fi
-
 status=$(echo ${JOB} | jq '.status')
 coverage=$(echo ${JOB} | jq '.coverage')
 ref=$(echo ${JOB} | jq '.pipeline.ref')
