@@ -9,18 +9,16 @@
 <p align="center">
   <a href="https://symfony.com/">Symfony 4</a> 
   <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST API</a> 
-  applying <a href="https://en.wikipedia.org/wiki/Continuous_integration">CI</a>, 
-  <a href="https://martinfowler.com/bliki/CQRS.html">CQRS</a>,
-  <a href="https://en.wikipedia.org/wiki/Domain-driven_design">DDD</a>
-  and driven by <a href="http://behat.org/en/latest/">Behat</a>,
-  <a href="http://www.phpspec.net/en/stable/">PHPSpec</a> 
-  <a href="https://phpunit.de/">PHPUnit</a>
+  applying <a href="https://martinfowler.com/bliki/CQRS.html">CQRS</a>,
+  <a href="https://en.wikipedia.org/wiki/Domain-driven_design">DDD</a> patterns,
+  built with <a href="https://en.wikipedia.org/wiki/Continuous_integration">CI</a>,
+  and driven by <a href="https://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a>.
 </p>
 
 <p align="center">
+    <img src="https://img.shields.io/badge/php-%5E7.2-blue.svg" alt="PHP 7.2">
     <img src="https://gitlab.com/lechatquidanse/public-badges/raw/master/bicing-statistics-api/reference.svg" alt="reference">
     <img src="https://gitlab.com/lechatquidanse/public-badges/raw/master/bicing-statistics-api/build.svg" alt="build">
-    <img src="https://img.shields.io/badge/php-%5E7.2-blue.svg" alt="PHP 7.2">
     <img src="https://gitlab.com/lechatquidanse/public-badges/raw/master/bicing-statistics-api/coverage.svg" alt="coverage">
     <img src="https://img.shields.io/badge/contributions-welcome-orange.svg" alt="Contributions welcome">
     <img src="https://img.shields.io/badge/license-MIT-lightgrey.svg" alt="License">
