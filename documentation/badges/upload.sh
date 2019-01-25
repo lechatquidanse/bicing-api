@@ -15,17 +15,17 @@ fi
 
 PIPELINES_URL="https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/pipelines"
 PIPELINES=$(curl  --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${PIPELINES_URL})
-JOB_ID=$(echo ${PIPELINES} | jq 'first(.[] | select(.sha == "${SHA}") | .id)')
+PIPELINE_ID=$(echo ${PIPELINES} | jq 'first(.[] | select(.sha == "${SHA}") | .id)')
 echo '--------------------------------'
-echo ${JOB_ID}
+echo ${PIPELINE_ID}
 
-if [ -z "JOB_ID" ]; then
-  echo "Required job id JOB_ID not found in pipeline"
+if [ -z "PIPELINE_ID" ]; then
+  echo "Required job id PIPELINE_ID not found in pipeline"
   exit 1
 fi
 
 
-JOB_URL="https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/jobs/${JOB_ID}"
+JOB_URL="https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/pipelines/${PIPELINE_ID}"
 JOB=$(curl  --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${JOB_URL})
 
 echo '--------------------------------'
