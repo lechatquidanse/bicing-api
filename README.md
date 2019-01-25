@@ -9,10 +9,12 @@
 > By collecting data from different providers ([Bicing][bicing], [Velib][velib], ...) it can advice customers and provide them useful information (location to pick or return a bike, best time for picking up a bike, ...).
 
 <p align="center">
+    <img src="https://gitlab.com/lechatquidanse/public-badges/raw/master/bicing-statistics-api/reference.svg" alt="reference">
     <img src="https://gitlab.com/lechatquidanse/public-badges/raw/master/bicing-statistics-api/build.svg" alt="build">
     <img src="https://img.shields.io/badge/php-%5E7.2-blue.svg" alt="PHP 7.2">
+    <img src="https://gitlab.com/lechatquidanse/public-badges/raw/master/bicing-statistics-api/coverage.svg" alt="coverage">
     <img src="https://img.shields.io/badge/contributions-welcome-orange.svg" alt="Contributions welcome">
-    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"><a>
+    <img src="https://img.shields.io/badge/license-MIT-lightgrey.svg" alt="License">
 </p>
 
 <p align="center">

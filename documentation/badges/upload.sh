@@ -1,13 +1,34 @@
 #!/usr/bin/env bash
 
-# Env needed
-#gitlab token
-#team
-#project
-#branch
+JOB_URL="https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/jobs/${CI_JOB_ID}"
+JOB=$(curl  --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${JOB_URL})
 
-BADGE_BUILD_URL="https://gitlab.com/"${CI_PROJECT_PATH}"/badges/"${CI_BUILD_REF_NAME}"/build.svg"
-BADGE_BUILD=$(curl --header "Private-Token: ${BADGE_REPOSITORY_PRIVATE_TOKEN}" "${BADGE_BUILD_URL}" | base64)
+status= JOB | jq '.status'
+coverage= JOB | jq '.coverage'
+ref = JOB | jq '.pipeline.ref'
+
+echo '--------------------------------'
+echo ${status}
+echo '--------------------------------'
+echo '--------------------------------'
+echo ${coverage}
+echo '--------------------------------'
+echo '--------------------------------'
+echo ${ref}
+echo '--------------------------------'
+
+
+if [ status = 'success' ]
+then
+    status_color = 'green'
+else
+    status_color = 'red'
+fi
+
+BADGE_BUILD=$(curl "https://img.shields.io/badge/pipeline-"${status}"-"${status_color}".svg" | base64)
+BADGE_COVERAGE=$(curl "https://img.shields.io/badge/coverage-"${coverage}"-green.svg" | base64)
+BADGE_REF=$(curl "https://img.shields.io/badge/api-"${ref}"-ff69b4.svg" | base64)
+
 
 PAYLOAD=$(cat << JSON
 {
@@ -19,6 +40,18 @@ PAYLOAD=$(cat << JSON
       "file_path": "bicing-statistics-api/build.svg",
       "encoding": "base64",
       "content": "${BADGE_BUILD}"
+    },
+    {
+      "action": "update",
+      "file_path": "bicing-statistics-api/coverage.svg",
+      "encoding": "base64",
+      "content": "${BADGE_COVERAGE}"
+    },
+    {
+      "action": "update",
+      "file_path": "bicing-statistics-api/reference.svg",
+      "encoding": "base64",
+      "content": "${BADGE_REF}"
     }
   ]
 }
