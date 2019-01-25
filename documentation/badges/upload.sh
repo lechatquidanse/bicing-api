@@ -15,7 +15,7 @@ fi
 
 PIPELINES_URL="https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/pipelines"
 PIPELINES=$(curl  --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${PIPELINES_URL})
-JOB_ID=$(echo ${PIPELINES} | jq 'select(.sha == ${SHA}) | .id)')
+JOB_ID=$(echo ${PIPELINES} | jq 'first(.[] | select(.sha == "${SHA}") | .id)')
 echo '--------------------------------'
 echo ${JOB_ID}
 
