@@ -91,4 +91,4 @@ publish:
   environment: publish
   stage: publish
   only:
-  - /^master\/.*$/
+  - master
