@@ -7,7 +7,14 @@
 </h3>
 
 <p align="center">
-  Symfony 4 REST API with <a href="https://en.wikipedia.org/wiki/Continuous_integration">CI</a>, <a href="https://martinfowler.com/bliki/CQRS.html">CQRS</a> and <a href="https://en.wikipedia.org/wiki/Domain-driven_design">DDD</a>.
+  <a href="https://symfony.com/">Symfony 4</a> 
+  <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST API</a> 
+  applying <a href="https://en.wikipedia.org/wiki/Continuous_integration">CI</a>, 
+  <a href="https://martinfowler.com/bliki/CQRS.html">CQRS</a>,
+  <a href="https://en.wikipedia.org/wiki/Domain-driven_design">DDD</a>
+  and driven by <a href="http://behat.org/en/latest/">Behat</a>,
+  <a href="http://www.phpspec.net/en/stable/">PHPSpec</a> 
+  <a href="https://phpunit.de/">PHPUnit</a>
 </p>
 
 <p align="center">
@@ -23,7 +30,7 @@
 
 > The goal of this REST API is to ease customer's usage of large-scale public bicycle sharing system.  
 > By collecting data from different providers ([Bicing][bicing], [Velib][velib], ...) it gives customers powerful information (location to pick or return a bike, best time for picking up a bike, ...).
-
+> Here is an example of a user interface project calling the API [/lechatquidanse/bicing-user-interface-app]((https://github.com/lechatquidanse/bicing-user-interface-app/))
 
 <p align="center">
   <a href="#getting-started">Getting Started</a> •

@@ -6,9 +6,9 @@ JOB=$(curl  --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${JOB_URL})
 echo '--------------------------------'
 echo ${JOB}
 
-status=$( echo jq -r  '.status' <<< "${JOB}" )
-coverage=$( echo jq -r  '.coverage' <<< "${JOB}" )
-ref=$( echo jq -r  '.pipeline.ref' <<< "${JOB}" )
+status=${JOB} jq '.status'
+coverage=echo ${JOB} | jq '.coverage'
+ref=echo ${JOB} | jq '.pipeline.ref'
 
 echo '--------------------------------'
 echo ${status}
@@ -23,9 +23,9 @@ echo '--------------------------------'
 
 if [ status = 'success' ]
 then
-    status_color= 'green'
+    status_color='green'
 else
-    status_color= 'red'
+    status_color='red'
 fi
 
 BADGE_BUILD=$(curl "https://img.shields.io/badge/build-"${status}"-"${status_color}".svg" | base64)
