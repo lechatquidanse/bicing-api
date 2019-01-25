@@ -6,22 +6,18 @@ JOB=$(curl  --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${JOB_URL})
 echo '--------------------------------'
 echo ${JOB}
 
-status=$(${JOB} jq '.status')
+stage=$(echo ${JOB} | jq '.stage')
+
+if [ stage == 'build' ]
+then
+    exit 0
+fi
+
+status=$(echo ${JOB} | jq '.status')
 coverage=$(echo ${JOB} | jq '.coverage')
 ref=$(echo ${JOB} | jq '.pipeline.ref')
 
-echo '--------------------------------'
-echo ${status}
-echo '--------------------------------'
-echo '--------------------------------'
-echo ${coverage}
-echo '--------------------------------'
-echo '--------------------------------'
-echo ${ref}
-echo '--------------------------------'
-
-
-if [ status = 'success' ]
+if [ status == 'success' ]
 then
     status_color='green'
 else

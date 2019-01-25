@@ -6,6 +6,7 @@ stages:
 - test
 - build
 - production
+- generate_badges
 
 before_script:
 - apk update && apk upgrade
@@ -50,13 +51,16 @@ after_script:
 #    - docker-compose down -v --remove-orphans
 #    - docker build --target bicing_api_php -t $PRODUCTION_IMAGE .
 #    - docker push $PRODUCTION_IMAGE
-    - chmod +x ./documentation/badges/upload.sh
-    - ./documentation/badges/upload.sh
 
 .production_script_template: &production_script
   script:
-    - chmod +x ./docker/production/deploy.sh
-    - ./docker/production/deploy.sh
+  - chmod +x ./docker/production/deploy.sh
+  - ./docker/production/deploy.sh
+
+.generate_badges_template: &generate_badges_script
+  script:
+  - chmod +x ./documentation/badges/upload.sh
+  - ./documentation/badges/upload.sh
 
 test:
   <<: *quality_assurance_script
@@ -81,3 +85,10 @@ production:
   - /^[H|h]otfix\/.*$/
   stage: production
   when: manual
+
+generate_badges:
+  <<: *generate_badges_script
+  only:
+  - /^[R|r]elease\/.*$/
+  - /^[H|h]otfix\/.*$/
+  when: always
