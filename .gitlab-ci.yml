@@ -6,14 +6,15 @@ stages:
 - test
 - build
 - production
+- publish
 
 before_script:
 - apk update && apk upgrade
 - apk add --update bash curl git gettext openssh python python-dev py-pip build-base openssl wget jq
 - pip install docker-compose
 
-#- docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
-#- docker network create bicing-api-network
+- docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+- docker network create bicing-api-network
 
 - ENVIRONMENT=$(echo $CI_BUILD_REF_NAME | awk -F'/' '{print $1}')
 - PRODUCTION_TAG=$(echo $CI_BUILD_REF_NAME | awk -F'/' '{print $2}')
@@ -40,23 +41,26 @@ after_script:
     - cp .env.dist .env
     - docker-compose -f docker-compose.yml -f ./docker/docker-compose.ci.yml up -d
     - docker-compose exec -T php composer install --dev --prefer-dist --no-scripts --no-progress --no-suggest
-#    - docker-compose exec -T php bin/phpstan analyse src --level max
-#    - docker-compose exec -T php bin/phpcs --standard=PSR2 src
-#    - docker-compose exec -T php bin/phpspec run
+    - docker-compose exec -T php bin/phpstan analyse src --level max
+    - docker-compose exec -T php bin/phpcs --standard=PSR2 src
+    - docker-compose exec -T php bin/phpspec run
     - docker-compose run --rm php bin/console do:mi:mi -n --env=test
     - docker-compose exec -T php bin/simple-phpunit --coverage-text --colors=never
-#    - docker-compose exec -T php bin/behat
-#    - docker-compose exec -T php rm -rf var/cache/* var/log/*
-#    - docker-compose down -v --remove-orphans
-#    - docker build --target bicing_api_php -t $PRODUCTION_IMAGE .
-#    - docker push $PRODUCTION_IMAGE
-    - chmod +x ./documentation/badges/upload.sh
-    - ./documentation/badges/upload.sh
+    - docker-compose exec -T php bin/behat
+    - docker-compose exec -T php rm -rf var/cache/* var/log/*
+    - docker-compose down -v --remove-orphans
+    - docker build --target bicing_api_php -t $PRODUCTION_IMAGE .
+    - docker push $PRODUCTION_IMAGE
 
 .production_script_template: &production_script
   script:
   - chmod +x ./docker/production/deploy.sh
   - ./docker/production/deploy.sh
+
+.generate_badges_template: &generate_badges_script
+  script:
+  - chmod +x ./documentation/badges/upload.sh
+  - ./documentation/badges/upload.sh
 
 test:
   <<: *quality_assurance_script
@@ -81,3 +85,10 @@ production:
   - /^[H|h]otfix\/.*$/
   stage: production
   when: manual
+
+publish:
+  <<: *generate_badges_script
+  environment: publish
+  stage: publish
+  only:
+  - /^master\/.*$/

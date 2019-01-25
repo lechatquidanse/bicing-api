@@ -1,6 +1,31 @@
 #!/usr/bin/env bash
 
-JOB_URL="https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/jobs/${CI_JOB_ID}"
+MERGE_REQUESTS_URL="https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/merge_requests?target_branch=master"
+MERGE_REQUESTS=$(curl  --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${MERGE_REQUESTS_URL})
+SHA=$(echo ${MERGE_REQUESTS} | jq 'first(.[] | select(.state == "merged") | .sha)')
+
+echo '--------------------------------'
+echo ${SHA}
+
+
+if [ -z "SHA" ]; then
+  echo "Required merge request SHA not found in pipeline"
+  exit 1
+fi
+
+PIPELINES_URL="https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/pipelines"
+PIPELINES=$(curl  --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${PIPELINES_URL})
+JOB_ID=$(echo ${PIPELINES} | jq 'select(.sha == ${SHA}) | .id)')
+echo '--------------------------------'
+echo ${JOB_ID}
+
+if [ -z "JOB_ID" ]; then
+  echo "Required job id JOB_ID not found in pipeline"
+  exit 1
+fi
+
+
+JOB_URL="https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/jobs/${JOB_ID}"
 JOB=$(curl  --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${JOB_URL})
 
 echo '--------------------------------'
@@ -8,9 +33,9 @@ echo ${JOB}
 
 stage=$(echo ${JOB} | jq '.stage')
 
-if [ stage == 'build' ]
-then
-    exit 0
+if [ stage != 'build' ];then
+  echo "Job was not not done in build stage"
+  exit 1
 fi
 
 status=$(echo ${JOB} | jq '.status')
@@ -27,7 +52,6 @@ fi
 BADGE_BUILD=$(curl "https://img.shields.io/badge/build-"${status}"-"${status_color}".svg" | base64)
 BADGE_COVERAGE=$(curl "https://img.shields.io/badge/coverage-"${coverage}"-green.svg" | base64)
 BADGE_REF=$(curl "https://img.shields.io/badge/api-"${ref}"-ff69b4.svg" | base64)
-
 
 PAYLOAD=$(cat << JSON
 {

@@ -28,7 +28,7 @@
 
 > The goal of this REST API is to ease customer's usage of large-scale public bicycle sharing system.  
 > By collecting data from different providers ([Bicing][bicing], [Velib][velib], ...) it gives customers powerful information (location to pick or return a bike, best time for picking up a bike, ...).
-> Here is an example of a user interface project calling the API [/lechatquidanse/bicing-user-interface-app]((https://github.com/lechatquidanse/bicing-user-interface-app/))
+> Here is an example of a user interface project calling the API [/lechatquidanse/bicing-user-interface-app](https://github.com/lechatquidanse/bicing-user-interface-app)
 
 <p align="center">
   <a href="#getting-started">Getting Started</a> •
@@ -51,7 +51,7 @@ Please follow the [official documentation](docker-compose-install) to install it
 Clone the project and run the default installation:
 
 ```bash
-git clone https://github.com/lechatquidanse/bicing-statistics-api.git && cd bicing-statistics-api && make install
+git clone https://github.com/lechatquidanse/bicing-api.git && cd bicing-api && make install
 ```
 Your docker containers should have been successfully built and run.
 
