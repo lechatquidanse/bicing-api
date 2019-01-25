@@ -1,13 +1,14 @@
 <p align="center">
     <img alt="Bicing Log" title="Bicing API" src="./documentation/images/bicing-logo.png" width="20%">
 </p>
-<h1 align="center">Bicing Statistics API</h1>
 
-<h3 align="center">Symfony 4 REST API with CI, CQRS & DDD.</h3>
-<h5 align="center">Get statistics and locations of bicycle stations.</h4>
+<h3 align="center">
+  Bicing Statistics API
+</h3>
 
-> The goal of this REST API is to ease customer's usage of large-scale public bicycle sharing system.  
-> By collecting data from different providers ([Bicing][bicing], [Velib][velib], ...) it gives customers powerful information (location to pick or return a bike, best time for picking up a bike, ...).
+<p align="center">
+  Symfony 4 REST API with <a href="https://en.wikipedia.org/wiki/Continuous_integration">CI</a>, <a href="https://martinfowler.com/bliki/CQRS.html">CQRS</a> and <a href="https://en.wikipedia.org/wiki/Domain-driven_design">DDD</a>.
+</p>
 
 <p align="center">
     <img src="https://gitlab.com/lechatquidanse/public-badges/raw/master/bicing-statistics-api/reference.svg" alt="reference">
@@ -17,6 +18,12 @@
     <img src="https://img.shields.io/badge/contributions-welcome-orange.svg" alt="Contributions welcome">
     <img src="https://img.shields.io/badge/license-MIT-lightgrey.svg" alt="License">
 </p>
+
+<h5 align="center">Get statistics and locations of bicycle stations.</h5>
+
+> The goal of this REST API is to ease customer's usage of large-scale public bicycle sharing system.  
+> By collecting data from different providers ([Bicing][bicing], [Velib][velib], ...) it gives customers powerful information (location to pick or return a bike, best time for picking up a bike, ...).
+
 
 <p align="center">
   <a href="#getting-started">Getting Started</a> •
