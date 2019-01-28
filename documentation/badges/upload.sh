@@ -4,32 +4,19 @@ MERGE_REQUESTS_URL="https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/merge_re
 MERGE_REQUESTS=$(curl  --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${MERGE_REQUESTS_URL})
 SHA=$(echo ${MERGE_REQUESTS} | jq 'first(.[] | select(.state == "merged") | .sha)')
 
-echo '--------------------------------'
-echo ${SHA}
-
-
 if [ -z "SHA" ]; then
   echo "Required merge request SHA not found in pipeline"
   exit 1
 fi
 
-PIPELINES_URL="https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/pipelines"
-PIPELINES=$(curl  --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${PIPELINES_URL})
-PIPELINE_ID=$(echo ${PIPELINES} | jq 'first(.[] | select(.sha == "${SHA}") | .id)')
-echo '--------------------------------'
-echo ${PIPELINE_ID}
+JOBS_URL="https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/jobs"
+JOBS=$(curl  --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${JOBS_URL})
+JOB=$(echo ${PIPELINES} | jq 'first(.[] | select(.commit.id == "${SHA}" and .stage == "build"))')
 
-if [ -z "PIPELINE_ID" ]; then
-  echo "Required job id PIPELINE_ID not found in pipeline"
+if [ -z "JOB" ]; then
+  echo "Required job not found in pipeline for commit: ${SHA} and stage= build"
   exit 1
 fi
-
-
-JOB_URL="https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/pipelines/${PIPELINE_ID}"
-JOB=$(curl  --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${JOB_URL})
-
-echo '--------------------------------'
-echo ${JOB}
 
 status=$(echo ${JOB} | jq '.status')
 coverage=$(echo ${JOB} | jq '.coverage')
