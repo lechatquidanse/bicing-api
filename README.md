@@ -27,7 +27,7 @@
 <h5 align="center">Get statistics and locations of bicycle stations.</h5>
 
 > The goal of this REST API is to ease customer's usage of large-scale public bicycle sharing system.  
-> By collecting data from different providers ([Bicing][bicing], [Velib][velib], ...) it gives customers powerful information (location to pick or return a bike, best time for picking up a bike, ...).
+> By collecting data from different providers ([Bicing][bicing], [Velib][velib], ...) it gives powerful information (location to pick or return a bike, best time for picking up a bike, ...).  
 > Here is an example of a user interface project calling the API [/lechatquidanse/bicing-user-interface-app](https://github.com/lechatquidanse/bicing-user-interface-app)
 
 <p align="center">
