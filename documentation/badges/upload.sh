@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 MERGE_REQUESTS_URL="https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/merge_requests?target_branch=master"
-MERGE_REQUESTS=$(curl  --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${MERGE_REQUESTS_URL})
+MERGE_REQUESTS=$(curl -sS --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${MERGE_REQUESTS_URL})
 SHA=$(echo ${MERGE_REQUESTS} | jq 'first(.[] | select(.state == "merged") | .sha)')
 
 if [ -z "SHA" ]; then
@@ -10,26 +10,19 @@ if [ -z "SHA" ]; then
 fi
 
 JOBS_URL="https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/jobs"
-JOBS=$(curl  --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${JOBS_URL})
-JOB=$(echo ${PIPELINES} | jq 'first(.[] | select(.commit.id == "${SHA}" and .stage == "build"))')
+JOBS=$(curl -sS --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${JOBS_URL})
+JOB=$(echo ${JOBS} | jq -r --arg SHA_COMMIT "$SHA" 'first(.[] | select(.commit.id==$SHA_COMMIT and .stage=="build"))')
 
 if [ -z "JOB" ]; then
   echo "Required job not found in pipeline for commit: ${SHA} and stage= build"
   exit 1
 fi
 
-status=$(echo ${JOB} | jq '.status')
-coverage=$(echo ${JOB} | jq '.coverage')
-ref=$(echo ${JOB} | jq '.pipeline.ref')
+status=$(echo ${JOB} | jq '.status' | tr -d '"')
+coverage=$(echo ${JOB} | jq '.coverage' | tr -d '"')
+ref=$(echo ${JOB} | jq '.pipeline.ref'| tr -d '"')
 
-if [ status == 'success' ]
-then
-    status_color='green'
-else
-    status_color='red'
-fi
-
-BADGE_BUILD=$(curl "https://img.shields.io/badge/build-"${status}"-"${status_color}".svg" | base64)
+BADGE_BUILD=$(curl "https://img.shields.io/badge/build-"${status}"-brightgreen.svg" | base64)
 BADGE_COVERAGE=$(curl "https://img.shields.io/badge/coverage-"${coverage}"-green.svg" | base64)
 BADGE_REF=$(curl "https://img.shields.io/badge/api-"${ref}"-ff69b4.svg" | base64)
 
@@ -61,7 +54,7 @@ PAYLOAD=$(cat << JSON
 JSON
 )
 
-curl --request POST \
-    --header "PRIVATE-TOKEN: ${BADGE_REPOSITORY_PRIVATE_TOKEN}" \
-    --header "Content-Type: application/json" \
-    --data "$PAYLOAD" https://gitlab.com/api/v4/projects/10513975/repository/commits
+#curl --request POST \
+#    --header "PRIVATE-TOKEN: ${BADGE_REPOSITORY_PRIVATE_TOKEN}" \
+#    --header "Content-Type: application/json" \
+#    --data "$PAYLOAD" https://gitlab.com/api/v4/projects/10513975/repository/commits
