@@ -2,7 +2,7 @@
 
 MERGE_REQUESTS_URL="https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/merge_requests?target_branch=master"
 MERGE_REQUESTS=$(curl -sS --header "PRIVATE-TOKEN: ${REPOSITORY_PRIVATE_TOKEN}" ${MERGE_REQUESTS_URL})
-SHAS=$(echo ${MERGE_REQUESTS} | jq 'first(.[] | select(.state == "merged") | .sha)')
+SHA=$(echo ${MERGE_REQUESTS} | jq 'first(.[] | select(.state == "merged") | .sha)')
 
 if [ -z "SHA" ]; then
   echo "Required merge request SHA not found in pipeline"
