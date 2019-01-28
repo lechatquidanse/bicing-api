@@ -1,19 +1,34 @@
 <p align="center">
-    <img alt="Bicing Log" title="Bicing API" src="./documentation/bicing-logo.png" width="20%">
+    <img alt="Bicing Log" title="Bicing API" src="./documentation/images/bicing-logo.png" width="20%">
 </p>
-<h1 align="center">Bicing API</h1>
 
-<h4 align="center">Get statistics and locations of bicycle stations.</h4>
+<h3 align="center">
+  Bicing Statistics API
+</h3>
 
-> The goal of this REST API is to ease customer's usage of large-scale public bicycle sharing system.  
-> By collecting data from different providers ([Bicing][bicing], [Velib][velib], ...) it can advice customers and provide them useful information (location to pick or return a bike, best time for picking up a bike, ...).
+<p align="center">
+  <a href="https://symfony.com/">Symfony 4</a> 
+  <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST API</a> 
+  applying <a href="https://martinfowler.com/bliki/CQRS.html">CQRS</a> and
+  <a href="https://en.wikipedia.org/wiki/Domain-driven_design">DDD</a> patterns,
+  built with <a href="https://en.wikipedia.org/wiki/Continuous_integration">CI</a>,
+  driven by <a href="https://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a>.
+</p>
 
 <p align="center">
     <img src="https://img.shields.io/badge/php-%5E7.2-blue.svg" alt="PHP 7.2">
-    <img src="https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg" alt="Dependencies">
+    <img src="https://gitlab.com/lechatquidanse/public-badges/raw/master/bicing-statistics-api/reference.svg" alt="reference">
+    <img src="https://gitlab.com/lechatquidanse/public-badges/raw/master/bicing-statistics-api/build.svg" alt="build">
+    <img src="https://gitlab.com/lechatquidanse/public-badges/raw/master/bicing-statistics-api/coverage.svg" alt="coverage">
     <img src="https://img.shields.io/badge/contributions-welcome-orange.svg" alt="Contributions welcome">
-    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"><a>
+    <img src="https://img.shields.io/badge/license-MIT-lightgrey.svg" alt="License">
 </p>
+
+<h5 align="center">Get statistics and locations of bicycle stations.</h5>
+
+> The goal of this REST API is to ease customer's usage of large-scale public bicycle sharing system.  
+> By collecting data from different providers ([Bicing][bicing], [Velib][velib], ...) it gives powerful information (location to pick or return a bike, best time for picking up a bike, ...).  
+> Here is an example of a user interface project calling the API [/lechatquidanse/bicing-user-interface-app](https://github.com/lechatquidanse/bicing-user-interface-app)
 
 <p align="center">
   <a href="#getting-started">Getting Started</a> •
@@ -24,7 +39,7 @@
   <a href="#ci-and-deployment">CI and Deployment</a>
 </p>
 
-![Bicing API RESTs examples](./documentation/bicing-api-curl-examples.png)
+![Bicing API RESTs examples](./documentation/images/bicing-api-curl-examples.png)
 
 ## <a name="getting-started"></a> Getting Started
 ### Prerequisites
@@ -45,14 +60,14 @@ Your docker containers should have been successfully built and run.
 Multiple features are proposed across 2 user interfaces, a REST API and command-line commands:
 
 ### REST API:
-![Bicing API RESTs features](./documentation/features-rest.png)
+![Bicing API RESTs features](./documentation/images/features-rest.png)
 
 You can find the concrete user stories written in [Gherkin][gherkin] in [features folder](./features).
 These behaviour requirements are tested with [Behat][behat].
 
 ### CLI:
 
-![Bicing API CLI features](./documentation/features-cli-min.png)
+![Bicing API CLI features](./documentation/images/features-cli-min.png)
 
 To run the project once installed:
 
@@ -67,7 +82,7 @@ To run the project once installed:
 ## Development
 The Makefile contains useful command for development purpose
 
-![Makefile helpul commands](./documentation/makefile-help-min.png)
+![Makefile helpul commands](./documentation/images/makefile-help-min.png)
 
 ## <a name="coding-standard"></a> Coding standard
 
@@ -94,7 +109,7 @@ This use case is then handled by a handler for a command or a data provider for 
 Commands are handled by a message bus ([SimpleBus][simplebus]) where a command is link to one handler.   
 For example, to create a station in database:
 
-![CQRS command handler](./documentation/command-handler-min.png)
+![CQRS command handler](./documentation/images/command-handler-min.png)
 
 ## <a name="ci-and-deployment"></a> CI and Deployment
 
@@ -115,7 +130,7 @@ It will then install project, launch qa tools and then build and push a docker i
 
 This manual action, will pull the image build by the previous step and update the specific container.
 
-![Continuous Integration](./documentation/continuous-integration.png)
+![Continuous Integration](./documentation/images/continuous-integration.png)
 
 ## License
 
