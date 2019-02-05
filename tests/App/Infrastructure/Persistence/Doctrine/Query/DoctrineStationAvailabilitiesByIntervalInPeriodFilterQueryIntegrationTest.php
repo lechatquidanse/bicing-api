@@ -86,7 +86,7 @@ class DoctrineStationAvailabilitiesByIntervalInPeriodFilterQueryIntegrationTest 
     {
         parent::setUp();
 
-        $this->query = $this->getContainer()->get('test.app.query.station_availabilites_by_interval_in_period_filter_query');
+        $this->query = $this->getContainer()->get('test.app.query.station_availabilities_by_interval_in_period_filter_query');
     }
 
     /** {@inheritdoc} */

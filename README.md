@@ -110,7 +110,6 @@ For example, to create a station in database:
 
 ![CQRS command handler](./documentation/images/command-handler-min.png)
 
-
 If you want to learn more and look for other DDD and CQRS implementation, here is a great [Symfony4 boilerplate]((https://github.com/jorge07/symfony-4-es-cqrs-boilerplate).) from [jorge07](https://github.com/jorge07).
 
 ## <a name="ci-and-deployment"></a> CI and Deployment
@@ -126,7 +125,7 @@ It will then install project and launch qa tools.
 ### Build
 
 Environment 'build' is triggered when a 'release/*' branch is pushed to the repository. 
-It will then install project, launch qa tools and then build and push a docker image on a registry if no error occured.
+It will then install project, launch qa tools and then build and push a docker image on a registry if no error occurred.
 
 ### Production
 
@@ -140,6 +139,8 @@ This manual action, will pull the image build by the previous step and update th
 
 > Stéphane EL MANOUNI &nbsp;&middot;&nbsp;
 > [Linkedin](https://www.linkedin.com/in/stephane-el-manouni/)
+
+> Pascal Borreli &nbsp;&middot;&nbsp; [GitHub](https://github.com/pborreli/)
 
 [api-platform]: https://api-platform.com/
 [behat]: http://behat.org/en/latest/
