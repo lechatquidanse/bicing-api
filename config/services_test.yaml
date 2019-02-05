@@ -23,7 +23,7 @@ services:
   tests\App\Infrastructure\BicingApi\MockHttpQueryClient: ~
   eight_points_guzzle.client.bicing_api: '@tests\App\Infrastructure\BicingApi\MockHttpQueryClient'
 
-  test.app.query.station_availabilites_by_interval_in_period_filter_query: '@App\Infrastructure\Persistence\Doctrine\Query\DoctrineStationAvailabilitiesByIntervalInPeriodFilterQuery'
+  test.app.query.station_availabilities_by_interval_in_period_filter_query: '@App\Infrastructure\Persistence\Doctrine\Query\DoctrineStationAvailabilitiesByIntervalInPeriodFilterQuery'
   test.app.query.station_with_detail_and_location_query: '@App\Infrastructure\Persistence\Doctrine\Query\DoctrineStationWithDetailAndLocationQuery'
   test.app.query.last_station_state_by_station_query:
     class: 'App\Infrastructure\Persistence\Doctrine\Query\DoctrineLastStationStateByStationQuery'
