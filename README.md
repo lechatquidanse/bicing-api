@@ -89,7 +89,6 @@ The Makefile contains useful command for development purpose
 ### Domain Driven Design
 
 Code and folder structure follow Domain Driven Design (DDD).  
-Here is a good article to understand naming and folder [Domain Driver Design, little explanation and example](https://jorgearco.com/ddd-with-symfony/).
 
     src
         \
@@ -110,6 +109,9 @@ Commands are handled by a message bus ([SimpleBus][simplebus]) where a command i
 For example, to create a station in database:
 
 ![CQRS command handler](./documentation/images/command-handler-min.png)
+
+
+If you want to learn more and look for other DDD and CQRS implementation, here is a great [Symfony4 boilerplate]((https://github.com/jorge07/symfony-4-es-cqrs-boilerplate).) from [jorge07](https://github.com/jorge07).
 
 ## <a name="ci-and-deployment"></a> CI and Deployment
 
