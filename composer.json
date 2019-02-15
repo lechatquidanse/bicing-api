@@ -1,4 +1,6 @@
 {
+    "name": "lechatquidanse/bicing-api",
+    "description": "Symfony 4 REST API applying CQRS and DDD patterns, built with CI, driven by BDD",
     "type": "project",
     "license": "proprietary",
     "require": {
