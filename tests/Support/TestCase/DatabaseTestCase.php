@@ -23,7 +23,7 @@ abstract class DatabaseTestCase extends IntegrationTestCase
      * @param string $class
      * @param mixed  $id
      *
-     * @return null|object
+     * @return object|null
      */
     protected function find(string $class, $id)
     {

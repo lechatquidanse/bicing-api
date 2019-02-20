@@ -92,7 +92,8 @@ services:
 
     Symfony\Component\Serializer\Normalizer\DateTimeNormalizer:
       arguments:
-        $format: 'Y-m-d H:i:s'
+        $defaultContext:
+          datetime_format: 'Y-m-d H:i:s'
 
     App\Application\UseCase\Subscriber\UpdateStationLocationGeometryWhenStationWasCreated:
       arguments: ['@command_bus']

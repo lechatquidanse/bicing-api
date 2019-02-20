@@ -46,9 +46,9 @@ class LocationBuilder implements BuilderInterface
      * @param float       $latitude
      * @param float       $longitude
      * @param int|null    $districtCode
-     * @param null|string $zipCode
-     * @param null|string $addressNumber
-     * @param null|string $geometry
+     * @param string|null $zipCode
+     * @param string|null $addressNumber
+     * @param string|null $geometry
      */
     private function __construct(
         string $address,
