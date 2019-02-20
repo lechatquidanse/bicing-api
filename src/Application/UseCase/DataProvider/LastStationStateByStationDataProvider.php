@@ -32,7 +32,7 @@ final class LastStationStateByStationDataProvider implements ItemDataProviderInt
      * @param string|null   $operationName
      * @param array         $context
      *
-     * @return LastStationStateByStationView|null|object
+     * @return LastStationStateByStationView|object|null
      */
     public function getItem(
         string $resourceClass,

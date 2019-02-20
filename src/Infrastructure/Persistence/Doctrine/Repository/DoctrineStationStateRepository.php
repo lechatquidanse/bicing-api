@@ -50,7 +50,7 @@ final class DoctrineStationStateRepository implements StationStateRepositoryInte
      * @param DateTimeImmutableStringable $statedAt
      * @param Station                     $stationAssigned
      *
-     * @return null|object
+     * @return object|null
      */
     private function stationState(DateTimeImmutableStringable $statedAt, Station $stationAssigned)
     {

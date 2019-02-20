@@ -70,9 +70,9 @@ final class Location implements ValueObjectInterface
      * @param string      $address
      * @param float       $latitude
      * @param float       $longitude
-     * @param null|string $addressNumber
+     * @param string|null $addressNumber
      * @param int|null    $districtCode
-     * @param null|string $zipCode
+     * @param string|null $zipCode
      */
     private function __construct(
         string $address,
@@ -96,9 +96,9 @@ final class Location implements ValueObjectInterface
      * @param string      $address
      * @param float       $latitude
      * @param float       $longitude
-     * @param null|string $addressNumber
+     * @param string|null $addressNumber
      * @param int|null    $districtCode
-     * @param null|string $zipCode
+     * @param string|null $zipCode
      *
      * @return Location
      */
