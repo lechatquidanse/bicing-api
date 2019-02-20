@@ -80,6 +80,7 @@
     },
     "scripts": {
         "auto-scripts": {
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "security-checker security:check": "script"
         },
         "post-install-cmd": [
