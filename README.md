@@ -111,7 +111,7 @@ For example, to create a station in database:
 
 ![CQRS command handler](./documentation/images/command-handler-min.png)
 
-If you want to learn more and look for other DDD and CQRS implementation, here is a great [Symfony4 boilerplate]((https://github.com/jorge07/symfony-4-es-cqrs-boilerplate).) from [jorge07](https://github.com/jorge07).
+If you want to learn more and look for other DDD and CQRS implementation, [here is a great Symfony4 boilerplate](https://github.com/jorge07/symfony-4-es-cqrs-boilerplate) from [jorge07](https://github.com/jorge07).
 
 ## <a name="ci-and-deployment"></a> CI and Deployment
 
