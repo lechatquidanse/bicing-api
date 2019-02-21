@@ -41,7 +41,7 @@ down:
 	docker-compose down -v --remove-orphans
 
 ## Run all quality assurance tools (tests and code inspection).
-qa: code_static_analysis code_fixer code_detect code_correct test_spec test test_behaviour
+qa: unsued_libraries code_static_analysis code_fixer code_detect code_correct test_spec test test_behaviour
 
 ## Truncate database and import fixtures.
 fixtures: down run import_dev
@@ -66,6 +66,9 @@ code_fixer:
 code_static_analysis:
 	docker-compose exec php bin/phpstan analyse src --level max
 
+## Check unsued libraries via composer
+unsued_libraries:
+	docker-compose exec php bin/unused_scanner scanner_config.php
 ###############
 # Environment #
 ###############
