@@ -1,4 +1,6 @@
 {
+    "name": "lechatquidanse/bicing-api",
+    "description": "Symfony 4 REST API applying CQRS and DDD patterns, built with CI, driven by BDD",
     "type": "project",
     "license": "proprietary",
     "require": {
@@ -6,24 +8,27 @@
         "ext-iconv": "*",
         "api-platform/api-pack": "^1.1",
         "beberlei/assert": "^2.9",
+        "doctrine/doctrine-bundle": "^1.6.10",
+        "doctrine/doctrine-migrations-bundle": "^1.3|^2.0",
+        "doctrine/orm": "^2.5.11",
         "eightpoints/guzzle-bundle": "^7.3",
         "jms/serializer-bundle": "^2.3",
         "jsor/doctrine-postgis": "^1.7",
         "ramsey/uuid": "^3.7",
         "ramsey/uuid-doctrine": "^1.4",
         "sensio/framework-extra-bundle": "^5.2",
-        "sensiolabs/security-checker": "^4.1",
+        "sensiolabs/security-checker": "^5.0",
         "simple-bus/doctrine-orm-bridge": "^5.0",
         "simple-bus/message-bus": "^3.0",
         "simple-bus/symfony-bridge": "^5.1",
         "symfony/console": "^4.1",
         "symfony/dotenv": "^4.1",
-        "symfony/flex": "^1.0",
+        "symfony/flex": "^1.1",
         "symfony/form": "^4.1",
-        "symfony/framework-bundle": "^4.1",
+        "symfony/framework-bundle": "4.2.*",
         "symfony/http-foundation": "v4.1.3",
         "symfony/monolog-bundle": "^3.3",
-        "symfony/orm-pack": "^1.0",
+        "symfony/proxy-manager-bridge": "^4.1",
         "symfony/validator": "^4.1",
         "symfony/yaml": "^4.1"
     },
@@ -33,14 +38,22 @@
         "behat/mink-extension": "^2.3",
         "behat/symfony2-extension": "^2.1",
         "behatch/contexts": "^3.2",
+        "easycorp/easy-log-handler": "^1.0.7",
         "friendsofphp/php-cs-fixer": "^2.13",
+        "insolita/unused-scanner": "^1.1",
         "phpspec/phpspec": "^5.1",
         "phpstan/phpstan": "0.10.3",
         "roave/security-advisories": "dev-master",
         "squizlabs/php_codesniffer": "3.*",
-        "symfony/browser-kit": "^4.1",
-        "symfony/phpunit-bridge": "^4.1",
-        "symfony/test-pack": "^1.0"
+        "symfony/browser-kit": "*",
+        "symfony/css-selector": "*",
+        "symfony/debug-bundle": "*",
+        "symfony/panther": "*",
+        "symfony/phpunit-bridge": "*",
+        "symfony/stopwatch": "*",
+        "symfony/twig-bundle": "*",
+        "symfony/var-dumper": "*",
+        "symfony/web-profiler-bundle": "*"
     },
     "config": {
         "bin-dir": "bin",
@@ -84,7 +97,7 @@
     "extra": {
         "symfony": {
             "id": "01C6D0DNGJKFD26GBGF1ZP3SSA",
-            "allow-contrib": false
+            "allow-contrib": true
         }
     }
 }

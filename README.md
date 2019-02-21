@@ -20,6 +20,7 @@
     <img src="https://gitlab.com/lechatquidanse/public-badges/raw/master/bicing-statistics-api/reference.svg" alt="reference">
     <img src="https://gitlab.com/lechatquidanse/public-badges/raw/master/bicing-statistics-api/build.svg" alt="build">
     <img src="https://gitlab.com/lechatquidanse/public-badges/raw/master/bicing-statistics-api/coverage.svg" alt="coverage">
+    <img src="https://insight.symfony.com/projects/a32d65eb-beb5-4e22-b987-7b0af6457024/mini.svg" alt="insight">
     <img src="https://img.shields.io/badge/contributions-welcome-orange.svg" alt="Contributions welcome">
     <img src="https://img.shields.io/badge/license-MIT-lightgrey.svg" alt="License">
 </p>
@@ -110,7 +111,7 @@ For example, to create a station in database:
 
 ![CQRS command handler](./documentation/images/command-handler-min.png)
 
-If you want to learn more and look for other DDD and CQRS implementation, here is a great [Symfony4 boilerplate]((https://github.com/jorge07/symfony-4-es-cqrs-boilerplate).) from [jorge07](https://github.com/jorge07).
+If you want to learn more and look for other DDD and CQRS implementation, [here is a great Symfony4 boilerplate](https://github.com/jorge07/symfony-4-es-cqrs-boilerplate) from [jorge07](https://github.com/jorge07).
 
 ## <a name="ci-and-deployment"></a> CI and Deployment
 

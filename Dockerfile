@@ -24,6 +24,7 @@ ENV PHP_EXTENSIONS \
 ENV COMPOSE_HTTP_TIMEOUT=3600
 ENV COMPOSE_PROJECT_NAME=bicing-api
 ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV PATH="${PATH}:/root/.composer/vendor/bin"
 
 RUN set -ex \
     && apk add --no-cache --virtual .fetch-deps $FETCH_PACKAGES \
@@ -37,9 +38,7 @@ RUN set -ex \
 WORKDIR /var/www/bicing-api
 
 COPY --from=composer:1.7 /usr/bin/composer /usr/bin/composer
-RUN set -eux; \
-	composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --classmap-authoritative; \
-	composer clear-cache
+RUN composer global require "symfony/flex":"^1.1" --prefer-dist --no-progress --no-suggest --classmap-authoritative
 
 ARG APP_ENV=prod
 COPY composer.json composer.lock symfony.lock ./
