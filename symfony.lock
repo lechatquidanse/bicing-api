@@ -56,9 +56,6 @@
     "container-interop/container-interop": {
         "version": "1.2.0"
     },
-    "cweagans/composer-patches": {
-        "version": "1.6.5"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
