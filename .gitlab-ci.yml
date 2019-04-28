@@ -10,7 +10,7 @@ stages:
 
 before_script:
 - apk update && apk upgrade
-- apk add --update bash curl git gettext openssh python python-dev py-pip build-base openssl wget jq
+- apk add --update bash curl git gettext openssh python python-dev py-pip py-paramiko build-base openssl wget jq
 - pip install docker-compose
 
 - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
