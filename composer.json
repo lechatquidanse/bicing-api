@@ -25,7 +25,7 @@
         "symfony/dotenv": "^4.1",
         "symfony/flex": "^1.1",
         "symfony/form": "^4.1",
-        "symfony/framework-bundle": "4.2.*",
+        "symfony/framework-bundle": "4.2.6",
         "symfony/http-foundation": "v4.2.*",
         "symfony/monolog-bundle": "^3.3",
         "symfony/proxy-manager-bridge": "^4.1",
@@ -81,8 +81,7 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "security-checker security:check": "script"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"
